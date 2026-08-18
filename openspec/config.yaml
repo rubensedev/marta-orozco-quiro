@@ -4,14 +4,20 @@ project:
 
 context:
   source_of_truth: astro-migration-context.md
-  repo_state: scratch-bootstrap
+  repo_state: astro-landing-page
   current_artifacts:
     - astro-migration-context.md
+    - README.md
+    - openspec/changes/adopt-astro-tailwind/
   intended_stack:
-    - Astro
-    - Tailwind CSS
-    - SCSS
-  styling_convention: BEM; no raw Tailwind utility classes in Astro templates
+    - Astro 7
+    - Tailwind CSS 4 (@tailwindcss/vite)
+  styling_convention: >
+    Tailwind utilities in .astro templates for layout, spacing, color, and type.
+    One stylesheet: src/styles/global.css with @import "tailwindcss",
+    @custom-variant dark (&:where(.dark, .dark *)), and @theme brand tokens.
+    Named leftover CSS only for the written allow-list (hard CSS + JS-injected
+    widgets such as btn-brand and pricing pills). @apply is last resort. No Sass.
 
 persistence:
   mode: hybrid
@@ -50,10 +56,18 @@ testing:
       available: false
       command: null
 
+rules:
+  apply:
+    guidelines:
+      - Use Tailwind utilities in .astro templates; do not restyle with a named-class-first system.
+      - Keep leftover named classes on the allow-list in src/styles/global.css; do not grow it for ordinary layout.
+      - Dark mode follows html.dark via the class custom variant, not prefers-color-scheme alone.
+      - Do not add Sass or a second global stylesheet.
+
 workflow:
   review_line_budget: 400
-  init_next: sdd-new
-  feature_name_hint: astro-landing-page
+  init_next: sdd-verify
+  feature_name_hint: adopt-astro-tailwind
   phases:
     - sdd-explore
     - sdd-propose
