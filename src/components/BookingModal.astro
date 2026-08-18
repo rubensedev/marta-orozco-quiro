@@ -2,10 +2,16 @@
 import { bonoTiers, bookingOptions } from "../data/site";
 ---
 
-<dialog id="bookingModal" class="booking-modal" aria-labelledby="bookingModalTitle">
-  <article class="booking-modal__panel">
+<dialog
+  id="bookingModal"
+  class="booking-modal w-[min(680px,calc(100%-1rem))] max-w-full rounded-[2rem] border-0 bg-transparent p-0"
+  aria-labelledby="bookingModalTitle"
+>
+  <article
+    class="relative rounded-[2rem] bg-brand-bg p-8 shadow-soft md:p-10 dark:bg-brand-card-dark"
+  >
     <button
-      class="booking-modal__close"
+      class="absolute top-5 right-5 inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-brand-sage/14 bg-transparent text-inherit"
       type="button"
       data-close-booking
       aria-label="Cerrar modal de reserva"
@@ -13,15 +19,29 @@ import { bonoTiers, bookingOptions } from "../data/site";
       <i class="fa-solid fa-xmark" aria-hidden="true"></i>
     </button>
 
-    <p class="section-eyebrow section-eyebrow--lavender">Cita Directa</p>
-    <h2 id="bookingModalTitle" class="booking-modal__title">Reservar tratamiento</h2>
+    <p
+      class="section-eyebrow m-0 mb-4 inline-flex items-center gap-3 text-xs font-semibold tracking-[0.24em] text-brand-lavender uppercase"
+    >
+      Cita Directa
+    </p>
+    <h2
+      id="bookingModalTitle"
+      class="m-0 mb-6 font-serif text-3xl font-light uppercase"
+    >
+      Reservar tratamiento
+    </h2>
 
-    <form id="bookingForm" class="booking-form">
+    <form id="bookingForm" class="grid gap-5">
       <div class="booking-field-group">
-        <label class="booking-form__label" for="modalTreatment">
-          Tratamiento Deseado <span class="booking-required">*</span>
+        <label class="mb-2 block text-[0.9rem] font-semibold tracking-[0.12em] uppercase" for="modalTreatment">
+          Tratamiento Deseado <span class="text-brand-lavender">*</span>
         </label>
-        <select id="modalTreatment" class="booking-form__control" name="treatment" required>
+        <select
+          id="modalTreatment"
+          class="min-h-13 w-full rounded-2xl border border-brand-sage/14 bg-white/70 px-4 py-[0.85rem] text-inherit dark:bg-white/6"
+          name="treatment"
+          required
+        >
           {
             bookingOptions.map((option) => (
               <option value={option}>{option}</option>
@@ -31,17 +51,25 @@ import { bonoTiers, bookingOptions } from "../data/site";
       </div>
 
       <div class="booking-field-group" id="modalDurationGroup">
-        <label class="booking-form__label" for="modalDuration">
-          Duración Preferida <span class="booking-required">*</span>
+        <label class="mb-2 block text-[0.9rem] font-semibold tracking-[0.12em] uppercase" for="modalDuration">
+          Duración Preferida <span class="text-brand-lavender">*</span>
         </label>
-        <select id="modalDuration" class="booking-form__control" name="duration"></select>
+        <select
+          id="modalDuration"
+          class="min-h-13 w-full rounded-2xl border border-brand-sage/14 bg-white/70 px-4 py-[0.85rem] text-inherit dark:bg-white/6"
+          name="duration"
+        ></select>
       </div>
 
       <div class="booking-field-group" id="modalPurchaseTypeGroup">
-        <label class="booking-form__label" for="modalPurchaseType">
-          Tipo de Compra <span class="booking-required">*</span>
+        <label class="mb-2 block text-[0.9rem] font-semibold tracking-[0.12em] uppercase" for="modalPurchaseType">
+          Tipo de Compra <span class="text-brand-lavender">*</span>
         </label>
-        <select id="modalPurchaseType" class="booking-form__control" name="purchaseType">
+        <select
+          id="modalPurchaseType"
+          class="min-h-13 w-full rounded-2xl border border-brand-sage/14 bg-white/70 px-4 py-[0.85rem] text-inherit dark:bg-white/6"
+          name="purchaseType"
+        >
           {
             bonoTiers.map((tier) => (
               <option value={tier.id}>{tier.label}</option>
@@ -51,17 +79,22 @@ import { bonoTiers, bookingOptions } from "../data/site";
       </div>
 
       <div class="booking-field-group">
-        <p class="booking-form__label">Precio estimado</p>
-        <output id="modalPriceEstimate" class="booking-form__estimate">-</output>
+        <p class="mb-2 text-[0.9rem] font-semibold tracking-[0.12em] uppercase">Precio estimado</p>
+        <output
+          id="modalPriceEstimate"
+          class="inline-flex min-h-13 w-full items-center rounded-2xl border border-brand-sage/14 bg-white/70 px-4 py-[0.85rem] font-semibold text-brand-lavender dark:bg-white/6"
+        >
+          -
+        </output>
       </div>
 
       <div class="booking-field-group">
-        <label class="booking-form__label" for="modalName">
-          Tu Nombre <span class="booking-required">*</span>
+        <label class="mb-2 block text-[0.9rem] font-semibold tracking-[0.12em] uppercase" for="modalName">
+          Tu Nombre <span class="text-brand-lavender">*</span>
         </label>
         <input
           id="modalName"
-          class="booking-form__control"
+          class="min-h-13 w-full rounded-2xl border border-brand-sage/14 bg-white/70 px-4 py-[0.85rem] text-inherit dark:bg-white/6"
           name="name"
           type="text"
           autocomplete="name"
@@ -70,21 +103,23 @@ import { bonoTiers, bookingOptions } from "../data/site";
       </div>
 
       <div class="booking-field-group">
-        <label class="booking-form__label" for="modalDate">
-          Preferencia de Fecha/Hora <span class="booking-required">*</span>
+        <label class="mb-2 block text-[0.9rem] font-semibold tracking-[0.12em] uppercase" for="modalDate">
+          Preferencia de Fecha/Hora <span class="text-brand-lavender">*</span>
         </label>
         <input
           id="modalDate"
-          class="booking-form__control"
+          class="min-h-13 w-full rounded-2xl border border-brand-sage/14 bg-white/70 px-4 py-[0.85rem] text-inherit dark:bg-white/6"
           name="datePreference"
           type="text"
           placeholder="Ej. Jueves 17:00"
           required
         />
-        <p class="booking-field-helper">Disponibilidad solo jueves de 15:00 a 20:00.</p>
+        <p class="m-0 text-[0.9rem] text-brand-muted">
+          Disponibilidad solo jueves de 15:00 a 20:00.
+        </p>
       </div>
 
-      <button class="btn-brand booking-form__submit" type="submit">Abrir WhatsApp</button>
+      <button class="btn-brand" type="submit">Abrir WhatsApp</button>
     </form>
   </article>
 </dialog>

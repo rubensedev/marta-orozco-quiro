@@ -2,17 +2,19 @@
 import { siteMeta } from "../data/site";
 ---
 
-<aside class="mobile-bar">
+<aside
+  class="fixed right-4 bottom-4 left-4 z-30 flex items-center justify-between gap-4 rounded-[1.5rem] bg-brand-bg/92 p-4 shadow-soft backdrop-blur-[16px] lg:hidden dark:bg-brand-bg-dark/92"
+>
   <a
-    class="mobile-bar__info"
+    class="flex min-w-0 flex-col"
     href={`https://wa.me/${siteMeta.whatsappNumber}?text=${encodeURIComponent(siteMeta.whatsappInquiry)}`}
     data-whatsapp-direct
   >
-    <span class="mobile-bar__label">Reservar Cita</span>
-    <span class="mobile-bar__value">{siteMeta.whatsappDisplay}</span>
+    <span class="m-0 text-[0.9rem] text-brand-muted">Reservar Cita</span>
+    <span class="text-[0.9rem] font-semibold">{siteMeta.whatsappDisplay}</span>
   </a>
 
-  <button class="btn-brand mobile-bar__button" type="button" data-open-booking>
+  <button class="btn-brand" type="button" data-open-booking>
     Reservar Ahora
   </button>
 </aside>

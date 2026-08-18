@@ -1,6 +1,5 @@
 ---
 import "../styles/global.css";
-import "../styles/global.scss";
 import { siteMeta } from "../data/site";
 
 type Props = {
@@ -15,7 +14,7 @@ const {
 ---
 
 <!doctype html>
-<html lang={siteMeta.lang} class="page">
+<html lang={siteMeta.lang} class="scroll-smooth scheme-light dark:scheme-dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -45,7 +44,9 @@ const {
     </script>
     <title>{title}</title>
   </head>
-  <body class="site-body">
+  <body
+    class="m-0 min-w-[320px] bg-brand-bg pb-20 font-sans text-brand-text-dark transition-colors duration-300 ease-in-out lg:pb-0 dark:bg-brand-bg-dark dark:text-brand-text-light"
+  >
     <slot />
   </body>
 </html>

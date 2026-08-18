@@ -3,16 +3,22 @@ import PricingCard from "./PricingCard.astro";
 import { treatments } from "../data/site";
 ---
 
-<section id="masajes" class="section-shell section-block section-block--spacious">
-  <div class="section-heading">
-    <p class="section-eyebrow">Masajes</p>
-    <h2 class="section-title">Tratamientos adaptados a cómo te sientes hoy</h2>
-    <p class="section-lead">
+<section id="masajes" class="mx-auto w-[min(1120px,calc(100%-2rem))] py-24">
+  <div class="mb-12 max-w-3xl">
+    <p
+      class="section-eyebrow m-0 mb-4 inline-flex items-center gap-3 text-xs font-semibold tracking-[0.24em] text-brand-sage uppercase"
+    >
+      Masajes
+    </p>
+    <h2 class="m-0 font-serif text-[clamp(2.25rem,4vw,3.5rem)] leading-[1.1] font-light">
+      Tratamientos adaptados a cómo te sientes hoy
+    </h2>
+    <p class="mt-4 mb-0 text-lg leading-[1.8] text-brand-muted">
       Elige duración y tipo de compra para ver tu precio. Compara el ahorro con bonos de 5 o 10 sesiones.
     </p>
   </div>
 
-  <div class="pricing-list">
+  <div class="flex flex-col gap-8">
     {treatments.map((treatment) => <PricingCard treatment={treatment} />)}
   </div>
 </section>

@@ -2,40 +2,56 @@
 import { siteMeta } from "../data/site";
 ---
 
-<section id="contacto" class="contact section-shell section-block">
-  <div class="contact__grid">
-    <article class="contact__content">
-      <p class="section-eyebrow">Citas y horario</p>
-      <h2 class="section-title">Ubicación y contacto</h2>
-      <p class="contact__schedule">
+<section id="contacto" class="mx-auto w-[min(1120px,calc(100%-2rem))] py-20 md:py-24">
+  <div class="grid gap-8 lg:grid-cols-12 lg:items-center">
+    <article
+      class="rounded-[2rem] bg-white/56 p-8 shadow-soft md:p-10 lg:col-span-5 dark:bg-white/6"
+    >
+      <p
+        class="section-eyebrow m-0 mb-4 inline-flex items-center gap-3 text-xs font-semibold tracking-[0.24em] text-brand-sage uppercase"
+      >
+        Citas y horario
+      </p>
+      <h2 class="m-0 font-serif text-[clamp(2.25rem,4vw,3.5rem)] leading-[1.1] font-light">
+        Ubicación y contacto
+      </h2>
+      <p class="mt-5 mb-0 flex items-start gap-3">
         <i class="fa-regular fa-clock" aria-hidden="true"></i>
         <span>Jueves de 15:00 a 20:00</span>
       </p>
-      <p class="contact__note">
+      <p class="mt-4 mb-0 text-[0.9rem] italic">
         *Citas bajo reserva previa para garantizar tu atención personalizada.
       </p>
-      <p class="contact__address">
+      <p class="mt-5 mb-0 flex items-start gap-3">
         <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
         <span>C. Esperanza Elena Caro, 2, 1°A4 / 41002 Sevilla</span>
       </p>
 
-      <div class="contact__actions">
+      <div class="mt-8 flex flex-wrap items-center gap-4">
         <button class="btn-brand" type="button" data-open-booking>Reservar Ahora</button>
-        <a class="btn-secondary" href={`https://wa.me/${siteMeta.whatsappNumber}?text=${encodeURIComponent(siteMeta.whatsappInquiry)}`}>
+        <a
+          class="btn-secondary"
+          href={`https://wa.me/${siteMeta.whatsappNumber}?text=${encodeURIComponent(siteMeta.whatsappInquiry)}`}
+        >
           WhatsApp
         </a>
       </div>
 
-      <ul class="contact__links">
+      <ul class="mt-8 mb-0 flex list-none flex-wrap items-center gap-6 p-0">
         <li>
-          <a class="contact__link" href={siteMeta.instagramUrl} target="_blank" rel="noreferrer">
+          <a
+            class="flex items-start gap-3"
+            href={siteMeta.instagramUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
             <i class="fa-brands fa-instagram" aria-hidden="true"></i>
             <span>Instagram</span>
           </a>
         </li>
         <li>
           <a
-            class="contact__link"
+            class="flex items-start gap-3"
             href={`https://wa.me/${siteMeta.whatsappNumber}?text=${encodeURIComponent(siteMeta.whatsappInquiry)}`}
             data-whatsapp-direct
           >
@@ -46,9 +62,11 @@ import { siteMeta } from "../data/site";
       </ul>
     </article>
 
-    <div class="contact__visuals">
+    <div
+      class="rounded-[2rem] bg-white/56 p-4 shadow-soft md:p-10 lg:col-span-7 dark:bg-white/6"
+    >
       <img
-        class="contact__image"
+        class="aspect-[16/10] h-full w-full rounded-[1.5rem] object-cover"
         src="/assets/images/contact.webp"
         alt="Espacio donde se realizan las sesiones."
         width="960"
@@ -56,7 +74,7 @@ import { siteMeta } from "../data/site";
         loading="lazy"
       />
       <iframe
-        class="contact__map"
+        class="contact__map mt-4 h-72 w-full rounded-[1.5rem] border-0"
         title="Mapa de ubicación de Marta Orozco"
         src={siteMeta.mapEmbedUrl}
         loading="lazy"

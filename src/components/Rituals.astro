@@ -2,25 +2,38 @@
 import { rituals } from "../data/site";
 ---
 
-<section id="bonos" class="section-shell section-block section-block--contrast">
-  <div class="section-heading section-heading--lavender">
-    <p class="section-eyebrow section-eyebrow--lavender">Rituales y bonos</p>
-    <h2 class="section-title">Renovación profunda con sesiones sueltas o bonos</h2>
-    <p class="section-lead">
+<section
+  id="bonos"
+  class="mx-auto my-8 w-[min(1120px,calc(100%-2rem))] rounded-[2rem] py-20 md:py-24 bg-[color-mix(in_srgb,var(--color-brand-lavender-light)_65%,white_35%)] dark:bg-[color-mix(in_srgb,var(--color-brand-lavender-dark)_72%,black_28%)]"
+>
+  <div class="mb-12 max-w-3xl">
+    <p
+      class="section-eyebrow m-0 mb-4 inline-flex items-center gap-3 text-xs font-semibold tracking-[0.24em] text-brand-lavender uppercase"
+    >
+      Rituales y bonos
+    </p>
+    <h2 class="m-0 font-serif text-[clamp(2.25rem,4vw,3.5rem)] leading-[1.1] font-light">
+      Renovación profunda con sesiones sueltas o bonos
+    </h2>
+    <p class="mt-4 mb-0 text-lg leading-[1.8] text-brand-muted">
       Rituales completos para una renovación profunda o paquetes de bonos con descuento especial.
     </p>
   </div>
 
-  <div class="rituals__grid">
+  <div class="grid gap-6 lg:grid-cols-2">
     {
       rituals.map((ritual) => (
-        <article class="ritual-card">
-          <div class="ritual-card__icon"><i class={ritual.iconClass} aria-hidden="true"></i></div>
-          <h3 class="ritual-card__title">{ritual.title}</h3>
-          <p class="ritual-card__meta">{ritual.duration} min · {ritual.price} €</p>
-          <p class="ritual-card__description">{ritual.description}</p>
+        <article class="rounded-[2rem] bg-white/48 p-8 shadow-soft md:p-10 dark:bg-white/6">
+          <div class="inline-flex h-14 w-14 items-center justify-center rounded-full bg-white/64 text-xl text-brand-lavender">
+            <i class={ritual.iconClass} aria-hidden="true"></i>
+          </div>
+          <h3 class="mt-6 mb-0 font-serif text-[1.75rem] font-light uppercase">{ritual.title}</h3>
+          <p class="mt-2 mb-0 text-[0.9rem] font-semibold tracking-[0.16em] text-brand-muted uppercase">
+            {ritual.duration} min · {ritual.price} €
+          </p>
+          <p class="mt-4 mb-0 leading-[1.8]">{ritual.description}</p>
           <button
-            class="btn-brand ritual-card__cta"
+            class="btn-brand mt-8"
             type="button"
             data-open-booking
             data-treatment={ritual.bookingValue}
@@ -32,30 +45,47 @@ import { rituals } from "../data/site";
     }
   </div>
 
-  <section class="bonos-panel" aria-labelledby="bonos-title">
-    <div class="bonos-panel__header">
-      <h3 id="bonos-title" class="bonos-panel__title">Bonos</h3>
-      <p class="bonos-panel__text">
+  <section
+    class="mt-8 rounded-[2rem] bg-white/50 p-8 shadow-soft md:p-10 dark:bg-white/8"
+    aria-labelledby="bonos-title"
+  >
+    <div>
+      <h3 id="bonos-title" class="mt-6 mb-0 font-serif text-[1.75rem] font-light uppercase">
+        Bonos
+      </h3>
+      <p class="mt-4 mb-0 leading-[1.8]">
         Consulta ejemplos de ahorro para encontrar el formato que mejor encaja contigo.
       </p>
     </div>
 
-    <div class="bonos-panel__tiers">
-      <article class="bonos-tier">
-        <div class="bono-savings-badge">10%</div>
-        <h4 class="bonos-tier__title">5 sesiones</h4>
-        <p class="bonos-tier__subtitle">Descuento especial</p>
+    <div class="mt-8 flex flex-col items-center gap-4 md:flex-row">
+      <article class="flex-1 rounded-[1.5rem] bg-white/64 p-6 text-center">
+        <div
+          class="mx-auto mb-4 inline-flex h-20 w-20 items-center justify-center rounded-full bg-brand-lavender text-[1.1rem] font-bold text-white"
+        >
+          10%
+        </div>
+        <h4 class="m-0 text-[1.35rem] font-semibold uppercase">5 sesiones</h4>
+        <p class="mt-2 mb-0 text-[0.9rem] font-semibold tracking-[0.16em] text-brand-muted uppercase">
+          Descuento especial
+        </p>
       </article>
-      <article class="bonos-tier">
-        <div class="bono-savings-badge">15%</div>
-        <h4 class="bonos-tier__title">10 sesiones</h4>
-        <p class="bonos-tier__subtitle">Descuento especial</p>
+      <article class="flex-1 rounded-[1.5rem] bg-white/64 p-6 text-center">
+        <div
+          class="mx-auto mb-4 inline-flex h-20 w-20 items-center justify-center rounded-full bg-brand-lavender text-[1.1rem] font-bold text-white"
+        >
+          15%
+        </div>
+        <h4 class="m-0 text-[1.35rem] font-semibold uppercase">10 sesiones</h4>
+        <p class="mt-2 mb-0 text-[0.9rem] font-semibold tracking-[0.16em] text-brand-muted uppercase">
+          Descuento especial
+        </p>
       </article>
     </div>
 
-    <div id="bonoExamples" class="bonos-panel__examples"></div>
+    <div id="bonoExamples" class="mt-8 grid gap-4"></div>
 
-    <button class="btn-brand bonos-panel__cta" type="button" data-open-booking>
+    <button class="btn-brand mt-8" type="button" data-open-booking>
       <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
       <span>Preguntar por Bonos</span>
     </button>

@@ -6,8 +6,9 @@ Landing page built with Astro for Marta Orozco, a professional quiromasajista ba
 
 - Astro 7
 - Tailwind CSS 4 via Vite plugin
-- Sass
 - Static single-page site in Spanish
+
+Styling uses Tailwind utilities in `.astro` templates plus leftover CSS in `src/styles/global.css`. Sass is gone.
 
 ## Requirements
 
@@ -44,7 +45,6 @@ src/
     index.astro
   styles/
     global.css
-    global.scss
 ```
 
 ## Site sections
@@ -62,7 +62,7 @@ The home page is assembled in `src/pages/index.astro` and includes:
 
 - Main site content and metadata live in `src/data/site.ts`
 - Global layout and head metadata live in `src/layouts/Layout.astro`
-- Global styles live in `src/styles/global.scss`
+- Global styles live in `src/styles/global.css`
 - The migration reference used for the Astro rebuild is documented in `astro-migration-context.md`
 
 ## Development notes

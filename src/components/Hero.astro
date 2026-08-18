@@ -1,26 +1,34 @@
-<section class="hero">
-  <div class="hero__media">
+<section class="relative min-h-[75vh] overflow-hidden">
+  <div class="absolute inset-0">
     <img
-      class="hero__image"
+      class="h-full w-full scale-105 object-cover"
       src="/assets/images/hero.webp"
       alt="Espacio de bienestar para tratamientos de quiromasaje."
       width="1440"
       height="960"
       fetchpriority="high"
     />
-    <div class="hero__overlay" aria-hidden="true"></div>
+    <div class="hero__overlay absolute inset-0" aria-hidden="true"></div>
   </div>
 
-  <div class="hero__content section-shell">
-    <div class="hero__copy">
-      <p class="section-eyebrow section-eyebrow--light">Bienestar en Sevilla</p>
-      <h1 class="hero__title">Espacio de calma, salud y equilibrio corporal</h1>
-      <p class="hero__text">
+  <div
+    class="relative z-[1] mx-auto flex min-h-[75vh] w-[min(1120px,calc(100%-2rem))] items-center py-16"
+  >
+    <div class="max-w-3xl">
+      <p
+        class="section-eyebrow m-0 mb-4 inline-flex items-center gap-3 text-xs font-semibold tracking-[0.24em] text-brand-text-light uppercase"
+      >
+        Bienestar en Sevilla
+      </p>
+      <h1 class="m-0 font-serif text-[clamp(3rem,7vw,5.25rem)] leading-[1.02] font-light">
+        Espacio de calma, salud y equilibrio corporal
+      </h1>
+      <p class="mt-6 mb-0 max-w-[42rem] text-[1.15rem] leading-[1.8]">
         Tratamientos de quiromasaje diseñados para aliviar tensiones físicas, activar tu
         energía vital y restablecer la paz en tu día a día.
       </p>
 
-      <div class="hero__actions">
+      <div class="mt-8 flex flex-wrap items-center gap-4">
         <button class="btn-brand" type="button" data-open-booking>Reservar Cita</button>
         <a class="btn-secondary" href="#masajes">Ver Masajes y Precios</a>
       </div>

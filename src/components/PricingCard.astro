@@ -7,20 +7,23 @@ type Props = {
 
 const { treatment } = Astro.props;
 const align = treatment.imagePosition === "end" ? "start" : undefined;
+const reverse = treatment.imagePosition === "end";
 ---
 
 <article
   class:list={[
-    "pricing-card",
-    treatment.imagePosition === "end" && "pricing-card--reverse",
+    "flex overflow-hidden rounded-[2rem] bg-white/60 shadow-soft dark:bg-brand-card-dark/84",
+    reverse
+      ? "flex-col-reverse md:flex-row-reverse lg:flex-row-reverse"
+      : "flex-col md:flex-row",
   ]}
   data-pricing-card={treatment.id}
   data-treatment={treatment.bookingValue}
   data-pricing-align={align}
 >
-  <div class="pricing-card__media">
+  <div class="min-w-0 md:w-[46%] md:shrink-0">
     <img
-      class="pricing-card__image"
+      class="aspect-[16/11] h-full w-full object-cover"
       src={treatment.image}
       alt={treatment.imageAlt}
       width="720"
@@ -29,14 +32,21 @@ const align = treatment.imagePosition === "end" ? "start" : undefined;
     />
   </div>
 
-  <div class="pricing-card__body">
-    <h3 class="pricing-card__title">{treatment.title}</h3>
-    <p class="pricing-card__description">{treatment.description}</p>
-    <div class="pricing-card__widgets">
-      <div class="pricing-card__mount" data-pricing-mount></div>
-      <div class="pricing-card__display" data-pricing-display aria-live="polite" aria-atomic="true"></div>
+  <div class="min-w-0 p-8 md:flex-1 md:p-10">
+    <h3 class="m-0 font-serif text-[2rem] font-light tracking-[0.08em] uppercase">
+      {treatment.title}
+    </h3>
+    <p class="mt-4 mb-0 leading-[1.8] text-brand-muted">{treatment.description}</p>
+    <div class="mt-8">
+      <div data-pricing-mount></div>
+      <div data-pricing-display aria-live="polite" aria-atomic="true"></div>
     </div>
-    <button class="btn-brand pricing-card__cta" type="button" data-open-booking data-treatment={treatment.bookingValue}>
+    <button
+      class="btn-brand mt-8"
+      type="button"
+      data-open-booking
+      data-treatment={treatment.bookingValue}
+    >
       Reservar {treatment.title}
     </button>
   </div>

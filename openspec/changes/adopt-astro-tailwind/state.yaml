@@ -1,0 +1,34 @@
+change: adopt-astro-tailwind
+status: applied
+phases:
+  explore: done
+  propose: done
+  spec: done
+  design: done
+  tasks: done
+  apply: done
+  verify: pending
+  archive: pending
+branch: feat/adopt-astro-tailwind
+created: 2026-08-18
+mode: hybrid
+delivery_strategy: exception-ok
+workload_decision: size:exception
+base_branch: develop
+phases:
+  explore: done
+  propose: done
+  spec: done
+  design: done
+  tasks: done
+  apply: in_progress
+  verify: pending
+  archive: pending
+assumptions:
+  - Use official Astro + Tailwind v4 conventions: utility classes in .astro templates.
+  - Keep one CSS entry: src/styles/global.css with @import "tailwindcss" and @theme brand tokens.
+  - Drop Sass/global.scss; Tailwind v4 is not designed for Sass.
+  - Preserve visual brand, content, and JS behavior; this is a styling-system migration, not a redesign.
+  - Dark mode stays class-based on html.dark via existing anti-flash script; use dark: utilities.
+  - @apply last resort; leftover CSS allow-list for hard CSS and JS-injected widgets.
+  - Maintainer accepted size:exception — implement all tasks in one PR on this branch.

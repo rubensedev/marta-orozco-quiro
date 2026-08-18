@@ -2,78 +2,117 @@
 import { navItems } from "../data/site";
 ---
 
-<header class="site-header">
-  <div class="site-header__inner section-shell">
-    <a class="site-header__brand" href="#inicio" aria-label="Ir al inicio">
-      <img class="site-logo" src="/assets/images/logo.svg" alt="Logo Marta Orozco" />
+<header
+  class="sticky top-0 z-40 border-b border-brand-sage/8 bg-brand-bg/90 backdrop-blur-[18px] dark:border-white/8 dark:bg-brand-bg-dark/90"
+>
+  <div
+    class="mx-auto flex w-[min(1120px,calc(100%-2rem))] items-center justify-between gap-6 py-4"
+  >
+    <a href="#inicio" aria-label="Ir al inicio">
+      <img class="site-logo h-14 w-auto" src="/assets/images/logo.svg" alt="Logo Marta Orozco" />
     </a>
 
-    <nav class="site-header__nav" aria-label="Navegación principal">
-      <ul class="site-header__nav-list">
+    <nav class="hidden lg:block" aria-label="Navegación principal">
+      <ul class="m-0 flex list-none items-center gap-8 p-0">
         {
           navItems.map((item) => (
-            <li><a class="site-header__nav-link" href={item.href}>{item.label}</a></li>
+            <li>
+              <a
+                class="text-[0.95rem] font-medium transition-colors duration-200 hover:text-brand-lavender"
+                href={item.href}
+              >
+                {item.label}
+              </a>
+            </li>
           ))
         }
       </ul>
     </nav>
 
-    <div class="site-header__actions">
-      <div class="theme-menu">
+    <div class="flex items-center gap-3">
+      <div class="relative">
         <button
           id="themeMenuBtn"
-          class="theme-menu__button"
+          class="inline-flex cursor-pointer items-center justify-center gap-2 rounded-full border border-brand-sage/14 bg-transparent px-4 py-[0.7rem] text-[0.9rem] text-inherit transition-all duration-200"
           type="button"
           aria-haspopup="true"
           aria-expanded="false"
           aria-controls="themeMenu"
         >
           <i id="themeMenuIcon" class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
-          <span class="theme-menu__label">Tema</span>
+          <span>Tema</span>
         </button>
 
-        <div id="themeMenu" class="theme-menu__panel" role="menu" hidden>
-          <button class="theme-menu-option" type="button" role="menuitemradio" data-theme-option="light">
+        <div
+          id="themeMenu"
+          class="absolute top-[calc(100%+0.75rem)] right-0 min-w-44 rounded-[1.5rem] bg-white/96 p-2 shadow-soft dark:bg-brand-card-dark/96"
+          role="menu"
+          hidden
+        >
+          <button
+            class="block w-full cursor-pointer rounded-2xl border-0 bg-transparent px-4 py-3 text-left text-inherit aria-checked:font-bold aria-checked:text-brand-lavender"
+            type="button"
+            role="menuitemradio"
+            data-theme-option="light"
+          >
             Claro
           </button>
-          <button class="theme-menu-option" type="button" role="menuitemradio" data-theme-option="dark">
+          <button
+            class="block w-full cursor-pointer rounded-2xl border-0 bg-transparent px-4 py-3 text-left text-inherit aria-checked:font-bold aria-checked:text-brand-lavender"
+            type="button"
+            role="menuitemradio"
+            data-theme-option="dark"
+          >
             Oscuro
           </button>
-          <button class="theme-menu-option" type="button" role="menuitemradio" data-theme-option="system">
+          <button
+            class="block w-full cursor-pointer rounded-2xl border-0 bg-transparent px-4 py-3 text-left text-inherit aria-checked:font-bold aria-checked:text-brand-lavender"
+            type="button"
+            role="menuitemradio"
+            data-theme-option="system"
+          >
             Dispositivo
           </button>
         </div>
       </div>
 
-      <button class="btn-brand site-header__cta" type="button" data-open-booking>
+      <button class="btn-brand hidden md:inline-flex" type="button" data-open-booking>
         Reservar Ahora
       </button>
 
       <button
         id="mobileMenuBtn"
-        class="site-header__menu-button"
+        class="inline-flex h-12 w-12 cursor-pointer flex-col items-center justify-center gap-[0.3rem] rounded-full border border-brand-sage/14 bg-transparent lg:hidden"
         type="button"
         aria-controls="mobileMenu"
         aria-expanded="false"
         aria-label="Abrir menú"
       >
-        <span class="site-header__menu-line"></span>
-        <span class="site-header__menu-line"></span>
-        <span class="site-header__menu-line"></span>
+        <span class="block h-0.5 w-5 rounded-full bg-current"></span>
+        <span class="block h-0.5 w-5 rounded-full bg-current"></span>
+        <span class="block h-0.5 w-5 rounded-full bg-current"></span>
       </button>
     </div>
   </div>
 
-  <div id="mobileMenu" class="mobile-menu" hidden>
-    <nav class="mobile-menu__nav" aria-label="Navegación móvil">
+  <div
+    id="mobileMenu"
+    class="mx-4 mb-4 rounded-[1.75rem] bg-white/96 p-5 shadow-soft lg:hidden dark:bg-brand-card-dark/98"
+    hidden
+  >
+    <nav class="flex flex-col gap-4" aria-label="Navegación móvil">
       {
         navItems.map((item) => (
-          <a class="mobile-menu__link" href={item.href} data-close-mobile-nav>
+          <a
+            class="text-[0.95rem] font-medium transition-colors duration-200 hover:text-brand-lavender"
+            href={item.href}
+            data-close-mobile-nav
+          >
             {item.label}
           </a>
         ))
       }
-      <button class="btn-brand mobile-menu__cta" type="button" data-open-booking-close-nav>
+      <button class="btn-brand" type="button" data-open-booking-close-nav>
         Reservar Ahora
       </button>
     </nav>
