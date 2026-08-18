@@ -444,6 +444,17 @@ import { bonoExamples, bonoTiers, rituals, siteMeta, treatments } from "../data/
     }
   });
 
+  const siteHeader = document.querySelector("header");
+  const headerSentinel = document.querySelector("[data-header-sentinel]");
+  if (siteHeader && headerSentinel) {
+    new IntersectionObserver(
+      ([entry]) => {
+        siteHeader.toggleAttribute("data-scrolled", !entry.isIntersecting);
+      },
+      { threshold: 0 },
+    ).observe(headerSentinel);
+  }
+
   applyThemePreference(localStorage.getItem(THEME_KEY) || "system");
   syncBookingFieldVisibility();
   updateModalPriceEstimate();
