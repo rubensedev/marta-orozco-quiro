@@ -15,14 +15,12 @@ const themeOptionClass =
   "block w-full cursor-pointer rounded-2xl border-0 bg-transparent px-4 py-3 text-left text-inherit aria-checked:font-bold aria-checked:text-brand-lavender";
 ---
 
-<header
-  class="sticky top-0 z-50 border-b border-brand-sage/8 bg-brand-bg/90 backdrop-blur-[18px] dark:border-white/8 dark:bg-brand-bg-dark/90"
->
+<header class="sticky top-0 z-40 bg-transparent">
   <div
-    class="mx-auto flex w-[min(1120px,calc(100%-2rem))] items-center justify-between gap-6 py-4"
+    class="mx-auto flex w-[min(1120px,calc(100%-2rem))] items-center justify-between gap-4 py-2"
   >
     <a href="#inicio" aria-label="Ir al inicio">
-      <img class="site-logo h-14 w-auto" src="/assets/images/logo.svg" alt="Logo Marta Orozco" />
+      <img class="site-logo h-10 w-auto" src="/assets/images/logo.svg" alt="Logo Marta Orozco" />
     </a>
 
     <nav class="hidden lg:block" aria-label="Navegación principal">
@@ -89,7 +87,7 @@ const themeOptionClass =
 
       <button
         id="mobileMenuBtn"
-        class="inline-flex size-16 shrink-0 cursor-pointer items-center justify-center whitespace-nowrap bg-transparent text-2xl lg:hidden"
+        class="inline-flex size-16 shrink-0 cursor-pointer items-center justify-center whitespace-nowrap bg-transparent text-3xl lg:hidden"
         type="button"
         aria-controls="mobileMenu"
         aria-expanded="false"
@@ -103,16 +101,24 @@ const themeOptionClass =
 
 <div
   data-mobile-nav-backdrop
-  class="fixed inset-0 z-40 bg-black/40 opacity-0 pointer-events-none transition-opacity duration-200 lg:hidden data-[open]:pointer-events-auto data-[open]:opacity-100"
+  class="fixed inset-0 z-50 bg-black/40 opacity-0 pointer-events-none transition-opacity duration-200 lg:hidden data-[open]:pointer-events-auto data-[open]:opacity-100"
   aria-hidden="true"
 ></div>
 
 <div
   id="mobileMenu"
-  class="pointer-events-none fixed inset-y-0 right-0 z-[45] w-[min(20rem,90vw)] translate-x-full bg-white/96 px-6 pt-24 pb-8 shadow-soft transition-transform duration-200 lg:hidden data-[open]:pointer-events-auto data-[open]:translate-x-0 dark:bg-brand-card-dark/98"
+  class="pointer-events-none fixed inset-y-0 right-0 z-[60] w-[min(20rem,90vw)] translate-x-full bg-white/96 px-6 pt-3 pb-8 shadow-soft transition-transform duration-200 lg:hidden data-[open]:pointer-events-auto data-[open]:translate-x-0 dark:bg-brand-card-dark/98"
   aria-hidden="true"
   inert
 >
+  <button
+    class="ml-auto mb-4 flex size-12 shrink-0 cursor-pointer items-center justify-center bg-transparent text-2xl"
+    type="button"
+    data-close-mobile-nav
+    aria-label="Cerrar menú"
+  >
+    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+  </button>
   <nav class="flex flex-col gap-4" aria-label="Navegación móvil">
     {
       navItems.map((item) => (
