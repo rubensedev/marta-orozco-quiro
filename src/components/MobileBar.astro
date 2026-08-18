@@ -3,18 +3,19 @@ import { siteMeta } from "../data/site";
 ---
 
 <aside
-  class="fixed right-4 bottom-4 left-4 z-30 flex items-center justify-between gap-4 rounded-[1.5rem] bg-brand-bg/92 p-4 shadow-soft backdrop-blur-[16px] lg:hidden dark:bg-brand-bg-dark/92"
+  class="w-full fixed right-0 bottom-0 z-30 flex items-center justify-between gap-4 border-t border-brand-sage/8 bg-brand-bg/92 px-4 py-2 shadow-soft backdrop-blur-lg lg:hidden dark:bg-brand-bg-dark/92"
 >
   <a
     class="flex min-w-0 flex-col"
     href={`https://wa.me/${siteMeta.whatsappNumber}?text=${encodeURIComponent(siteMeta.whatsappInquiry)}`}
     data-whatsapp-direct
   >
-    <span class="m-0 text-[0.9rem] text-brand-muted">Reservar Cita</span>
+    <span class="m-0 text-[0.9rem] text-brand-muted">RESERVAR CITA</span>
     <span class="text-[0.9rem] font-semibold">{siteMeta.whatsappDisplay}</span>
   </a>
 
   <button class="btn-brand" type="button" data-open-booking>
-    Reservar Ahora
+    RESERVAR AHORA
+    <i class="fa-solid fa-chevron-right text-[10px]"></i>
   </button>
 </aside>

@@ -17,7 +17,7 @@
   --color-brand-lavender-bright: #8b7fe8;
   --color-brand-lavender-dark: #2e2470;
   --color-brand-text-dark: #2c3e2d;
-  --color-brand-text-light: #fdf0e8;
+  --color-brand-text-light: #fff;
   --color-brand-muted: #6b6863;
   --font-sans: "Noto Sans", sans-serif;
   --font-serif: "Noto Serif", serif;
@@ -113,7 +113,7 @@
     padding: 0.85rem 1.5rem;
     border-radius: 999px;
     border: 1px solid transparent;
-    font-size: 0.95rem;
+    font-size: 0.75rem;
     font-weight: 600;
     transition: all 0.2s ease;
     cursor: pointer;
