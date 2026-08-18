@@ -17,17 +17,21 @@ const themeOptionClass =
 
 <div
   data-header-sentinel
-  class="pointer-events-none absolute top-0 left-0 h-px w-px"
+  class="pointer-events-none h-px w-full"
   aria-hidden="true"
 ></div>
 <header
-  class="sticky top-0 z-40 border-b border-transparent bg-transparent transition-[background-color,border-color,backdrop-filter] duration-300 ease-out data-[scrolled]:border-brand-sage/8 data-[scrolled]:bg-brand-bg/90 data-[scrolled]:backdrop-blur-[18px] dark:data-[scrolled]:border-white/8 dark:data-[scrolled]:bg-brand-bg-dark/90"
+  class="fixed inset-x-0 top-0 z-40 border-b border-transparent bg-transparent transition-[background-color,border-color,backdrop-filter] duration-300 ease-out data-[scrolled]:border-brand-sage/8 data-[scrolled]:bg-brand-bg/90 data-[scrolled]:backdrop-blur-[18px] dark:data-[scrolled]:border-white/8 dark:data-[scrolled]:bg-brand-bg-dark/90"
 >
   <div
     class="mx-auto flex w-[min(1120px,calc(100%-2rem))] items-center justify-between gap-4 py-2"
   >
     <a href="#inicio" aria-label="Ir al inicio">
-      <img class="site-logo h-10 w-auto" src="/assets/images/logo.svg" alt="Logo Marta Orozco" />
+      <img
+        class="site-logo h-10 w-auto"
+        src="/assets/images/logo.svg"
+        alt="Logo Marta Orozco"
+      />
     </a>
 
     <nav class="hidden lg:block" aria-label="Navegación principal">
@@ -88,7 +92,11 @@ const themeOptionClass =
         </div>
       </div>
 
-      <button class="btn-brand hidden md:inline-flex" type="button" data-open-booking>
+      <button
+        class="btn-brand hidden md:inline-flex"
+        type="button"
+        data-open-booking
+      >
         Reservar Ahora
       </button>
 
@@ -100,7 +108,8 @@ const themeOptionClass =
         aria-expanded="false"
         aria-label="Abrir menú"
       >
-        <i data-mobile-menu-icon class="fa-solid fa-bars" aria-hidden="true"></i>
+        <i data-mobile-menu-icon class="fa-solid fa-bars" aria-hidden="true"
+        ></i>
       </button>
     </div>
   </div>
@@ -110,16 +119,17 @@ const themeOptionClass =
   data-mobile-nav-backdrop
   class="fixed inset-0 z-50 bg-black/40 opacity-0 pointer-events-none transition-opacity duration-200 lg:hidden data-[open]:pointer-events-auto data-[open]:opacity-100"
   aria-hidden="true"
-></div>
+>
+</div>
 
 <div
   id="mobileMenu"
-  class="pointer-events-none fixed inset-y-0 right-0 z-[60] w-[min(20rem,90vw)] translate-x-full bg-white px-6 pt-3 pb-8 shadow-soft transition-transform duration-200 lg:hidden data-[open]:pointer-events-auto data-[open]:translate-x-0 dark:bg-brand-card-dark"
+  class="pointer-events-none fixed inset-y-0 right-0 z-60 w-[min(20rem,90vw)] translate-x-full bg-white px-6 pt-3 pb-8 shadow-soft transition-transform duration-200 lg:hidden data-[open]:pointer-events-auto data-[open]:translate-x-0 dark:bg-brand-card-dark"
   aria-hidden="true"
   inert
 >
   <button
-    class="ml-auto mb-4 flex size-12 shrink-0 cursor-pointer items-center justify-center bg-transparent text-2xl"
+    class="ml-auto mt-1 mr-3 flex size-12 shrink-0 cursor-pointer items-center justify-center bg-transparent text-3xl"
     type="button"
     data-close-mobile-nav
     aria-label="Cerrar menú"
