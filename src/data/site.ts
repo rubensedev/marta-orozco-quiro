@@ -35,10 +35,10 @@ export const siteMeta = {
 };
 
 export const navItems = [
-  { href: "#sobre-mi", label: "Sobre mí" },
-  { href: "#masajes", label: "Masajes" },
-  { href: "#bonos", label: "Bonos" },
-  { href: "#contacto", label: "Contacto" },
+  { href: "#sobre-mi", label: "SOBRE MÍ" },
+  { href: "#masajes", label: "MASAJES" },
+  { href: "#bonos", label: "BONOS" },
+  { href: "#contacto", label: "CONTACTO" },
 ];
 
 export const aboutContent = {
@@ -164,6 +164,7 @@ export const bonoExamples = [
 export const bookingOptions = [
   ...treatments.map((treatment) => treatment.bookingValue),
   ...rituals.map(
-    (ritual) => `${ritual.bookingValue} (${ritual.duration} min - ${ritual.price}EUR)`,
+    (ritual) =>
+      `${ritual.bookingValue} (${ritual.duration} min - ${ritual.price}EUR)`,
   ),
 ];

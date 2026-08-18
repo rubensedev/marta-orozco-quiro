@@ -2,17 +2,17 @@
 import { navItems } from "../data/site";
 
 const themeOptions = [
-  { value: "light", label: "Claro" },
-  { value: "dark", label: "Oscuro" },
-  { value: "system", label: "Dispositivo" },
+  { value: "light", label: "Claro", icon: "fa-solid fa-sun text-amber-500" },
+  { value: "dark", label: "Oscuro", icon: "fa-solid fa-moon text-indigo-400" },
+  { value: "system", label: "Dispositivo", icon: "fa-solid fa-circle-half-stroke text-slate-600 dark:text-amber-300" },
 ];
 
 const themeBtnClass =
-  "inline-flex size-12 shrink-0 cursor-pointer items-center justify-center whitespace-nowrap rounded-full border border-current/20 bg-transparent text-inherit transition-all duration-200";
+  "inline-flex size-12 text-2xl shrink-0 cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-transparent text-inherit transition-all duration-200";
 const themeMenuClass =
-  "absolute top-[calc(100%+0.75rem)] right-0 z-10 min-w-44 rounded-[1.5rem] bg-white/96 p-2 shadow-soft dark:bg-brand-card-dark/96";
+  "absolute top-full z-50 mt-2 flex w-max min-w-52 flex-col rounded-[1.5rem] bg-white p-1.5 text-brand-text-dark shadow-soft dark:bg-brand-card-dark dark:text-brand-text-light";
 const themeOptionClass =
-  "block w-full cursor-pointer rounded-2xl border-0 bg-transparent px-4 py-3 text-left text-inherit aria-checked:font-bold aria-checked:text-brand-lavender";
+  "group flex w-full cursor-pointer items-center gap-3 rounded-2xl border-0 bg-transparent px-3 py-2.5 text-left text-sm text-brand-text-dark hover:bg-black/5 aria-checked:bg-black/5 dark:text-brand-text-light dark:hover:bg-white/8 dark:aria-checked:bg-white/10";
 ---
 
 <div
@@ -53,7 +53,7 @@ const themeOptionClass =
     </nav>
 
     <div class="flex shrink-0 flex-nowrap items-center gap-3">
-      <div class="relative hidden lg:block" data-theme-widget>
+      <div class="relative hidden size-12 shrink-0 md:inline-flex" data-theme-widget>
         <button
           id="themeMenuBtn"
           class={themeBtnClass}
@@ -73,7 +73,7 @@ const themeOptionClass =
 
         <div
           id="themeMenu"
-          class={themeMenuClass}
+          class={`${themeMenuClass} right-0`}
           data-theme-menu
           role="menu"
           hidden
@@ -86,7 +86,12 @@ const themeOptionClass =
                 role="menuitemradio"
                 data-theme-option={option.value}
               >
-                {option.label}
+                <i class:list={["fa-fw", option.icon]} aria-hidden="true" />
+                <span class="flex-1 whitespace-nowrap">{option.label}</span>
+                <i
+                  class="fa-solid fa-check text-sm opacity-0 group-aria-checked:opacity-100"
+                  aria-hidden="true"
+                />
               </button>
             ))
           }
@@ -98,7 +103,8 @@ const themeOptionClass =
         type="button"
         data-open-booking
       >
-        Reservar Ahora
+        RESERVAR AHORA
+        <i class="fa-solid fa-chevron-right text-[10px]"></i>
       </button>
 
       <button
@@ -137,7 +143,10 @@ const themeOptionClass =
   >
     <i class="fa-solid fa-xmark" aria-hidden="true"></i>
   </button>
-  <nav class="flex flex-col gap-4" aria-label="Navegación móvil">
+  <nav
+    class="flex flex-col gap-4 border-t border-brand-sage/8 pt-4 dark:border-white/8"
+    aria-label="Navegación móvil"
+  >
     {
       navItems.map((item) => (
         <a
@@ -150,9 +159,12 @@ const themeOptionClass =
       ))
     }
     <button class="btn-brand" type="button" data-open-booking-close-nav>
-      Reservar Ahora
+      RESERVAR AHORA
     </button>
-    <div class="relative" data-theme-widget>
+    <div
+      class="relative w-fit border-t border-brand-sage/8 pt-4 dark:border-white/8"
+      data-theme-widget
+    >
       <button
         id="themeMenuBtnDrawer"
         class={themeBtnClass}
@@ -172,7 +184,7 @@ const themeOptionClass =
 
       <div
         id="themeMenuDrawer"
-        class={themeMenuClass}
+        class={`${themeMenuClass} left-0`}
         data-theme-menu
         role="menu"
         hidden
@@ -185,7 +197,12 @@ const themeOptionClass =
               role="menuitemradio"
               data-theme-option={option.value}
             >
-              {option.label}
+              <i class:list={["fa-fw", option.icon]} aria-hidden="true" />
+              <span class="flex-1 whitespace-nowrap">{option.label}</span>
+              <i
+                class="fa-solid fa-check text-sm opacity-0 group-aria-checked:opacity-100"
+                aria-hidden="true"
+              />
             </button>
           ))
         }
