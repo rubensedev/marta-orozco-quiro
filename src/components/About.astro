@@ -1,0 +1,29 @@
+---
+import { aboutContent } from "../data/site";
+---
+
+<section id="sobre-mi" class="about section-shell section-block">
+  <div class="about__grid">
+    <article class="about__card">
+      <p class="section-eyebrow section-eyebrow--lavender">{aboutContent.eyebrow}</p>
+      <h2 class="section-title">{aboutContent.title}</h2>
+      <p class="about__subtitle">{aboutContent.subtitle}</p>
+      {
+        aboutContent.paragraphs.map((paragraph) => (
+          <p class="about__paragraph">{paragraph}</p>
+        ))
+      }
+    </article>
+
+    <figure class="about__figure">
+      <img
+        class="about__image"
+        src="/assets/images/about.webp"
+        alt="Retrato de Marta Orozco."
+        width="720"
+        height="900"
+        loading="lazy"
+      />
+    </figure>
+  </div>
+</section>

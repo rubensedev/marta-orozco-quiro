@@ -1,0 +1,387 @@
+---
+import { bonoExamples, bonoTiers, rituals, siteMeta, treatments } from "../data/site";
+---
+
+<script
+  define:vars={{
+    bonoExamples,
+    bonoTiers,
+    rituals,
+    siteMeta,
+    treatments,
+  }}
+>
+  const THEME_KEY = "marta-orozco-theme";
+  const html = document.documentElement;
+  const dialog = document.getElementById("bookingModal");
+  const bookingForm = document.getElementById("bookingForm");
+  const modalTreatment = document.getElementById("modalTreatment");
+  const modalDuration = document.getElementById("modalDuration");
+  const modalPurchaseType = document.getElementById("modalPurchaseType");
+  const modalPriceEstimate = document.getElementById("modalPriceEstimate");
+  const modalName = document.getElementById("modalName");
+  const modalDate = document.getElementById("modalDate");
+  const modalDurationGroup = document.getElementById("modalDurationGroup");
+  const modalPurchaseTypeGroup = document.getElementById("modalPurchaseTypeGroup");
+  const themeMenuBtn = document.getElementById("themeMenuBtn");
+  const themeMenu = document.getElementById("themeMenu");
+  const themeIcon = document.getElementById("themeMenuIcon");
+  const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  const ritualMap = new Map(rituals.map((ritual) => [ritual.bookingValue, ritual]));
+  const treatmentMap = new Map(treatments.map((treatment) => [treatment.bookingValue, treatment]));
+
+  const themeIconClasses = {
+    light: "fa-solid fa-sun text-amber-500",
+    dark: "fa-solid fa-moon text-indigo-400",
+    system: "fa-solid fa-circle-half-stroke text-slate-600 dark:text-amber-300",
+  };
+
+  function resolveTheme(preference) {
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    return preference === "dark" || (preference === "system" && prefersDark);
+  }
+
+  function updateThemeMenu(preference) {
+    document.querySelectorAll("[data-theme-option]").forEach((button) => {
+      const selected = button.dataset.themeOption === preference;
+      button.setAttribute("aria-checked", String(selected));
+    });
+    themeIcon.className = themeIconClasses[preference];
+  }
+
+  function applyThemePreference(preference) {
+    const actualPreference = preference || "system";
+    html.classList.toggle("dark", resolveTheme(actualPreference));
+    localStorage.setItem(THEME_KEY, actualPreference);
+    updateThemeMenu(actualPreference);
+  }
+
+  function toggleThemeMenu(forceOpen) {
+    const open = forceOpen ?? themeMenu.hidden;
+    themeMenu.hidden = !open;
+    themeMenuBtn.setAttribute("aria-expanded", String(open));
+  }
+
+  function toggleMobileMenu(forceOpen) {
+    const open = forceOpen ?? mobileMenu.hidden;
+    mobileMenu.hidden = !open;
+    mobileMenuBtn.setAttribute("aria-expanded", String(open));
+  }
+
+  function getSelectedTier(card) {
+    return bonoTiers.find((tier) => tier.id === card.dataset.selectedBono) ?? bonoTiers[0];
+  }
+
+  function getSelectedDuration(card, treatment) {
+    const minutes = Number(card.dataset.selectedDuration);
+    return treatment.durations.find((duration) => duration.min === minutes) ?? treatment.durations[0];
+  }
+
+  function calculateQuote(unitPrice, tier) {
+    const fullTotal = unitPrice * tier.sessions;
+    const discountedTotal = Math.round(fullTotal * (1 - tier.discount));
+    const perSession = tier.sessions > 1 ? Math.round(discountedTotal / tier.sessions) : unitPrice;
+    const savings = fullTotal - discountedTotal;
+
+    return { discountedTotal, fullTotal, perSession, savings };
+  }
+
+  function renderPriceDisplay(card, treatment) {
+    const display = card.querySelector("[data-pricing-display]");
+    const tier = getSelectedTier(card);
+    const duration = getSelectedDuration(card, treatment);
+    const quote = calculateQuote(duration.price, tier);
+
+    if (tier.sessions === 1) {
+      display.innerHTML = `<div class="pricing-compare"><p class="pricing-single">${duration.price} €</p></div>`;
+      return;
+    }
+
+    display.innerHTML = `
+      <div class="pricing-compare">
+        <div class="pricing-compare-figures">
+          <span class="pricing-original">${quote.fullTotal} €</span>
+          <span class="pricing-discounted">${quote.discountedTotal} €</span>
+        </div>
+        <p class="pricing-per-session">${quote.perSession} € / sesión</p>
+        <p class="pricing-savings-highlight">Ahorras ${quote.savings} €</p>
+      </div>
+    `;
+  }
+
+  function renderPillGroup({ label, items, onClick, selectedValue, bono = false }) {
+    return `
+      <div class="pricing-card__group">
+        <p class="pricing-card__group-title">${label}</p>
+        <div class="pricing-card__pill-row" role="radiogroup" aria-label="${label}">
+          ${items
+            .map((item) => {
+              const active = item.value === selectedValue;
+              const bonusClass = bono ? " pricing-pill-bono" : "";
+              const activeClass = active ? " pricing-pill-active" : "";
+              return `<button type="button" class="pricing-pill${bonusClass}${activeClass}" data-role="${onClick}" data-value="${item.value}" aria-pressed="${active}">${item.label}</button>`;
+            })
+            .join("")}
+        </div>
+      </div>
+    `;
+  }
+
+  function renderPricingWidgets() {
+    document.querySelectorAll("[data-pricing-card]").forEach((card) => {
+      const treatment = treatments.find((entry) => entry.id === card.dataset.pricingCard);
+      if (!treatment) return;
+
+      card.dataset.selectedDuration ||= String(treatment.durations[0].min);
+      card.dataset.selectedBono ||= bonoTiers[0].id;
+
+      const mount = card.querySelector("[data-pricing-mount]");
+      mount.innerHTML =
+        renderPillGroup({
+          label: "Duración",
+          items: treatment.durations.map((duration) => ({
+            value: String(duration.min),
+            label: `${duration.min} min`,
+          })),
+          onClick: "duration",
+          selectedValue: card.dataset.selectedDuration,
+        }) +
+        renderPillGroup({
+          label: "Tipo de compra",
+          items: bonoTiers.map((tier) => ({
+            value: tier.id,
+            label: tier.shortLabel,
+          })),
+          onClick: "bono",
+          selectedValue: card.dataset.selectedBono,
+          bono: true,
+        });
+
+      mount.querySelectorAll("[data-role='duration']").forEach((button) => {
+        button.addEventListener("click", () => {
+          card.dataset.selectedDuration = button.dataset.value;
+          renderPricingWidgets();
+        });
+      });
+
+      mount.querySelectorAll("[data-role='bono']").forEach((button) => {
+        button.addEventListener("click", () => {
+          card.dataset.selectedBono = button.dataset.value;
+          renderPricingWidgets();
+        });
+      });
+
+      renderPriceDisplay(card, treatment);
+    });
+  }
+
+  function renderBonoExamples() {
+    const container = document.getElementById("bonoExamples");
+    container.innerHTML = bonoExamples
+      .map((example) => {
+        const treatment = treatments.find((entry) => entry.id === example.treatmentId);
+        const duration = treatment?.durations.find((entry) => entry.min === example.durationMin);
+        const tier = bonoTiers.find((entry) => entry.id === example.bonoId);
+        if (!treatment || !duration || !tier) return "";
+        const quote = calculateQuote(duration.price, tier);
+
+        return `
+          <article class="bonos-example">
+            <div>
+              <h4 class="bonos-example__title">${treatment.title} · ${duration.min} min</h4>
+              <p class="bonos-example__text">${tier.label}</p>
+            </div>
+            <div class="bonos-example__prices">
+              <span class="pricing-original">${quote.fullTotal} €</span>
+              <span class="pricing-discounted">${quote.discountedTotal} €</span>
+            </div>
+          </article>
+        `;
+      })
+      .join("");
+  }
+
+  function syncBookingFieldVisibility() {
+    const treatmentName = modalTreatment.value;
+    const ritual = ritualMap.get(treatmentName) ?? ritualMap.get(treatmentName.replace(/\s+\(.+$/, ""));
+    const treatment = treatmentMap.get(treatmentName);
+
+    if (ritual) {
+      modalDurationGroup.hidden = true;
+      modalPurchaseTypeGroup.hidden = true;
+      modalDuration.innerHTML = `<option value="${ritual.duration}">${ritual.duration} minutos</option>`;
+      modalPurchaseType.value = "single";
+      modalPriceEstimate.value = `${ritual.price} €`;
+      return;
+    }
+
+    if (!treatment) return;
+
+    modalDurationGroup.hidden = false;
+    modalPurchaseTypeGroup.hidden = false;
+    modalDuration.innerHTML = treatment.durations
+      .map((duration) => `<option value="${duration.min}">${duration.min} minutos</option>`)
+      .join("");
+
+    updateModalPriceEstimate();
+  }
+
+  function updateModalPriceEstimate() {
+    const treatment = treatmentMap.get(modalTreatment.value);
+    if (!treatment) return;
+
+    const duration = treatment.durations.find((entry) => entry.min === Number(modalDuration.value)) ?? treatment.durations[0];
+    const tier = bonoTiers.find((entry) => entry.id === modalPurchaseType.value) ?? bonoTiers[0];
+    const quote = calculateQuote(duration.price, tier);
+    modalPriceEstimate.value =
+      tier.sessions === 1
+        ? `${duration.price} €`
+        : `${quote.discountedTotal} € (${quote.perSession} € / sesión)`;
+  }
+
+  function openBookingModal(treatmentName, context = {}) {
+    if (treatmentName) {
+      const match = [...modalTreatment.options].find((option) =>
+        option.value.startsWith(treatmentName),
+      );
+      if (match) modalTreatment.value = match.value;
+    }
+
+    syncBookingFieldVisibility();
+
+    if (context.duration && !modalDurationGroup.hidden) {
+      modalDuration.value = String(context.duration);
+    }
+
+    if (context.bono && !modalPurchaseTypeGroup.hidden) {
+      modalPurchaseType.value = context.bono;
+    }
+
+    updateModalPriceEstimate();
+    document.body.classList.add("is-locked");
+    dialog.showModal();
+  }
+
+  function closeBookingModal() {
+    dialog.close();
+    document.body.classList.remove("is-locked");
+  }
+
+  function bookingMessage() {
+    const purchaseTypeLabel =
+      bonoTiers.find((entry) => entry.id === modalPurchaseType.value)?.label ?? "Sesión suelta";
+    const estimate = modalPriceEstimate.value;
+    const durationLabel = modalDurationGroup.hidden
+      ? "80 minutos"
+      : `${modalDuration.value} minutos`;
+
+    return [
+      "Hola Marta! Me gustaría reservar una cita.",
+      "",
+      `• *Tratamiento:* ${modalTreatment.value}`,
+      `• *Duración:* ${durationLabel}`,
+      `• *Tipo de compra:* ${purchaseTypeLabel}`,
+      estimate ? `• *Precio estimado:* ${estimate}` : "",
+      `• *Nombre:* ${modalName.value}`,
+      `• *Preferencia de Fecha/Hora:* ${modalDate.value}`,
+    ]
+      .filter(Boolean)
+      .join("\n");
+  }
+
+  document.querySelectorAll("[data-theme-option]").forEach((button) => {
+    button.addEventListener("click", () => {
+      applyThemePreference(button.dataset.themeOption);
+      toggleThemeMenu(false);
+    });
+  });
+
+  themeMenuBtn?.addEventListener("click", () => toggleThemeMenu());
+  mobileMenuBtn?.addEventListener("click", () => toggleMobileMenu());
+
+  document.querySelectorAll("[data-close-mobile-nav]").forEach((link) => {
+    link.addEventListener("click", () => toggleMobileMenu(false));
+  });
+
+  document.querySelectorAll("[data-open-booking-close-nav]").forEach((button) => {
+    button.addEventListener("click", () => {
+      toggleMobileMenu(false);
+      openBookingModal();
+    });
+  });
+
+  document.querySelectorAll("[data-open-booking]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const treatmentName = button.dataset.treatment;
+      const card = button.closest("[data-pricing-card]");
+      const context = card
+        ? {
+            duration: Number(card.dataset.selectedDuration),
+            bono: card.dataset.selectedBono,
+          }
+        : {};
+
+      openBookingModal(treatmentName, context);
+    });
+  });
+
+  document.querySelectorAll("[data-close-booking]").forEach((button) => {
+    button.addEventListener("click", closeBookingModal);
+  });
+
+  dialog?.addEventListener("click", (event) => {
+    const rect = dialog.getBoundingClientRect();
+    const inDialog =
+      rect.top <= event.clientY &&
+      event.clientY <= rect.top + rect.height &&
+      rect.left <= event.clientX &&
+      event.clientX <= rect.left + rect.width;
+    if (!inDialog) closeBookingModal();
+  });
+
+  dialog?.addEventListener("close", () => {
+    document.body.classList.remove("is-locked");
+  });
+
+  modalTreatment?.addEventListener("change", () => {
+    syncBookingFieldVisibility();
+    updateModalPriceEstimate();
+  });
+  modalDuration?.addEventListener("change", updateModalPriceEstimate);
+  modalPurchaseType?.addEventListener("change", updateModalPriceEstimate);
+
+  bookingForm?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const url = `https://wa.me/${siteMeta.whatsappNumber}?text=${encodeURIComponent(bookingMessage())}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+  });
+
+  document.addEventListener("click", (event) => {
+    if (themeMenu.hidden) return;
+    if (!themeMenu.contains(event.target) && !themeMenuBtn.contains(event.target)) {
+      toggleThemeMenu(false);
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      toggleThemeMenu(false);
+      toggleMobileMenu(false);
+    }
+  });
+
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+    const preference = localStorage.getItem(THEME_KEY) || "system";
+    if (preference === "system") {
+      applyThemePreference("system");
+    }
+  });
+
+  applyThemePreference(localStorage.getItem(THEME_KEY) || "system");
+  syncBookingFieldVisibility();
+  updateModalPriceEstimate();
+  renderPricingWidgets();
+  renderBonoExamples();
+</script>

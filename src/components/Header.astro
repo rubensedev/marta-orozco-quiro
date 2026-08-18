@@ -1,0 +1,81 @@
+---
+import { navItems } from "../data/site";
+---
+
+<header class="site-header">
+  <div class="site-header__inner section-shell">
+    <a class="site-header__brand" href="#inicio" aria-label="Ir al inicio">
+      <img class="site-logo" src="/assets/images/logo.svg" alt="Logo Marta Orozco" />
+    </a>
+
+    <nav class="site-header__nav" aria-label="Navegación principal">
+      <ul class="site-header__nav-list">
+        {
+          navItems.map((item) => (
+            <li><a class="site-header__nav-link" href={item.href}>{item.label}</a></li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <div class="theme-menu">
+        <button
+          id="themeMenuBtn"
+          class="theme-menu__button"
+          type="button"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="themeMenu"
+        >
+          <i id="themeMenuIcon" class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
+          <span class="theme-menu__label">Tema</span>
+        </button>
+
+        <div id="themeMenu" class="theme-menu__panel" role="menu" hidden>
+          <button class="theme-menu-option" type="button" role="menuitemradio" data-theme-option="light">
+            Claro
+          </button>
+          <button class="theme-menu-option" type="button" role="menuitemradio" data-theme-option="dark">
+            Oscuro
+          </button>
+          <button class="theme-menu-option" type="button" role="menuitemradio" data-theme-option="system">
+            Dispositivo
+          </button>
+        </div>
+      </div>
+
+      <button class="btn-brand site-header__cta" type="button" data-open-booking>
+        Reservar Ahora
+      </button>
+
+      <button
+        id="mobileMenuBtn"
+        class="site-header__menu-button"
+        type="button"
+        aria-controls="mobileMenu"
+        aria-expanded="false"
+        aria-label="Abrir menú"
+      >
+        <span class="site-header__menu-line"></span>
+        <span class="site-header__menu-line"></span>
+        <span class="site-header__menu-line"></span>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobileMenu" class="mobile-menu" hidden>
+    <nav class="mobile-menu__nav" aria-label="Navegación móvil">
+      {
+        navItems.map((item) => (
+          <a class="mobile-menu__link" href={item.href} data-close-mobile-nav>
+            {item.label}
+          </a>
+        ))
+      }
+      <button class="btn-brand mobile-menu__cta" type="button" data-open-booking-close-nav>
+        Reservar Ahora
+      </button>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,90 @@
+---
+import { bonoTiers, bookingOptions } from "../data/site";
+---
+
+<dialog id="bookingModal" class="booking-modal" aria-labelledby="bookingModalTitle">
+  <article class="booking-modal__panel">
+    <button
+      class="booking-modal__close"
+      type="button"
+      data-close-booking
+      aria-label="Cerrar modal de reserva"
+    >
+      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>
+
+    <p class="section-eyebrow section-eyebrow--lavender">Cita Directa</p>
+    <h2 id="bookingModalTitle" class="booking-modal__title">Reservar tratamiento</h2>
+
+    <form id="bookingForm" class="booking-form">
+      <div class="booking-field-group">
+        <label class="booking-form__label" for="modalTreatment">
+          Tratamiento Deseado <span class="booking-required">*</span>
+        </label>
+        <select id="modalTreatment" class="booking-form__control" name="treatment" required>
+          {
+            bookingOptions.map((option) => (
+              <option value={option}>{option}</option>
+            ))
+          }
+        </select>
+      </div>
+
+      <div class="booking-field-group" id="modalDurationGroup">
+        <label class="booking-form__label" for="modalDuration">
+          Duración Preferida <span class="booking-required">*</span>
+        </label>
+        <select id="modalDuration" class="booking-form__control" name="duration"></select>
+      </div>
+
+      <div class="booking-field-group" id="modalPurchaseTypeGroup">
+        <label class="booking-form__label" for="modalPurchaseType">
+          Tipo de Compra <span class="booking-required">*</span>
+        </label>
+        <select id="modalPurchaseType" class="booking-form__control" name="purchaseType">
+          {
+            bonoTiers.map((tier) => (
+              <option value={tier.id}>{tier.label}</option>
+            ))
+          }
+        </select>
+      </div>
+
+      <div class="booking-field-group">
+        <p class="booking-form__label">Precio estimado</p>
+        <output id="modalPriceEstimate" class="booking-form__estimate">-</output>
+      </div>
+
+      <div class="booking-field-group">
+        <label class="booking-form__label" for="modalName">
+          Tu Nombre <span class="booking-required">*</span>
+        </label>
+        <input
+          id="modalName"
+          class="booking-form__control"
+          name="name"
+          type="text"
+          autocomplete="name"
+          required
+        />
+      </div>
+
+      <div class="booking-field-group">
+        <label class="booking-form__label" for="modalDate">
+          Preferencia de Fecha/Hora <span class="booking-required">*</span>
+        </label>
+        <input
+          id="modalDate"
+          class="booking-form__control"
+          name="datePreference"
+          type="text"
+          placeholder="Ej. Jueves 17:00"
+          required
+        />
+        <p class="booking-field-helper">Disponibilidad solo jueves de 15:00 a 20:00.</p>
+      </div>
+
+      <button class="btn-brand booking-form__submit" type="submit">Abrir WhatsApp</button>
+    </form>
+  </article>
+</dialog>

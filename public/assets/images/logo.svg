@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 72" role="img" aria-labelledby="logo-title">
+  <title id="logo-title">Marta Orozco</title>
+  <rect width="72" height="72" rx="20" fill="#2C3E2D" />
+  <path
+    d="M17 50V22h8.2L36.8 39.7 48.5 22H57v28H48.5V35.8L36.8 53 25.2 35.8V50H17Z"
+    fill="#FDF0E8"
+  />
+  <g fill="#2C3E2D">
+    <text x="88" y="30" font-family="Noto Serif, serif" font-size="22" font-weight="500">Marta Orozco</text>
+    <text x="88" y="52" font-family="Noto Sans, sans-serif" font-size="12" letter-spacing="2.6">
+      QUIROMASAJISTA
+    </text>
+  </g>
+</svg>

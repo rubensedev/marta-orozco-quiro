@@ -1,0 +1,18 @@
+---
+import { siteMeta } from "../data/site";
+---
+
+<aside class="mobile-bar">
+  <a
+    class="mobile-bar__info"
+    href={`https://wa.me/${siteMeta.whatsappNumber}?text=${encodeURIComponent(siteMeta.whatsappInquiry)}`}
+    data-whatsapp-direct
+  >
+    <span class="mobile-bar__label">Reservar Cita</span>
+    <span class="mobile-bar__value">{siteMeta.whatsappDisplay}</span>
+  </a>
+
+  <button class="btn-brand mobile-bar__button" type="button" data-open-booking>
+    Reservar Ahora
+  </button>
+</aside>

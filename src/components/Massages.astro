@@ -1,0 +1,18 @@
+---
+import PricingCard from "./PricingCard.astro";
+import { treatments } from "../data/site";
+---
+
+<section id="masajes" class="section-shell section-block section-block--spacious">
+  <div class="section-heading">
+    <p class="section-eyebrow">Masajes</p>
+    <h2 class="section-title">Tratamientos adaptados a cómo te sientes hoy</h2>
+    <p class="section-lead">
+      Elige duración y tipo de compra para ver tu precio. Compara el ahorro con bonos de 5 o 10 sesiones.
+    </p>
+  </div>
+
+  <div class="pricing-list">
+    {treatments.map((treatment) => <PricingCard treatment={treatment} />)}
+  </div>
+</section>

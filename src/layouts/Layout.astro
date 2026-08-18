@@ -1,0 +1,51 @@
+---
+import "../styles/global.css";
+import "../styles/global.scss";
+import { siteMeta } from "../data/site";
+
+type Props = {
+  title?: string;
+  description?: string;
+};
+
+const {
+  title = siteMeta.title,
+  description = siteMeta.description,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={siteMeta.lang} class="page">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Serif:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script is:inline>
+      (function () {
+        var saved = localStorage.getItem("marta-orozco-theme");
+        var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var useDark =
+          saved === "dark" || (saved !== "light" && (saved === "system" || !saved) && prefersDark);
+        if (useDark) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
+    <title>{title}</title>
+  </head>
+  <body class="site-body">
+    <slot />
+  </body>
+</html>

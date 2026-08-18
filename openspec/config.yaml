@@ -1,0 +1,65 @@
+project:
+  name: marta-orozco-quiro
+  goal: Single-page Astro landing page for "Marta Orozco | Quiromasajista" in Spanish.
+
+context:
+  source_of_truth: astro-migration-context.md
+  repo_state: scratch-bootstrap
+  current_artifacts:
+    - astro-migration-context.md
+  intended_stack:
+    - Astro
+    - Tailwind CSS
+    - SCSS
+  styling_convention: BEM; no raw Tailwind utility classes in Astro templates
+
+persistence:
+  mode: hybrid
+  local_registry: .atl/skill-registry.md
+  memory_project: marta-orozco-quiro
+
+strict_tdd: false
+
+testing:
+  detected_at: 2026-08-18
+  test_runner:
+    available: false
+    framework: null
+    command: null
+  layers:
+    unit:
+      available: false
+      tool: null
+    integration:
+      available: false
+      tool: null
+    e2e:
+      available: false
+      tool: null
+  coverage:
+    available: false
+    command: null
+  quality:
+    linter:
+      available: false
+      command: null
+    type_checker:
+      available: false
+      command: null
+    formatter:
+      available: false
+      command: null
+
+workflow:
+  review_line_budget: 400
+  init_next: sdd-new
+  feature_name_hint: astro-landing-page
+  phases:
+    - sdd-explore
+    - sdd-propose
+    - sdd-spec
+    - sdd-design
+    - sdd-tasks
+    - sdd-apply
+    - sdd-verify
+    - sdd-archive

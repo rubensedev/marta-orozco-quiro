@@ -1,0 +1,30 @@
+---
+import About from "../components/About.astro";
+import BookingModal from "../components/BookingModal.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import Massages from "../components/Massages.astro";
+import MobileBar from "../components/MobileBar.astro";
+import PageScripts from "../components/PageScripts.astro";
+import Rituals from "../components/Rituals.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+  <Header />
+
+  <main id="inicio" class="landing-page">
+    <Hero />
+    <About />
+    <Massages />
+    <Rituals />
+    <Contact />
+  </main>
+
+  <Footer />
+  <MobileBar />
+  <BookingModal />
+  <PageScripts />
+</Layout>

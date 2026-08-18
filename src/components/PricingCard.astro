@@ -1,0 +1,43 @@
+---
+import type { Treatment } from "../data/site";
+
+type Props = {
+  treatment: Treatment;
+};
+
+const { treatment } = Astro.props;
+const align = treatment.imagePosition === "end" ? "start" : undefined;
+---
+
+<article
+  class:list={[
+    "pricing-card",
+    treatment.imagePosition === "end" && "pricing-card--reverse",
+  ]}
+  data-pricing-card={treatment.id}
+  data-treatment={treatment.bookingValue}
+  data-pricing-align={align}
+>
+  <div class="pricing-card__media">
+    <img
+      class="pricing-card__image"
+      src={treatment.image}
+      alt={treatment.imageAlt}
+      width="720"
+      height="560"
+      loading="lazy"
+    />
+  </div>
+
+  <div class="pricing-card__body">
+    <h3 class="pricing-card__title">{treatment.title}</h3>
+    <p class="pricing-card__description">{treatment.description}</p>
+    <div class="pricing-card__widgets">
+      <div class="pricing-card__mount" data-pricing-mount></div>
+      <div class="pricing-card__display" data-pricing-display aria-live="polite" aria-atomic="true"></div>
+    </div>
+    <button class="btn-brand pricing-card__cta" type="button" data-open-booking data-treatment={treatment.bookingValue}>
+      Reservar {treatment.title}
+    </button>
+  </div>
+</article>

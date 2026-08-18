@@ -1,0 +1,63 @@
+---
+import { rituals } from "../data/site";
+---
+
+<section id="bonos" class="section-shell section-block section-block--contrast">
+  <div class="section-heading section-heading--lavender">
+    <p class="section-eyebrow section-eyebrow--lavender">Rituales y bonos</p>
+    <h2 class="section-title">Renovación profunda con sesiones sueltas o bonos</h2>
+    <p class="section-lead">
+      Rituales completos para una renovación profunda o paquetes de bonos con descuento especial.
+    </p>
+  </div>
+
+  <div class="rituals__grid">
+    {
+      rituals.map((ritual) => (
+        <article class="ritual-card">
+          <div class="ritual-card__icon"><i class={ritual.iconClass} aria-hidden="true"></i></div>
+          <h3 class="ritual-card__title">{ritual.title}</h3>
+          <p class="ritual-card__meta">{ritual.duration} min · {ritual.price} €</p>
+          <p class="ritual-card__description">{ritual.description}</p>
+          <button
+            class="btn-brand ritual-card__cta"
+            type="button"
+            data-open-booking
+            data-treatment={ritual.bookingValue}
+          >
+            Reservar Ritual
+          </button>
+        </article>
+      ))
+    }
+  </div>
+
+  <section class="bonos-panel" aria-labelledby="bonos-title">
+    <div class="bonos-panel__header">
+      <h3 id="bonos-title" class="bonos-panel__title">Bonos</h3>
+      <p class="bonos-panel__text">
+        Consulta ejemplos de ahorro para encontrar el formato que mejor encaja contigo.
+      </p>
+    </div>
+
+    <div class="bonos-panel__tiers">
+      <article class="bonos-tier">
+        <div class="bono-savings-badge">10%</div>
+        <h4 class="bonos-tier__title">5 sesiones</h4>
+        <p class="bonos-tier__subtitle">Descuento especial</p>
+      </article>
+      <article class="bonos-tier">
+        <div class="bono-savings-badge">15%</div>
+        <h4 class="bonos-tier__title">10 sesiones</h4>
+        <p class="bonos-tier__subtitle">Descuento especial</p>
+      </article>
+    </div>
+
+    <div id="bonoExamples" class="bonos-panel__examples"></div>
+
+    <button class="btn-brand bonos-panel__cta" type="button" data-open-booking>
+      <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+      <span>Preguntar por Bonos</span>
+    </button>
+  </section>
+</section>

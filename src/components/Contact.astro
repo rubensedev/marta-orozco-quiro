@@ -1,0 +1,67 @@
+---
+import { siteMeta } from "../data/site";
+---
+
+<section id="contacto" class="contact section-shell section-block">
+  <div class="contact__grid">
+    <article class="contact__content">
+      <p class="section-eyebrow">Citas y horario</p>
+      <h2 class="section-title">Ubicación y contacto</h2>
+      <p class="contact__schedule">
+        <i class="fa-regular fa-clock" aria-hidden="true"></i>
+        <span>Jueves de 15:00 a 20:00</span>
+      </p>
+      <p class="contact__note">
+        *Citas bajo reserva previa para garantizar tu atención personalizada.
+      </p>
+      <p class="contact__address">
+        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+        <span>C. Esperanza Elena Caro, 2, 1°A4 / 41002 Sevilla</span>
+      </p>
+
+      <div class="contact__actions">
+        <button class="btn-brand" type="button" data-open-booking>Reservar Ahora</button>
+        <a class="btn-secondary" href={`https://wa.me/${siteMeta.whatsappNumber}?text=${encodeURIComponent(siteMeta.whatsappInquiry)}`}>
+          WhatsApp
+        </a>
+      </div>
+
+      <ul class="contact__links">
+        <li>
+          <a class="contact__link" href={siteMeta.instagramUrl} target="_blank" rel="noreferrer">
+            <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+            <span>Instagram</span>
+          </a>
+        </li>
+        <li>
+          <a
+            class="contact__link"
+            href={`https://wa.me/${siteMeta.whatsappNumber}?text=${encodeURIComponent(siteMeta.whatsappInquiry)}`}
+            data-whatsapp-direct
+          >
+            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+            <span>{siteMeta.whatsappDisplay}</span>
+          </a>
+        </li>
+      </ul>
+    </article>
+
+    <div class="contact__visuals">
+      <img
+        class="contact__image"
+        src="/assets/images/contact.webp"
+        alt="Espacio donde se realizan las sesiones."
+        width="960"
+        height="720"
+        loading="lazy"
+      />
+      <iframe
+        class="contact__map"
+        title="Mapa de ubicación de Marta Orozco"
+        src={siteMeta.mapEmbedUrl}
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+  </div>
+</section>
