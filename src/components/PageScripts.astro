@@ -23,11 +23,18 @@ import { bonoExamples, bonoTiers, rituals, siteMeta, treatments } from "../data/
   const modalDate = document.getElementById("modalDate");
   const modalDurationGroup = document.getElementById("modalDurationGroup");
   const modalPurchaseTypeGroup = document.getElementById("modalPurchaseTypeGroup");
-  const themeMenuBtn = document.getElementById("themeMenuBtn");
-  const themeMenu = document.getElementById("themeMenu");
-  const themeIcon = document.getElementById("themeMenuIcon");
   const mobileMenuBtn = document.getElementById("mobileMenuBtn");
   const mobileMenu = document.getElementById("mobileMenu");
+  const mobileMenuIcon = mobileMenuBtn?.querySelector("[data-mobile-menu-icon]");
+  const mobileNavBackdrop = document.querySelector("[data-mobile-nav-backdrop]");
+  const themeMenuButtons = document.querySelectorAll("[data-theme-menu-btn]");
+  const themeMenus = document.querySelectorAll("[data-theme-menu]");
+  const themeIcons = document.querySelectorAll("[data-theme-menu-icon]");
+  const pageInertTargets = [
+    document.querySelector("main"),
+    document.querySelector("footer"),
+    document.querySelector("aside.fixed"),
+  ].filter(Boolean);
 
   const ritualMap = new Map(rituals.map((ritual) => [ritual.bookingValue, ritual]));
   const treatmentMap = new Map(treatments.map((treatment) => [treatment.bookingValue, treatment]));
@@ -48,7 +55,10 @@ import { bonoExamples, bonoTiers, rituals, siteMeta, treatments } from "../data/
       const selected = button.dataset.themeOption === preference;
       button.setAttribute("aria-checked", String(selected));
     });
-    themeIcon.className = themeIconClasses[preference];
+    const iconClass = themeIconClasses[preference] || themeIconClasses.system;
+    themeIcons.forEach((icon) => {
+      icon.className = iconClass;
+    });
   }
 
   function applyThemePreference(preference) {
@@ -58,16 +68,64 @@ import { bonoExamples, bonoTiers, rituals, siteMeta, treatments } from "../data/
     updateThemeMenu(actualPreference);
   }
 
-  function toggleThemeMenu(forceOpen) {
-    const open = forceOpen ?? themeMenu.hidden;
-    themeMenu.hidden = !open;
-    themeMenuBtn.setAttribute("aria-expanded", String(open));
+  function isNavOpen() {
+    return mobileMenuBtn?.getAttribute("aria-expanded") === "true";
+  }
+
+  function syncBodyLock() {
+    document.body.classList.toggle("is-locked", isNavOpen() || Boolean(dialog?.open));
+  }
+
+  function setPageInert(inert) {
+    pageInertTargets.forEach((node) => {
+      node.toggleAttribute("inert", inert);
+    });
+  }
+
+  function closeAllThemeMenus() {
+    themeMenus.forEach((menu) => {
+      menu.hidden = true;
+    });
+    themeMenuButtons.forEach((button) => {
+      button.setAttribute("aria-expanded", "false");
+    });
+  }
+
+  function menuForThemeButton(button) {
+    return document.getElementById(button.getAttribute("aria-controls"));
+  }
+
+  function toggleThemeMenu(button, forceOpen) {
+    const menu = menuForThemeButton(button);
+    if (!menu) return;
+
+    const open = forceOpen ?? menu.hidden;
+    closeAllThemeMenus();
+
+    if (open) {
+      menu.hidden = false;
+      button.setAttribute("aria-expanded", "true");
+    }
   }
 
   function toggleMobileMenu(forceOpen) {
-    const open = forceOpen ?? mobileMenu.hidden;
-    mobileMenu.hidden = !open;
+    if (!mobileMenu || !mobileMenuBtn) return;
+
+    const open = forceOpen ?? !isNavOpen();
+    mobileMenu.toggleAttribute("data-open", open);
+    mobileNavBackdrop?.toggleAttribute("data-open", open);
+    mobileMenu.toggleAttribute("inert", !open);
+    mobileMenu.setAttribute("aria-hidden", String(!open));
     mobileMenuBtn.setAttribute("aria-expanded", String(open));
+    mobileMenuBtn.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+
+    if (mobileMenuIcon) {
+      mobileMenuIcon.className = open ? "fa-solid fa-xmark" : "fa-solid fa-bars";
+    }
+
+    setPageInert(open);
+    closeAllThemeMenus();
+    syncBodyLock();
   }
 
   function getSelectedTier(card) {
@@ -260,13 +318,13 @@ import { bonoExamples, bonoTiers, rituals, siteMeta, treatments } from "../data/
     }
 
     updateModalPriceEstimate();
-    document.body.classList.add("is-locked");
     dialog.showModal();
+    syncBodyLock();
   }
 
   function closeBookingModal() {
     dialog.close();
-    document.body.classList.remove("is-locked");
+    syncBodyLock();
   }
 
   function bookingMessage() {
@@ -294,12 +352,18 @@ import { bonoExamples, bonoTiers, rituals, siteMeta, treatments } from "../data/
   document.querySelectorAll("[data-theme-option]").forEach((button) => {
     button.addEventListener("click", () => {
       applyThemePreference(button.dataset.themeOption);
-      toggleThemeMenu(false);
+      closeAllThemeMenus();
     });
   });
 
-  themeMenuBtn?.addEventListener("click", () => toggleThemeMenu());
+  themeMenuButtons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
+      toggleThemeMenu(button);
+    });
+  });
   mobileMenuBtn?.addEventListener("click", () => toggleMobileMenu());
+  mobileNavBackdrop?.addEventListener("click", () => toggleMobileMenu(false));
 
   document.querySelectorAll("[data-close-mobile-nav]").forEach((link) => {
     link.addEventListener("click", () => toggleMobileMenu(false));
@@ -342,7 +406,7 @@ import { bonoExamples, bonoTiers, rituals, siteMeta, treatments } from "../data/
   });
 
   dialog?.addEventListener("close", () => {
-    document.body.classList.remove("is-locked");
+    syncBodyLock();
   });
 
   modalTreatment?.addEventListener("change", () => {
@@ -359,17 +423,18 @@ import { bonoExamples, bonoTiers, rituals, siteMeta, treatments } from "../data/
   });
 
   document.addEventListener("click", (event) => {
-    if (themeMenu.hidden) return;
-    if (!themeMenu.contains(event.target) && !themeMenuBtn.contains(event.target)) {
-      toggleThemeMenu(false);
-    }
+    const insideThemeWidget = event.target.closest("[data-theme-widget]");
+    if (!insideThemeWidget) closeAllThemeMenus();
   });
 
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      toggleThemeMenu(false);
-      toggleMobileMenu(false);
-    }
+    if (event.key !== "Escape") return;
+    closeAllThemeMenus();
+    toggleMobileMenu(false);
+  });
+
+  window.matchMedia("(min-width: 64rem)").addEventListener("change", (event) => {
+    if (event.matches) toggleMobileMenu(false);
   });
 
   window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {

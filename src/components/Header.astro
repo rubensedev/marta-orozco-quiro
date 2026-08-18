@@ -1,9 +1,22 @@
 ---
 import { navItems } from "../data/site";
+
+const themeOptions = [
+  { value: "light", label: "Claro" },
+  { value: "dark", label: "Oscuro" },
+  { value: "system", label: "Dispositivo" },
+];
+
+const themeBtnClass =
+  "inline-flex size-12 shrink-0 cursor-pointer items-center justify-center whitespace-nowrap rounded-full border border-brand-sage/14 bg-transparent text-inherit transition-all duration-200";
+const themeMenuClass =
+  "absolute top-[calc(100%+0.75rem)] right-0 z-10 min-w-44 rounded-[1.5rem] bg-white/96 p-2 shadow-soft dark:bg-brand-card-dark/96";
+const themeOptionClass =
+  "block w-full cursor-pointer rounded-2xl border-0 bg-transparent px-4 py-3 text-left text-inherit aria-checked:font-bold aria-checked:text-brand-lavender";
 ---
 
 <header
-  class="sticky top-0 z-40 border-b border-brand-sage/8 bg-brand-bg/90 backdrop-blur-[18px] dark:border-white/8 dark:bg-brand-bg-dark/90"
+  class="sticky top-0 z-50 border-b border-brand-sage/8 bg-brand-bg/90 backdrop-blur-[18px] dark:border-white/8 dark:bg-brand-bg-dark/90"
 >
   <div
     class="mx-auto flex w-[min(1120px,calc(100%-2rem))] items-center justify-between gap-6 py-4"
@@ -29,50 +42,44 @@ import { navItems } from "../data/site";
       </ul>
     </nav>
 
-    <div class="flex items-center gap-3">
-      <div class="relative">
+    <div class="flex shrink-0 flex-nowrap items-center gap-3">
+      <div class="relative hidden lg:block" data-theme-widget>
         <button
           id="themeMenuBtn"
-          class="inline-flex cursor-pointer items-center justify-center gap-2 rounded-full border border-brand-sage/14 bg-transparent px-4 py-[0.7rem] text-[0.9rem] text-inherit transition-all duration-200"
+          class={themeBtnClass}
           type="button"
+          data-theme-menu-btn
+          aria-label="Tema"
           aria-haspopup="true"
           aria-expanded="false"
           aria-controls="themeMenu"
         >
-          <i id="themeMenuIcon" class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
-          <span>Tema</span>
+          <i
+            id="themeMenuIcon"
+            class="fa-solid fa-circle-half-stroke"
+            data-theme-menu-icon
+            aria-hidden="true"></i>
         </button>
 
         <div
           id="themeMenu"
-          class="absolute top-[calc(100%+0.75rem)] right-0 min-w-44 rounded-[1.5rem] bg-white/96 p-2 shadow-soft dark:bg-brand-card-dark/96"
+          class={themeMenuClass}
+          data-theme-menu
           role="menu"
           hidden
         >
-          <button
-            class="block w-full cursor-pointer rounded-2xl border-0 bg-transparent px-4 py-3 text-left text-inherit aria-checked:font-bold aria-checked:text-brand-lavender"
-            type="button"
-            role="menuitemradio"
-            data-theme-option="light"
-          >
-            Claro
-          </button>
-          <button
-            class="block w-full cursor-pointer rounded-2xl border-0 bg-transparent px-4 py-3 text-left text-inherit aria-checked:font-bold aria-checked:text-brand-lavender"
-            type="button"
-            role="menuitemradio"
-            data-theme-option="dark"
-          >
-            Oscuro
-          </button>
-          <button
-            class="block w-full cursor-pointer rounded-2xl border-0 bg-transparent px-4 py-3 text-left text-inherit aria-checked:font-bold aria-checked:text-brand-lavender"
-            type="button"
-            role="menuitemradio"
-            data-theme-option="system"
-          >
-            Dispositivo
-          </button>
+          {
+            themeOptions.map((option) => (
+              <button
+                class={themeOptionClass}
+                type="button"
+                role="menuitemradio"
+                data-theme-option={option.value}
+              >
+                {option.label}
+              </button>
+            ))
+          }
         </div>
       </div>
 
@@ -82,39 +89,83 @@ import { navItems } from "../data/site";
 
       <button
         id="mobileMenuBtn"
-        class="inline-flex h-12 w-12 cursor-pointer flex-col items-center justify-center gap-[0.3rem] rounded-full border border-brand-sage/14 bg-transparent lg:hidden"
+        class="inline-flex size-12 shrink-0 cursor-pointer items-center justify-center whitespace-nowrap rounded-full border border-brand-sage/14 bg-transparent lg:hidden"
         type="button"
         aria-controls="mobileMenu"
         aria-expanded="false"
         aria-label="Abrir menú"
       >
-        <span class="block h-0.5 w-5 rounded-full bg-current"></span>
-        <span class="block h-0.5 w-5 rounded-full bg-current"></span>
-        <span class="block h-0.5 w-5 rounded-full bg-current"></span>
+        <i data-mobile-menu-icon class="fa-solid fa-bars" aria-hidden="true"></i>
       </button>
     </div>
   </div>
-
-  <div
-    id="mobileMenu"
-    class="mx-4 mb-4 rounded-[1.75rem] bg-white/96 p-5 shadow-soft lg:hidden dark:bg-brand-card-dark/98"
-    hidden
-  >
-    <nav class="flex flex-col gap-4" aria-label="Navegación móvil">
-      {
-        navItems.map((item) => (
-          <a
-            class="text-[0.95rem] font-medium transition-colors duration-200 hover:text-brand-lavender"
-            href={item.href}
-            data-close-mobile-nav
-          >
-            {item.label}
-          </a>
-        ))
-      }
-      <button class="btn-brand" type="button" data-open-booking-close-nav>
-        Reservar Ahora
-      </button>
-    </nav>
-  </div>
 </header>
+
+<div
+  data-mobile-nav-backdrop
+  class="fixed inset-0 z-40 bg-black/40 opacity-0 pointer-events-none transition-opacity duration-200 lg:hidden data-[open]:pointer-events-auto data-[open]:opacity-100"
+  aria-hidden="true"
+></div>
+
+<div
+  id="mobileMenu"
+  class="pointer-events-none fixed inset-y-0 right-0 z-[45] w-[min(20rem,90vw)] translate-x-full bg-white/96 px-6 pt-24 pb-8 shadow-soft transition-transform duration-200 lg:hidden data-[open]:pointer-events-auto data-[open]:translate-x-0 dark:bg-brand-card-dark/98"
+  aria-hidden="true"
+  inert
+>
+  <nav class="flex flex-col gap-4" aria-label="Navegación móvil">
+    {
+      navItems.map((item) => (
+        <a
+          class="text-[0.95rem] font-medium transition-colors duration-200 hover:text-brand-lavender"
+          href={item.href}
+          data-close-mobile-nav
+        >
+          {item.label}
+        </a>
+      ))
+    }
+    <button class="btn-brand" type="button" data-open-booking-close-nav>
+      Reservar Ahora
+    </button>
+    <div class="relative" data-theme-widget>
+      <button
+        id="themeMenuBtnDrawer"
+        class={themeBtnClass}
+        type="button"
+        data-theme-menu-btn
+        aria-label="Tema"
+        aria-haspopup="true"
+        aria-expanded="false"
+        aria-controls="themeMenuDrawer"
+      >
+        <i
+          id="themeMenuIconDrawer"
+          class="fa-solid fa-circle-half-stroke"
+          data-theme-menu-icon
+          aria-hidden="true"></i>
+      </button>
+
+      <div
+        id="themeMenuDrawer"
+        class={themeMenuClass}
+        data-theme-menu
+        role="menu"
+        hidden
+      >
+        {
+          themeOptions.map((option) => (
+            <button
+              class={themeOptionClass}
+              type="button"
+              role="menuitemradio"
+              data-theme-option={option.value}
+            >
+              {option.label}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+  </nav>
+</div>

@@ -1,0 +1,23 @@
+change: refactor-header
+status: applied
+phases:
+  explore: done
+  propose: done
+  spec: done
+  design: done
+  tasks: done
+  apply: done
+  verify: pending
+  archive: pending
+branch: feat/refactor-header
+created: 2026-08-18
+mode: hybrid
+delivery_strategy: ask-on-risk
+base_branch: develop
+assumptions:
+  - Mobile-first header: hamburger + overlay drawer on small viewports; inline nav on lg+.
+  - Hamburger uses a Font Awesome icon and is not wrapped in extra bar spans or wrapping containers.
+  - Theme control is icon-only; dropdown labels are Claro, Oscuro, Dispositivo.
+  - On mobile, theme selector lives in the side menu, below Reservar.
+  - Side menu slides in from the right over content; main content does not shift.
+  - Overlay markup is a sibling of header, not inside it, because header backdrop-blur creates a fixed containing block.
