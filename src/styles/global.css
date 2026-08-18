@@ -63,14 +63,12 @@
   }
 
   .hero__overlay {
-    background:
-      linear-gradient(
-        180deg,
-        rgba(253, 240, 232, 0.45),
-        rgba(253, 240, 232, 0.3),
-        var(--color-brand-bg)
-      ),
-      rgba(18, 22, 18, 0.1);
+    background: linear-gradient(
+      180deg,
+      rgba(253, 240, 232, 0.12),
+      rgba(253, 240, 232, 0.28),
+      var(--color-brand-bg)
+    );
   }
 
   .dark .hero__overlay {
