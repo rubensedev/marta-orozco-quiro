@@ -8,26 +8,74 @@ import AboutStats from "./AboutStats.astro";
   class="mx-auto w-[min(1120px,calc(100%-2rem))] py-[clamp(3rem,8vh,6rem)] md:px-6 lg:px-8"
 >
   <article
-    class="rounded-4xl bg-brand-lavender-light p-8 shadow-soft md:p-10 dark:bg-brand-lavender-dark/50"
+    class="about-reveal about-reveal--1 rounded-4xl bg-brand-lavender-light p-8 shadow-soft md:p-10 dark:bg-brand-lavender-dark/50"
   >
     <p
-      class="m-0 mb-4 inline-flex items-center gap-3 text-xs font-semibold tracking-[0.24em] text-brand-lavender uppercase"
+      class="about-reveal about-reveal--2 m-0 mb-4 inline-flex items-center gap-3 text-xs font-semibold tracking-[0.24em] text-brand-lavender uppercase"
     >
       {aboutContent.eyebrow}
     </p>
     <h2
-      class="m-0 font-serif text-[clamp(2.25rem,4vw,3.5rem)] leading-[1.1] font-normal"
+      class="about-reveal about-reveal--3 m-0 font-serif text-[clamp(2.25rem,4vw,3.5rem)] leading-[1.1] font-normal"
     >
       {aboutContent.title}
     </h2>
-    <p class="mt-3 mb-0 text-lg font-medium text-brand-muted">
+    <p class="about-reveal about-reveal--4 mt-3 mb-0 text-lg font-medium text-brand-muted">
       {aboutContent.subtitle}
     </p>
     {
-      aboutContent.paragraphs.map((paragraph) => (
-        <p class="mt-5 mb-0 leading-[1.8]">{paragraph}</p>
+      aboutContent.paragraphs.map((paragraph, i) => (
+        <p class={`about-reveal about-reveal--${i + 5} mt-5 mb-0 leading-[1.8]`}>{paragraph}</p>
       ))
     }
   </article>
   <AboutStats />
 </section>
+
+<style>
+  .about-reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .about-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .about-reveal--1  { transition-delay: 0s; }
+  .about-reveal--2  { transition-delay: 0.1s; }
+  .about-reveal--3  { transition-delay: 0.2s; }
+  .about-reveal--4  { transition-delay: 0.32s; }
+  .about-reveal--5  { transition-delay: 0.44s; }
+  .about-reveal--6  { transition-delay: 0.54s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+
+  document.querySelectorAll("#sobre-mi .about-reveal").forEach((el) => {
+    observer.observe(el);
+  });
+</script>
