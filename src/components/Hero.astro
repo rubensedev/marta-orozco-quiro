@@ -1,10 +1,10 @@
 ---
-import HeroPortrait from "./HeroPortrait.astro";
 import { heroContent } from "../data/site";
+import HeroPortrait from "./HeroPortrait.astro";
 ---
 
 <div class="hero-section">
-  <section class="relative min-h-[65vh] lg:min-h-[72vh] lg:overflow-hidden">
+  <section class="relative overflow-hidden">
     <div class="absolute inset-0 overflow-hidden">
       <img
         class="absolute inset-0 h-full w-full object-cover"
@@ -18,7 +18,7 @@ import { heroContent } from "../data/site";
     </div>
 
     <div
-      class="hero-inner relative z-1 mx-auto flex min-h-[65vh] w-[min(1120px,calc(100%-2rem))] flex-col pt-20 lg:min-h-[72vh] lg:grid lg:grid-cols-[minmax(0,1fr)_min(36%,22rem)] lg:items-center lg:gap-8 lg:pb-6 xl:grid-cols-[minmax(0,1fr)_min(34%,24rem)]"
+      class="hero-inner relative z-1 mx-auto flex min-h-[65vh] w-[min(1120px,calc(100%-2rem))] flex-col pt-24 lg:min-h-0 lg:grid lg:grid-cols-[minmax(0,1fr)_min(36%,22rem)] lg:items-start lg:gap-8 lg:pt-28 lg:pb-12 xl:grid-cols-[minmax(0,1fr)_min(34%,24rem)]"
     >
       <div class="hero-content max-w-3xl md:px-6 md:pt-8 lg:px-8 lg:pt-10">
         <h1

@@ -110,13 +110,12 @@
 
   @media (min-width: 1024px) {
     .hero-portrait {
-      min-height: clamp(18rem, 52vh, 28rem);
-      align-self: end;
+      align-self: start;
     }
 
     .hero-portrait__image {
       width: min(100%, 20rem);
-      max-height: clamp(18rem, 52vh, 28rem);
+      max-height: clamp(20rem, 56vh, 32rem);
     }
   }
 
