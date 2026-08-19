@@ -55,6 +55,11 @@ export const heroContent = {
   portraitAlt: "Retrato de Marta Orozco.",
 };
 
+export const aboutStats = [
+  { value: "+7", label: "Años de experiencia" },
+  { value: "+500", label: "Clientes satisfeches" },
+];
+
 export const aboutContent = {
   eyebrow: "Sobre mí",
   title: "Marta Orozco",

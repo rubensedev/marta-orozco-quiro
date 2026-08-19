@@ -1,0 +1,33 @@
+---
+import { Image } from "astro:assets";
+import heroBg from "../assets/images/hero.webp";
+import { aboutStats } from "../data/site";
+---
+
+<section class="mx-auto w-[min(1120px,calc(100%-2rem))] py-[clamp(3rem,8vh,6rem)] md:px-6 lg:px-8">
+  <div class="relative overflow-hidden rounded-4xl shadow-soft">
+    <Image
+      src={heroBg}
+      alt=""
+      class="absolute inset-0 h-full w-full object-cover"
+      aria-hidden="true"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-brand-sage/75"></div>
+
+    <div class="relative z-10 flex divide-x divide-white/25">
+      {
+        aboutStats.map((stat) => (
+          <div class="flex flex-1 flex-col items-center gap-2 px-8 py-14 text-center text-white">
+            <span class="font-serif text-[clamp(3rem,6vw,4.5rem)] leading-none font-light">
+              {stat.value}
+            </span>
+            <span class="text-sm font-semibold tracking-[0.18em] uppercase opacity-80">
+              {stat.label}
+            </span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
