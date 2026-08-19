@@ -4,7 +4,11 @@ import { navItems } from "../data/site";
 const themeOptions = [
   { value: "light", label: "Claro", icon: "fa-solid fa-sun text-amber-500" },
   { value: "dark", label: "Oscuro", icon: "fa-solid fa-moon text-indigo-400" },
-  { value: "system", label: "Dispositivo", icon: "fa-solid fa-circle-half-stroke text-slate-600 dark:text-amber-300" },
+  {
+    value: "system",
+    label: "Dispositivo",
+    icon: "fa-solid fa-circle-half-stroke text-slate-600 dark:text-amber-300",
+  },
 ];
 
 const themeBtnClass =
@@ -53,7 +57,10 @@ const themeOptionClass =
     </nav>
 
     <div class="flex shrink-0 flex-nowrap items-center gap-3">
-      <div class="relative hidden size-12 shrink-0 md:inline-flex" data-theme-widget>
+      <div
+        class="relative hidden size-12 shrink-0 md:inline-flex"
+        data-theme-widget
+      >
         <button
           id="themeMenuBtn"
           class={themeBtnClass}
@@ -162,7 +169,7 @@ const themeOptionClass =
       RESERVAR AHORA
     </button>
     <div
-      class="relative w-fit border-t border-brand-sage/8 pt-4 dark:border-white/8"
+      class="relative w-full border-t border-brand-sage/8 pt-4 dark:border-white/8"
       data-theme-widget
     >
       <button

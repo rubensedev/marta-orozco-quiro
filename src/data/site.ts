@@ -41,6 +41,20 @@ export const navItems = [
   { href: "#contacto", label: "CONTACTO" },
 ];
 
+export const heroContent = {
+  title: "Espacio de calma, salud y equilibrio corporal",
+  description:
+    "Tratamientos de quiromasaje diseñados para aliviar tensiones físicas, activar tu energía vital y restablecer la paz en tu día a día.",
+  primaryCta: "RESERVAR CITA",
+  secondaryCta: {
+    label: "VER MASAJES Y PRECIOS",
+    href: "#masajes",
+  },
+  backgroundImageAlt:
+    "Toalla enrollada en un espacio de bienestar para tratamientos de quiromasaje.",
+  portraitAlt: "Retrato de Marta Orozco.",
+};
+
 export const aboutContent = {
   eyebrow: "Sobre mí",
   title: "Marta Orozco",

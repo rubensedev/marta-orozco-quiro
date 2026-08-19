@@ -1,4 +1,6 @@
 ---
+import { heroContent } from "../data/site";
+
 interface Props {
   class?: string;
   priority?: boolean;
@@ -11,7 +13,7 @@ const { class: className = "", priority = false } = Astro.props;
   <img
     class="hero-portrait__image"
     src="/assets/images/hero-marta.svg"
-    alt="Retrato de Marta Orozco."
+    alt={heroContent.portraitAlt}
     width="260"
     height="514"
     loading={priority ? "eager" : "lazy"}
