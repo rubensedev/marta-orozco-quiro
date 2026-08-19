@@ -92,14 +92,6 @@
     animation-fill-mode: forwards;
   }
 
-  .section-eyebrow::after {
-    content: "";
-    display: inline-block;
-    width: 3rem;
-    height: 1px;
-    background: currentColor;
-  }
-
   .hero-section {
     margin-bottom: clamp(1.25rem, 4vh, 2.5rem);
   }
