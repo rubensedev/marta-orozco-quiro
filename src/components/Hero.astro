@@ -22,17 +22,17 @@ import HeroPortrait from "./HeroPortrait.astro";
     >
       <div class="hero-content max-w-3xl md:px-6 md:pt-8 lg:px-8 lg:pt-10">
         <h1
-          class="m-0 font-serif text-[clamp(2.5rem,7vw,5.25rem)] leading-tight font-normal lg:text-[clamp(2.25rem,3.5vw,3.75rem)]"
+          class="hero-reveal hero-reveal--1 m-0 font-serif text-[clamp(2.5rem,7vw,5.25rem)] leading-tight font-normal lg:text-[clamp(2.25rem,3.5vw,3.75rem)]"
         >
           {heroContent.title}
         </h1>
         <p
-          class="mt-6 mb-0 max-w-2xl text-[1.15rem] leading-[1.45] text-brand-muted lg:mt-4 lg:text-[1rem]"
+          class="hero-reveal hero-reveal--2 mt-6 mb-0 max-w-2xl text-[1.15rem] leading-[1.45] text-brand-muted lg:mt-4 lg:text-[1rem]"
         >
           {heroContent.description}
         </p>
 
-        <div class="mt-8 flex flex-wrap items-center gap-4">
+        <div class="hero-reveal hero-reveal--3 mt-8 flex flex-wrap items-center gap-4">
           <button class="btn-brand" type="button" data-open-booking>
             {heroContent.primaryCta}
           </button>
@@ -42,8 +42,8 @@ import HeroPortrait from "./HeroPortrait.astro";
         </div>
       </div>
 
-      <HeroPortrait class="hero-portrait--mobile lg:hidden" />
-      <HeroPortrait class="hidden lg:block" priority />
+      <HeroPortrait class="hero-portrait--mobile hero-reveal hero-reveal--4 lg:hidden" />
+      <HeroPortrait class="hero-reveal hero-reveal--4 hidden lg:block" priority />
     </div>
   </section>
 </div>
