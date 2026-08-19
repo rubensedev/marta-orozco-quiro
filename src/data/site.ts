@@ -70,6 +70,12 @@ export const aboutContent = {
   ],
 };
 
+export const massagesContent = {
+  heading: "Masajes",
+  description:
+    "Elige duración y tipo de compra para ver tu precio. Compara el ahorro con bonos de 5 o 10 sesiones.",
+};
+
 export const treatments: Treatment[] = [
   {
     id: "relajante",
