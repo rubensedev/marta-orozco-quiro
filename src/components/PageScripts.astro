@@ -460,6 +460,11 @@ import { bonoExamples, bonoTiers, rituals, siteMeta, treatments } from "../data/
     ).observe(headerSentinel);
   }
 
+  // Expose for carousel panel switching (Massages.astro inline script)
+  window.treatments = treatments;
+  window.renderPricingWidgets = renderPricingWidgets;
+  window.openBookingModal = openBookingModal;
+
   applyThemePreference(localStorage.getItem(THEME_KEY) || "system");
   syncBookingFieldVisibility();
   updateModalPriceEstimate();

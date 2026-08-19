@@ -351,6 +351,20 @@
   }
 }
 
+/* ── Massage section scroll-reveal ──────────────────────────── */
+.massage-card-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.massage-card-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @keyframes pricing-savings-in {
   from {
     opacity: 0;
