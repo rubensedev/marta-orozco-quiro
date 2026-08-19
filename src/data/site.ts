@@ -57,7 +57,7 @@ export const heroContent = {
 
 export const aboutStats = [
   { value: "+7", label: "Años de experiencia" },
-  { value: "+500", label: "Clientes satisfeches" },
+  { value: "+500", label: "Clientes satisfechos" },
 ];
 
 export const aboutContent = {
