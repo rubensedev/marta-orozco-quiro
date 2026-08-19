@@ -19,9 +19,14 @@ const first = treatments[0];
 const firstImage = imageMap[first.id];
 ---
 
-<section id="masajes" class="mx-auto w-[min(1120px,calc(100%-2rem))] py-24">
+<section
+  id="masajes"
+  class="mx-auto w-[min(1120px,calc(100%-2rem))] py-[clamp(3rem,8vh,6rem)] md:px-6 lg:px-8"
+>
   <div class="mb-12 max-w-3xl">
-    <h2 class="m-0 font-serif text-[clamp(2.25rem,4vw,3.5rem)] leading-[1.1] font-light">
+    <h2
+      class="m-0 font-serif text-[clamp(2.25rem,4vw,3.5rem)] leading-[1.1] font-light"
+    >
       {massagesContent.heading}
     </h2>
     <p class="mt-4 mb-0 text-lg leading-[1.8] text-brand-muted">
@@ -96,7 +101,13 @@ const firstImage = imageMap[first.id];
       >
         {first.title}
       </h3>
-      <div class="mt-6" data-pricing-display aria-live="polite" aria-atomic="true"></div>
+      <div
+        class="mt-6"
+        data-pricing-display
+        aria-live="polite"
+        aria-atomic="true"
+      >
+      </div>
       <p id="panelDescription" class="mt-5 mb-0 leading-[1.8] text-brand-muted">
         {first.description}
       </p>
@@ -128,24 +139,38 @@ const firstImage = imageMap[first.id];
 </section>
 
 <script>
-  const panel = document.getElementById("massageMainPanel") as HTMLElement | null;
-  const carousel = document.getElementById("massageCarousel") as HTMLElement | null;
-  const panelTitle = document.getElementById("panelTitle") as HTMLElement | null;
-  const panelDesc = document.getElementById("panelDescription") as HTMLElement | null;
-  const panelImg = document.getElementById("panelImage") as HTMLImageElement | null;
-  const panelBookingBtn = document.getElementById("panelBookingBtn") as HTMLButtonElement | null;
+  const panel = document.getElementById(
+    "massageMainPanel",
+  ) as HTMLElement | null;
+  const carousel = document.getElementById(
+    "massageCarousel",
+  ) as HTMLElement | null;
+  const panelTitle = document.getElementById(
+    "panelTitle",
+  ) as HTMLElement | null;
+  const panelDesc = document.getElementById(
+    "panelDescription",
+  ) as HTMLElement | null;
+  const panelImg = document.getElementById(
+    "panelImage",
+  ) as HTMLImageElement | null;
+  const panelBookingBtn = document.getElementById(
+    "panelBookingBtn",
+  ) as HTMLButtonElement | null;
 
   // Build img src map from rendered carousel thumbnails (Astro-optimized at build time)
   const imgSrcMap: Record<string, string> = {};
   const imgAltMap: Record<string, string> = {};
-  carousel?.querySelectorAll<HTMLButtonElement>("[data-carousel-card]").forEach((card) => {
-    const id = card.dataset.carouselCard!;
-    const img = card.querySelector("img");
-    if (img) {
-      imgSrcMap[id] = img.src;
-      imgAltMap[id] = img.alt;
-    }
-  });
+  carousel
+    ?.querySelectorAll<HTMLButtonElement>("[data-carousel-card]")
+    .forEach((card) => {
+      const id = card.dataset.carouselCard!;
+      const img = card.querySelector("img");
+      if (img) {
+        imgSrcMap[id] = img.src;
+        imgAltMap[id] = img.alt;
+      }
+    });
 
   function switchTreatment(id: string) {
     if (!panel) return;
@@ -175,7 +200,8 @@ const firstImage = imageMap[first.id];
         panelImg.alt = imgAltMap[id] ?? "";
       }
 
-      if (typeof w.renderPricingWidgets === "function") w.renderPricingWidgets();
+      if (typeof w.renderPricingWidgets === "function")
+        w.renderPricingWidgets();
 
       panel.style.transition = "opacity 0.3s ease, transform 0.3s ease";
       panel.style.opacity = "1";
@@ -186,22 +212,28 @@ const firstImage = imageMap[first.id];
   // The panel booking button click is handled by PageScripts' delegated listener on [data-open-booking].
   // After treatment switch, PageScripts re-reads data-treatment from the button so no extra wiring needed.
 
-  carousel?.querySelectorAll<HTMLButtonElement>("[data-carousel-card]").forEach((card) => {
-    card.addEventListener("click", () => {
-      const id = card.dataset.carouselCard!;
-      carousel.querySelectorAll<HTMLButtonElement>("[data-carousel-card]").forEach((c) => {
-        c.classList.remove("ring-2", "ring-brand-sage");
-        c.setAttribute("aria-pressed", "false");
+  carousel
+    ?.querySelectorAll<HTMLButtonElement>("[data-carousel-card]")
+    .forEach((card) => {
+      card.addEventListener("click", () => {
+        const id = card.dataset.carouselCard!;
+        carousel
+          .querySelectorAll<HTMLButtonElement>("[data-carousel-card]")
+          .forEach((c) => {
+            c.classList.remove("ring-2", "ring-brand-sage");
+            c.setAttribute("aria-pressed", "false");
+          });
+        card.classList.add("ring-2", "ring-brand-sage");
+        card.setAttribute("aria-pressed", "true");
+        switchTreatment(id);
+        panel?.scrollIntoView({ behavior: "smooth", block: "start" });
       });
-      card.classList.add("ring-2", "ring-brand-sage");
-      card.setAttribute("aria-pressed", "true");
-      switchTreatment(id);
-      panel?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
-  });
 
   // Scroll-reveal
-  const revealEls = document.querySelectorAll<HTMLElement>(".massage-card-reveal");
+  const revealEls = document.querySelectorAll<HTMLElement>(
+    ".massage-card-reveal",
+  );
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
