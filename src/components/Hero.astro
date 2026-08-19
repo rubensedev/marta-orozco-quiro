@@ -1,18 +1,22 @@
 ---
 import { heroContent } from "../data/site";
+import { Image } from "astro:assets";
 import HeroPortrait from "./HeroPortrait.astro";
+import heroBg from "../assets/images/hero.webp";
 ---
 
 <div class="hero-section">
   <section class="relative overflow-hidden">
     <div class="absolute inset-0 overflow-hidden">
-      <img
+      <Image
         class="absolute inset-0 h-full w-full object-cover"
-        src="/assets/images/hero.webp"
+        src={heroBg}
         alt={heroContent.backgroundImageAlt}
-        width="1536"
-        height="1024"
+        width={1536}
+        height={1024}
         fetchpriority="high"
+        loading="eager"
+        quality={85}
       />
       <div class="hero__overlay absolute inset-0" aria-hidden="true"></div>
     </div>
