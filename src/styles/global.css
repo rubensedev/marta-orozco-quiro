@@ -190,6 +190,21 @@
     color: var(--color-brand-text-light);
   }
 
+  header .theme-menu-btn {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px);
+  }
+
+  header .theme-menu-btn:hover,
+  header .theme-menu-btn:focus-visible {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  header.group[data-scrolled] .theme-menu-btn:hover,
+  header.group[data-scrolled] .theme-menu-btn:focus-visible {
+    background: rgba(255, 255, 255, 0.22);
+  }
+
   .pricing-card__group + .pricing-card__group {
     margin-top: 1.5rem;
   }

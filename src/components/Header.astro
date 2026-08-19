@@ -12,6 +12,8 @@ const themeOptions = [
 ];
 
 const themeBtnClass =
+  "theme-menu-btn inline-flex h-12 w-[75%] text-2xl shrink-0 cursor-pointer items-center justify-center whitespace-nowrap rounded-full text-inherit transition-all duration-200";
+const themeDrawerBtnClass =
   "inline-flex size-12 text-2xl shrink-0 cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-transparent text-inherit transition-all duration-200";
 const themeMenuClass =
   "absolute top-full z-50 mt-2 flex w-max min-w-52 flex-col rounded-[1.5rem] bg-white p-1.5 text-brand-text-dark shadow-soft dark:bg-brand-card-dark dark:text-brand-text-light";
@@ -58,7 +60,7 @@ const themeOptionClass =
 
     <div class="flex shrink-0 flex-nowrap items-center gap-3">
       <div
-        class="relative hidden size-12 shrink-0 md:inline-flex"
+        class="relative hidden size-12 shrink-0 items-center justify-center md:inline-flex"
         data-theme-widget
       >
         <button
@@ -174,7 +176,7 @@ const themeOptionClass =
     >
       <button
         id="themeMenuBtnDrawer"
-        class={themeBtnClass}
+        class={themeDrawerBtnClass}
         type="button"
         data-theme-menu-btn
         aria-label="Tema"
