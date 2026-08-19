@@ -1,38 +1,47 @@
-<section class="relative min-h-[75vh] overflow-hidden">
-  <div class="absolute inset-0">
-    <img
-      class="absolute inset-0 h-full w-full object-cover"
-      src="/assets/images/hero.webp"
-      alt="Toalla enrollada en un espacio de bienestar para tratamientos de quiromasaje."
-      width="1536"
-      height="1024"
-      fetchpriority="high"
-    />
-    <div class="hero__overlay absolute inset-0" aria-hidden="true"></div>
-  </div>
+---
+import HeroPortrait from "./HeroPortrait.astro";
+---
 
-  <div
-    class="relative z-1 mx-auto flex min-h-[75vh] w-[min(1120px,calc(100%-2rem))] items-center pt-16 pb-16"
-  >
-    <div class="max-w-3xl">
-      <h1
-        class="m-0 font-serif text-[clamp(2.5rem,7vw,5.25rem)] leading-tight font-light"
-      >
-        Espacio de calma, salud y equilibrio corporal
-      </h1>
-      <p
-        class="mt-6 mb-0 max-w-2xl text-[1.15rem] leading-[1.45] text-brand-muted"
-      >
-        Tratamientos de quiromasaje diseñados para aliviar tensiones físicas,
-        activar tu energía vital y restablecer la paz en tu día a día.
-      </p>
-
-      <div class="mt-8 flex flex-wrap items-center gap-4">
-        <button class="btn-brand" type="button" data-open-booking
-          >RESERVAR CITA</button
-        >
-        <a class="btn-secondary" href="#masajes">VER MASAJES Y PRECIOS</a>
-      </div>
+<div class="hero-section">
+  <section class="relative min-h-[65vh] lg:min-h-[82vh] lg:overflow-hidden">
+    <div class="absolute inset-0 overflow-hidden">
+      <img
+        class="absolute inset-0 h-full w-full object-cover"
+        src="/assets/images/hero.webp"
+        alt="Toalla enrollada en un espacio de bienestar para tratamientos de quiromasaje."
+        width="1536"
+        height="1024"
+        fetchpriority="high"
+      />
+      <div class="hero__overlay absolute inset-0" aria-hidden="true"></div>
     </div>
-  </div>
-</section>
+
+    <div
+      class="hero-inner relative z-1 mx-auto flex min-h-[65vh] w-[min(1120px,calc(100%-2rem))] flex-col pt-16 lg:min-h-[82vh] lg:grid lg:grid-cols-[minmax(0,1fr)_min(46%,32rem)] lg:items-center lg:gap-10 lg:pb-8 xl:grid-cols-[minmax(0,1fr)_min(42%,34rem)]"
+    >
+      <div class="hero-content max-w-3xl">
+        <h1
+          class="m-0 font-serif text-[clamp(2.5rem,7vw,5.25rem)] leading-tight font-normal"
+        >
+          Espacio de calma, salud y equilibrio corporal
+        </h1>
+        <p
+          class="mt-6 mb-0 max-w-2xl text-[1.15rem] leading-[1.45] text-brand-muted"
+        >
+          Tratamientos de quiromasaje diseñados para aliviar tensiones físicas,
+          activar tu energía vital y restablecer la paz en tu día a día.
+        </p>
+
+        <div class="mt-8 flex flex-wrap items-center gap-4">
+          <button class="btn-brand" type="button" data-open-booking
+            >RESERVAR CITA</button
+          >
+          <a class="btn-secondary" href="#masajes">VER MASAJES Y PRECIOS</a>
+        </div>
+      </div>
+
+      <HeroPortrait class="hero-portrait--mobile lg:hidden" />
+      <HeroPortrait class="hidden lg:block" priority />
+    </div>
+  </section>
+</div>

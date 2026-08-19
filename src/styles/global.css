@@ -62,6 +62,10 @@
     background: currentColor;
   }
 
+  .hero-section {
+    margin-bottom: clamp(1.25rem, 4vh, 2.5rem);
+  }
+
   .hero__overlay {
     background: linear-gradient(
       180deg,
@@ -69,6 +73,51 @@
       rgba(253, 240, 232, 0.28),
       var(--color-brand-bg)
     );
+  }
+
+  .hero-portrait {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  @media (max-width: 1023px) {
+    .hero-inner {
+      min-height: max(65vh, 100%);
+    }
+
+    .hero-portrait--mobile {
+      width: 100%;
+      margin-top: auto;
+      padding-top: clamp(1.5rem, 5vh, 3rem);
+      min-height: clamp(16rem, 52vw, 28rem);
+    }
+
+    .hero-portrait--mobile .hero-portrait__image {
+      width: 100%;
+      max-width: none;
+      max-height: clamp(28rem, 105vw, 40rem);
+    }
+  }
+
+  .hero-portrait__image {
+    object-fit: contain;
+    object-position: bottom center;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-portrait {
+      min-height: clamp(30rem, 82vh, 44rem);
+      align-self: end;
+    }
+
+    .hero-portrait__image {
+      width: min(100%, 30rem);
+      max-height: clamp(30rem, 82vh, 44rem);
+    }
   }
 
   .dark .hero__overlay {

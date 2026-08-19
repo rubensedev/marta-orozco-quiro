@@ -1,0 +1,21 @@
+---
+interface Props {
+  class?: string;
+  priority?: boolean;
+}
+
+const { class: className = "", priority = false } = Astro.props;
+---
+
+<div class:list={["hero-portrait", className]}>
+  <img
+    class="hero-portrait__image"
+    src="/assets/images/hero-marta.svg"
+    alt="Retrato de Marta Orozco."
+    width="260"
+    height="514"
+    loading={priority ? "eager" : "lazy"}
+    fetchpriority={priority ? "high" : "auto"}
+    decoding="async"
+  />
+</div>
