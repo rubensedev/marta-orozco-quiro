@@ -4,7 +4,7 @@ import { heroContent } from "../data/site";
 ---
 
 <div class="hero-section">
-  <section class="relative min-h-[65vh] lg:min-h-[82vh] lg:overflow-hidden">
+  <section class="relative min-h-[65vh] lg:min-h-[72vh] lg:overflow-hidden">
     <div class="absolute inset-0 overflow-hidden">
       <img
         class="absolute inset-0 h-full w-full object-cover"
@@ -18,16 +18,16 @@ import { heroContent } from "../data/site";
     </div>
 
     <div
-      class="hero-inner relative z-1 mx-auto flex min-h-[65vh] w-[min(1120px,calc(100%-2rem))] flex-col pt-20 lg:min-h-[82vh] lg:grid lg:grid-cols-[minmax(0,1fr)_min(46%,32rem)] lg:items-center lg:gap-10 lg:pb-8 xl:grid-cols-[minmax(0,1fr)_min(42%,34rem)]"
+      class="hero-inner relative z-1 mx-auto flex min-h-[65vh] w-[min(1120px,calc(100%-2rem))] flex-col pt-20 lg:min-h-[72vh] lg:grid lg:grid-cols-[minmax(0,1fr)_min(36%,22rem)] lg:items-center lg:gap-8 lg:pb-6 xl:grid-cols-[minmax(0,1fr)_min(34%,24rem)]"
     >
-      <div class="hero-content max-w-3xl md:px-6 md:pt-8 lg:px-10 lg:pt-12">
+      <div class="hero-content max-w-3xl md:px-6 md:pt-8 lg:px-8 lg:pt-10">
         <h1
-          class="m-0 font-serif text-[clamp(2.5rem,7vw,5.25rem)] leading-tight font-normal"
+          class="m-0 font-serif text-[clamp(2.5rem,7vw,5.25rem)] leading-tight font-normal lg:text-[clamp(2.25rem,3.5vw,3.75rem)]"
         >
           {heroContent.title}
         </h1>
         <p
-          class="mt-6 mb-0 max-w-2xl text-[1.15rem] leading-[1.45] text-brand-muted"
+          class="mt-6 mb-0 max-w-2xl text-[1.15rem] leading-[1.45] text-brand-muted lg:mt-4 lg:text-[1rem]"
         >
           {heroContent.description}
         </p>
