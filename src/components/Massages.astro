@@ -95,58 +95,70 @@ const firstImage = imageMap[first.id];
   <!-- Horizontal carousel -->
   <div class="massage-carousel mt-10" id="massageCarousel">
     <div class="massage-carousel__viewport">
-      <div
+      <ul
         class="massage-carousel__track"
         id="massageCarouselTrack"
         tabindex="0"
         role="listbox"
         aria-label="Tipos de masaje"
+        aria-activedescendant={`massage-card-${first.id}`}
       >
         {
           treatments.map((treatment, i) => {
             const img = imageMap[treatment.id];
             const basePrice = treatment.durations[0].price;
+            const selected = i === 0;
             return (
-              <button
-                type="button"
-                role="option"
-                class:list={[
-                  "massage-carousel-card group relative flex cursor-pointer flex-row items-stretch overflow-visible rounded-2xl border border-brand-sage/14 bg-white/60 text-left shadow-soft transition duration-300 ease-out hover:-translate-y-0.5 hover:shadow-xl dark:border-white/10 dark:bg-brand-card-dark/84 massage-card-reveal",
-                  i === 0 ? "is-selected" : "",
-                ]}
-                data-carousel-card={treatment.id}
-                data-treatment-id={treatment.id}
-                data-treatment-index={i}
-                aria-selected={i === 0 ? "true" : "false"}
-                aria-pressed={i === 0 ? "true" : "false"}
-              >
-                <div class="massage-carousel-card__media">
-                  <Image
-                    src={img}
-                    alt={treatment.imageAlt}
-                    width={480}
-                    height={640}
-                    densities={[1, 2]}
-                    class="massage-carousel-card__image"
-                    loading="lazy"
-                  />
-                </div>
-                <div class="flex min-w-0 flex-1 flex-col justify-center overflow-hidden py-4 pr-4 pl-0">
-                  <h3 class="m-0 line-clamp-2 wrap-break-word font-serif text-base font-semibold tracking-[0.04em] text-brand-sage uppercase dark:text-brand-text-light">
-                    {treatment.title}
-                  </h3>
-                  <p class="mt-1.5 mb-0 line-clamp-2 text-sm leading-snug text-brand-muted">
-                    {treatment.description}
-                  </p>
-                  <p class="massage-carousel-card__price mt-3 mb-0 text-sm font-semibold text-brand-sage transition duration-300 ease-out dark:text-brand-sage-bright">
-                    desde {basePrice}€ →
-                  </p>
-                </div>
-              </button>
+              <li class="massage-carousel__slide" role="presentation">
+                <button
+                  type="button"
+                  id={`massage-card-${treatment.id}`}
+                  role="option"
+                  class:list={[
+                    "massage-carousel-card massage-card-reveal",
+                    selected ? "is-selected" : "",
+                  ]}
+                  data-carousel-card={treatment.id}
+                  data-treatment-index={i}
+                  data-image-alt={treatment.imageAlt}
+                  aria-selected={selected ? "true" : "false"}
+                >
+                  <div class="massage-carousel-card__media" aria-hidden="true">
+                    <Image
+                      src={img}
+                      alt=""
+                      width={480}
+                      height={640}
+                      densities={[1, 2]}
+                      class="massage-carousel-card__image"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div class="massage-carousel-card__body">
+                    <h3 class="massage-carousel-card__title">
+                      {treatment.title}
+                    </h3>
+                    <p class="massage-carousel-card__desc">
+                      {treatment.description}
+                    </p>
+                    <div class="massage-carousel-card__footer">
+                      <span class="massage-carousel-card__price">
+                        desde {basePrice}€
+                      </span>
+                      <span
+                        class="massage-carousel-card__cta"
+                        aria-hidden="true"
+                      >
+                        <i class="fa-solid fa-plus"></i>
+                      </span>
+                    </div>
+                  </div>
+                </button>
+              </li>
             );
           })
         }
-      </div>
+      </ul>
 
       <button
         type="button"
@@ -208,8 +220,8 @@ const firstImage = imageMap[first.id];
     const img = card.querySelector("img");
     if (img) {
       imgSrcMap[id] = img.currentSrc || img.src;
-      imgAltMap[id] = img.alt;
     }
+    imgAltMap[id] = card.dataset.imageAlt ?? "";
   });
 
   let activeIndex = 0;
@@ -218,22 +230,39 @@ const firstImage = imageMap[first.id];
     "(prefers-reduced-motion: reduce)",
   ).matches;
 
-  function setActiveCard(index: number) {
+  function getSlide(card: HTMLElement) {
+    return (card.closest(".massage-carousel__slide") as HTMLElement | null) ?? card;
+  }
+
+  function scrollCardIntoView(index: number) {
+    const active = cards[index];
+    if (!active || !track) return;
+    const slide = getSlide(active);
+    const trackRect = track.getBoundingClientRect();
+    const slideRect = slide.getBoundingClientRect();
+    const left =
+      track.scrollLeft +
+      (slideRect.left - trackRect.left) -
+      (track.clientWidth - slideRect.width) / 2;
+    track.scrollTo({
+      left: Math.max(0, left),
+      behavior: prefersReduced ? "auto" : "smooth",
+    });
+  }
+
+  function setActiveCard(index: number, { scroll = true } = {}) {
+    if (index < 0 || index >= cards.length) return;
+    activeIndex = index;
     cards.forEach((card, i) => {
       const on = i === index;
       card.classList.toggle("is-selected", on);
-      card.setAttribute("aria-pressed", String(on));
       card.setAttribute("aria-selected", String(on));
     });
     const active = cards[index];
     if (active && track) {
-      const left =
-        active.offsetLeft - (track.clientWidth - active.offsetWidth) / 2;
-      track.scrollTo({
-        left: Math.max(0, left),
-        behavior: prefersReduced ? "auto" : "smooth",
-      });
+      track.setAttribute("aria-activedescendant", active.id);
     }
+    if (scroll) scrollCardIntoView(index);
     updateNavButtons();
   }
 
@@ -245,13 +274,14 @@ const firstImage = imageMap[first.id];
     if (!treatment) return;
 
     const nextIndex = treatmentIds.indexOf(id);
+    if (nextIndex < 0) return;
+
     if (nextIndex === activeIndex && panel.dataset.pricingCard === id) {
       setActiveCard(nextIndex);
       return;
     }
 
-    activeIndex = nextIndex >= 0 ? nextIndex : activeIndex;
-    setActiveCard(activeIndex);
+    setActiveCard(nextIndex);
 
     switching = true;
     panel.style.transition = "none";
@@ -259,7 +289,7 @@ const firstImage = imageMap[first.id];
     panel.style.transform = prefersReduced ? "none" : "translateY(8px)";
 
     const delay = prefersReduced ? 0 : 180;
-    setTimeout(() => {
+    window.setTimeout(() => {
       panel.dataset.pricingCard = id;
       panel.dataset.treatment = treatment.bookingValue;
       delete panel.dataset.selectedDuration;
@@ -273,11 +303,12 @@ const firstImage = imageMap[first.id];
       }
       if (panelImg && imgSrcMap[id]) {
         panelImg.src = imgSrcMap[id];
-        panelImg.alt = imgAltMap[id] ?? "";
+        panelImg.alt = imgAltMap[id] ?? treatment.imageAlt ?? "";
       }
 
-      if (typeof w.renderPricingWidgets === "function")
+      if (typeof w.renderPricingWidgets === "function") {
         w.renderPricingWidgets();
+      }
 
       if (!prefersReduced) {
         panel.style.transition = "opacity 0.3s ease, transform 0.3s ease";
@@ -302,11 +333,12 @@ const firstImage = imageMap[first.id];
   }
 
   function scrollTrackBy(dir: -1 | 1) {
-    if (!track) return;
-    const card = cards[0];
-    const step = card
-      ? card.offsetWidth + parseFloat(getComputedStyle(track).gap || "16")
-      : track.clientWidth * 0.8;
+    if (!track || cards.length === 0) return;
+    const slide = getSlide(cards[0]);
+    const gap = parseFloat(
+      getComputedStyle(track).columnGap || getComputedStyle(track).gap || "16",
+    );
+    const step = slide.offsetWidth + gap;
     track.scrollBy({
       left: dir * step,
       behavior: prefersReduced ? "auto" : "smooth",
@@ -320,6 +352,7 @@ const firstImage = imageMap[first.id];
 
   track?.addEventListener("pointerdown", (e) => {
     if (e.button !== 0) return;
+    // Don't start drag from nav — only the track
     dragging = true;
     dragMoved = false;
     dragStartX = e.clientX;
@@ -331,7 +364,7 @@ const firstImage = imageMap[first.id];
   track?.addEventListener("pointermove", (e) => {
     if (!dragging) return;
     const dx = e.clientX - dragStartX;
-    if (Math.abs(dx) > 4) dragMoved = true;
+    if (Math.abs(dx) > 6) dragMoved = true;
     track.scrollLeft = dragScrollLeft - dx;
   });
 
@@ -365,9 +398,27 @@ const firstImage = imageMap[first.id];
   track?.addEventListener("scroll", () => updateNavButtons(), {
     passive: true,
   });
-
   window.addEventListener("resize", () => updateNavButtons(), {
     passive: true,
+  });
+
+  // Keyboard: left/right on focused track
+  track?.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      const next = Math.min(activeIndex + 1, cards.length - 1);
+      switchTreatment(treatmentIds[next]);
+    } else if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      const prev = Math.max(activeIndex - 1, 0);
+      switchTreatment(treatmentIds[prev]);
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      switchTreatment(treatmentIds[0]);
+    } else if (e.key === "End") {
+      e.preventDefault();
+      switchTreatment(treatmentIds[treatmentIds.length - 1]);
+    }
   });
 
   const revealEls = document.querySelectorAll<HTMLElement>(
@@ -389,6 +440,6 @@ const firstImage = imageMap[first.id];
     observer.observe(el);
   });
 
-  setActiveCard(0);
+  setActiveCard(0, { scroll: false });
   updateNavButtons();
 </script>

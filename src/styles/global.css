@@ -433,22 +433,17 @@
   transform: translateY(0);
 }
 
-/* ── Massage carousel track ─────────────────────────────────── */
+/* ── Massage carousel ───────────────────────────────────────── */
 .massage-carousel {
-  --massage-card-gap: 1rem;
+  --massage-card-gap: 1.125rem;
   --massage-visible: 1.15;
   --massage-nav-size: 2.75rem;
-  /* cards inset to ~button midpoint so they never hug the screen edge */
   --massage-edge-inset: calc(var(--massage-nav-size) / 2);
-  /* vertical only — horizontal negative bleed caused the muddy bg band */
-  --massage-bleed-top: 2.5rem;
-  --massage-bleed-bottom: 2.25rem;
+  --massage-bleed-top: 2.75rem;
+  --massage-bleed-bottom: 1.5rem;
   position: relative;
   width: 100%;
   overflow: visible;
-  background: transparent;
-  box-shadow: none;
-  filter: none;
   padding-top: var(--massage-bleed-top);
   padding-bottom: var(--massage-bleed-bottom);
 }
@@ -475,29 +470,21 @@
   position: relative;
   width: 100%;
   overflow: visible;
-  background: transparent;
-  box-shadow: none;
 }
 
-/*
-  overflow-x:auto clips the other axis — vertical bleed only, cancelled into
-  carousel padding. Horizontal inset keeps cards off the screen edge
-  (aligned to nav button midpoint).
-*/
 .massage-carousel__track {
   display: flex;
   gap: var(--massage-card-gap);
+  list-style: none;
+  margin: calc(var(--massage-bleed-top) * -1) 0 calc(var(--massage-bleed-bottom) * -1);
+  padding: var(--massage-bleed-top) var(--massage-edge-inset) var(--massage-bleed-bottom);
   overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  padding: var(--massage-bleed-top) var(--massage-edge-inset) var(--massage-bleed-bottom);
-  margin: calc(var(--massage-bleed-top) * -1) 0 calc(var(--massage-bleed-bottom) * -1);
   cursor: grab;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  background: transparent;
-  box-shadow: none;
 }
 
 .massage-carousel__track::-webkit-scrollbar {
@@ -511,18 +498,28 @@
   user-select: none;
 }
 
+.massage-carousel__slide {
+  flex: 0 0
+    calc(
+      (100% - (var(--massage-visible) - 1) * var(--massage-card-gap)) /
+        var(--massage-visible)
+    );
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
 .massage-carousel__nav {
   position: absolute;
   top: 50%;
   z-index: 3;
   display: inline-flex;
-  height: 2.75rem;
-  width: 2.75rem;
+  height: var(--massage-nav-size);
+  width: var(--massage-nav-size);
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--color-brand-sage-light);
+  border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.92);
   color: var(--color-brand-sage);
   box-shadow: 0 8px 24px rgba(31, 45, 32, 0.12);
   cursor: pointer;
@@ -531,7 +528,8 @@
     background 0.2s ease,
     color 0.2s ease,
     opacity 0.2s ease,
-    box-shadow 0.2s ease;
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .massage-carousel__nav--prev {
@@ -540,6 +538,9 @@
 
 .massage-carousel__nav--next {
   right: 0;
+  background: color-mix(in srgb, var(--color-brand-sage-bright) 55%, #fff);
+  border-color: transparent;
+  color: var(--color-brand-text-light);
 }
 
 .massage-carousel__nav[hidden] {
@@ -549,6 +550,7 @@
 .massage-carousel__nav:hover:not(:disabled),
 .massage-carousel__nav:focus-visible:not(:disabled) {
   background: var(--color-brand-sage);
+  border-color: transparent;
   color: var(--color-brand-text-light);
   box-shadow: 0 10px 28px rgba(31, 45, 32, 0.18);
 }
@@ -560,10 +562,14 @@
 }
 
 .dark .massage-carousel__nav {
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.18);
   background: rgba(36, 48, 40, 0.95);
   color: var(--color-brand-text-light);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.dark .massage-carousel__nav--next {
+  background: color-mix(in srgb, var(--color-brand-sage-bright) 42%, var(--color-brand-card-dark));
 }
 
 .dark .massage-carousel__nav:hover:not(:disabled),
@@ -572,91 +578,56 @@
   color: var(--color-brand-sage-dark);
 }
 
-.massage-carousel-card {
-  flex: 0 0
-    calc(
-      (100% - (var(--massage-visible) - 1) * var(--massage-card-gap)) /
-        var(--massage-visible)
-    );
-  min-width: 0;
-  min-height: 9.5rem;
-  scroll-snap-align: start;
-  isolation: isolate;
-}
-
-.massage-carousel-card.is-selected,
-.massage-carousel-card:hover {
-  z-index: 2;
-}
-
 /* ── Massage carousel cards ─────────────────────────────────── */
-.massage-carousel-card h3 {
-  overflow-wrap: anywhere;
-  word-break: break-word;
-}
-
-.massage-carousel-card__media {
-  --massage-img-rest: 5.5rem;
+.massage-carousel-card {
+  --massage-img-rest: 5.25rem;
   --massage-img-pop: 6.5rem;
-  /* rest/pop ratio — scale down at rest, scale(1) when popped (no upscale blur) */
   --massage-img-rest-scale: calc(var(--massage-img-rest) / var(--massage-img-pop));
   position: relative;
   z-index: 1;
-  flex-shrink: 0;
-  width: calc(var(--massage-img-rest) + 1.5rem);
-  height: calc(var(--massage-img-rest) * 4 / 3 + 1.5rem);
-  padding: 0.75rem;
+  display: flex;
+  width: 100%;
+  min-height: 9.75rem;
+  align-items: stretch;
   overflow: visible;
-}
-
-@media (min-width: 640px) {
-  .massage-carousel-card__media {
-    --massage-img-rest: 6.25rem;
-    --massage-img-pop: 7.5rem;
-    width: calc(var(--massage-img-rest) + 1.75rem);
-    height: calc(var(--massage-img-rest) * 4 / 3 + 1.75rem);
-    padding: 0.875rem;
-  }
-}
-
-.massage-carousel-card__image {
-  position: absolute;
-  top: 0.75rem;
-  left: 0.75rem;
-  display: block;
-  width: var(--massage-img-pop);
-  aspect-ratio: 3 / 4;
-  border-radius: 1rem;
-  object-fit: cover;
-  object-position: center;
-  box-shadow: 0 12px 28px rgba(31, 45, 32, 0.14);
-  /* Grow from top-left so rest stays inset; pop extends above (not below) */
-  transform-origin: top left;
-  transform: scale(var(--massage-img-rest-scale));
+  border: 1px solid rgba(44, 62, 45, 0.1);
+  border-radius: 1.35rem;
+  background: color-mix(in srgb, var(--color-brand-sage) 8%, rgba(255, 255, 255, 0.55));
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 28px rgba(31, 45, 32, 0.08);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  isolation: isolate;
   transition:
-    transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
 }
 
 @media (min-width: 640px) {
-  .massage-carousel-card__image {
-    top: 0.875rem;
-    left: 0.875rem;
+  .massage-carousel-card {
+    --massage-img-rest: 6rem;
+    --massage-img-pop: 7.5rem;
+    min-height: 10.5rem;
   }
 }
 
-/* Slot stays fixed — only transform moves the image. Pop = scale(1) so texture is never upscaled. */
-.massage-carousel-card:hover .massage-carousel-card__image,
-.massage-carousel-card.is-selected .massage-carousel-card__image {
-  transform: translate(-1.45rem, -1.5rem) scale(1);
-  box-shadow: 0 20px 40px rgba(31, 45, 32, 0.22);
+.massage-carousel-card:hover,
+.massage-carousel-card.is-selected {
+  z-index: 2;
+}
+
+.massage-carousel-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(31, 45, 32, 0.12);
 }
 
 .massage-carousel-card.is-selected {
-  border-color: transparent;
-  outline: none;
-  background: color-mix(in srgb, var(--color-brand-sage) 14%, var(--color-brand-bg));
-  box-shadow: 0 16px 36px rgba(31, 45, 32, 0.14);
+  border-color: rgba(255, 255, 255, 0.72);
+  background: color-mix(in srgb, var(--color-brand-sage-bright) 28%, rgba(255, 255, 255, 0.82));
+  box-shadow: 0 18px 40px rgba(31, 45, 32, 0.14);
 }
 
 .massage-carousel-card:focus {
@@ -668,16 +639,189 @@
   outline-offset: 3px;
 }
 
+.dark .massage-carousel-card {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: color-mix(in srgb, var(--color-brand-card-dark) 88%, transparent);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+}
+
 .dark .massage-carousel-card.is-selected {
+  border-color: rgba(255, 255, 255, 0.22);
   background: color-mix(in srgb, var(--color-brand-sage-bright) 18%, var(--color-brand-card-dark));
 }
 
-.massage-carousel-card.is-selected .massage-carousel-card__price {
+.massage-carousel-card__media {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  width: calc(var(--massage-img-rest) + 1.35rem);
+  height: calc(var(--massage-img-rest) * 4 / 3 + 1.35rem);
+  padding: 0.7rem;
+  overflow: visible;
+}
+
+@media (min-width: 640px) {
+  .massage-carousel-card__media {
+    width: calc(var(--massage-img-rest) + 1.6rem);
+    height: calc(var(--massage-img-rest) * 4 / 3 + 1.6rem);
+    padding: 0.85rem;
+  }
+}
+
+.massage-carousel-card__image {
+  position: absolute;
+  top: 0.7rem;
+  left: 0.7rem;
+  display: block;
+  width: var(--massage-img-pop);
+  aspect-ratio: 3 / 4;
+  border-radius: 1rem;
+  object-fit: cover;
+  object-position: center;
+  box-shadow: 0 12px 28px rgba(31, 45, 32, 0.14);
+  transform-origin: top left;
+  transform: scale(var(--massage-img-rest-scale));
+  transition:
+    transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@media (min-width: 640px) {
+  .massage-carousel-card__image {
+    top: 0.85rem;
+    left: 0.85rem;
+  }
+}
+
+.massage-carousel-card:hover .massage-carousel-card__image,
+.massage-carousel-card.is-selected .massage-carousel-card__image {
+  transform: translate(-1.35rem, -1.45rem) scale(1);
+  box-shadow: 0 20px 40px rgba(31, 45, 32, 0.22);
+}
+
+.massage-carousel-card__body {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.35rem;
+  overflow: hidden;
+  padding: 0.9rem 1rem 0.9rem 0;
+}
+
+.massage-carousel-card__title {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-family: var(--font-serif, ui-serif, Georgia, serif);
+  font-size: 0.98rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.25;
   color: var(--color-brand-sage);
+  text-transform: uppercase;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.dark .massage-carousel-card__title {
+  color: var(--color-brand-text-light);
+}
+
+.massage-carousel-card__desc {
+  margin: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--color-brand-muted);
+}
+
+.massage-carousel-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.45rem;
+}
+
+.massage-carousel-card__price {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--color-brand-sage);
+  transition: color 0.25s ease;
+}
+
+.dark .massage-carousel-card__price {
+  color: var(--color-brand-sage-bright);
+}
+
+.massage-carousel-card.is-selected .massage-carousel-card__price {
+  color: var(--color-brand-sage-dark);
 }
 
 .dark .massage-carousel-card.is-selected .massage-carousel-card__price {
   color: var(--color-brand-sage-bright);
+}
+
+.massage-carousel-card__cta {
+  display: inline-flex;
+  height: 1.75rem;
+  width: 1.75rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid color-mix(in srgb, var(--color-brand-sage) 35%, transparent);
+  border-radius: 999px;
+  color: var(--color-brand-sage);
+  font-size: 0.7rem;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.massage-carousel-card.is-selected .massage-carousel-card__cta,
+.massage-carousel-card:hover .massage-carousel-card__cta {
+  border-color: transparent;
+  background: var(--color-brand-sage);
+  color: var(--color-brand-text-light);
+}
+
+.dark .massage-carousel-card__cta {
+  border-color: rgba(255, 255, 255, 0.28);
+  color: var(--color-brand-text-light);
+}
+
+.dark .massage-carousel-card.is-selected .massage-carousel-card__cta,
+.dark .massage-carousel-card:hover .massage-carousel-card__cta {
+  background: var(--color-brand-sage-bright);
+  color: var(--color-brand-sage-dark);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .massage-carousel__track,
+  .massage-carousel-card,
+  .massage-carousel-card__image,
+  .massage-carousel-card__cta,
+  .massage-carousel__nav {
+    transition: none;
+    scroll-behavior: auto;
+  }
+
+  .massage-carousel-card:hover {
+    transform: none;
+  }
+
+  .massage-carousel-card:hover .massage-carousel-card__image,
+  .massage-carousel-card.is-selected .massage-carousel-card__image {
+    transform: scale(var(--massage-img-rest-scale));
+  }
 }
 
 @keyframes pricing-savings-in {
