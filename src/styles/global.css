@@ -351,6 +351,32 @@
   }
 }
 
+/* ── Massage main panel: floating image ─────────────────────── */
+.massage-main-panel__image {
+  isolation: isolate;
+}
+
+.massage-main-panel__image img {
+  display: block;
+  border-radius: 1.75rem;
+  box-shadow:
+    0 4px 12px rgba(31, 45, 32, 0.06),
+    0 24px 56px rgba(31, 45, 32, 0.16);
+  transform: translateY(-0.35rem);
+}
+
+.dark .massage-main-panel__image img {
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.25),
+    0 24px 56px rgba(0, 0, 0, 0.4);
+}
+
+@media (min-width: 1024px) {
+  .massage-main-panel__image img {
+    transform: translateY(-0.5rem);
+  }
+}
+
 /* ── Massage section scroll-reveal ──────────────────────────── */
 .massage-card-reveal {
   opacity: 0;

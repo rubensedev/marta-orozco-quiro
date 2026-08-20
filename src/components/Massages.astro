@@ -34,14 +34,14 @@ const firstImage = imageMap[first.id];
     </p>
   </div>
 
-  <!-- Main panel -->
+  <!-- Main panel: integrated (no card) — content left, floating image right -->
   <article
     id="massageMainPanel"
-    class="massage-main-panel massage-card-reveal flex flex-col overflow-hidden rounded-4xl bg-white/60 shadow-soft dark:bg-brand-card-dark/84 lg:flex-row"
+    class="massage-main-panel massage-card-reveal flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-12"
     data-pricing-card={first.id}
     data-treatment={first.bookingValue}
   >
-    <div class="min-w-0 p-8 lg:flex-1 lg:p-12">
+    <div class="min-w-0 lg:flex-1">
       <h3
         id="panelTitle"
         class="m-0 wrap-break-word font-serif text-[clamp(1.75rem,3.5vw,2.75rem)] font-light tracking-[0.04em] uppercase"
@@ -70,15 +70,19 @@ const firstImage = imageMap[first.id];
       </button>
     </div>
 
-    <div class="relative min-w-0 lg:w-[46%] lg:shrink-0" id="panelImageWrapper">
+    <div
+      class="massage-main-panel__image relative mx-auto w-full max-w-md min-w-0 lg:mx-0 lg:w-[46%] lg:max-w-none lg:shrink-0"
+      id="panelImageWrapper"
+    >
       <Image
         id="panelImage"
         src={firstImage}
         alt={first.imageAlt}
         width={720}
         height={900}
-        class="aspect-4/5 h-full w-full object-cover lg:rounded-r-4xl"
+        class="aspect-4/5 h-full w-full rounded-[1.75rem] object-cover"
         loading="eager"
+        fetchpriority="high"
       />
     </div>
   </article>
