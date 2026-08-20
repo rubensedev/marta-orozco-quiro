@@ -371,6 +371,7 @@
   position: relative;
   height: calc(var(--massage-scrub-count) * 90vh);
   overflow: visible;
+  background: transparent;
 }
 
 .massage-scrub__sticky {
@@ -380,6 +381,7 @@
   flex-direction: column;
   padding-bottom: 1.5rem;
   overflow: visible;
+  background: transparent;
 }
 
 @media (max-width: 1023px), (prefers-reduced-motion: reduce) {
@@ -397,15 +399,20 @@
 .massage-carousel {
   --massage-card-gap: 1rem;
   --massage-visible: 1.15;
-  /* space reserved inside scrollport so protrude/shadows aren't clipped */
-  --massage-bleed-x: 1.75rem;
+  --massage-nav-size: 2.75rem;
+  /* cards inset to ~button midpoint so they never hug the screen edge */
+  --massage-edge-inset: calc(var(--massage-nav-size) / 2);
+  /* vertical only — horizontal negative bleed caused the muddy bg band */
   --massage-bleed-top: 2.5rem;
-  --massage-bleed-bottom: 2rem;
+  --massage-bleed-bottom: 2.25rem;
   position: relative;
   width: 100%;
   overflow: visible;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
+  background: transparent;
+  box-shadow: none;
+  filter: none;
+  padding-top: var(--massage-bleed-top);
+  padding-bottom: var(--massage-bleed-bottom);
 }
 
 @media (min-width: 640px) {
@@ -430,11 +437,14 @@
   position: relative;
   width: 100%;
   overflow: visible;
+  background: transparent;
+  box-shadow: none;
 }
 
 /*
-  overflow-x:auto always clips the other axis in browsers.
-  Bleed padding expands the scrollport; negative margin keeps layout size.
+  overflow-x:auto clips the other axis — vertical bleed only, cancelled into
+  carousel padding. Horizontal inset keeps cards off the screen edge
+  (aligned to nav button midpoint).
 */
 .massage-carousel__track {
   display: flex;
@@ -443,12 +453,13 @@
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  padding: var(--massage-bleed-top) var(--massage-bleed-x) var(--massage-bleed-bottom);
-  margin: calc(var(--massage-bleed-top) * -1) calc(var(--massage-bleed-x) * -1)
-    calc(var(--massage-bleed-bottom) * -1);
+  padding: var(--massage-bleed-top) var(--massage-edge-inset) var(--massage-bleed-bottom);
+  margin: calc(var(--massage-bleed-top) * -1) 0 calc(var(--massage-bleed-bottom) * -1);
   cursor: grab;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+  background: transparent;
+  box-shadow: none;
 }
 
 .massage-carousel__track::-webkit-scrollbar {

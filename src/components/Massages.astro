@@ -357,12 +357,8 @@ const treatmentCount = treatments.length;
 
   function updateNavButtons() {
     if (!track || !prevBtn || !nextBtn) return;
-    const style = getComputedStyle(track);
-    const padX =
-      (parseFloat(style.paddingLeft) || 0) + (parseFloat(style.paddingRight) || 0);
     const maxScroll = track.scrollWidth - track.clientWidth;
-    // Horizontal bleed padding inflates scrollWidth even when cards fit
-    const needsNav = maxScroll > padX + 8;
+    const needsNav = maxScroll > 8;
 
     prevBtn.hidden = !needsNav;
     nextBtn.hidden = !needsNav;
