@@ -1,10 +1,9 @@
 ---
-import { bonoExamples, bonoTiers, rituals, siteMeta, treatments } from "../data/site";
+import { bonoTiers, rituals, siteMeta, treatments } from "../data/site";
 ---
 
 <script
   define:vars={{
-    bonoExamples,
     bonoTiers,
     rituals,
     siteMeta,
@@ -235,32 +234,6 @@ import { bonoExamples, bonoTiers, rituals, siteMeta, treatments } from "../data/
     });
   }
 
-  function renderBonoExamples() {
-    const container = document.getElementById("bonoExamples");
-    container.innerHTML = bonoExamples
-      .map((example) => {
-        const treatment = treatments.find((entry) => entry.id === example.treatmentId);
-        const duration = treatment?.durations.find((entry) => entry.min === example.durationMin);
-        const tier = bonoTiers.find((entry) => entry.id === example.bonoId);
-        if (!treatment || !duration || !tier) return "";
-        const quote = calculateQuote(duration.price, tier);
-
-        return `
-          <article class="bonos-example">
-            <div>
-              <h4 class="bonos-example__title">${treatment.title} · ${duration.min} min</h4>
-              <p class="bonos-example__text">${tier.label}</p>
-            </div>
-            <div class="bonos-example__prices">
-              <span class="pricing-original">${quote.fullTotal} €</span>
-              <span class="pricing-discounted">${quote.discountedTotal} €</span>
-            </div>
-          </article>
-        `;
-      })
-      .join("");
-  }
-
   function syncBookingFieldVisibility() {
     const treatmentName = modalTreatment.value;
     const ritual = ritualMap.get(treatmentName) ?? ritualMap.get(treatmentName.replace(/\s+\(.+$/, ""));
@@ -469,5 +442,4 @@ import { bonoExamples, bonoTiers, rituals, siteMeta, treatments } from "../data/
   syncBookingFieldVisibility();
   updateModalPriceEstimate();
   renderPricingWidgets();
-  renderBonoExamples();
 </script>

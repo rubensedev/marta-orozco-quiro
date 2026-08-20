@@ -76,6 +76,20 @@ export const massagesContent = {
     "Elige duración y tipo de compra para ver tu precio. Compara el ahorro con bonos de 5 o 10 sesiones.",
 };
 
+export const ritualsContent = {
+  heading: "Rituales y bonos",
+  description:
+    "Rituales completos para una renovación profunda o paquetes de bonos con descuento especial.",
+  ctaLabel: "Reservar Ritual",
+};
+
+export const bonosContent = {
+  heading: "Bonos",
+  discountLabel: "Descuento",
+  examplesHeading: "Ejemplos de ahorro",
+  ctaLabel: "Preguntar por Bonos",
+};
+
 export const treatments: Treatment[] = [
   {
     id: "relajante",

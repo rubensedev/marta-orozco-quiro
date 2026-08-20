@@ -1,42 +1,90 @@
 ---
-import { rituals } from "../data/site";
+import {
+  bonoExamples,
+  bonoTiers,
+  bonosContent,
+  rituals,
+  ritualsContent,
+  treatments,
+} from "../data/site";
+
+const packageTiers = bonoTiers.filter((tier) => tier.sessions > 1);
+
+function calculateQuote(unitPrice: number, sessions: number, discount: number) {
+  const fullTotal = unitPrice * sessions;
+  const discountedTotal = Math.round(fullTotal * (1 - discount));
+  return {
+    fullTotal,
+    discountedTotal,
+    savings: fullTotal - discountedTotal,
+  };
+}
+
+const exampleRows = bonoExamples.flatMap((example) => {
+  const treatment = treatments.find((entry) => entry.id === example.treatmentId);
+  const duration = treatment?.durations.find(
+    (entry) => entry.min === example.durationMin,
+  );
+  const tier = bonoTiers.find((entry) => entry.id === example.bonoId);
+  if (!treatment || !duration || !tier) return [];
+
+  const quote = calculateQuote(duration.price, tier.sessions, tier.discount);
+  return [
+    {
+      label: `${treatment.bookingValue} · ${duration.min} min · ${tier.label}`,
+      ...quote,
+    },
+  ];
+});
 ---
 
 <section
   id="bonos"
-  class="mx-auto my-8 w-[min(1120px,calc(100%-2rem))] rounded-[2rem] py-20 md:py-24 bg-[color-mix(in_srgb,var(--color-brand-lavender-light)_65%,white_35%)] dark:bg-[color-mix(in_srgb,var(--color-brand-lavender-dark)_72%,black_28%)]"
+  class="mx-auto my-8 w-[min(1120px,calc(100%-2rem))] rounded-4xl bg-brand-bg px-5 py-16 sm:px-8 md:px-10 md:py-20 dark:bg-brand-bg-dark"
 >
-  <div class="mb-12 max-w-3xl">
-    <p class="m-0 mb-4 inline-flex items-center gap-3 text-xs font-semibold tracking-[0.24em] text-brand-lavender uppercase">
-      Rituales y bonos
-    </p>
-    <h2 class="m-0 font-serif text-[clamp(2.25rem,4vw,3.5rem)] leading-[1.1] font-light">
-      Renovación profunda con sesiones sueltas o bonos
+  <div class="mx-auto mb-12 max-w-2xl text-center">
+    <h2
+      class="m-0 font-serif text-[clamp(2rem,4vw,3rem)] leading-[1.1] font-light tracking-[0.04em] text-brand-lavender uppercase dark:text-brand-lavender-bright"
+    >
+      {ritualsContent.heading}
     </h2>
-    <p class="mt-4 mb-0 text-lg leading-[1.8] text-brand-muted">
-      Rituales completos para una renovación profunda o paquetes de bonos con descuento especial.
+    <div
+      class="mx-auto mt-4 h-px w-12 bg-brand-lavender/35 dark:bg-brand-lavender-bright/40"
+      aria-hidden="true"
+    >
+    </div>
+    <p class="mt-5 mb-0 text-base leading-[1.7] text-brand-muted md:text-lg">
+      {ritualsContent.description}
     </p>
   </div>
 
-  <div class="grid gap-6 lg:grid-cols-2">
+  <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
     {
       rituals.map((ritual) => (
-        <article class="rounded-[2rem] bg-white/48 p-8 shadow-soft md:p-10 dark:bg-white/6">
-          <div class="inline-flex h-14 w-14 items-center justify-center rounded-full bg-white/64 text-xl text-brand-lavender">
-            <i class={ritual.iconClass} aria-hidden="true"></i>
+        <article class="flex flex-col items-center rounded-[1.75rem] bg-[color-mix(in_srgb,var(--color-brand-lavender)_22%,white_78%)] px-7 py-10 text-center shadow-soft md:px-10 md:py-12 dark:bg-[color-mix(in_srgb,var(--color-brand-lavender-dark)_55%,black_45%)]">
+          <div class="inline-flex size-12 items-center justify-center rounded-full bg-white text-lg text-brand-lavender shadow-sm dark:bg-white/90">
+            <i class={ritual.iconClass} aria-hidden="true" />
           </div>
-          <h3 class="mt-6 mb-0 font-serif text-[1.75rem] font-light uppercase">{ritual.title}</h3>
-          <p class="mt-2 mb-0 text-[0.9rem] font-semibold tracking-[0.16em] text-brand-muted uppercase">
-            {ritual.duration} min · {ritual.price} €
+          <h3 class="mt-6 mb-0 font-serif text-[clamp(1.35rem,2.4vw,1.65rem)] leading-tight font-normal tracking-[0.04em] text-brand-lavender uppercase dark:text-brand-lavender-bright">
+            {ritual.title}
+          </h3>
+          <p class="mt-4 mb-0 max-w-[34ch] text-[0.95rem] leading-[1.7] text-brand-muted">
+            {ritual.description}
           </p>
-          <p class="mt-4 mb-0 leading-[1.8]">{ritual.description}</p>
+          <div
+            class="my-6 h-px w-full max-w-[14rem] bg-brand-lavender/20 dark:bg-white/15"
+            aria-hidden="true"
+          />
+          <p class="m-0 text-[0.95rem] font-semibold tracking-[0.04em] text-brand-lavender dark:text-brand-lavender-bright">
+            {ritual.duration} min — {ritual.price} €
+          </p>
           <button
-            class="btn-brand mt-8"
+            class="mt-6 inline-flex w-full max-w-xs items-center justify-center rounded-full bg-brand-lavender px-6 py-3.5 text-[0.72rem] font-semibold tracking-[0.14em] text-white uppercase transition hover:bg-brand-lavender-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-lavender dark:hover:bg-brand-lavender"
             type="button"
             data-open-booking
             data-treatment={ritual.bookingValue}
           >
-            Reservar Ritual
+            {ritualsContent.ctaLabel}
           </button>
         </article>
       ))
@@ -44,48 +92,79 @@ import { rituals } from "../data/site";
   </div>
 
   <section
-    class="mt-8 rounded-[2rem] bg-white/50 p-8 shadow-soft md:p-10 dark:bg-white/8"
+    class="mt-8 rounded-[1.75rem] bg-[color-mix(in_srgb,var(--color-brand-surface)_72%,white_28%)] px-6 py-10 shadow-soft sm:px-8 md:px-12 md:py-12 dark:bg-brand-card-dark"
     aria-labelledby="bonos-title"
   >
-    <div>
-      <h3 id="bonos-title" class="mt-6 mb-0 font-serif text-[1.75rem] font-light uppercase">
-        Bonos
-      </h3>
-      <p class="mt-4 mb-0 leading-[1.8]">
-        Consulta ejemplos de ahorro para encontrar el formato que mejor encaja contigo.
-      </p>
+    <h3
+      id="bonos-title"
+      class="m-0 text-center font-serif text-[clamp(1.75rem,3vw,2.25rem)] font-light tracking-[0.06em] text-brand-text-dark uppercase dark:text-brand-text-light"
+    >
+      {bonosContent.heading}
+    </h3>
+
+    <div
+      class="mx-auto mt-8 grid max-w-xl grid-cols-1 gap-8 sm:grid-cols-[1fr_auto_1fr] sm:items-start sm:gap-0"
+    >
+      {
+        packageTiers.map((tier, index) => (
+          <>
+            {index > 0 && (
+              <div
+                class="mx-auto hidden h-full min-h-28 w-px bg-brand-muted/25 sm:block dark:bg-white/15"
+                aria-hidden="true"
+              />
+            )}
+            <article class="flex flex-col items-center text-center">
+              <h4 class="m-0 text-[0.95rem] font-semibold tracking-[0.12em] text-brand-text-dark uppercase dark:text-brand-text-light">
+                {tier.sessions} sesiones
+              </h4>
+              <div class="mt-4 inline-flex size-[4.5rem] items-center justify-center rounded-full bg-brand-lavender text-[1.15rem] font-bold text-white">
+                {Math.round(tier.discount * 100)}%
+              </div>
+              <p class="mt-3 mb-0 text-[0.78rem] font-semibold tracking-[0.16em] text-brand-muted uppercase">
+                {bonosContent.discountLabel}
+              </p>
+            </article>
+          </>
+        ))
+      }
     </div>
 
-    <div class="mt-8 flex flex-col items-center gap-4 md:flex-row">
-      <article class="flex-1 rounded-[1.5rem] bg-white/64 p-6 text-center">
-        <div
-          class="mx-auto mb-4 inline-flex h-20 w-20 items-center justify-center rounded-full bg-brand-lavender text-[1.1rem] font-bold text-white"
-        >
-          10%
-        </div>
-        <h4 class="m-0 text-[1.35rem] font-semibold uppercase">5 sesiones</h4>
-        <p class="mt-2 mb-0 text-[0.9rem] font-semibold tracking-[0.16em] text-brand-muted uppercase">
-          Descuento especial
-        </p>
-      </article>
-      <article class="flex-1 rounded-[1.5rem] bg-white/64 p-6 text-center">
-        <div
-          class="mx-auto mb-4 inline-flex h-20 w-20 items-center justify-center rounded-full bg-brand-lavender text-[1.1rem] font-bold text-white"
-        >
-          15%
-        </div>
-        <h4 class="m-0 text-[1.35rem] font-semibold uppercase">10 sesiones</h4>
-        <p class="mt-2 mb-0 text-[0.9rem] font-semibold tracking-[0.16em] text-brand-muted uppercase">
-          Descuento especial
-        </p>
-      </article>
+    <div
+      class="mx-auto mt-10 h-px max-w-3xl bg-brand-muted/20 dark:bg-white/12"
+      aria-hidden="true"
+    >
     </div>
 
-    <div id="bonoExamples" class="mt-8 grid gap-4"></div>
+    <h4
+      class="mt-8 mb-0 text-center text-[0.78rem] font-semibold tracking-[0.18em] text-brand-muted uppercase"
+    >
+      {bonosContent.examplesHeading}
+    </h4>
 
-    <button class="btn-brand mt-8" type="button" data-open-booking>
-      <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-      <span>Preguntar por Bonos</span>
-    </button>
+    <div class="mx-auto mt-6 grid max-w-3xl gap-4" id="bonoExamples">
+      {
+        exampleRows.map((row) => (
+          <article class="bonos-example">
+            <p class="bonos-example__label">{row.label}</p>
+            <div class="bonos-example__prices">
+              <span class="pricing-original">{row.fullTotal} €</span>
+              <span class="pricing-discounted">{row.discountedTotal} €</span>
+              <span class="pricing-savings-highlight">
+                <i class="fa-solid fa-tag" aria-hidden="true" />
+                -{row.savings} €
+              </span>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="mt-10 flex justify-center">
+      <button class="btn-brand" type="button" data-open-booking>
+        <span>{bonosContent.ctaLabel}</span>
+        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+      </button>
+    </div>
   </section>
 </section>
