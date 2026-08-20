@@ -17,13 +17,14 @@ const imageMap: Record<string, ImageMetadata> = {
 
 const first = treatments[0];
 const firstImage = imageMap[first.id];
+const treatmentCount = treatments.length;
 ---
 
 <section
   id="masajes"
   class="mx-auto w-[min(1120px,calc(100%-2rem))] py-[clamp(3rem,8vh,6rem)] md:px-6 lg:px-8"
 >
-  <div class="w-full mb-12">
+  <div class="mb-10 w-full">
     <h2
       class="m-0 font-serif text-[clamp(2.25rem,4vw,3.5rem)] leading-[1.1] font-light"
     >
@@ -34,113 +35,161 @@ const firstImage = imageMap[first.id];
     </p>
   </div>
 
-  <!-- Carousel grid -->
   <div
-    class="massage-carousel mb-12 grid grid-cols-1 gap-x-5 gap-y-8 pt-8 sm:grid-cols-2 lg:grid-cols-4"
-    id="massageCarousel"
+    class="massage-scrub"
+    id="massageScrub"
+    data-treatment-count={treatmentCount}
+    style={`--massage-scrub-count: ${treatmentCount}`}
   >
-    {
-      treatments.map((treatment, i) => {
-        const img = imageMap[treatment.id];
-        const basePrice = treatment.durations[0].price;
-        return (
-          <button
-            type="button"
-            class:list={[
-              "massage-carousel-card group relative flex cursor-pointer flex-row items-stretch overflow-visible rounded-2xl border border-brand-sage/14 bg-white/60 text-left shadow-soft transition duration-300 ease-out hover:-translate-y-0.5 hover:shadow-xl dark:border-white/10 dark:bg-brand-card-dark/84 massage-card-reveal",
-              i === 0 ? "is-selected" : "",
-            ]}
-            data-carousel-card={treatment.id}
-            data-treatment-id={treatment.id}
-            aria-pressed={i === 0 ? "true" : "false"}
-          >
-            <div class="massage-carousel-card__media">
-              <Image
-                src={img}
-                alt={treatment.imageAlt}
-                width={480}
-                height={640}
-                densities={[1, 2]}
-                class="massage-carousel-card__image"
-                loading="lazy"
-              />
-            </div>
-            <div class="flex min-w-0 flex-1 flex-col justify-center overflow-hidden py-4 pr-4 pl-0">
-              <h3 class="m-0 line-clamp-2 wrap-break-word font-serif text-base font-semibold tracking-[0.04em] text-brand-sage uppercase dark:text-brand-text-light">
-                {treatment.title}
-              </h3>
-              <p class="mt-1.5 mb-0 line-clamp-2 text-sm leading-snug text-brand-muted">
-                {treatment.description}
-              </p>
-              <p class="massage-carousel-card__price mt-3 mb-0 text-sm font-semibold text-brand-sage transition duration-300 ease-out dark:text-brand-sage-bright">
-                desde {basePrice}€ →
-              </p>
-            </div>
-          </button>
-        );
-      })
-    }
-  </div>
-
-  <!-- Main panel -->
-  <article
-    id="massageMainPanel"
-    class="massage-main-panel massage-card-reveal flex flex-col overflow-hidden rounded-4xl bg-white/60 shadow-soft dark:bg-brand-card-dark/84 lg:flex-row"
-    data-pricing-card={first.id}
-    data-treatment={first.bookingValue}
-  >
-    <!-- Left: content -->
-    <div class="min-w-0 p-8 lg:flex-1 lg:p-12">
-      <h3
-        id="panelTitle"
-        class="m-0 wrap-break-word font-serif text-[clamp(1.75rem,3.5vw,2.75rem)] font-light tracking-[0.04em] uppercase"
-      >
-        {first.title}
-      </h3>
-      <div
-        class="mt-6"
-        data-pricing-display
-        aria-live="polite"
-        aria-atomic="true"
-      >
-      </div>
-      <p id="panelDescription" class="mt-5 mb-0 leading-[1.8] text-brand-muted">
-        {first.description}
-      </p>
-      <div class="mt-8" data-pricing-mount></div>
-      <button
-        id="panelBookingBtn"
-        class="btn-brand mt-8"
-        type="button"
-        data-open-booking
+    <div class="massage-scrub__sticky" id="massageScrubSticky">
+      <!-- Main panel -->
+      <article
+        id="massageMainPanel"
+        class="massage-main-panel massage-card-reveal flex flex-col overflow-hidden rounded-4xl bg-white/60 shadow-soft dark:bg-brand-card-dark/84 lg:flex-row"
+        data-pricing-card={first.id}
         data-treatment={first.bookingValue}
       >
-        Reservar {first.title}
-      </button>
-    </div>
+        <div class="min-w-0 p-8 lg:flex-1 lg:p-12">
+          <h3
+            id="panelTitle"
+            class="m-0 wrap-break-word font-serif text-[clamp(1.75rem,3.5vw,2.75rem)] font-light tracking-[0.04em] uppercase"
+          >
+            {first.title}
+          </h3>
+          <div
+            class="mt-6"
+            data-pricing-display
+            aria-live="polite"
+            aria-atomic="true"
+          >
+          </div>
+          <p
+            id="panelDescription"
+            class="mt-5 mb-0 leading-[1.8] text-brand-muted"
+          >
+            {first.description}
+          </p>
+          <div class="mt-8" data-pricing-mount></div>
+          <button
+            id="panelBookingBtn"
+            class="btn-brand mt-8"
+            type="button"
+            data-open-booking
+            data-treatment={first.bookingValue}
+          >
+            Reservar {first.title}
+          </button>
+        </div>
 
-    <!-- Right: image -->
-    <div class="relative min-w-0 lg:w-[46%] lg:shrink-0" id="panelImageWrapper">
-      <Image
-        id="panelImage"
-        src={firstImage}
-        alt={first.imageAlt}
-        width={720}
-        height={900}
-        class="aspect-4/5 h-full w-full object-cover lg:rounded-r-4xl"
-        loading="eager"
-      />
+        <div
+          class="relative min-w-0 lg:w-[46%] lg:shrink-0"
+          id="panelImageWrapper"
+        >
+          <Image
+            id="panelImage"
+            src={firstImage}
+            alt={first.imageAlt}
+            width={720}
+            height={900}
+            class="aspect-4/5 h-full w-full object-cover lg:rounded-r-4xl"
+            loading="eager"
+          />
+        </div>
+      </article>
+
+      <!-- Horizontal carousel -->
+      <div class="massage-carousel mt-10" id="massageCarousel">
+        <button
+          type="button"
+          class="massage-carousel__nav"
+          id="massageCarouselPrev"
+          aria-controls="massageCarouselTrack"
+          aria-label="Masaje anterior"
+        >
+          <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+        </button>
+
+        <div
+          class="massage-carousel__track"
+          id="massageCarouselTrack"
+          tabindex="0"
+          role="listbox"
+          aria-label="Tipos de masaje"
+        >
+          {
+            treatments.map((treatment, i) => {
+              const img = imageMap[treatment.id];
+              const basePrice = treatment.durations[0].price;
+              return (
+                <button
+                  type="button"
+                  role="option"
+                  class:list={[
+                    "massage-carousel-card group relative flex cursor-pointer flex-row items-stretch overflow-visible rounded-2xl border border-brand-sage/14 bg-white/60 text-left shadow-soft transition duration-300 ease-out hover:-translate-y-0.5 hover:shadow-xl dark:border-white/10 dark:bg-brand-card-dark/84 massage-card-reveal",
+                    i === 0 ? "is-selected" : "",
+                  ]}
+                  data-carousel-card={treatment.id}
+                  data-treatment-id={treatment.id}
+                  data-treatment-index={i}
+                  aria-selected={i === 0 ? "true" : "false"}
+                  aria-pressed={i === 0 ? "true" : "false"}
+                >
+                  <div class="massage-carousel-card__media">
+                    <Image
+                      src={img}
+                      alt={treatment.imageAlt}
+                      width={480}
+                      height={640}
+                      densities={[1, 2]}
+                      class="massage-carousel-card__image"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div class="flex min-w-0 flex-1 flex-col justify-center overflow-hidden py-4 pr-4 pl-0">
+                    <h3 class="m-0 line-clamp-2 wrap-break-word font-serif text-base font-semibold tracking-[0.04em] text-brand-sage uppercase dark:text-brand-text-light">
+                      {treatment.title}
+                    </h3>
+                    <p class="mt-1.5 mb-0 line-clamp-2 text-sm leading-snug text-brand-muted">
+                      {treatment.description}
+                    </p>
+                    <p class="massage-carousel-card__price mt-3 mb-0 text-sm font-semibold text-brand-sage transition duration-300 ease-out dark:text-brand-sage-bright">
+                      desde {basePrice}€ →
+                    </p>
+                  </div>
+                </button>
+              );
+            })
+          }
+        </div>
+
+        <button
+          type="button"
+          class="massage-carousel__nav"
+          id="massageCarouselNext"
+          aria-controls="massageCarouselTrack"
+          aria-label="Masaje siguiente"
+        >
+          <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+        </button>
+      </div>
     </div>
-  </article>
+  </div>
 </section>
 
 <script>
+  const scrub = document.getElementById("massageScrub") as HTMLElement | null;
   const panel = document.getElementById(
     "massageMainPanel",
   ) as HTMLElement | null;
-  const carousel = document.getElementById(
-    "massageCarousel",
+  const track = document.getElementById(
+    "massageCarouselTrack",
   ) as HTMLElement | null;
+  const prevBtn = document.getElementById(
+    "massageCarouselPrev",
+  ) as HTMLButtonElement | null;
+  const nextBtn = document.getElementById(
+    "massageCarouselNext",
+  ) as HTMLButtonElement | null;
   const panelTitle = document.getElementById(
     "panelTitle",
   ) as HTMLElement | null;
@@ -154,31 +203,71 @@ const firstImage = imageMap[first.id];
     "panelBookingBtn",
   ) as HTMLButtonElement | null;
 
-  // Build img src map from rendered carousel thumbnails (Astro-optimized at build time)
+  const cards = Array.from(
+    track?.querySelectorAll<HTMLButtonElement>("[data-carousel-card]") ?? [],
+  );
+  const treatmentIds = cards.map((c) => c.dataset.carouselCard!);
+  const count = treatmentIds.length;
+
   const imgSrcMap: Record<string, string> = {};
   const imgAltMap: Record<string, string> = {};
-  carousel
-    ?.querySelectorAll<HTMLButtonElement>("[data-carousel-card]")
-    .forEach((card) => {
-      const id = card.dataset.carouselCard!;
-      const img = card.querySelector("img");
-      if (img) {
-        imgSrcMap[id] = img.src;
-        imgAltMap[id] = img.alt;
-      }
-    });
+  cards.forEach((card) => {
+    const id = card.dataset.carouselCard!;
+    const img = card.querySelector("img");
+    if (img) {
+      imgSrcMap[id] = img.currentSrc || img.src;
+      imgAltMap[id] = img.alt;
+    }
+  });
 
-  function switchTreatment(id: string) {
-    if (!panel) return;
+  let activeIndex = 0;
+  let lastScrollY = window.scrollY;
+  let switching = false;
+  const prefersReduced = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+
+  function setActiveCard(index: number) {
+    cards.forEach((card, i) => {
+      const on = i === index;
+      card.classList.toggle("is-selected", on);
+      card.setAttribute("aria-pressed", String(on));
+      card.setAttribute("aria-selected", String(on));
+    });
+    const active = cards[index];
+    if (active && track) {
+      const left =
+        active.offsetLeft - (track.clientWidth - active.offsetWidth) / 2;
+      track.scrollTo({
+        left: Math.max(0, left),
+        behavior: prefersReduced ? "auto" : "smooth",
+      });
+    }
+    updateNavButtons();
+  }
+
+  function switchTreatment(id: string, opts: { fromScroll?: boolean } = {}) {
+    if (!panel || switching) return;
     const w = window as any;
-    const treatments: any[] = w.treatments ?? [];
-    const treatment = treatments.find((t: any) => t.id === id);
+    const list: any[] = w.treatments ?? [];
+    const treatment = list.find((t: any) => t.id === id);
     if (!treatment) return;
 
+    const nextIndex = treatmentIds.indexOf(id);
+    if (nextIndex === activeIndex && panel.dataset.pricingCard === id) {
+      setActiveCard(nextIndex);
+      return;
+    }
+
+    activeIndex = nextIndex >= 0 ? nextIndex : activeIndex;
+    setActiveCard(activeIndex);
+
+    switching = true;
     panel.style.transition = "none";
     panel.style.opacity = "0";
-    panel.style.transform = "translateY(8px)";
+    panel.style.transform = prefersReduced ? "none" : "translateY(8px)";
 
+    const delay = prefersReduced ? 0 : 180;
     setTimeout(() => {
       panel.dataset.pricingCard = id;
       panel.dataset.treatment = treatment.bookingValue;
@@ -199,32 +288,153 @@ const firstImage = imageMap[first.id];
       if (typeof w.renderPricingWidgets === "function")
         w.renderPricingWidgets();
 
-      panel.style.transition = "opacity 0.3s ease, transform 0.3s ease";
+      if (!prefersReduced) {
+        panel.style.transition = "opacity 0.3s ease, transform 0.3s ease";
+      }
       panel.style.opacity = "1";
       panel.style.transform = "translateY(0)";
-    }, 180);
+      switching = false;
+    }, delay);
+
+    void opts;
   }
 
-  // The panel booking button click is handled by PageScripts' delegated listener on [data-open-booking].
-  // After treatment switch, PageScripts re-reads data-treatment from the button so no extra wiring needed.
+  function scrubMetrics() {
+    if (!scrub || prefersReduced) return null;
+    const rect = scrub.getBoundingClientRect();
+    const top = window.scrollY + rect.top;
+    const height = scrub.offsetHeight;
+    const stickyH =
+      document.getElementById("massageScrubSticky")?.offsetHeight ??
+      window.innerHeight;
+    // Not in scrub mode (mobile / reduced motion collapses height)
+    if (height < stickyH + 80) return null;
+    const scrollable = Math.max(1, height - stickyH);
+    return { top, height, stickyH, scrollable };
+  }
 
-  carousel
-    ?.querySelectorAll<HTMLButtonElement>("[data-carousel-card]")
-    .forEach((card) => {
-      card.addEventListener("click", () => {
-        const id = card.dataset.carouselCard!;
-        carousel
-          .querySelectorAll<HTMLButtonElement>("[data-carousel-card]")
-          .forEach((c) => {
-            c.classList.remove("is-selected");
-            c.setAttribute("aria-pressed", "false");
-          });
-        card.classList.add("is-selected");
-        card.setAttribute("aria-pressed", "true");
-        switchTreatment(id);
-        panel?.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
+  function indexFromScroll(): number {
+    const m = scrubMetrics();
+    if (!m) return activeIndex;
+    const raw = (window.scrollY - m.top) / m.scrollable;
+    const progress = Math.min(1, Math.max(0, raw));
+    return Math.min(count - 1, Math.floor(progress * count));
+  }
+
+  function scrollToTreatmentIndex(index: number) {
+    const m = scrubMetrics();
+    if (!m || count < 1) return;
+    const clamped = Math.min(count - 1, Math.max(0, index));
+    // Land at the start of that segment so down-scroll continues from here
+    const targetY = m.top + (clamped / count) * m.scrollable + 1;
+    window.scrollTo({
+      top: targetY,
+      behavior: prefersReduced ? "auto" : "smooth",
     });
+  }
+
+  function onPageScroll() {
+    const y = window.scrollY;
+    const deltaY = y - lastScrollY;
+    lastScrollY = y;
+
+    if (!scrub) return;
+    const m = scrubMetrics();
+    if (!m) return;
+
+    // Outside scrub range: nothing
+    if (y < m.top - 2 || y > m.top + m.scrollable + 2) return;
+
+    // Down only: advance selection from scroll progress
+    if (deltaY > 0) {
+      const next = indexFromScroll();
+      if (next !== activeIndex && treatmentIds[next]) {
+        switchTreatment(treatmentIds[next], { fromScroll: true });
+      }
+    }
+  }
+
+  function updateNavButtons() {
+    if (!track || !prevBtn || !nextBtn) return;
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    prevBtn.disabled = track.scrollLeft <= 4;
+    nextBtn.disabled = track.scrollLeft >= maxScroll - 4;
+  }
+
+  function scrollTrackBy(dir: -1 | 1) {
+    if (!track) return;
+    const card = cards[0];
+    const step = card
+      ? card.offsetWidth + parseFloat(getComputedStyle(track).gap || "16")
+      : track.clientWidth * 0.8;
+    track.scrollBy({
+      left: dir * step,
+      behavior: prefersReduced ? "auto" : "smooth",
+    });
+  }
+
+  // Pointer drag on track
+  let dragging = false;
+  let dragStartX = 0;
+  let dragScrollLeft = 0;
+  let dragMoved = false;
+
+  track?.addEventListener("pointerdown", (e) => {
+    if (e.button !== 0) return;
+    dragging = true;
+    dragMoved = false;
+    dragStartX = e.clientX;
+    dragScrollLeft = track.scrollLeft;
+    track.setPointerCapture(e.pointerId);
+    track.classList.add("is-dragging");
+  });
+
+  track?.addEventListener("pointermove", (e) => {
+    if (!dragging) return;
+    const dx = e.clientX - dragStartX;
+    if (Math.abs(dx) > 4) dragMoved = true;
+    track.scrollLeft = dragScrollLeft - dx;
+  });
+
+  function endDrag(e: PointerEvent) {
+    if (!dragging) return;
+    dragging = false;
+    track?.classList.remove("is-dragging");
+    try {
+      track?.releasePointerCapture(e.pointerId);
+    } catch {
+      /* already released */
+    }
+  }
+
+  track?.addEventListener("pointerup", endDrag);
+  track?.addEventListener("pointercancel", endDrag);
+
+  // Click select (ignore if it was a drag)
+  cards.forEach((card) => {
+    card.addEventListener("click", (e) => {
+      if (dragMoved) {
+        e.preventDefault();
+        dragMoved = false;
+        return;
+      }
+      const id = card.dataset.carouselCard!;
+      const index = Number(card.dataset.treatmentIndex ?? 0);
+      switchTreatment(id);
+      scrollToTreatmentIndex(index);
+    });
+  });
+
+  prevBtn?.addEventListener("click", () => scrollTrackBy(-1));
+  nextBtn?.addEventListener("click", () => scrollTrackBy(1));
+  track?.addEventListener("scroll", () => updateNavButtons(), {
+    passive: true,
+  });
+
+  window.addEventListener("scroll", onPageScroll, { passive: true });
+  window.addEventListener("resize", () => updateNavButtons(), {
+    passive: true,
+  });
 
   // Scroll-reveal
   const revealEls = document.querySelectorAll<HTMLElement>(
@@ -245,4 +455,7 @@ const firstImage = imageMap[first.id];
     el.style.transitionDelay = `${i * 80}ms`;
     observer.observe(el);
   });
+
+  setActiveCard(0);
+  updateNavButtons();
 </script>
