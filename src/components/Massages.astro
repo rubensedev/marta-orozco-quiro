@@ -360,31 +360,50 @@ const firstImage = imageMap[first.id];
   }
 
   let dragging = false;
+  let dragPending = false;
   let dragStartX = 0;
   let dragScrollLeft = 0;
   let dragMoved = false;
+  let dragPointerId: number | null = null;
+  const dragThreshold = 8;
 
   track?.addEventListener("pointerdown", (e) => {
-    if (e.button !== 0) return;
-    // Don't start drag from nav — only the track
-    dragging = true;
+    if (e.button !== 0 || !track) return;
+    // Defer capture/drag until the pointer actually moves — otherwise
+    // desktop clicks on cards never fire (capture steals the interaction).
+    dragPending = true;
+    dragging = false;
     dragMoved = false;
+    dragPointerId = e.pointerId;
     dragStartX = e.clientX;
     dragScrollLeft = track.scrollLeft;
-    track.setPointerCapture(e.pointerId);
-    track.classList.add("is-dragging");
   });
 
   track?.addEventListener("pointermove", (e) => {
-    if (!dragging) return;
+    if (!track || dragPointerId !== e.pointerId) return;
+    if (!dragPending && !dragging) return;
+
     const dx = e.clientX - dragStartX;
-    if (Math.abs(dx) > 6) dragMoved = true;
+
+    if (!dragging) {
+      if (Math.abs(dx) < dragThreshold) return;
+      dragging = true;
+      dragMoved = true;
+      dragPending = false;
+      track.setPointerCapture(e.pointerId);
+      track.classList.add("is-dragging");
+    }
+
     track.scrollLeft = dragScrollLeft - dx;
   });
 
   function endDrag(e: PointerEvent) {
-    if (!dragging) return;
+    if (dragPointerId !== e.pointerId) return;
+    if (!dragPending && !dragging) return;
+
+    dragPending = false;
     dragging = false;
+    dragPointerId = null;
     track?.classList.remove("is-dragging");
     try {
       track?.releasePointerCapture(e.pointerId);
@@ -400,6 +419,7 @@ const firstImage = imageMap[first.id];
     card.addEventListener("click", (e) => {
       if (dragMoved) {
         e.preventDefault();
+        e.stopPropagation();
         dragMoved = false;
         return;
       }
