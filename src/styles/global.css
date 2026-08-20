@@ -235,59 +235,68 @@
   }
 
   .pricing-card__group + .pricing-card__group {
-    margin-top: 1.5rem;
+    margin-top: 1rem;
   }
 
   .pricing-card__group-title {
-    margin: 0 0 0.75rem;
-    font-size: 0.9rem;
+    margin: 0 0 0.5rem;
+    font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.16em;
     text-transform: uppercase;
+    color: var(--color-brand-muted);
   }
 
   .pricing-card__pill-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: 0.5rem;
   }
 
   .pricing-pill {
-    padding: 0.65rem 1rem;
+    padding: 0.5rem 0.85rem;
     border: 1px solid var(--color-brand-sage-light);
     border-radius: 999px;
-    background: transparent;
+    background: #fff;
     color: inherit;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     cursor: pointer;
   }
 
+  .dark .pricing-pill {
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--color-brand-sage-dark);
+  }
+
   .pricing-pill-active {
+    border-color: transparent;
     background: var(--color-brand-sage);
     color: var(--color-brand-text-light);
+    box-shadow: 0 8px 18px rgba(31, 45, 32, 0.16);
   }
 
   .pricing-pill-bono.pricing-pill-active {
     background: var(--color-brand-lavender);
+    box-shadow: 0 8px 18px rgba(75, 57, 181, 0.28);
   }
 
   .pricing-compare {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 1rem;
+    gap: 0.65rem 0.85rem;
   }
 
   .pricing-compare-figures,
   .bonos-example__prices {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.6rem;
   }
 
   .pricing-single,
   .pricing-discounted {
-    font-size: 1.875rem;
+    font-size: 1.5rem;
     font-weight: 600;
   }
 
@@ -298,6 +307,7 @@
   .pricing-original {
     color: var(--color-brand-muted);
     text-decoration: line-through;
+    font-size: 1rem;
   }
 
   .pricing-discounted {
@@ -306,19 +316,29 @@
 
   .pricing-per-session {
     margin: 0;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 500;
   }
 
   .pricing-savings-highlight {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
     margin: 0;
-    padding: 0.55rem 0.9rem;
+    padding: 0.4rem 0.8rem;
     border-radius: 999px;
-    background: rgba(75, 57, 181, 0.14);
-    color: var(--color-brand-lavender);
-    font-size: 0.9rem;
+    background: var(--color-brand-lavender);
+    color: var(--color-brand-text-light);
+    font-size: 0.75rem;
     font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    box-shadow: 0 8px 18px rgba(75, 57, 181, 0.28);
     animation: pricing-savings-in 300ms ease-out;
+  }
+
+  .pricing-savings-highlight i {
+    font-size: 0.7rem;
   }
 
   .bonos-example {
@@ -351,7 +371,19 @@
   }
 }
 
-/* ── Massage main panel: floating image ─────────────────────── */
+/* ── Massage main panel: content card + floating image ──────── */
+.massage-main-panel__content {
+  background: color-mix(in srgb, var(--color-brand-sage) 11%, #fff);
+}
+
+.dark .massage-main-panel__content {
+  background: color-mix(
+    in srgb,
+    var(--color-brand-sage-bright) 14%,
+    var(--color-brand-card-dark)
+  );
+}
+
 .massage-main-panel__image {
   isolation: isolate;
 }

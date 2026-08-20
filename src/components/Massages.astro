@@ -34,34 +34,39 @@ const firstImage = imageMap[first.id];
     </p>
   </div>
 
-  <!-- Main panel: integrated (no card) — content left, floating image right -->
+  <!-- Main panel: content card left, floating image right -->
   <article
     id="massageMainPanel"
-    class="massage-main-panel massage-card-reveal flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-12"
+    class="massage-main-panel massage-card-reveal flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-10"
     data-pricing-card={first.id}
     data-treatment={first.bookingValue}
   >
-    <div class="min-w-0 lg:flex-1">
+    <div
+      class="massage-main-panel__content min-w-0 rounded-[1.75rem] p-6 shadow-soft sm:p-7 lg:flex-1 lg:p-8"
+    >
       <h3
         id="panelTitle"
-        class="m-0 wrap-break-word font-serif text-[clamp(1.75rem,3.5vw,2.75rem)] font-light tracking-[0.04em] uppercase"
+        class="m-0 wrap-break-word font-serif text-[clamp(1.35rem,2.8vw,2rem)] font-light tracking-[0.04em] uppercase"
       >
         {first.title}
       </h3>
       <div
-        class="mt-6"
+        class="mt-3"
         data-pricing-display
         aria-live="polite"
         aria-atomic="true"
       >
       </div>
-      <p id="panelDescription" class="mt-5 mb-0 leading-[1.8] text-brand-muted">
+      <p
+        id="panelDescription"
+        class="mt-3 mb-0 text-[0.95rem] leading-[1.55] text-brand-muted"
+      >
         {first.description}
       </p>
-      <div class="mt-8" data-pricing-mount></div>
+      <div class="mt-5" data-pricing-mount></div>
       <button
         id="panelBookingBtn"
-        class="btn-brand mt-8"
+        class="btn-brand mt-5 w-full uppercase tracking-[0.08em] sm:w-auto"
         type="button"
         data-open-booking
         data-treatment={first.bookingValue}
@@ -71,7 +76,7 @@ const firstImage = imageMap[first.id];
     </div>
 
     <div
-      class="massage-main-panel__image relative mx-auto w-full max-w-md min-w-0 lg:mx-0 lg:w-[46%] lg:max-w-none lg:shrink-0"
+      class="massage-main-panel__image relative mx-auto w-full max-w-sm min-w-0 lg:mx-0 lg:w-[38%] lg:max-w-none lg:shrink-0"
       id="panelImageWrapper"
     >
       <Image
