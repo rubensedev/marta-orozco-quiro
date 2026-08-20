@@ -365,36 +365,6 @@
   transform: translateY(0);
 }
 
-/* ── Massage scrub (sticky panel + carousel) ────────────────── */
-.massage-scrub {
-  --massage-scrub-count: 4;
-  position: relative;
-  height: calc(var(--massage-scrub-count) * 90vh);
-  overflow: visible;
-  background: transparent;
-}
-
-.massage-scrub__sticky {
-  position: sticky;
-  top: 5.5rem;
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 1.5rem;
-  overflow: visible;
-  background: transparent;
-}
-
-@media (max-width: 1023px), (prefers-reduced-motion: reduce) {
-  .massage-scrub {
-    height: auto;
-  }
-
-  .massage-scrub__sticky {
-    position: static;
-    top: auto;
-  }
-}
-
 /* ── Massage carousel track ─────────────────────────────────── */
 .massage-carousel {
   --massage-card-gap: 1rem;
