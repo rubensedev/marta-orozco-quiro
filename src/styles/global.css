@@ -370,6 +370,7 @@
   --massage-scrub-count: 4;
   position: relative;
   height: calc(var(--massage-scrub-count) * 90vh);
+  overflow: visible;
 }
 
 .massage-scrub__sticky {
@@ -378,6 +379,7 @@
   display: flex;
   flex-direction: column;
   padding-bottom: 1.5rem;
+  overflow: visible;
 }
 
 @media (max-width: 1023px), (prefers-reduced-motion: reduce) {
@@ -395,12 +397,12 @@
 .massage-carousel {
   --massage-card-gap: 1rem;
   --massage-visible: 1.15;
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  align-items: stretch;
-  gap: 0.75rem;
+  position: relative;
+  width: 100%;
   overflow: visible;
-  padding-top: 1.75rem;
+  /* room for image protrude above cards */
+  padding-top: 2rem;
+  padding-bottom: 0.5rem;
 }
 
 @media (min-width: 640px) {
@@ -421,6 +423,12 @@
   }
 }
 
+.massage-carousel__viewport {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+}
+
 .massage-carousel__track {
   display: flex;
   gap: var(--massage-card-gap);
@@ -428,7 +436,7 @@
   overflow-y: visible;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  padding: 0.5rem 0.25rem 1.25rem;
+  padding: 0.25rem 0 1rem;
   cursor: grab;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
@@ -446,39 +454,54 @@
 }
 
 .massage-carousel__nav {
-  align-self: center;
+  position: absolute;
+  top: 50%;
+  z-index: 2;
   display: inline-flex;
   height: 2.75rem;
   width: 2.75rem;
-  flex-shrink: 0;
   align-items: center;
   justify-content: center;
   border: 1px solid var(--color-brand-sage-light);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.92);
   color: var(--color-brand-sage);
+  box-shadow: 0 8px 24px rgba(31, 45, 32, 0.12);
   cursor: pointer;
+  transform: translateY(-50%);
   transition:
     background 0.2s ease,
     color 0.2s ease,
-    opacity 0.2s ease;
+    opacity 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.massage-carousel__nav--prev {
+  left: 0.75rem;
+}
+
+.massage-carousel__nav--next {
+  right: 0.75rem;
 }
 
 .massage-carousel__nav:hover:not(:disabled),
 .massage-carousel__nav:focus-visible:not(:disabled) {
   background: var(--color-brand-sage);
   color: var(--color-brand-text-light);
+  box-shadow: 0 10px 28px rgba(31, 45, 32, 0.18);
 }
 
 .massage-carousel__nav:disabled {
   cursor: default;
   opacity: 0.35;
+  pointer-events: none;
 }
 
 .dark .massage-carousel__nav {
   border-color: rgba(255, 255, 255, 0.2);
-  background: rgba(36, 48, 40, 0.9);
+  background: rgba(36, 48, 40, 0.92);
   color: var(--color-brand-text-light);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
 
 .dark .massage-carousel__nav:hover:not(:disabled),

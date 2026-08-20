@@ -22,7 +22,7 @@ const treatmentCount = treatments.length;
 
 <section
   id="masajes"
-  class="mx-auto w-[min(1120px,calc(100%-2rem))] py-[clamp(3rem,8vh,6rem)] md:px-6 lg:px-8"
+  class="mx-auto w-[min(1120px,calc(100%-2rem))] overflow-visible py-[clamp(3rem,8vh,6rem)] md:px-6 lg:px-8"
 >
   <div class="mb-10 w-full">
     <h2
@@ -99,78 +99,79 @@ const treatmentCount = treatments.length;
 
       <!-- Horizontal carousel -->
       <div class="massage-carousel mt-10" id="massageCarousel">
-        <button
-          type="button"
-          class="massage-carousel__nav"
-          id="massageCarouselPrev"
-          aria-controls="massageCarouselTrack"
-          aria-label="Masaje anterior"
-        >
-          <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
-        </button>
+        <div class="massage-carousel__viewport">
+          <div
+            class="massage-carousel__track"
+            id="massageCarouselTrack"
+            tabindex="0"
+            role="listbox"
+            aria-label="Tipos de masaje"
+          >
+            {
+              treatments.map((treatment, i) => {
+                const img = imageMap[treatment.id];
+                const basePrice = treatment.durations[0].price;
+                return (
+                  <button
+                    type="button"
+                    role="option"
+                    class:list={[
+                      "massage-carousel-card group relative flex cursor-pointer flex-row items-stretch overflow-visible rounded-2xl border border-brand-sage/14 bg-white/60 text-left shadow-soft transition duration-300 ease-out hover:-translate-y-0.5 hover:shadow-xl dark:border-white/10 dark:bg-brand-card-dark/84 massage-card-reveal",
+                      i === 0 ? "is-selected" : "",
+                    ]}
+                    data-carousel-card={treatment.id}
+                    data-treatment-id={treatment.id}
+                    data-treatment-index={i}
+                    aria-selected={i === 0 ? "true" : "false"}
+                    aria-pressed={i === 0 ? "true" : "false"}
+                  >
+                    <div class="massage-carousel-card__media">
+                      <Image
+                        src={img}
+                        alt={treatment.imageAlt}
+                        width={480}
+                        height={640}
+                        densities={[1, 2]}
+                        class="massage-carousel-card__image"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="flex min-w-0 flex-1 flex-col justify-center overflow-hidden py-4 pr-4 pl-0">
+                      <h3 class="m-0 line-clamp-2 wrap-break-word font-serif text-base font-semibold tracking-[0.04em] text-brand-sage uppercase dark:text-brand-text-light">
+                        {treatment.title}
+                      </h3>
+                      <p class="mt-1.5 mb-0 line-clamp-2 text-sm leading-snug text-brand-muted">
+                        {treatment.description}
+                      </p>
+                      <p class="massage-carousel-card__price mt-3 mb-0 text-sm font-semibold text-brand-sage transition duration-300 ease-out dark:text-brand-sage-bright">
+                        desde {basePrice}€ →
+                      </p>
+                    </div>
+                  </button>
+                );
+              })
+            }
+          </div>
 
-        <div
-          class="massage-carousel__track"
-          id="massageCarouselTrack"
-          tabindex="0"
-          role="listbox"
-          aria-label="Tipos de masaje"
-        >
-          {
-            treatments.map((treatment, i) => {
-              const img = imageMap[treatment.id];
-              const basePrice = treatment.durations[0].price;
-              return (
-                <button
-                  type="button"
-                  role="option"
-                  class:list={[
-                    "massage-carousel-card group relative flex cursor-pointer flex-row items-stretch overflow-visible rounded-2xl border border-brand-sage/14 bg-white/60 text-left shadow-soft transition duration-300 ease-out hover:-translate-y-0.5 hover:shadow-xl dark:border-white/10 dark:bg-brand-card-dark/84 massage-card-reveal",
-                    i === 0 ? "is-selected" : "",
-                  ]}
-                  data-carousel-card={treatment.id}
-                  data-treatment-id={treatment.id}
-                  data-treatment-index={i}
-                  aria-selected={i === 0 ? "true" : "false"}
-                  aria-pressed={i === 0 ? "true" : "false"}
-                >
-                  <div class="massage-carousel-card__media">
-                    <Image
-                      src={img}
-                      alt={treatment.imageAlt}
-                      width={480}
-                      height={640}
-                      densities={[1, 2]}
-                      class="massage-carousel-card__image"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div class="flex min-w-0 flex-1 flex-col justify-center overflow-hidden py-4 pr-4 pl-0">
-                    <h3 class="m-0 line-clamp-2 wrap-break-word font-serif text-base font-semibold tracking-[0.04em] text-brand-sage uppercase dark:text-brand-text-light">
-                      {treatment.title}
-                    </h3>
-                    <p class="mt-1.5 mb-0 line-clamp-2 text-sm leading-snug text-brand-muted">
-                      {treatment.description}
-                    </p>
-                    <p class="massage-carousel-card__price mt-3 mb-0 text-sm font-semibold text-brand-sage transition duration-300 ease-out dark:text-brand-sage-bright">
-                      desde {basePrice}€ →
-                    </p>
-                  </div>
-                </button>
-              );
-            })
-          }
+          <button
+            type="button"
+            class="massage-carousel__nav massage-carousel__nav--prev"
+            id="massageCarouselPrev"
+            aria-controls="massageCarouselTrack"
+            aria-label="Masaje anterior"
+          >
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+          </button>
+          <button
+            type="button"
+            class="massage-carousel__nav massage-carousel__nav--next"
+            id="massageCarouselNext"
+            aria-controls="massageCarouselTrack"
+            aria-label="Masaje siguiente"
+          >
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+          </button>
         </div>
-
-        <button
-          type="button"
-          class="massage-carousel__nav"
-          id="massageCarouselNext"
-          aria-controls="massageCarouselTrack"
-          aria-label="Masaje siguiente"
-        >
-          <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-        </button>
       </div>
     </div>
   </div>
