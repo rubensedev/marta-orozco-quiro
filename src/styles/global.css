@@ -434,6 +434,11 @@
 }
 
 /* ── Massage carousel ───────────────────────────────────────── */
+/*
+  Arrow midpoints are the hard edge for cards:
+  card left/right ≤ center of prev/next. Inset = half nav size;
+  nav is centered on that inset line (half outside, half over card).
+*/
 .massage-carousel {
   --massage-card-gap: 1.125rem;
   --massage-visible: 1.15;
@@ -477,7 +482,9 @@
   gap: var(--massage-card-gap);
   list-style: none;
   margin: calc(var(--massage-bleed-top) * -1) 0 calc(var(--massage-bleed-bottom) * -1);
-  padding: var(--massage-bleed-top) var(--massage-edge-inset) var(--massage-bleed-bottom);
+  padding-block: var(--massage-bleed-top) var(--massage-bleed-bottom);
+  padding-inline: var(--massage-edge-inset);
+  scroll-padding-inline: var(--massage-edge-inset);
   overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
@@ -506,6 +513,7 @@
     );
   min-width: 0;
   scroll-snap-align: start;
+  scroll-snap-stop: normal;
 }
 
 .massage-carousel__nav {
@@ -517,30 +525,27 @@
   width: var(--massage-nav-size);
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(44, 62, 45, 0.12);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.92);
+  background: #fff;
   color: var(--color-brand-sage);
-  box-shadow: 0 8px 24px rgba(31, 45, 32, 0.12);
   cursor: pointer;
-  transform: translateY(-50%);
   transition:
     background 0.2s ease,
     color 0.2s ease,
     opacity 0.2s ease,
-    box-shadow 0.2s ease,
     border-color 0.2s ease;
 }
 
+/* Centers sit on the card-edge limit (track inline padding). */
 .massage-carousel__nav--prev {
-  left: 0;
+  left: var(--massage-edge-inset);
+  transform: translate(-50%, -50%);
 }
 
 .massage-carousel__nav--next {
-  right: 0;
-  background: color-mix(in srgb, var(--color-brand-sage-bright) 55%, #fff);
-  border-color: transparent;
-  color: var(--color-brand-text-light);
+  right: var(--massage-edge-inset);
+  transform: translate(50%, -50%);
 }
 
 .massage-carousel__nav[hidden] {
@@ -549,10 +554,9 @@
 
 .massage-carousel__nav:hover:not(:disabled),
 .massage-carousel__nav:focus-visible:not(:disabled) {
-  background: var(--color-brand-sage);
-  border-color: transparent;
-  color: var(--color-brand-text-light);
-  box-shadow: 0 10px 28px rgba(31, 45, 32, 0.18);
+  background: #fff;
+  border-color: var(--color-brand-sage);
+  color: var(--color-brand-sage);
 }
 
 .massage-carousel__nav:disabled {
@@ -562,19 +566,15 @@
 }
 
 .dark .massage-carousel__nav {
-  border-color: rgba(255, 255, 255, 0.18);
-  background: rgba(36, 48, 40, 0.95);
-  color: var(--color-brand-text-light);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-}
-
-.dark .massage-carousel__nav--next {
-  background: color-mix(in srgb, var(--color-brand-sage-bright) 42%, var(--color-brand-card-dark));
+  border-color: rgba(255, 255, 255, 0.2);
+  background: #fff;
+  color: var(--color-brand-sage);
 }
 
 .dark .massage-carousel__nav:hover:not(:disabled),
 .dark .massage-carousel__nav:focus-visible:not(:disabled) {
-  background: var(--color-brand-sage-bright);
+  background: #fff;
+  border-color: var(--color-brand-sage);
   color: var(--color-brand-sage-dark);
 }
 
@@ -594,7 +594,7 @@
   border-radius: 1.35rem;
   background: color-mix(in srgb, var(--color-brand-sage) 8%, rgba(255, 255, 255, 0.55));
   backdrop-filter: blur(10px);
-  box-shadow: 0 10px 28px rgba(31, 45, 32, 0.08);
+  box-shadow: none;
   color: inherit;
   text-align: left;
   cursor: pointer;
@@ -602,7 +602,6 @@
   transition:
     background 0.3s ease,
     border-color 0.3s ease,
-    box-shadow 0.3s ease,
     transform 0.3s ease;
 }
 
@@ -621,13 +620,11 @@
 
 .massage-carousel-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 36px rgba(31, 45, 32, 0.12);
 }
 
 .massage-carousel-card.is-selected {
   border-color: rgba(255, 255, 255, 0.72);
   background: color-mix(in srgb, var(--color-brand-sage-bright) 28%, rgba(255, 255, 255, 0.82));
-  box-shadow: 0 18px 40px rgba(31, 45, 32, 0.14);
 }
 
 .massage-carousel-card:focus {
@@ -642,7 +639,7 @@
 .dark .massage-carousel-card {
   border-color: rgba(255, 255, 255, 0.08);
   background: color-mix(in srgb, var(--color-brand-card-dark) 88%, transparent);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+  box-shadow: none;
 }
 
 .dark .massage-carousel-card.is-selected {
@@ -678,12 +675,10 @@
   border-radius: 1rem;
   object-fit: cover;
   object-position: center;
-  box-shadow: 0 12px 28px rgba(31, 45, 32, 0.14);
+  box-shadow: none;
   transform-origin: top left;
   transform: scale(var(--massage-img-rest-scale));
-  transition:
-    transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 @media (min-width: 640px) {
@@ -696,7 +691,6 @@
 .massage-carousel-card:hover .massage-carousel-card__image,
 .massage-carousel-card.is-selected .massage-carousel-card__image {
   transform: translate(-1.35rem, -1.45rem) scale(1);
-  box-shadow: 0 20px 40px rgba(31, 45, 32, 0.22);
 }
 
 .massage-carousel-card__body {

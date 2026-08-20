@@ -149,7 +149,7 @@ const firstImage = imageMap[first.id];
                         class="massage-carousel-card__cta"
                         aria-hidden="true"
                       >
-                        <i class="fa-solid fa-plus"></i>
+                        <i class="fa-solid fa-arrow-right"></i>
                       </span>
                     </div>
                   </div>
@@ -238,12 +238,12 @@ const firstImage = imageMap[first.id];
     const active = cards[index];
     if (!active || !track) return;
     const slide = getSlide(active);
+    const padLeft = parseFloat(getComputedStyle(track).paddingLeft) || 0;
     const trackRect = track.getBoundingClientRect();
     const slideRect = slide.getBoundingClientRect();
+    // Align card start to the prev-arrow midpoint (track inline padding).
     const left =
-      track.scrollLeft +
-      (slideRect.left - trackRect.left) -
-      (track.clientWidth - slideRect.width) / 2;
+      track.scrollLeft + (slideRect.left - trackRect.left) - padLeft;
     track.scrollTo({
       left: Math.max(0, left),
       behavior: prefersReduced ? "auto" : "smooth",
