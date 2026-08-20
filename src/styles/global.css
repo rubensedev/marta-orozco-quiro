@@ -397,12 +397,15 @@
 .massage-carousel {
   --massage-card-gap: 1rem;
   --massage-visible: 1.15;
+  /* space reserved inside scrollport so protrude/shadows aren't clipped */
+  --massage-bleed-x: 1.75rem;
+  --massage-bleed-top: 2.5rem;
+  --massage-bleed-bottom: 2rem;
   position: relative;
   width: 100%;
   overflow: visible;
-  /* room for image protrude above cards */
-  padding-top: 2rem;
-  padding-bottom: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 
 @media (min-width: 640px) {
@@ -429,14 +432,20 @@
   overflow: visible;
 }
 
+/*
+  overflow-x:auto always clips the other axis in browsers.
+  Bleed padding expands the scrollport; negative margin keeps layout size.
+*/
 .massage-carousel__track {
   display: flex;
   gap: var(--massage-card-gap);
   overflow-x: auto;
-  overflow-y: visible;
+  overflow-y: hidden;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  padding: 0.25rem 0 1rem;
+  padding: var(--massage-bleed-top) var(--massage-bleed-x) var(--massage-bleed-bottom);
+  margin: calc(var(--massage-bleed-top) * -1) calc(var(--massage-bleed-x) * -1)
+    calc(var(--massage-bleed-bottom) * -1);
   cursor: grab;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
@@ -456,7 +465,7 @@
 .massage-carousel__nav {
   position: absolute;
   top: 50%;
-  z-index: 2;
+  z-index: 3;
   display: inline-flex;
   height: 2.75rem;
   width: 2.75rem;
@@ -464,7 +473,7 @@
   justify-content: center;
   border: 1px solid var(--color-brand-sage-light);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.95);
   color: var(--color-brand-sage);
   box-shadow: 0 8px 24px rgba(31, 45, 32, 0.12);
   cursor: pointer;
@@ -477,11 +486,15 @@
 }
 
 .massage-carousel__nav--prev {
-  left: 0.75rem;
+  left: 0;
 }
 
 .massage-carousel__nav--next {
-  right: 0.75rem;
+  right: 0;
+}
+
+.massage-carousel__nav[hidden] {
+  display: none;
 }
 
 .massage-carousel__nav:hover:not(:disabled),
@@ -499,7 +512,7 @@
 
 .dark .massage-carousel__nav {
   border-color: rgba(255, 255, 255, 0.2);
-  background: rgba(36, 48, 40, 0.92);
+  background: rgba(36, 48, 40, 0.95);
   color: var(--color-brand-text-light);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
@@ -519,6 +532,12 @@
   min-width: 0;
   min-height: 9.5rem;
   scroll-snap-align: start;
+  isolation: isolate;
+}
+
+.massage-carousel-card.is-selected,
+.massage-carousel-card:hover {
+  z-index: 2;
 }
 
 /* ── Massage carousel cards ─────────────────────────────────── */
