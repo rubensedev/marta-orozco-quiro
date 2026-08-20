@@ -36,7 +36,7 @@ const firstImage = imageMap[first.id];
 
   <!-- Carousel grid -->
   <div
-    class="massage-carousel mb-12 grid grid-cols-1 gap-x-5 gap-y-8 pt-3 sm:grid-cols-2 lg:grid-cols-4"
+    class="massage-carousel mb-12 grid grid-cols-1 gap-x-5 gap-y-8 pt-8 sm:grid-cols-2 lg:grid-cols-4"
     id="massageCarousel"
   >
     {
@@ -66,7 +66,7 @@ const firstImage = imageMap[first.id];
               />
             </div>
             <div class="flex min-w-0 flex-1 flex-col justify-center overflow-hidden py-4 pr-4 pl-0">
-              <h3 class="m-0 line-clamp-2 break-words font-serif text-base font-semibold tracking-[0.04em] text-brand-sage uppercase dark:text-brand-text-light">
+              <h3 class="m-0 line-clamp-2 wrap-break-word font-serif text-base font-semibold tracking-[0.04em] text-brand-sage uppercase dark:text-brand-text-light">
                 {treatment.title}
               </h3>
               <p class="mt-1.5 mb-0 line-clamp-2 text-sm leading-snug text-brand-muted">
@@ -85,7 +85,7 @@ const firstImage = imageMap[first.id];
   <!-- Main panel -->
   <article
     id="massageMainPanel"
-    class="massage-main-panel massage-card-reveal flex flex-col overflow-hidden rounded-[2rem] bg-white/60 shadow-soft dark:bg-brand-card-dark/84 lg:flex-row"
+    class="massage-main-panel massage-card-reveal flex flex-col overflow-hidden rounded-4xl bg-white/60 shadow-soft dark:bg-brand-card-dark/84 lg:flex-row"
     data-pricing-card={first.id}
     data-treatment={first.bookingValue}
   >
@@ -93,7 +93,7 @@ const firstImage = imageMap[first.id];
     <div class="min-w-0 p-8 lg:flex-1 lg:p-12">
       <h3
         id="panelTitle"
-        class="m-0 break-words font-serif text-[clamp(1.75rem,3.5vw,2.75rem)] font-light tracking-[0.04em] uppercase"
+        class="m-0 wrap-break-word font-serif text-[clamp(1.75rem,3.5vw,2.75rem)] font-light tracking-[0.04em] uppercase"
       >
         {first.title}
       </h3>
@@ -127,7 +127,7 @@ const firstImage = imageMap[first.id];
         alt={first.imageAlt}
         width={720}
         height={900}
-        class="aspect-[4/5] h-full w-full object-cover lg:rounded-r-[2rem]"
+        class="aspect-4/5 h-full w-full object-cover lg:rounded-r-4xl"
         loading="eager"
       />
     </div>

@@ -410,7 +410,8 @@
   object-fit: cover;
   object-position: center;
   box-shadow: 0 12px 28px rgba(31, 45, 32, 0.14);
-  transform-origin: left bottom;
+  /* Grow from top-left so rest stays inset; pop extends above (not below) */
+  transform-origin: top left;
   transform: scale(var(--massage-img-rest-scale));
   transition:
     transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
@@ -427,7 +428,7 @@
 /* Slot stays fixed — only transform moves the image. Pop = scale(1) so texture is never upscaled. */
 .massage-carousel-card:hover .massage-carousel-card__image,
 .massage-carousel-card.is-selected .massage-carousel-card__image {
-  transform: translate(-0.45rem, -1.1rem) scale(1);
+  transform: translate(-1.45rem, -1.5rem) scale(1);
   box-shadow: 0 20px 40px rgba(31, 45, 32, 0.22);
 }
 
