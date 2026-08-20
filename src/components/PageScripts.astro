@@ -280,6 +280,17 @@ import { bonoTiers, rituals, siteMeta, treatments } from "../data/site";
       if (match) modalTreatment.value = match.value;
     }
 
+    // Voucher CTAs need a massage treatment so "Tipo de compra" stays visible.
+    if (context.bono) {
+      const current = modalTreatment.value;
+      const isRitual =
+        ritualMap.has(current) ||
+        ritualMap.has(current.replace(/\s+\(.+$/, ""));
+      if (isRitual || !treatmentMap.has(current)) {
+        modalTreatment.value = treatments[0].bookingValue;
+      }
+    }
+
     syncBookingFieldVisibility();
 
     if (context.duration && !modalDurationGroup.hidden) {
@@ -359,6 +370,10 @@ import { bonoTiers, rituals, siteMeta, treatments } from "../data/site";
             bono: card.dataset.selectedBono,
           }
         : {};
+
+      if (button.dataset.bono) {
+        context.bono = button.dataset.bono;
+      }
 
       openBookingModal(treatmentName, context);
     });

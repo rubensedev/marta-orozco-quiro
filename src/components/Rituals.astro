@@ -110,9 +110,22 @@ const exampleRows = bonoExamples.flatMap((example) => {
               <h4 class="m-0 text-[0.95rem] font-semibold tracking-[0.12em] text-brand-text-dark uppercase dark:text-brand-text-light">
                 {tier.sessions} sesiones
               </h4>
-              <div class="mt-4 inline-flex size-18 items-center justify-center rounded-full bg-brand-lavender text-[1.15rem] font-bold text-white">
-                {Math.round(tier.discount * 100)}%
-              </div>
+              <button
+                class="bono-discount mt-4"
+                type="button"
+                data-open-booking
+                data-bono={tier.id}
+                aria-label={`Reservar ${tier.label}`}
+              >
+                <span class="bono-discount__wave" aria-hidden="true"></span>
+                <span
+                  class="bono-discount__wave bono-discount__wave--late"
+                  aria-hidden="true"
+                ></span>
+                <span class="bono-discount__core">
+                  {Math.round(tier.discount * 100)}%
+                </span>
+              </button>
               <p class="mt-3 mb-0 text-[0.78rem] font-semibold tracking-[0.16em] text-brand-muted uppercase">
                 {bonosContent.discountLabel}
               </p>
@@ -159,3 +172,78 @@ const exampleRows = bonoExamples.flatMap((example) => {
     </div>
   </section>
 </section>
+
+<style>
+  .bono-discount {
+    position: relative;
+    display: inline-flex;
+    width: 4.5rem;
+    height: 4.5rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    color: inherit;
+  }
+
+  .bono-discount:focus-visible {
+    outline: 2px solid var(--color-brand-lavender);
+    outline-offset: 4px;
+    border-radius: 999px;
+  }
+
+  .bono-discount:hover .bono-discount__core {
+    background: var(--color-brand-lavender-dark);
+  }
+
+  .bono-discount__core {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: var(--color-brand-lavender);
+    color: var(--color-brand-text-light);
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+
+  .bono-discount__wave {
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    border: 1.5px solid color-mix(in srgb, var(--color-brand-lavender) 55%, transparent);
+    pointer-events: none;
+    animation: bono-discount-wave 3.2s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+  }
+
+  .bono-discount__wave--late {
+    animation-delay: 1.6s;
+  }
+
+  @keyframes bono-discount-wave {
+    0% {
+      transform: scale(1);
+      opacity: 0.5;
+    }
+    70% {
+      opacity: 0.12;
+    }
+    100% {
+      transform: scale(1.55);
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bono-discount__wave {
+      animation: none;
+      opacity: 0;
+    }
+  }
+</style>
