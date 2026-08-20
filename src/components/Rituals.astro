@@ -7,6 +7,7 @@ import {
   ritualsContent,
   treatments,
 } from "../data/site";
+import SectionHeading from "./SectionHeading.astro";
 
 const packageTiers = bonoTiers.filter((tier) => tier.sessions > 1);
 
@@ -21,7 +22,9 @@ function calculateQuote(unitPrice: number, sessions: number, discount: number) {
 }
 
 const exampleRows = bonoExamples.flatMap((example) => {
-  const treatment = treatments.find((entry) => entry.id === example.treatmentId);
+  const treatment = treatments.find(
+    (entry) => entry.id === example.treatmentId,
+  );
   const duration = treatment?.durations.find(
     (entry) => entry.min === example.durationMin,
   );
@@ -42,21 +45,10 @@ const exampleRows = bonoExamples.flatMap((example) => {
   id="bonos"
   class="mx-auto my-8 w-[min(1120px,calc(100%-2rem))] rounded-4xl bg-brand-bg px-5 py-16 sm:px-8 md:px-10 md:py-20 dark:bg-brand-bg-dark"
 >
-  <div class="mx-auto mb-12 max-w-2xl text-center">
-    <h2
-      class="m-0 font-serif text-[clamp(2rem,4vw,3rem)] leading-[1.1] font-light tracking-[0.04em] text-brand-lavender uppercase dark:text-brand-lavender-bright"
-    >
-      {ritualsContent.heading}
-    </h2>
-    <div
-      class="mx-auto mt-4 h-px w-12 bg-brand-lavender/35 dark:bg-brand-lavender-bright/40"
-      aria-hidden="true"
-    >
-    </div>
-    <p class="mt-5 mb-0 text-base leading-[1.7] text-brand-muted md:text-lg">
-      {ritualsContent.description}
-    </p>
-  </div>
+  <SectionHeading
+    title={ritualsContent.heading}
+    description={ritualsContent.description}
+  />
 
   <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
     {
@@ -72,14 +64,14 @@ const exampleRows = bonoExamples.flatMap((example) => {
             {ritual.description}
           </p>
           <div
-            class="my-6 h-px w-full max-w-[14rem] bg-brand-lavender/20 dark:bg-white/15"
+            class="my-6 h-px w-full max-w-56 bg-brand-lavender/20 dark:bg-white/15"
             aria-hidden="true"
           />
           <p class="m-0 text-[0.95rem] font-semibold tracking-[0.04em] text-brand-lavender dark:text-brand-lavender-bright">
             {ritual.duration} min — {ritual.price} €
           </p>
           <button
-            class="mt-6 inline-flex w-full max-w-xs items-center justify-center rounded-full bg-brand-lavender px-6 py-3.5 text-[0.72rem] font-semibold tracking-[0.14em] text-white uppercase transition hover:bg-brand-lavender-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-lavender dark:hover:bg-brand-lavender"
+            class="mt-6 inline-flex w-full max-w-xs items-center justify-center rounded-full bg-brand-lavender px-6 py-3.5 text-[0.72rem] font-semibold tracking-[0.14em] text-white uppercase cursor-pointer transition hover:bg-brand-lavender-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-lavender dark:hover:bg-brand-lavender"
             type="button"
             data-open-booking
             data-treatment={ritual.bookingValue}
@@ -118,7 +110,7 @@ const exampleRows = bonoExamples.flatMap((example) => {
               <h4 class="m-0 text-[0.95rem] font-semibold tracking-[0.12em] text-brand-text-dark uppercase dark:text-brand-text-light">
                 {tier.sessions} sesiones
               </h4>
-              <div class="mt-4 inline-flex size-[4.5rem] items-center justify-center rounded-full bg-brand-lavender text-[1.15rem] font-bold text-white">
+              <div class="mt-4 inline-flex size-18 items-center justify-center rounded-full bg-brand-lavender text-[1.15rem] font-bold text-white">
                 {Math.round(tier.discount * 100)}%
               </div>
               <p class="mt-3 mb-0 text-[0.78rem] font-semibold tracking-[0.16em] text-brand-muted uppercase">
@@ -151,8 +143,7 @@ const exampleRows = bonoExamples.flatMap((example) => {
               <span class="pricing-original">{row.fullTotal} €</span>
               <span class="pricing-discounted">{row.discountedTotal} €</span>
               <span class="pricing-savings-highlight">
-                <i class="fa-solid fa-tag" aria-hidden="true" />
-                -{row.savings} €
+                <i class="fa-solid fa-tag" aria-hidden="true" />-{row.savings} €
               </span>
             </div>
           </article>

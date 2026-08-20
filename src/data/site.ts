@@ -61,7 +61,7 @@ export const aboutStats = [
 ];
 
 export const aboutContent = {
-  eyebrow: "Sobre mí",
+  heading: "Sobre mí",
   title: "Marta Orozco",
   subtitle: "Quiromasajista Profesional",
   paragraphs: [
@@ -88,6 +88,11 @@ export const bonosContent = {
   discountLabel: "Descuento",
   examplesHeading: "Ejemplos de ahorro",
   ctaLabel: "Preguntar por Bonos",
+};
+
+export const contactContent = {
+  heading: "Ubicación y contacto",
+  eyebrow: "Citas y horario",
 };
 
 export const treatments: Treatment[] = [

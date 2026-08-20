@@ -1,25 +1,23 @@
 ---
 import { aboutContent } from "../data/site";
 import AboutStats from "./AboutStats.astro";
+import SectionHeading from "./SectionHeading.astro";
 ---
 
 <section
   id="sobre-mi"
   class="mx-auto w-[min(1120px,calc(100%-2rem))] py-[clamp(3rem,8vh,6rem)] md:px-6 lg:px-8"
 >
+  <SectionHeading title={aboutContent.heading} />
+
   <article
     class="about-reveal about-reveal--1 rounded-4xl bg-brand-lavender-light p-8 shadow-soft md:p-10 dark:bg-brand-lavender-dark/50"
   >
-    <p
-      class="about-reveal about-reveal--2 m-0 mb-4 inline-flex items-center gap-3 text-xs font-semibold tracking-[0.24em] text-brand-lavender uppercase"
-    >
-      {aboutContent.eyebrow}
-    </p>
-    <h2
-      class="about-reveal about-reveal--3 m-0 font-serif text-[clamp(2.25rem,4vw,3.5rem)] leading-[1.1] font-normal"
+    <h3
+      class="about-reveal about-reveal--3 m-0 font-serif text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.1] font-normal"
     >
       {aboutContent.title}
-    </h2>
+    </h3>
     <p class="about-reveal about-reveal--4 mt-3 mb-0 text-lg font-medium text-brand-muted">
       {aboutContent.subtitle}
     </p>
@@ -47,7 +45,6 @@ import AboutStats from "./AboutStats.astro";
   }
 
   .about-reveal--1  { transition-delay: 0s; }
-  .about-reveal--2  { transition-delay: 0.1s; }
   .about-reveal--3  { transition-delay: 0.2s; }
   .about-reveal--4  { transition-delay: 0.32s; }
   .about-reveal--5  { transition-delay: 0.44s; }
