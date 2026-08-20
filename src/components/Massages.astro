@@ -34,19 +34,19 @@ const firstImage = imageMap[first.id];
     </p>
   </div>
 
-  <!-- Main panel: content card left, floating image right -->
+  <!-- Main panel: content card left, floating image right (side-by-side from tablet) -->
   <article
     id="massageMainPanel"
-    class="massage-main-panel massage-card-reveal flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-10"
+    class="massage-main-panel massage-card-reveal flex flex-col gap-8 md:flex-row md:items-center md:gap-8 lg:gap-10"
     data-pricing-card={first.id}
     data-treatment={first.bookingValue}
   >
     <div
-      class="massage-main-panel__content min-w-0 rounded-[1.75rem] p-6 shadow-soft sm:p-7 lg:flex-1 lg:p-8"
+      class="massage-main-panel__content min-w-0 rounded-[1.75rem] p-6 shadow-soft sm:p-7 md:min-w-0 md:flex-1 lg:p-8"
     >
       <h3
         id="panelTitle"
-        class="m-0 wrap-break-word font-serif text-[clamp(1.35rem,2.8vw,2rem)] font-light tracking-[0.04em] uppercase"
+        class="m-0 wrap-break-word font-serif text-[clamp(1.35rem,2.8vw,2rem)] font-normal tracking-[0.04em] uppercase"
       >
         {first.title}
       </h3>
@@ -76,7 +76,7 @@ const firstImage = imageMap[first.id];
     </div>
 
     <div
-      class="massage-main-panel__image relative mx-auto w-full max-w-sm min-w-0 lg:mx-0 lg:w-[38%] lg:max-w-none lg:shrink-0"
+      class="massage-main-panel__image relative mx-auto w-full max-w-sm min-w-0"
       id="panelImageWrapper"
     >
       <Image

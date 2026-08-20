@@ -388,6 +388,16 @@
   isolation: isolate;
 }
 
+@media (min-width: 768px) {
+  .massage-main-panel__image {
+    /* Grows with viewport from tablet → desktop */
+    width: clamp(11rem, 6.5rem + 18vw, 22rem);
+    max-width: none;
+    margin-inline: 0;
+    flex-shrink: 0;
+  }
+}
+
 .massage-main-panel__image img {
   display: block;
   border-radius: 1.75rem;
@@ -403,7 +413,7 @@
     0 24px 56px rgba(0, 0, 0, 0.4);
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .massage-main-panel__image img {
     transform: translateY(-0.5rem);
   }
