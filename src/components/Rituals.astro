@@ -52,8 +52,11 @@ const exampleRows = bonoExamples.flatMap((example) => {
 
   <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
     {
-      rituals.map((ritual) => (
-        <article class="flex flex-col items-center rounded-[1.75rem] bg-[color-mix(in_srgb,var(--color-brand-lavender)_22%,white_78%)] px-7 py-10 text-center shadow-soft md:px-10 md:py-12 dark:bg-[color-mix(in_srgb,var(--color-brand-lavender-dark)_55%,black_45%)]">
+      rituals.map((ritual, index) => (
+        <article
+          class={`massage-card-reveal flex flex-col items-center rounded-[1.75rem] bg-[color-mix(in_srgb,var(--color-brand-lavender)_22%,white_78%)] px-7 py-10 text-center shadow-soft md:px-10 md:py-12 dark:bg-[color-mix(in_srgb,var(--color-brand-lavender-dark)_55%,black_45%)]`}
+          style={`transition-delay: ${index * 120}ms`}
+        >
           <div class="inline-flex size-12 items-center justify-center rounded-full bg-white text-lg text-brand-lavender shadow-sm dark:bg-white/90">
             <i class={ritual.iconClass} aria-hidden="true" />
           </div>
@@ -71,7 +74,7 @@ const exampleRows = bonoExamples.flatMap((example) => {
             {ritual.duration} min — {ritual.price} €
           </p>
           <button
-            class="mt-6 inline-flex w-full max-w-xs items-center justify-center rounded-full bg-brand-lavender px-6 py-3.5 text-[0.72rem] font-semibold tracking-[0.14em] text-white uppercase cursor-pointer transition hover:bg-brand-lavender-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-lavender dark:hover:bg-brand-lavender"
+            class="mt-6 inline-flex w-full max-w-xs cursor-pointer items-center justify-center rounded-full bg-brand-lavender px-6 py-3.5 text-[0.72rem] font-semibold tracking-[0.14em] text-white uppercase transition hover:bg-brand-lavender-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-lavender dark:hover:bg-brand-lavender"
             type="button"
             data-open-booking
             data-treatment={ritual.bookingValue}
@@ -84,7 +87,8 @@ const exampleRows = bonoExamples.flatMap((example) => {
   </div>
 
   <section
-    class="mt-8 rounded-[1.75rem] bg-[color-mix(in_srgb,var(--color-brand-surface)_72%,white_28%)] px-6 py-10 shadow-soft sm:px-8 md:px-12 md:py-12 dark:bg-brand-card-dark"
+    class="massage-card-reveal mt-8 rounded-[1.75rem] bg-[color-mix(in_srgb,var(--color-brand-surface)_72%,white_28%)] px-6 py-10 shadow-soft sm:px-8 md:px-12 md:py-12 dark:bg-brand-card-dark"
+    style="transition-delay: 240ms"
     aria-labelledby="bonos-title"
   >
     <h3
@@ -247,3 +251,20 @@ const exampleRows = bonoExamples.flatMap((example) => {
     }
   }
 </style>
+
+<script>
+  const revealEls = document.querySelectorAll("#bonos .massage-card-reveal");
+
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("massage-card-visible");
+        revealObserver.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.05 },
+  );
+
+  revealEls.forEach((el) => revealObserver.observe(el));
+</script>

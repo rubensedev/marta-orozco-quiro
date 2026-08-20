@@ -455,6 +455,14 @@
   transform: translateY(0);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .massage-card-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* ── Massage carousel ───────────────────────────────────────── */
 /*
   Arrow midpoints are the hard edge for cards:
