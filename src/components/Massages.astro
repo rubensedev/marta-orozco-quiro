@@ -23,7 +23,7 @@ const firstImage = imageMap[first.id];
   id="masajes"
   class="mx-auto w-[min(1120px,calc(100%-2rem))] py-[clamp(3rem,8vh,6rem)] md:px-6 lg:px-8"
 >
-  <div class="mb-12 max-w-3xl">
+  <div class="w-full mb-12">
     <h2
       class="m-0 font-serif text-[clamp(2.25rem,4vw,3.5rem)] leading-[1.1] font-light"
     >
@@ -36,7 +36,7 @@ const firstImage = imageMap[first.id];
 
   <!-- Carousel grid -->
   <div
-    class="mb-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
+    class="massage-carousel mb-12 grid grid-cols-1 gap-x-5 gap-y-8 pt-3 sm:grid-cols-2 lg:grid-cols-4"
     id="massageCarousel"
   >
     {
@@ -47,38 +47,34 @@ const firstImage = imageMap[first.id];
           <button
             type="button"
             class:list={[
-              "massage-carousel-card group relative flex cursor-pointer flex-col overflow-hidden rounded-2xl bg-white/60 text-left shadow-soft transition duration-300 ease-out hover:-translate-y-1 hover:shadow-xl dark:bg-brand-card-dark/84 massage-card-reveal",
-              i === 0 ? "ring-2 ring-brand-sage" : "",
+              "massage-carousel-card group relative flex cursor-pointer flex-row items-stretch overflow-visible rounded-2xl border border-brand-sage/14 bg-white/60 text-left shadow-soft transition duration-300 ease-out hover:-translate-y-0.5 hover:shadow-xl dark:border-white/10 dark:bg-brand-card-dark/84 massage-card-reveal",
+              i === 0 ? "is-selected" : "",
             ]}
             data-carousel-card={treatment.id}
             data-treatment-id={treatment.id}
             aria-pressed={i === 0 ? "true" : "false"}
           >
-            <div class="overflow-hidden rounded-t-2xl">
+            <div class="massage-carousel-card__media shrink-0 p-3 sm:p-3.5">
               <Image
                 src={img}
                 alt={treatment.imageAlt}
-                width={400}
-                height={280}
-                class="aspect-[16/11] w-full object-cover transition duration-300 ease-out group-hover:scale-[1.08] group-hover:-translate-y-2"
+                width={480}
+                height={640}
+                densities={[1, 2]}
+                class="massage-carousel-card__image aspect-3/4 w-22 rounded-2xl object-cover object-center sm:w-25"
                 loading="lazy"
               />
             </div>
-            <div class="flex flex-1 flex-col p-4">
-              <h3 class="m-0 font-serif text-lg font-light tracking-[0.06em] uppercase">
+            <div class="flex min-w-0 flex-1 flex-col justify-center overflow-hidden py-4 pr-4 pl-0">
+              <h3 class="m-0 line-clamp-2 break-words font-serif text-base font-semibold tracking-[0.04em] text-brand-sage uppercase dark:text-brand-text-light">
                 {treatment.title}
               </h3>
-              <p class="mt-2 mb-0 line-clamp-2 text-sm leading-relaxed text-brand-muted">
+              <p class="mt-1.5 mb-0 line-clamp-2 text-sm leading-snug text-brand-muted">
                 {treatment.description}
               </p>
-              <div class="mt-auto flex items-center justify-between pt-3">
-                <span class="text-sm font-semibold text-brand-sage">
-                  desde {basePrice} €
-                </span>
-                <span class="text-xs text-brand-muted transition group-hover:text-brand-sage">
-                  Ver opciones →
-                </span>
-              </div>
+              <p class="massage-carousel-card__price mt-3 mb-0 text-sm font-semibold text-brand-sage transition duration-300 ease-out dark:text-brand-sage-bright">
+                desde {basePrice}€ →
+              </p>
             </div>
           </button>
         );
@@ -97,7 +93,7 @@ const firstImage = imageMap[first.id];
     <div class="min-w-0 p-8 lg:flex-1 lg:p-12">
       <h3
         id="panelTitle"
-        class="m-0 font-serif text-[clamp(2rem,4vw,3rem)] font-light tracking-[0.06em] uppercase"
+        class="m-0 break-words font-serif text-[clamp(1.75rem,3.5vw,2.75rem)] font-light tracking-[0.04em] uppercase"
       >
         {first.title}
       </h3>
@@ -220,10 +216,10 @@ const firstImage = imageMap[first.id];
         carousel
           .querySelectorAll<HTMLButtonElement>("[data-carousel-card]")
           .forEach((c) => {
-            c.classList.remove("ring-2", "ring-brand-sage");
+            c.classList.remove("is-selected");
             c.setAttribute("aria-pressed", "false");
           });
-        card.classList.add("ring-2", "ring-brand-sage");
+        card.classList.add("is-selected");
         card.setAttribute("aria-pressed", "true");
         switchTreatment(id);
         panel?.scrollIntoView({ behavior: "smooth", block: "start" });

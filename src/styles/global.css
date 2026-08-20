@@ -365,6 +365,68 @@
   transform: translateY(0);
 }
 
+/* ── Massage carousel cards ─────────────────────────────────── */
+.massage-carousel {
+  overflow: visible;
+}
+
+.massage-carousel-card h3 {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.massage-carousel-card__media {
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+}
+
+.massage-carousel-card__image {
+  display: block;
+  box-shadow: 0 12px 28px rgba(31, 45, 32, 0.14);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  transition:
+    transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Protrude via translate (not heavy upscale) so bitmaps stay sharp */
+.massage-carousel-card:hover .massage-carousel-card__image,
+.massage-carousel-card.is-selected .massage-carousel-card__image {
+  transform: translate3d(-6%, -14%, 0) scale(1.06);
+  box-shadow: 0 20px 40px rgba(31, 45, 32, 0.22);
+}
+
+.massage-carousel-card.is-selected {
+  border-color: transparent;
+  outline: none;
+  background: color-mix(in srgb, var(--color-brand-sage) 14%, var(--color-brand-bg));
+  box-shadow: 0 16px 36px rgba(31, 45, 32, 0.14);
+}
+
+.massage-carousel-card:focus {
+  outline: none;
+}
+
+.massage-carousel-card:focus-visible {
+  outline: 2px solid var(--color-brand-sage);
+  outline-offset: 3px;
+}
+
+.dark .massage-carousel-card.is-selected {
+  background: color-mix(in srgb, var(--color-brand-sage-bright) 18%, var(--color-brand-card-dark));
+}
+
+.massage-carousel-card.is-selected .massage-carousel-card__price {
+  color: var(--color-brand-sage);
+}
+
+.dark .massage-carousel-card.is-selected .massage-carousel-card__price {
+  color: var(--color-brand-sage-bright);
+}
+
 @keyframes pricing-savings-in {
   from {
     opacity: 0;
