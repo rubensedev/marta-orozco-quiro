@@ -376,26 +376,58 @@
 }
 
 .massage-carousel-card__media {
+  --massage-img-rest: 5.5rem;
+  --massage-img-pop: 6.5rem;
+  /* rest/pop ratio — scale down at rest, scale(1) when popped (no upscale blur) */
+  --massage-img-rest-scale: calc(var(--massage-img-rest) / var(--massage-img-pop));
   position: relative;
   z-index: 1;
+  flex-shrink: 0;
+  width: calc(var(--massage-img-rest) + 1.5rem);
+  height: calc(var(--massage-img-rest) * 4 / 3 + 1.5rem);
+  padding: 0.75rem;
   overflow: visible;
 }
 
+@media (min-width: 640px) {
+  .massage-carousel-card__media {
+    --massage-img-rest: 6.25rem;
+    --massage-img-pop: 7.5rem;
+    width: calc(var(--massage-img-rest) + 1.75rem);
+    height: calc(var(--massage-img-rest) * 4 / 3 + 1.75rem);
+    padding: 0.875rem;
+  }
+}
+
 .massage-carousel-card__image {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
   display: block;
+  width: var(--massage-img-pop);
+  aspect-ratio: 3 / 4;
+  border-radius: 1rem;
+  object-fit: cover;
+  object-position: center;
   box-shadow: 0 12px 28px rgba(31, 45, 32, 0.14);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  transform: translate3d(0, 0, 0);
+  transform-origin: left bottom;
+  transform: scale(var(--massage-img-rest-scale));
   transition:
     transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
     box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Protrude via translate (not heavy upscale) so bitmaps stay sharp */
+@media (min-width: 640px) {
+  .massage-carousel-card__image {
+    top: 0.875rem;
+    left: 0.875rem;
+  }
+}
+
+/* Slot stays fixed — only transform moves the image. Pop = scale(1) so texture is never upscaled. */
 .massage-carousel-card:hover .massage-carousel-card__image,
 .massage-carousel-card.is-selected .massage-carousel-card__image {
-  transform: translate3d(-6%, -14%, 0) scale(1.06);
+  transform: translate(-0.45rem, -1.1rem) scale(1);
   box-shadow: 0 20px 40px rgba(31, 45, 32, 0.22);
 }
 

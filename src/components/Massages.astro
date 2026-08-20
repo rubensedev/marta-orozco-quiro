@@ -54,14 +54,14 @@ const firstImage = imageMap[first.id];
             data-treatment-id={treatment.id}
             aria-pressed={i === 0 ? "true" : "false"}
           >
-            <div class="massage-carousel-card__media shrink-0 p-3 sm:p-3.5">
+            <div class="massage-carousel-card__media">
               <Image
                 src={img}
                 alt={treatment.imageAlt}
                 width={480}
                 height={640}
                 densities={[1, 2]}
-                class="massage-carousel-card__image aspect-3/4 w-22 rounded-2xl object-cover object-center sm:w-25"
+                class="massage-carousel-card__image"
                 loading="lazy"
               />
             </div>
