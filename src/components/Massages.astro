@@ -250,6 +250,18 @@ const firstImage = imageMap[first.id];
     });
   }
 
+  function scrollPanelIntoView() {
+    if (!panel) return;
+    const header = document.querySelector("header");
+    const offset = (header?.getBoundingClientRect().height ?? 0) + 16;
+    const top =
+      window.scrollY + panel.getBoundingClientRect().top - offset;
+    window.scrollTo({
+      top: Math.max(0, top),
+      behavior: prefersReduced ? "auto" : "smooth",
+    });
+  }
+
   function setActiveCard(index: number, { scroll = true } = {}) {
     if (index < 0 || index >= cards.length) return;
     activeIndex = index;
@@ -278,10 +290,12 @@ const firstImage = imageMap[first.id];
 
     if (nextIndex === activeIndex && panel.dataset.pricingCard === id) {
       setActiveCard(nextIndex);
+      scrollPanelIntoView();
       return;
     }
 
     setActiveCard(nextIndex);
+    scrollPanelIntoView();
 
     switching = true;
     panel.style.transition = "none";
