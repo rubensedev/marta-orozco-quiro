@@ -27,7 +27,6 @@ export const siteMeta = {
   location: "Sevilla, Spain",
   whatsappNumber: "34601585508",
   whatsappDisplay: "+34 601 585 508",
-  phoneHref: "tel:+34601585508",
   whatsappInquiry: "Hola Marta! Me gustaría reservar una cita. ¿Tienes disponibilidad?",
   instagramUrl: "https://www.instagram.com/martaorozco.quiro",
   mapEmbedUrl:

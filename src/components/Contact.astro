@@ -18,11 +18,10 @@ const whatsappHref = `https://wa.me/${siteMeta.whatsappNumber}?text=${encodeURIC
   >
     <!-- Info column -->
     <div
-      class="contact-reveal contact-reveal--1 flex flex-col justify-center md:col-span-2 lg:col-span-1 lg:self-center"
+      class="flex flex-col justify-center md:col-span-2 lg:col-span-1 lg:self-center"
     >
-
       <div
-        class="mt-5 rounded-[1.5rem] bg-brand-surface/80 px-5 py-5 shadow-soft sm:px-6 dark:bg-white/6"
+        class="contact-reveal contact-reveal--1 rounded-[1.5rem] bg-brand-surface/80 px-5 py-5 shadow-soft sm:px-6 dark:bg-white/6"
       >
         <p class="m-0 flex items-start gap-3 leading-[1.5]">
           <i
@@ -50,55 +49,58 @@ const whatsappHref = `https://wa.me/${siteMeta.whatsappNumber}?text=${encodeURIC
             </span>
           </a>
         </address>
+
+        <ul class="mt-5 mb-0 flex list-none flex-wrap items-center gap-3.5 p-0">
+          <li>
+            <a
+              class="contact__social contact__social--instagram"
+              href={siteMeta.instagramUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram de Marta Orozco"
+            >
+              <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li>
+            <a
+              class="contact__social contact__social--whatsapp"
+              href={whatsappHref}
+              target="_blank"
+              rel="noreferrer"
+              data-whatsapp-direct
+              aria-label="WhatsApp de Marta Orozco"
+            >
+              <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li>
+            <a
+              class="text-[0.95rem] font-medium tracking-[0.02em] text-inherit no-underline transition-opacity hover:opacity-80"
+              href={whatsappHref}
+              target="_blank"
+              rel="noreferrer"
+              data-whatsapp-direct
+            >
+              {siteMeta.whatsappDisplay}
+            </a>
+          </li>
+        </ul>
       </div>
 
       <button
-        class="btn-brand mt-6 w-full tracking-[0.08em] sm:w-auto"
+        class="contact-reveal contact-reveal--2 btn-brand mt-6 w-full tracking-[0.08em] sm:w-auto"
         type="button"
         data-open-booking
       >
         {contactContent.ctaLabel}
         <i class="fa-solid fa-chevron-right text-[10px]" aria-hidden="true"></i>
       </button>
-
-      <ul class="mt-6 mb-0 flex list-none flex-wrap items-center gap-3 p-0">
-        <li>
-          <a
-            class="contact__social contact__social--instagram"
-            href={siteMeta.instagramUrl}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Instagram de Marta Orozco"
-          >
-            <i class="fa-brands fa-instagram" aria-hidden="true"></i>
-          </a>
-        </li>
-        <li>
-          <a
-            class="contact__social contact__social--whatsapp"
-            href={whatsappHref}
-            target="_blank"
-            rel="noreferrer"
-            data-whatsapp-direct
-            aria-label="WhatsApp de Marta Orozco"
-          >
-            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-          </a>
-        </li>
-        <li>
-          <a
-            class="text-[0.95rem] font-medium tracking-[0.02em] text-inherit no-underline transition-opacity hover:opacity-80"
-            href={siteMeta.phoneHref}
-          >
-            {siteMeta.whatsappDisplay}
-          </a>
-        </li>
-      </ul>
     </div>
 
     <!-- Photo -->
     <div
-      class="contact-reveal contact-reveal--2 contact__media contact__media--image relative overflow-hidden rounded-[1.75rem] shadow-soft"
+      class="contact-reveal contact-reveal--3 contact__media contact__media--image relative mx-auto overflow-hidden rounded-[1.75rem] shadow-soft"
     >
       <Image
         class="contact__photo h-full w-full object-cover"
@@ -113,7 +115,7 @@ const whatsappHref = `https://wa.me/${siteMeta.whatsappNumber}?text=${encodeURIC
 
     <!-- Map -->
     <div
-      class="contact-reveal contact-reveal--3 contact__media contact__media--map relative overflow-hidden rounded-[1.75rem] shadow-soft"
+      class="contact-reveal contact-reveal--4 contact__media contact__media--map relative overflow-hidden rounded-[1.75rem] shadow-soft"
     >
       <iframe
         class="contact__map absolute inset-0 size-full border-0"
@@ -143,6 +145,8 @@ const whatsappHref = `https://wa.me/${siteMeta.whatsappNumber}?text=${encodeURIC
 
 <style>
   .contact__media--image {
+    width: 100%;
+    max-width: 20rem;
     aspect-ratio: 4 / 5;
     max-height: 26rem;
   }
@@ -152,11 +156,15 @@ const whatsappHref = `https://wa.me/${siteMeta.whatsappNumber}?text=${encodeURIC
   }
 
   @media (min-width: 768px) {
+    .contact__media--image {
+      max-width: none;
+      max-height: none;
+    }
+
     .contact__media--image,
     .contact__media--map {
       aspect-ratio: 4 / 5;
       height: auto;
-      max-height: none;
     }
   }
 
@@ -173,40 +181,39 @@ const whatsappHref = `https://wa.me/${siteMeta.whatsappNumber}?text=${encodeURIC
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2.75rem;
-    height: 2.75rem;
+    width: 3.25rem;
+    height: 3.25rem;
     border-radius: 999px;
-    font-size: 1.15rem;
+    font-size: 1.4rem;
+    color: #fff;
     text-decoration: none;
     transition:
       transform 0.2s ease,
-      background-color 0.2s ease,
-      color 0.2s ease;
+      filter 0.2s ease,
+      box-shadow 0.2s ease;
   }
 
   .contact__social:hover,
   .contact__social:focus-visible {
     transform: translateY(-2px);
+    filter: brightness(1.06);
   }
 
   .contact__social--instagram {
-    background: color-mix(in srgb, var(--color-brand-lavender) 16%, white);
-    color: var(--color-brand-lavender);
+    background: linear-gradient(
+      45deg,
+      #f09433 0%,
+      #e6683c 25%,
+      #dc2743 50%,
+      #cc2366 75%,
+      #bc1888 100%
+    );
+    box-shadow: 0 8px 18px rgba(188, 24, 136, 0.28);
   }
 
   .contact__social--whatsapp {
-    background: color-mix(in srgb, var(--color-brand-sage) 16%, white);
-    color: var(--color-brand-sage);
-  }
-
-  :global(.dark) .contact__social--instagram {
-    background: color-mix(in srgb, var(--color-brand-lavender-bright) 22%, transparent);
-    color: var(--color-brand-lavender-bright);
-  }
-
-  :global(.dark) .contact__social--whatsapp {
-    background: color-mix(in srgb, var(--color-brand-sage-bright) 22%, transparent);
-    color: var(--color-brand-sage-bright);
+    background: #25d366;
+    box-shadow: 0 8px 18px rgba(37, 211, 102, 0.28);
   }
 
   .contact__open-maps {
@@ -294,6 +301,10 @@ const whatsappHref = `https://wa.me/${siteMeta.whatsappNumber}?text=${encodeURIC
 
   .contact-reveal--3 {
     transition-delay: 0.24s;
+  }
+
+  .contact-reveal--4 {
+    transition-delay: 0.36s;
   }
 
   @media (prefers-reduced-motion: reduce) {
