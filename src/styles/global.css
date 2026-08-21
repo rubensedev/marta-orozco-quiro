@@ -403,6 +403,7 @@
 /* ── Massage main panel: content card + floating image ──────── */
 .massage-main-panel__content {
   background: color-mix(in srgb, var(--color-brand-sage) 11%, #fff);
+  view-transition-name: massage-content;
 }
 
 .dark .massage-main-panel__content {
@@ -411,6 +412,7 @@
 
 .massage-main-panel__image {
   isolation: isolate;
+  view-transition-name: massage-image;
 }
 
 @media (min-width: 768px) {
@@ -441,6 +443,132 @@
 @media (min-width: 768px) {
   .massage-main-panel__image img {
     transform: translateY(-0.5rem);
+  }
+}
+
+/* ── Massage panel treatment swap (content ← / photo →) ─────── */
+@keyframes massage-content-leave {
+  to {
+    opacity: 0;
+    transform: translate3d(-2.25rem, 0.2rem, 0) scale(0.985);
+  }
+}
+
+@keyframes massage-content-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(-2.75rem, 0.25rem, 0) scale(0.985);
+  }
+}
+
+@keyframes massage-image-leave {
+  to {
+    opacity: 0;
+    transform: translate3d(2.25rem, 0.2rem, 0) scale(0.985);
+  }
+}
+
+@keyframes massage-image-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(2.75rem, 0.25rem, 0) scale(0.985);
+  }
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-group(massage-content),
+::view-transition-group(massage-image) {
+  animation-duration: 0.85s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::view-transition-old(massage-content) {
+  animation: massage-content-leave 0.42s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+::view-transition-new(massage-content) {
+  animation: massage-content-enter 0.82s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+::view-transition-old(massage-image) {
+  animation: massage-image-leave 0.42s cubic-bezier(0.4, 0, 0.2, 1) 40ms both;
+}
+
+::view-transition-new(massage-image) {
+  animation: massage-image-enter 0.88s cubic-bezier(0.22, 1, 0.36, 1) 70ms both;
+}
+
+/* Fallback when View Transitions API is unavailable */
+.massage-main-panel__content,
+.massage-main-panel__image {
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.massage-main-panel[data-swap="leaving"] .massage-main-panel__content {
+  opacity: 0;
+  transform: translate3d(-2.25rem, 0.2rem, 0) scale(0.985);
+  transition-duration: 0.4s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.massage-main-panel[data-swap="leaving"] .massage-main-panel__image {
+  opacity: 0;
+  transform: translate3d(2.25rem, 0.2rem, 0) scale(0.985);
+  transition-duration: 0.4s;
+  transition-delay: 40ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.massage-main-panel[data-swap="prep"] .massage-main-panel__content {
+  opacity: 0;
+  transform: translate3d(-2.75rem, 0.25rem, 0) scale(0.985);
+  transition: none;
+}
+
+.massage-main-panel[data-swap="prep"] .massage-main-panel__image {
+  opacity: 0;
+  transform: translate3d(2.75rem, 0.25rem, 0) scale(0.985);
+  transition: none;
+}
+
+.massage-main-panel[data-swap="entering"] .massage-main-panel__content {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0s;
+}
+
+.massage-main-panel[data-swap="entering"] .massage-main-panel__image {
+  opacity: 1;
+  transform: none;
+  transition-delay: 70ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .massage-main-panel__content,
+  .massage-main-panel__image {
+    view-transition-name: none;
+    transition: none;
+  }
+
+  ::view-transition-old(massage-content),
+  ::view-transition-new(massage-content),
+  ::view-transition-old(massage-image),
+  ::view-transition-new(massage-image) {
+    animation: none;
+  }
+
+  .massage-main-panel[data-swap] .massage-main-panel__content,
+  .massage-main-panel[data-swap] .massage-main-panel__image {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
 

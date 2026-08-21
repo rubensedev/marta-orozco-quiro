@@ -224,6 +224,82 @@ const firstImage = imageMap[first.id];
   const prefersReduced = window.matchMedia(
     "(prefers-reduced-motion: reduce)",
   ).matches;
+  const supportsViewTransition =
+    typeof document.startViewTransition === "function";
+
+  function wait(ms: number) {
+    return new Promise<void>((resolve) => {
+      window.setTimeout(resolve, ms);
+    });
+  }
+
+  function applyTreatment(id: string, treatment: any) {
+    if (!panel) return;
+
+    panel.dataset.pricingCard = id;
+    panel.dataset.treatment = treatment.bookingValue;
+    delete panel.dataset.selectedDuration;
+    delete panel.dataset.selectedBono;
+
+    if (panelTitle) panelTitle.textContent = treatment.title;
+    if (panelDesc) panelDesc.textContent = treatment.description;
+    if (panelBookingBtn) {
+      panelBookingBtn.dataset.treatment = treatment.bookingValue;
+      panelBookingBtn.textContent = `Reservar ${treatment.title}`;
+    }
+    if (panelImg && imgSrcMap[id]) {
+      panelImg.src = imgSrcMap[id];
+      panelImg.alt = imgAltMap[id] ?? treatment.imageAlt ?? "";
+    }
+
+    const w = window as any;
+    if (typeof w.renderPricingWidgets === "function") {
+      w.renderPricingWidgets();
+    }
+  }
+
+  async function awaitImageReady() {
+    if (!panelImg?.decode) return;
+    try {
+      await panelImg.decode();
+    } catch {
+      /* cached / decode failures are fine */
+    }
+  }
+
+  async function swapWithFallback(update: () => void | Promise<void>) {
+    if (!panel || prefersReduced) {
+      await update();
+      return;
+    }
+
+    panel.dataset.swap = "leaving";
+    await wait(420);
+    await update();
+    panel.dataset.swap = "prep";
+    void panel.offsetWidth;
+    panel.dataset.swap = "entering";
+    await wait(860);
+    delete panel.dataset.swap;
+  }
+
+  async function swapPanel(update: () => void | Promise<void>) {
+    if (prefersReduced || !supportsViewTransition) {
+      await swapWithFallback(update);
+      return;
+    }
+
+    const transition = document.startViewTransition(async () => {
+      await update();
+      await awaitImageReady();
+    });
+
+    try {
+      await transition.finished;
+    } catch {
+      /* aborted / skipped */
+    }
+  }
 
   function getSlide(card: HTMLElement) {
     return (card.closest(".massage-carousel__slide") as HTMLElement | null) ?? card;
@@ -273,7 +349,7 @@ const firstImage = imageMap[first.id];
     updateNavButtons();
   }
 
-  function switchTreatment(id: string) {
+  async function switchTreatment(id: string) {
     if (!panel || switching) return;
     const w = window as any;
     const list: any[] = w.treatments ?? [];
@@ -293,39 +369,14 @@ const firstImage = imageMap[first.id];
     scrollPanelIntoView();
 
     switching = true;
-    panel.style.transition = "none";
-    panel.style.opacity = "0";
-    panel.style.transform = prefersReduced ? "none" : "translateY(8px)";
-
-    const delay = prefersReduced ? 0 : 180;
-    window.setTimeout(() => {
-      panel.dataset.pricingCard = id;
-      panel.dataset.treatment = treatment.bookingValue;
-      delete panel.dataset.selectedDuration;
-      delete panel.dataset.selectedBono;
-
-      if (panelTitle) panelTitle.textContent = treatment.title;
-      if (panelDesc) panelDesc.textContent = treatment.description;
-      if (panelBookingBtn) {
-        panelBookingBtn.dataset.treatment = treatment.bookingValue;
-        panelBookingBtn.textContent = `Reservar ${treatment.title}`;
-      }
-      if (panelImg && imgSrcMap[id]) {
-        panelImg.src = imgSrcMap[id];
-        panelImg.alt = imgAltMap[id] ?? treatment.imageAlt ?? "";
-      }
-
-      if (typeof w.renderPricingWidgets === "function") {
-        w.renderPricingWidgets();
-      }
-
-      if (!prefersReduced) {
-        panel.style.transition = "opacity 0.3s ease, transform 0.3s ease";
-      }
-      panel.style.opacity = "1";
-      panel.style.transform = "translateY(0)";
+    try {
+      await swapPanel(async () => {
+        applyTreatment(id, treatment);
+        await awaitImageReady();
+      });
+    } finally {
       switching = false;
-    }, delay);
+    }
   }
 
   function updateNavButtons() {
