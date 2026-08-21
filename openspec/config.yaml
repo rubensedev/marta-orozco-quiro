@@ -6,18 +6,22 @@ context:
   source_of_truth: astro-migration-context.md
   repo_state: astro-landing-page
   current_artifacts:
-    - astro-migration-context.md
     - README.md
     - openspec/changes/adopt-astro-tailwind/
+    - openspec/changes/refactor-header/
+    - openspec/changes/add-client-reviews/
+    - openspec/changes/add-i18n-es-en/
   intended_stack:
     - Astro 7
     - Tailwind CSS 4 (@tailwindcss/vite)
+    - TypeScript (+ @astrojs/check)
   styling_convention: >
     Tailwind utilities in .astro templates for layout, spacing, color, and type.
     One stylesheet: src/styles/global.css with @import "tailwindcss",
     @custom-variant dark (&:where(.dark, .dark *)), and @theme brand tokens.
     Named leftover CSS only for the written allow-list (hard CSS + JS-injected
-    widgets such as btn-brand and pricing pills). @apply is last resort. No Sass.
+    widgets such as btn-brand, pricing pills, massage carousel). @apply is last
+    resort. No Sass.
 
 persistence:
   mode: hybrid
@@ -27,7 +31,7 @@ persistence:
 strict_tdd: false
 
 testing:
-  detected_at: 2026-08-18
+  detected_at: 2026-08-21
   test_runner:
     available: false
     framework: null
@@ -50,8 +54,8 @@ testing:
       available: false
       command: null
     type_checker:
-      available: false
-      command: null
+      available: true
+      command: npx astro check
     formatter:
       available: false
       command: null

@@ -44,6 +44,7 @@ const bookLabelTemplate =
     class="massage-main-panel massage-card-reveal flex flex-col-reverse gap-8 md:flex-row md:items-center md:gap-8 lg:gap-10"
     data-pricing-card={first.id}
     data-treatment={first.id}
+    data-book-label-template={bookLabelTemplate}
   >
     <div
       class="massage-main-panel__content min-w-0 rounded-[1.75rem] p-6 shadow-soft sm:p-7 md:min-w-0 md:flex-1 lg:p-8"
@@ -186,26 +187,46 @@ const bookLabelTemplate =
   </div>
 </section>
 
-<script define:vars={{ bookLabelTemplate }}>
-  // Plain JS only: define:vars inlines this script (TypeScript is not compiled).
-  const panel = document.getElementById("massageMainPanel");
-  const track = document.getElementById("massageCarouselTrack");
-  const prevBtn = document.getElementById("massageCarouselPrev");
-  const nextBtn = document.getElementById("massageCarouselNext");
-  const panelTitle = document.getElementById("panelTitle");
-  const panelDesc = document.getElementById("panelDescription");
-  const panelImg = document.getElementById("panelImage");
-  const panelBookingBtn = document.getElementById("panelBookingBtn");
+<script>
+  import { initHorizontalCarousel } from "../scripts/horizontal-carousel";
+
+  const panel = document.getElementById(
+    "massageMainPanel",
+  ) as HTMLElement | null;
+  const track = document.getElementById(
+    "massageCarouselTrack",
+  ) as HTMLElement | null;
+  const prevBtn = document.getElementById(
+    "massageCarouselPrev",
+  ) as HTMLButtonElement | null;
+  const nextBtn = document.getElementById(
+    "massageCarouselNext",
+  ) as HTMLButtonElement | null;
+  const panelTitle = document.getElementById(
+    "panelTitle",
+  ) as HTMLElement | null;
+  const panelDesc = document.getElementById(
+    "panelDescription",
+  ) as HTMLElement | null;
+  const panelImg = document.getElementById(
+    "panelImage",
+  ) as HTMLImageElement | null;
+  const panelBookingBtn = document.getElementById(
+    "panelBookingBtn",
+  ) as HTMLButtonElement | null;
+
+  const bookLabelTemplate =
+    panel?.dataset.bookLabelTemplate || "Reservar {title}";
 
   const cards = Array.from(
-    track?.querySelectorAll("[data-carousel-card]") ?? [],
+    track?.querySelectorAll<HTMLButtonElement>("[data-carousel-card]") ?? [],
   );
-  const treatmentIds = cards.map((c) => c.dataset.carouselCard);
+  const treatmentIds = cards.map((c) => c.dataset.carouselCard!);
 
-  const imgSrcMap = {};
-  const imgAltMap = {};
+  const imgSrcMap: Record<string, string> = {};
+  const imgAltMap: Record<string, string> = {};
   cards.forEach((card) => {
-    const id = card.dataset.carouselCard;
+    const id = card.dataset.carouselCard!;
     const img = card.querySelector("img");
     if (img) {
       imgSrcMap[id] = img.currentSrc || img.src;
@@ -221,13 +242,24 @@ const bookLabelTemplate =
   const supportsViewTransition =
     typeof document.startViewTransition === "function";
 
-  function wait(ms) {
-    return new Promise((resolve) => {
+  const carousel =
+    track != null
+      ? initHorizontalCarousel({
+          track,
+          prevBtn,
+          nextBtn,
+          slideSelector: ".massage-carousel__slide",
+          infinite: false,
+        })
+      : null;
+
+  function wait(ms: number) {
+    return new Promise<void>((resolve) => {
       window.setTimeout(resolve, ms);
     });
   }
 
-  function applyTreatment(id, treatment) {
+  function applyTreatment(id: string, treatment: { title: string; description: string; imageAlt?: string }) {
     if (!panel) return;
 
     panel.dataset.pricingCard = id;
@@ -249,8 +281,9 @@ const bookLabelTemplate =
       panelImg.alt = imgAltMap[id] ?? treatment.imageAlt ?? "";
     }
 
-    if (typeof window.renderPricingWidgets === "function") {
-      window.renderPricingWidgets();
+    const w = window as Window & { renderPricingWidgets?: () => void };
+    if (typeof w.renderPricingWidgets === "function") {
+      w.renderPricingWidgets();
     }
   }
 
@@ -263,7 +296,7 @@ const bookLabelTemplate =
     }
   }
 
-  async function swapWithFallback(update) {
+  async function swapWithFallback(update: () => void | Promise<void>) {
     if (!panel || prefersReduced) {
       await update();
       return;
@@ -279,7 +312,7 @@ const bookLabelTemplate =
     delete panel.dataset.swap;
   }
 
-  async function swapPanel(update) {
+  async function swapPanel(update: () => void | Promise<void>) {
     if (prefersReduced || !supportsViewTransition) {
       await swapWithFallback(update);
       return;
@@ -297,18 +330,19 @@ const bookLabelTemplate =
     }
   }
 
-  function getSlide(card) {
-    return card.closest(".massage-carousel__slide") ?? card;
+  function getSlide(card: HTMLElement) {
+    return (
+      (card.closest(".massage-carousel__slide") as HTMLElement | null) ?? card
+    );
   }
 
-  function scrollCardIntoView(index) {
+  function scrollCardIntoView(index: number) {
     const active = cards[index];
     if (!active || !track) return;
     const slide = getSlide(active);
     const padLeft = parseFloat(getComputedStyle(track).paddingLeft) || 0;
     const trackRect = track.getBoundingClientRect();
     const slideRect = slide.getBoundingClientRect();
-    // Align card start to the prev-arrow midpoint (track inline padding).
     const left =
       track.scrollLeft + (slideRect.left - trackRect.left) - padLeft;
     track.scrollTo({
@@ -329,7 +363,7 @@ const bookLabelTemplate =
     });
   }
 
-  function setActiveCard(index, { scroll = true } = {}) {
+  function setActiveCard(index: number, { scroll = true } = {}) {
     if (index < 0 || index >= cards.length) return;
     activeIndex = index;
     cards.forEach((card, i) => {
@@ -342,12 +376,20 @@ const bookLabelTemplate =
       track.setAttribute("aria-activedescendant", active.id);
     }
     if (scroll) scrollCardIntoView(index);
-    updateNavButtons();
+    carousel?.updateNavButtons();
   }
 
-  async function switchTreatment(id) {
+  async function switchTreatment(id: string) {
     if (!panel || switching) return;
-    const list = window.treatments ?? [];
+    const w = window as Window & {
+      treatments?: Array<{
+        id: string;
+        title: string;
+        description: string;
+        imageAlt?: string;
+      }>;
+    };
+    const list = w.treatments ?? [];
     const treatment = list.find((t) => t.id === id);
     if (!treatment) return;
 
@@ -374,110 +416,17 @@ const bookLabelTemplate =
     }
   }
 
-  function updateNavButtons() {
-    if (!track || !prevBtn || !nextBtn) return;
-    const maxScroll = track.scrollWidth - track.clientWidth;
-    const needsNav = maxScroll > 8;
-
-    prevBtn.hidden = !needsNav;
-    nextBtn.hidden = !needsNav;
-    if (!needsNav) return;
-
-    prevBtn.disabled = track.scrollLeft <= 4;
-    nextBtn.disabled = track.scrollLeft >= maxScroll - 4;
-  }
-
-  function scrollTrackBy(dir) {
-    if (!track || cards.length === 0) return;
-    const slide = getSlide(cards[0]);
-    const gap = parseFloat(
-      getComputedStyle(track).columnGap || getComputedStyle(track).gap || "16",
-    );
-    const step = slide.offsetWidth + gap;
-    track.scrollBy({
-      left: dir * step,
-      behavior: prefersReduced ? "auto" : "smooth",
-    });
-  }
-
-  let dragging = false;
-  let dragPending = false;
-  let dragStartX = 0;
-  let dragScrollLeft = 0;
-  let dragMoved = false;
-  let dragPointerId = null;
-  const dragThreshold = 8;
-
-  track?.addEventListener("pointerdown", (e) => {
-    if (e.button !== 0 || !track) return;
-    // Defer capture/drag until the pointer actually moves — otherwise
-    // desktop clicks on cards never fire (capture steals the interaction).
-    dragPending = true;
-    dragging = false;
-    dragMoved = false;
-    dragPointerId = e.pointerId;
-    dragStartX = e.clientX;
-    dragScrollLeft = track.scrollLeft;
-  });
-
-  track?.addEventListener("pointermove", (e) => {
-    if (!track || dragPointerId !== e.pointerId) return;
-    if (!dragPending && !dragging) return;
-
-    const dx = e.clientX - dragStartX;
-
-    if (!dragging) {
-      if (Math.abs(dx) < dragThreshold) return;
-      dragging = true;
-      dragMoved = true;
-      dragPending = false;
-      track.setPointerCapture(e.pointerId);
-      track.classList.add("is-dragging");
-    }
-
-    track.scrollLeft = dragScrollLeft - dx;
-  });
-
-  function endDrag(e) {
-    if (dragPointerId !== e.pointerId) return;
-    if (!dragPending && !dragging) return;
-
-    dragPending = false;
-    dragging = false;
-    dragPointerId = null;
-    track?.classList.remove("is-dragging");
-    try {
-      track?.releasePointerCapture(e.pointerId);
-    } catch {
-      /* already released */
-    }
-  }
-
-  track?.addEventListener("pointerup", endDrag);
-  track?.addEventListener("pointercancel", endDrag);
-
   cards.forEach((card) => {
     card.addEventListener("click", (e) => {
-      if (dragMoved) {
+      if (carousel?.consumeDragMoved()) {
         e.preventDefault();
         e.stopPropagation();
-        dragMoved = false;
         return;
       }
-      switchTreatment(card.dataset.carouselCard);
+      switchTreatment(card.dataset.carouselCard!);
     });
   });
 
-  prevBtn?.addEventListener("click", () => scrollTrackBy(-1));
-  nextBtn?.addEventListener("click", () => scrollTrackBy(1));
-  track?.addEventListener("scroll", () => updateNavButtons(), {
-    passive: true,
-  });
-  window.addEventListener("resize", () => updateNavButtons(), {
-    passive: true,
-  });
-
-  // Keyboard: left/right on focused track
   track?.addEventListener("keydown", (e) => {
     if (e.key === "ArrowRight") {
       e.preventDefault();
@@ -496,12 +445,14 @@ const bookLabelTemplate =
     }
   });
 
-  const revealEls = document.querySelectorAll(".massage-card-reveal");
+  const revealEls = document.querySelectorAll<HTMLElement>(
+    ".massage-card-reveal",
+  );
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("massage-card-visible");
+          (entry.target as HTMLElement).classList.add("massage-card-visible");
           observer.unobserve(entry.target);
         }
       });
@@ -514,5 +465,4 @@ const bookLabelTemplate =
   });
 
   setActiveCard(0, { scroll: false });
-  updateNavButtons();
 </script>

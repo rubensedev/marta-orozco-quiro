@@ -13,12 +13,14 @@ export const en = {
     about: "about",
     massages: "massages",
     packages: "packages",
+    reviews: "testimonials",
     contact: "contact",
   },
   navItems: [
     { href: "#about", label: "ABOUT" },
     { href: "#massages", label: "MASSAGES" },
     { href: "#packages", label: "PACKAGES" },
+    { href: "#testimonials", label: "TESTIMONIALS" },
     { href: "#contact", label: "CONTACT" },
   ],
   hero: {
@@ -58,6 +60,85 @@ export const en = {
       "Complete rituals for deep renewal, or multi-session packs with a special discount.",
     ctaLabel: "Book ritual",
   },
+  reviewsContent: {
+    heading: "Still unsure?",
+    description:
+      "Since 2021 I have supported more than 1,500 people on their path to wellbeing. These voices share how they felt after the session — in case it helps you take the next step.",
+  },
+  reviews: [
+    {
+      id: "review-01",
+      name: "Laura M.",
+      stars: 5 as const,
+      quote:
+        "I left feeling brand new. My body felt soft and my mind was quiet for the first time in weeks.",
+      treatmentName: "Relaxing",
+    },
+    {
+      id: "review-02",
+      name: "Javier R.",
+      stars: 5 as const,
+      quote:
+        "My back was in knots and I walked out light on my feet. Marta has magic hands.",
+      treatmentName: "Deep tissue",
+    },
+    {
+      id: "review-03",
+      name: "Ana S.",
+      stars: 5 as const,
+      quote:
+        "Light legs, a sense of freshness and a calm that stayed with me all day. Highly recommend.",
+      treatmentName: "Detox",
+    },
+    {
+      id: "review-04",
+      name: "Patricia G.",
+      stars: 5 as const,
+      quote:
+        "The tension in my jaw and neck melted away. I left with a relaxed face and an easy smile.",
+      treatmentName: "Craniofacial",
+    },
+    {
+      id: "review-05",
+      name: "Pablo V.",
+      stars: 5 as const,
+      quote:
+        "A real total disconnect. I closed my eyes and the world stayed outside. I will definitely be back.",
+      treatmentName: "Total Disconnect Ritual",
+    },
+    {
+      id: "review-06",
+      name: "Lucía P.",
+      stars: 5 as const,
+      quote:
+        "A warm atmosphere, a kind approach and a massage that left me floating. Exactly what I needed.",
+      treatmentName: "Relaxing",
+    },
+    {
+      id: "review-07",
+      name: "Marta H.",
+      stars: 5 as const,
+      quote:
+        "I felt light and gently energised, with no overwhelm. Ideal when the body needs a reset.",
+      treatmentName: "Light Body Ritual",
+    },
+    {
+      id: "review-08",
+      name: "Andrés N.",
+      stars: 5 as const,
+      quote:
+        "After hours at the computer, this massage gave me my neck back. Really pleased.",
+      treatmentName: "Deep tissue",
+    },
+    {
+      id: "review-09",
+      name: "Irene C.",
+      stars: 5 as const,
+      quote:
+        "Relaxed, renewed and keen to look after myself more. The session felt like a sigh of relief.",
+      treatmentName: "Detox",
+    },
+  ],
   bonos: {
     heading: "Session packs",
     discountLabel: "Discount",
@@ -163,6 +244,10 @@ export const en = {
     massageTypesAria: "Massage types",
     prevMassage: "Previous massage",
     nextMassage: "Next massage",
+    reviewsAria: "Client reviews",
+    prevReview: "Previous review",
+    nextReview: "Next review",
+    reviewStarsSr: "5 out of 5",
     instagramAria: "Marta Orozco on Instagram",
     whatsappAria: "Marta Orozco on WhatsApp",
     modal: {

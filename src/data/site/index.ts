@@ -33,6 +33,14 @@ export type Ritual = {
   price: number;
 };
 
+export type Review = {
+  id: string;
+  name: string;
+  stars: 5;
+  quote: string;
+  treatmentName: string;
+};
+
 export type BonoTier = {
   id: string;
   sessions: number;
@@ -114,6 +122,8 @@ export function getSite(locale: Locale) {
     })),
     massages: dict.massages,
     ritualsContent: dict.rituals,
+    reviewsContent: dict.reviewsContent,
+    reviews: dict.reviews,
     bonos: dict.bonos,
     contact: dict.contact,
     treatments,
@@ -138,6 +148,8 @@ export const aboutStats = defaultSite.aboutStats;
 export const aboutContent = defaultSite.about;
 export const massagesContent = defaultSite.massages;
 export const ritualsContent = defaultSite.ritualsContent;
+export const reviewsContent = defaultSite.reviewsContent;
+export const reviews = defaultSite.reviews;
 export const bonosContent = defaultSite.bonos;
 export const contactContent = defaultSite.contact;
 export const treatments = defaultSite.treatments;

@@ -13,12 +13,14 @@ export const es = {
     about: "sobre-mi",
     massages: "masajes",
     packages: "bonos",
+    reviews: "testimonios",
     contact: "contacto",
   },
   navItems: [
     { href: "#sobre-mi", label: "SOBRE MÍ" },
     { href: "#masajes", label: "MASAJES" },
     { href: "#bonos", label: "BONOS" },
+    { href: "#testimonios", label: "TESTIMONIOS" },
     { href: "#contacto", label: "CONTACTO" },
   ],
   hero: {
@@ -58,6 +60,85 @@ export const es = {
       "Rituales completos para una renovación profunda o paquetes de bonos con descuento especial.",
     ctaLabel: "Reservar Ritual",
   },
+  reviewsContent: {
+    heading: "¿Tienes dudas?",
+    description:
+      "Desde 2021 he acompañado a más de 1.500 personas en su camino hacia el bienestar. Estas voces cuentan cómo se sintieron después de la sesión — por si te ayuda a dar el paso.",
+  },
+  reviews: [
+    {
+      id: "review-01",
+      name: "Laura M.",
+      stars: 5 as const,
+      quote:
+        "Salí como nueva. Noté el cuerpo blandito y la cabeza en silencio por primera vez en semanas.",
+      treatmentName: "Relajante",
+    },
+    {
+      id: "review-02",
+      name: "Javier R.",
+      stars: 5 as const,
+      quote:
+        "Tenía la espalda hecha un nudo y me fui caminando ligero. Marta tiene unas manos mágicas.",
+      treatmentName: "Descontracturante",
+    },
+    {
+      id: "review-03",
+      name: "Ana S.",
+      stars: 5 as const,
+      quote:
+        "Piernas ligeras, sensación de frescura y una calma que me acompañó todo el día. Recomendadísimo.",
+      treatmentName: "Detox",
+    },
+    {
+      id: "review-04",
+      name: "Patricia G.",
+      stars: 5 as const,
+      quote:
+        "Se me disolvió la tensión de mandíbula y cuello. Salí con la cara relajada y una sonrisa fácil.",
+      treatmentName: "Cráneo Facial",
+    },
+    {
+      id: "review-05",
+      name: "Pablo V.",
+      stars: 5 as const,
+      quote:
+        "Una desconexión total de verdad. Cerré los ojos y el mundo se quedó fuera. Volveré seguro.",
+      treatmentName: "Ritual Desconexión Total",
+    },
+    {
+      id: "review-06",
+      name: "Lucía P.",
+      stars: 5 as const,
+      quote:
+        "Ambiente cálido, trato cercano y un masaje que me dejó flotando. Justo lo que necesitaba.",
+      treatmentName: "Relajante",
+    },
+    {
+      id: "review-07",
+      name: "Marta H.",
+      stars: 5 as const,
+      quote:
+        "Me sentí liviana y con energía suave, sin agobio. Ideal cuando el cuerpo pide reset.",
+      treatmentName: "Ritual Cuerpo Ligero",
+    },
+    {
+      id: "review-08",
+      name: "Andrés N.",
+      stars: 5 as const,
+      quote:
+        "Después de horas frente al ordenador, este masaje me devolvió el cuello. Super contento.",
+      treatmentName: "Descontracturante",
+    },
+    {
+      id: "review-09",
+      name: "Irene C.",
+      stars: 5 as const,
+      quote:
+        "Relajada, renovada y con ganas de cuidarme más. La sesión se me hizo un suspiro.",
+      treatmentName: "Detox",
+    },
+  ],
   bonos: {
     heading: "Bonos",
     discountLabel: "Descuento",
@@ -163,6 +244,10 @@ export const es = {
     massageTypesAria: "Tipos de masaje",
     prevMassage: "Masaje anterior",
     nextMassage: "Masaje siguiente",
+    reviewsAria: "Opiniones de clientes",
+    prevReview: "Opinión anterior",
+    nextReview: "Opinión siguiente",
+    reviewStarsSr: "5 de 5",
     instagramAria: "Instagram de Marta Orozco",
     whatsappAria: "WhatsApp de Marta Orozco",
     modal: {
