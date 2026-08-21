@@ -37,6 +37,7 @@ const uiClient = {
   const modalDuration = document.getElementById("modalDuration");
   const modalPurchaseType = document.getElementById("modalPurchaseType");
   const modalPriceEstimate = document.getElementById("modalPriceEstimate");
+  const modalPriceSavings = document.getElementById("modalPriceSavings");
   const modalName = document.getElementById("modalName");
   const modalEmail = document.getElementById("modalEmail");
   const modalDate = document.getElementById("modalDate");
@@ -270,6 +271,23 @@ const uiClient = {
     });
   }
 
+  function formatSaveLabel(amount) {
+    return String(uiClient.youSaveTemplate).replace("{amount}", String(amount));
+  }
+
+  function setModalPriceSavings(amount) {
+    if (!modalPriceSavings) return;
+    if (!amount) {
+      modalPriceSavings.hidden = true;
+      modalPriceSavings.textContent = "";
+      return;
+    }
+
+    const saveLabel = formatSaveLabel(amount);
+    modalPriceSavings.hidden = false;
+    modalPriceSavings.innerHTML = `<i class="fa-solid fa-tag" aria-hidden="true"></i> ${saveLabel}`;
+  }
+
   function syncBookingFieldVisibility() {
     const selectedId = modalTreatment.value;
     const ritual = ritualMap.get(selectedId);
@@ -281,6 +299,7 @@ const uiClient = {
       modalDuration.innerHTML = `<option value="${ritual.duration}">${ritual.duration} ${uiClient.minutesSuffix}</option>`;
       modalPurchaseType.value = "single";
       modalPriceEstimate.value = `${ritual.price} €`;
+      setModalPriceSavings(0);
       return;
     }
 
@@ -311,6 +330,7 @@ const uiClient = {
       tier.sessions === 1
         ? `${duration.price} €`
         : `${quote.discountedTotal} € (${quote.perSession} € ${uiClient.perSession})`;
+    setModalPriceSavings(tier.sessions > 1 ? quote.savings : 0);
   }
 
   function openBookingModal(treatmentId, context = {}) {

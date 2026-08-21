@@ -230,6 +230,30 @@
     color: var(--color-brand-lavender-bright);
   }
 
+  .booking-price-card__savings {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    width: fit-content;
+    margin: 0.15rem 0 0;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    background: var(--color-brand-lavender);
+    color: var(--color-brand-text-light);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  .booking-price-card__savings[hidden] {
+    display: none;
+  }
+
+  .dark .booking-price-card__savings {
+    background: var(--color-brand-lavender-bright);
+    color: var(--color-brand-lavender-dark);
+  }
+
   .btn-brand,
   .btn-secondary,
   .btn-whatsapp {
