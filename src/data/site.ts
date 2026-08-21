@@ -27,11 +27,13 @@ export const siteMeta = {
   location: "Sevilla, Spain",
   whatsappNumber: "34601585508",
   whatsappDisplay: "+34 601 585 508",
-  whatsappInquiry:
-    "Hola Marta! Me gustaría reservar una cita. ¿Tienes disponibilidad?",
+  phoneHref: "tel:+34601585508",
+  whatsappInquiry: "Hola Marta! Me gustaría reservar una cita. ¿Tienes disponibilidad?",
   instagramUrl: "https://www.instagram.com/martaorozco.quiro",
   mapEmbedUrl:
     "https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1sCalle+Esperanza+Elena+Caro+2,+41002+Sevilla,+Espa%C3%B1a",
+  mapsUrl:
+    "https://www.google.com/maps/search/?api=1&query=C.+Esperanza+Elena+Caro,+2,+41002+Sevilla",
 };
 
 export const navItems = [
@@ -56,8 +58,8 @@ export const heroContent = {
 };
 
 export const aboutStats = [
-  { value: "+7", label: "Años de experiencia" },
-  { value: "+500", label: "Clientes satisfechos" },
+  { value: "+5", label: "Años de experiencia" },
+  { value: "+1500", label: "Clientes satisfechos" },
 ];
 
 export const aboutContent = {
@@ -92,7 +94,14 @@ export const bonosContent = {
 
 export const contactContent = {
   heading: "Ubicación y contacto",
-  eyebrow: "Citas y horario",
+  hours: "Jueves de 15:00 a 21:00",
+  hoursNote: "*Citas bajo reserva previa para garantizar tu atención personalizada.",
+  addressLines: ["C. Esperanza Elena Caro, 2, 1°A4", "41002 Sevilla"],
+  ctaLabel: "Reservar Ahora",
+  openInMapsLabel: "Abrir en Maps",
+  mapHint: "Consulta el mapa para indicaciones de llegada",
+  imageAlt: "Espacio donde se realizan las sesiones.",
+  mapTitle: "Mapa de ubicación de Marta Orozco",
 };
 
 export const treatments: Treatment[] = [
@@ -208,7 +217,6 @@ export const bonoExamples = [
 export const bookingOptions = [
   ...treatments.map((treatment) => treatment.bookingValue),
   ...rituals.map(
-    (ritual) =>
-      `${ritual.bookingValue} (${ritual.duration} min - ${ritual.price}EUR)`,
+    (ritual) => `${ritual.bookingValue} (${ritual.duration} min - ${ritual.price}EUR)`,
   ),
 ];

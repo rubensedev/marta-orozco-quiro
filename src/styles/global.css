@@ -81,9 +81,15 @@
     animation: hero-drift-in 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   }
 
-  .hero-reveal--1 { animation-delay: 0.1s; }
-  .hero-reveal--2 { animation-delay: 0.28s; }
-  .hero-reveal--3 { animation-delay: 0.46s; }
+  .hero-reveal--1 {
+    animation-delay: 0.1s;
+  }
+  .hero-reveal--2 {
+    animation-delay: 0.28s;
+  }
+  .hero-reveal--3 {
+    animation-delay: 0.46s;
+  }
   .hero-reveal--4 {
     animation-name: hero-rise-in;
     animation-duration: 1.1s;
@@ -195,6 +201,7 @@
     font-weight: 600;
     transition: all 0.2s ease;
     cursor: pointer;
+    text-transform: uppercase;
   }
 
   .btn-brand {
@@ -399,11 +406,7 @@
 }
 
 .dark .massage-main-panel__content {
-  background: color-mix(
-    in srgb,
-    var(--color-brand-sage-bright) 14%,
-    var(--color-brand-card-dark)
-  );
+  background: color-mix(in srgb, var(--color-brand-sage-bright) 14%, var(--color-brand-card-dark));
 }
 
 .massage-main-panel__image {
@@ -537,10 +540,7 @@
 
 .massage-carousel__slide {
   flex: 0 0
-    calc(
-      (100% - (var(--massage-visible) - 1) * var(--massage-card-gap)) /
-        var(--massage-visible)
-    );
+    calc((100% - (var(--massage-visible) - 1) * var(--massage-card-gap)) / var(--massage-visible));
   min-width: 0;
   scroll-snap-align: start;
   scroll-snap-stop: normal;

@@ -1,83 +1,340 @@
 ---
+import { Image } from "astro:assets";
+import contactImg from "../assets/images/contact.webp";
 import { contactContent, siteMeta } from "../data/site";
 import SectionHeading from "./SectionHeading.astro";
+
+const whatsappHref = `https://wa.me/${siteMeta.whatsappNumber}?text=${encodeURIComponent(siteMeta.whatsappInquiry)}`;
 ---
 
-<section id="contacto" class="mx-auto w-[min(1120px,calc(100%-2rem))] py-20 md:py-24">
+<section
+  id="contacto"
+  class="mx-auto w-[min(1120px,calc(100%-2rem))] py-[clamp(3rem,8vh,6rem)] md:px-6 lg:px-8"
+>
   <SectionHeading title={contactContent.heading} />
 
-  <div class="grid gap-8 lg:grid-cols-12 lg:items-center">
-    <article
-      class="rounded-[2rem] bg-white/56 p-8 shadow-soft md:p-10 lg:col-span-5 dark:bg-white/6"
+  <div
+    class="grid gap-8 md:grid-cols-2 md:gap-6 lg:grid-cols-[minmax(17rem,1.05fr)_1fr_1fr] lg:items-stretch lg:gap-8"
+  >
+    <!-- Info column -->
+    <div
+      class="contact-reveal contact-reveal--1 flex flex-col justify-center md:col-span-2 lg:col-span-1 lg:self-center"
     >
-      <p class="m-0 mb-4 inline-flex items-center gap-3 text-xs font-semibold tracking-[0.24em] text-brand-sage uppercase">
-        {contactContent.eyebrow}
-      </p>
-      <p class="mt-5 mb-0 flex items-start gap-3">
-        <i class="fa-regular fa-clock" aria-hidden="true"></i>
-        <span>Jueves de 15:00 a 20:00</span>
-      </p>
-      <p class="mt-4 mb-0 text-[0.9rem] italic">
-        *Citas bajo reserva previa para garantizar tu atención personalizada.
-      </p>
-      <p class="mt-5 mb-0 flex items-start gap-3">
-        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-        <span>C. Esperanza Elena Caro, 2, 1°A4 / 41002 Sevilla</span>
-      </p>
 
-      <div class="mt-8 flex flex-wrap items-center gap-4">
-        <button class="btn-brand" type="button" data-open-booking>Reservar Ahora</button>
-        <a
-          class="btn-secondary"
-          href={`https://wa.me/${siteMeta.whatsappNumber}?text=${encodeURIComponent(siteMeta.whatsappInquiry)}`}
-        >
-          WhatsApp
-        </a>
-      </div>
-
-      <ul class="mt-8 mb-0 flex list-none flex-wrap items-center gap-6 p-0">
-        <li>
+      <div
+        class="mt-5 rounded-[1.5rem] bg-brand-surface/80 px-5 py-5 shadow-soft sm:px-6 dark:bg-white/6"
+      >
+        <p class="m-0 flex items-start gap-3 leading-[1.5]">
+          <i
+            class="fa-regular fa-clock mt-0.5 text-brand-sage dark:text-brand-sage-bright"
+            aria-hidden="true"></i>
+          <span>{contactContent.hours}</span>
+        </p>
+        <p class="mt-3 mb-0 pl-7 text-[0.9rem] leading-[1.55] text-brand-muted italic">
+          {contactContent.hoursNote}
+        </p>
+        <address class="mt-5 mb-0 not-italic">
           <a
-            class="flex items-start gap-3"
-            href={siteMeta.instagramUrl}
+            class="flex items-start gap-3 leading-[1.5] text-inherit no-underline transition-opacity hover:opacity-80 focus-visible:opacity-80"
+            href={siteMeta.mapsUrl}
             target="_blank"
             rel="noreferrer"
           >
+            <i
+              class="fa-solid fa-location-dot mt-0.5 text-brand-sage dark:text-brand-sage-bright"
+              aria-hidden="true"></i>
+            <span>
+              {contactContent.addressLines[0]}
+              <br />
+              {contactContent.addressLines[1]}
+            </span>
+          </a>
+        </address>
+      </div>
+
+      <button
+        class="btn-brand mt-6 w-full tracking-[0.08em] sm:w-auto"
+        type="button"
+        data-open-booking
+      >
+        {contactContent.ctaLabel}
+        <i class="fa-solid fa-chevron-right text-[10px]" aria-hidden="true"></i>
+      </button>
+
+      <ul class="mt-6 mb-0 flex list-none flex-wrap items-center gap-3 p-0">
+        <li>
+          <a
+            class="contact__social contact__social--instagram"
+            href={siteMeta.instagramUrl}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Instagram de Marta Orozco"
+          >
             <i class="fa-brands fa-instagram" aria-hidden="true"></i>
-            <span>Instagram</span>
           </a>
         </li>
         <li>
           <a
-            class="flex items-start gap-3"
-            href={`https://wa.me/${siteMeta.whatsappNumber}?text=${encodeURIComponent(siteMeta.whatsappInquiry)}`}
+            class="contact__social contact__social--whatsapp"
+            href={whatsappHref}
+            target="_blank"
+            rel="noreferrer"
             data-whatsapp-direct
+            aria-label="WhatsApp de Marta Orozco"
           >
             <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-            <span>{siteMeta.whatsappDisplay}</span>
+          </a>
+        </li>
+        <li>
+          <a
+            class="text-[0.95rem] font-medium tracking-[0.02em] text-inherit no-underline transition-opacity hover:opacity-80"
+            href={siteMeta.phoneHref}
+          >
+            {siteMeta.whatsappDisplay}
           </a>
         </li>
       </ul>
-    </article>
+    </div>
 
+    <!-- Photo -->
     <div
-      class="rounded-[2rem] bg-white/56 p-4 shadow-soft md:p-10 lg:col-span-7 dark:bg-white/6"
+      class="contact-reveal contact-reveal--2 contact__media contact__media--image relative overflow-hidden rounded-[1.75rem] shadow-soft"
     >
-      <img
-        class="aspect-[16/10] h-full w-full rounded-[1.5rem] object-cover"
-        src="/assets/images/contact.webp"
-        alt="Espacio donde se realizan las sesiones."
-        width="960"
-        height="720"
+      <Image
+        class="contact__photo h-full w-full object-cover"
+        src={contactImg}
+        alt={contactContent.imageAlt}
+        width={720}
+        height={900}
         loading="lazy"
+        sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 100vw"
       />
+    </div>
+
+    <!-- Map -->
+    <div
+      class="contact-reveal contact-reveal--3 contact__media contact__media--map relative overflow-hidden rounded-[1.75rem] shadow-soft"
+    >
       <iframe
-        class="contact__map mt-4 h-72 w-full rounded-[1.5rem] border-0"
-        title="Mapa de ubicación de Marta Orozco"
+        class="contact__map absolute inset-0 size-full border-0"
+        title={contactContent.mapTitle}
         src={siteMeta.mapEmbedUrl}
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen
       ></iframe>
+
+      <a
+        class="contact__open-maps"
+        href={siteMeta.mapsUrl}
+        target="_blank"
+        rel="noreferrer"
+      >
+        {contactContent.openInMapsLabel}
+      </a>
+
+      <p class="contact__map-hint">
+        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+        <span>{contactContent.mapHint}</span>
+      </p>
     </div>
   </div>
 </section>
+
+<style>
+  .contact__media--image {
+    aspect-ratio: 4 / 5;
+    max-height: 26rem;
+  }
+
+  .contact__media--map {
+    height: 18rem;
+  }
+
+  @media (min-width: 768px) {
+    .contact__media--image,
+    .contact__media--map {
+      aspect-ratio: 4 / 5;
+      height: auto;
+      max-height: none;
+    }
+  }
+
+  .contact__photo {
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .contact__media--image:hover .contact__photo,
+  .contact__media--image:focus-within .contact__photo {
+    transform: scale(1.03);
+  }
+
+  .contact__social {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 999px;
+    font-size: 1.15rem;
+    text-decoration: none;
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .contact__social:hover,
+  .contact__social:focus-visible {
+    transform: translateY(-2px);
+  }
+
+  .contact__social--instagram {
+    background: color-mix(in srgb, var(--color-brand-lavender) 16%, white);
+    color: var(--color-brand-lavender);
+  }
+
+  .contact__social--whatsapp {
+    background: color-mix(in srgb, var(--color-brand-sage) 16%, white);
+    color: var(--color-brand-sage);
+  }
+
+  :global(.dark) .contact__social--instagram {
+    background: color-mix(in srgb, var(--color-brand-lavender-bright) 22%, transparent);
+    color: var(--color-brand-lavender-bright);
+  }
+
+  :global(.dark) .contact__social--whatsapp {
+    background: color-mix(in srgb, var(--color-brand-sage-bright) 22%, transparent);
+    color: var(--color-brand-sage-bright);
+  }
+
+  .contact__open-maps {
+    position: absolute;
+    top: 0.85rem;
+    left: 0.85rem;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.45rem 0.85rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.94);
+    color: var(--color-brand-sage);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    text-transform: uppercase;
+    box-shadow: 0 8px 20px rgba(31, 45, 32, 0.14);
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .contact__open-maps:hover,
+  .contact__open-maps:focus-visible {
+    transform: translateY(-1px);
+    background: #fff;
+  }
+
+  .contact__map-hint {
+    position: absolute;
+    z-index: 2;
+    right: 0.85rem;
+    bottom: 2.35rem;
+    left: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 0;
+    padding: 0.65rem 0.9rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.94);
+    color: var(--color-brand-sage);
+    font-size: 0.78rem;
+    line-height: 1.35;
+    box-shadow: 0 10px 24px rgba(31, 45, 32, 0.12);
+  }
+
+  .contact__map-hint i {
+    flex-shrink: 0;
+    color: var(--color-brand-lavender);
+  }
+
+  :global(.dark) .contact__open-maps,
+  :global(.dark) .contact__map-hint {
+    background: rgba(36, 48, 40, 0.94);
+    color: var(--color-brand-text-light);
+  }
+
+  :global(.dark) .contact__map-hint i {
+    color: var(--color-brand-lavender-bright);
+  }
+
+  .contact-reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .contact-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .contact-reveal--1 {
+    transition-delay: 0s;
+  }
+
+  .contact-reveal--2 {
+    transition-delay: 0.12s;
+  }
+
+  .contact-reveal--3 {
+    transition-delay: 0.24s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contact-reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .contact__photo {
+      transition: none;
+    }
+
+    .contact__media--image:hover .contact__photo,
+    .contact__media--image:focus-within .contact__photo {
+      transform: none;
+    }
+
+    .contact__social:hover,
+    .contact__social:focus-visible,
+    .contact__open-maps:hover,
+    .contact__open-maps:focus-visible {
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12 },
+  );
+
+  document.querySelectorAll("#contacto .contact-reveal").forEach((el) => {
+    observer.observe(el);
+  });
+</script>
