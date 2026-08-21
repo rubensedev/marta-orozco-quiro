@@ -41,7 +41,7 @@ const bookLabelTemplate =
   <!-- Main panel: content card left, floating image right (side-by-side from tablet) -->
   <article
     id="massageMainPanel"
-    class="massage-main-panel massage-card-reveal flex flex-col gap-8 md:flex-row md:items-center md:gap-8 lg:gap-10"
+    class="massage-main-panel massage-card-reveal flex flex-col-reverse gap-8 md:flex-row md:items-center md:gap-8 lg:gap-10"
     data-pricing-card={first.id}
     data-treatment={first.id}
   >
@@ -187,40 +187,25 @@ const bookLabelTemplate =
 </section>
 
 <script define:vars={{ bookLabelTemplate }}>
-  const panel = document.getElementById(
-    "massageMainPanel",
-  ) as HTMLElement | null;
-  const track = document.getElementById(
-    "massageCarouselTrack",
-  ) as HTMLElement | null;
-  const prevBtn = document.getElementById(
-    "massageCarouselPrev",
-  ) as HTMLButtonElement | null;
-  const nextBtn = document.getElementById(
-    "massageCarouselNext",
-  ) as HTMLButtonElement | null;
-  const panelTitle = document.getElementById(
-    "panelTitle",
-  ) as HTMLElement | null;
-  const panelDesc = document.getElementById(
-    "panelDescription",
-  ) as HTMLElement | null;
-  const panelImg = document.getElementById(
-    "panelImage",
-  ) as HTMLImageElement | null;
-  const panelBookingBtn = document.getElementById(
-    "panelBookingBtn",
-  ) as HTMLButtonElement | null;
+  // Plain JS only: define:vars inlines this script (TypeScript is not compiled).
+  const panel = document.getElementById("massageMainPanel");
+  const track = document.getElementById("massageCarouselTrack");
+  const prevBtn = document.getElementById("massageCarouselPrev");
+  const nextBtn = document.getElementById("massageCarouselNext");
+  const panelTitle = document.getElementById("panelTitle");
+  const panelDesc = document.getElementById("panelDescription");
+  const panelImg = document.getElementById("panelImage");
+  const panelBookingBtn = document.getElementById("panelBookingBtn");
 
   const cards = Array.from(
-    track?.querySelectorAll<HTMLButtonElement>("[data-carousel-card]") ?? [],
+    track?.querySelectorAll("[data-carousel-card]") ?? [],
   );
-  const treatmentIds = cards.map((c) => c.dataset.carouselCard!);
+  const treatmentIds = cards.map((c) => c.dataset.carouselCard);
 
-  const imgSrcMap: Record<string, string> = {};
-  const imgAltMap: Record<string, string> = {};
+  const imgSrcMap = {};
+  const imgAltMap = {};
   cards.forEach((card) => {
-    const id = card.dataset.carouselCard!;
+    const id = card.dataset.carouselCard;
     const img = card.querySelector("img");
     if (img) {
       imgSrcMap[id] = img.currentSrc || img.src;
@@ -236,13 +221,13 @@ const bookLabelTemplate =
   const supportsViewTransition =
     typeof document.startViewTransition === "function";
 
-  function wait(ms: number) {
-    return new Promise<void>((resolve) => {
+  function wait(ms) {
+    return new Promise((resolve) => {
       window.setTimeout(resolve, ms);
     });
   }
 
-  function applyTreatment(id: string, treatment: any) {
+  function applyTreatment(id, treatment) {
     if (!panel) return;
 
     panel.dataset.pricingCard = id;
@@ -264,9 +249,8 @@ const bookLabelTemplate =
       panelImg.alt = imgAltMap[id] ?? treatment.imageAlt ?? "";
     }
 
-    const w = window as any;
-    if (typeof w.renderPricingWidgets === "function") {
-      w.renderPricingWidgets();
+    if (typeof window.renderPricingWidgets === "function") {
+      window.renderPricingWidgets();
     }
   }
 
@@ -279,7 +263,7 @@ const bookLabelTemplate =
     }
   }
 
-  async function swapWithFallback(update: () => void | Promise<void>) {
+  async function swapWithFallback(update) {
     if (!panel || prefersReduced) {
       await update();
       return;
@@ -295,7 +279,7 @@ const bookLabelTemplate =
     delete panel.dataset.swap;
   }
 
-  async function swapPanel(update: () => void | Promise<void>) {
+  async function swapPanel(update) {
     if (prefersReduced || !supportsViewTransition) {
       await swapWithFallback(update);
       return;
@@ -313,11 +297,11 @@ const bookLabelTemplate =
     }
   }
 
-  function getSlide(card: HTMLElement) {
-    return (card.closest(".massage-carousel__slide") as HTMLElement | null) ?? card;
+  function getSlide(card) {
+    return card.closest(".massage-carousel__slide") ?? card;
   }
 
-  function scrollCardIntoView(index: number) {
+  function scrollCardIntoView(index) {
     const active = cards[index];
     if (!active || !track) return;
     const slide = getSlide(active);
@@ -345,7 +329,7 @@ const bookLabelTemplate =
     });
   }
 
-  function setActiveCard(index: number, { scroll = true } = {}) {
+  function setActiveCard(index, { scroll = true } = {}) {
     if (index < 0 || index >= cards.length) return;
     activeIndex = index;
     cards.forEach((card, i) => {
@@ -361,11 +345,10 @@ const bookLabelTemplate =
     updateNavButtons();
   }
 
-  async function switchTreatment(id: string) {
+  async function switchTreatment(id) {
     if (!panel || switching) return;
-    const w = window as any;
-    const list: any[] = w.treatments ?? [];
-    const treatment = list.find((t: any) => t.id === id);
+    const list = window.treatments ?? [];
+    const treatment = list.find((t) => t.id === id);
     if (!treatment) return;
 
     const nextIndex = treatmentIds.indexOf(id);
@@ -404,7 +387,7 @@ const bookLabelTemplate =
     nextBtn.disabled = track.scrollLeft >= maxScroll - 4;
   }
 
-  function scrollTrackBy(dir: -1 | 1) {
+  function scrollTrackBy(dir) {
     if (!track || cards.length === 0) return;
     const slide = getSlide(cards[0]);
     const gap = parseFloat(
@@ -422,7 +405,7 @@ const bookLabelTemplate =
   let dragStartX = 0;
   let dragScrollLeft = 0;
   let dragMoved = false;
-  let dragPointerId: number | null = null;
+  let dragPointerId = null;
   const dragThreshold = 8;
 
   track?.addEventListener("pointerdown", (e) => {
@@ -455,7 +438,7 @@ const bookLabelTemplate =
     track.scrollLeft = dragScrollLeft - dx;
   });
 
-  function endDrag(e: PointerEvent) {
+  function endDrag(e) {
     if (dragPointerId !== e.pointerId) return;
     if (!dragPending && !dragging) return;
 
@@ -481,7 +464,7 @@ const bookLabelTemplate =
         dragMoved = false;
         return;
       }
-      switchTreatment(card.dataset.carouselCard!);
+      switchTreatment(card.dataset.carouselCard);
     });
   });
 
@@ -513,14 +496,12 @@ const bookLabelTemplate =
     }
   });
 
-  const revealEls = document.querySelectorAll<HTMLElement>(
-    ".massage-card-reveal",
-  );
+  const revealEls = document.querySelectorAll(".massage-card-reveal");
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          (entry.target as HTMLElement).classList.add("massage-card-visible");
+          entry.target.classList.add("massage-card-visible");
           observer.unobserve(entry.target);
         }
       });
