@@ -1,13 +1,20 @@
 ---
 import { Image } from "astro:assets";
-import { treatments, massagesContent } from "../data/site";
 import type { ImageMetadata } from "astro";
+import type { SiteBundle } from "../data/site";
 import SectionHeading from "./SectionHeading.astro";
 
 import relajanteImg from "../assets/images/relajante.webp";
 import detoxImg from "../assets/images/detox.webp";
 import descontracturanteImg from "../assets/images/descontracturante.webp";
 import craneofacialImg from "../assets/images/craneofacial.webp";
+
+type Props = {
+  site: SiteBundle;
+};
+
+const { site } = Astro.props;
+const { treatments, massages: massagesContent, ui, sectionIds } = site;
 
 const imageMap: Record<string, ImageMetadata> = {
   relajante: relajanteImg,
@@ -18,10 +25,12 @@ const imageMap: Record<string, ImageMetadata> = {
 
 const first = treatments[0];
 const firstImage = imageMap[first.id];
+const bookLabelTemplate =
+  site.locale === "en" ? "Book {title}" : "Reservar {title}";
 ---
 
 <section
-  id="masajes"
+  id={sectionIds.massages}
   class="mx-auto w-[min(1120px,calc(100%-2rem))] overflow-visible py-[clamp(3rem,8vh,6rem)] md:px-6 lg:px-8"
 >
   <SectionHeading
@@ -34,7 +43,7 @@ const firstImage = imageMap[first.id];
     id="massageMainPanel"
     class="massage-main-panel massage-card-reveal flex flex-col gap-8 md:flex-row md:items-center md:gap-8 lg:gap-10"
     data-pricing-card={first.id}
-    data-treatment={first.bookingValue}
+    data-treatment={first.id}
   >
     <div
       class="massage-main-panel__content min-w-0 rounded-[1.75rem] p-6 shadow-soft sm:p-7 md:min-w-0 md:flex-1 lg:p-8"
@@ -64,9 +73,9 @@ const firstImage = imageMap[first.id];
         class="btn-brand mt-5 w-full uppercase tracking-[0.08em] sm:w-auto"
         type="button"
         data-open-booking
-        data-treatment={first.bookingValue}
+        data-treatment={first.id}
       >
-        Reservar {first.title}
+        {ui.reserveTreatment(first.title)}
       </button>
     </div>
 
@@ -95,7 +104,7 @@ const firstImage = imageMap[first.id];
         id="massageCarouselTrack"
         tabindex="0"
         role="listbox"
-        aria-label="Tipos de masaje"
+        aria-label={ui.massageTypesAria}
         aria-activedescendant={`massage-card-${first.id}`}
       >
         {
@@ -138,7 +147,7 @@ const firstImage = imageMap[first.id];
                     </p>
                     <div class="massage-carousel-card__footer">
                       <span class="massage-carousel-card__price">
-                        desde {basePrice}€
+                        {ui.fromPrice(basePrice)}
                       </span>
                       <span
                         class="massage-carousel-card__cta"
@@ -160,7 +169,7 @@ const firstImage = imageMap[first.id];
         class="massage-carousel__nav massage-carousel__nav--prev"
         id="massageCarouselPrev"
         aria-controls="massageCarouselTrack"
-        aria-label="Masaje anterior"
+        aria-label={ui.prevMassage}
       >
         <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
       </button>
@@ -169,7 +178,7 @@ const firstImage = imageMap[first.id];
         class="massage-carousel__nav massage-carousel__nav--next"
         id="massageCarouselNext"
         aria-controls="massageCarouselTrack"
-        aria-label="Masaje siguiente"
+        aria-label={ui.nextMassage}
       >
         <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
       </button>
@@ -177,7 +186,7 @@ const firstImage = imageMap[first.id];
   </div>
 </section>
 
-<script>
+<script define:vars={{ bookLabelTemplate }}>
   const panel = document.getElementById(
     "massageMainPanel",
   ) as HTMLElement | null;
@@ -237,15 +246,18 @@ const firstImage = imageMap[first.id];
     if (!panel) return;
 
     panel.dataset.pricingCard = id;
-    panel.dataset.treatment = treatment.bookingValue;
+    panel.dataset.treatment = id;
     delete panel.dataset.selectedDuration;
     delete panel.dataset.selectedBono;
 
     if (panelTitle) panelTitle.textContent = treatment.title;
     if (panelDesc) panelDesc.textContent = treatment.description;
     if (panelBookingBtn) {
-      panelBookingBtn.dataset.treatment = treatment.bookingValue;
-      panelBookingBtn.textContent = `Reservar ${treatment.title}`;
+      panelBookingBtn.dataset.treatment = id;
+      panelBookingBtn.textContent = String(bookLabelTemplate).replace(
+        "{title}",
+        treatment.title,
+      );
     }
     if (panelImg && imgSrcMap[id]) {
       panelImg.src = imgSrcMap[id];

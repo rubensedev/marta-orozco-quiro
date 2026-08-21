@@ -1,5 +1,23 @@
 ---
-import { bonoTiers, rituals, siteMeta, treatments } from "../data/site";
+import type { SiteBundle } from "../data/site";
+
+type Props = {
+  site: SiteBundle;
+};
+
+const { site } = Astro.props;
+const { bonoTiers, rituals, meta: siteMeta, treatments, ui } = site;
+
+const uiClient = {
+  durationLabel: ui.durationLabel,
+  purchaseTypeLabel: ui.purchaseTypeLabel,
+  minutesSuffix: ui.minutesSuffix,
+  perSession: ui.perSession,
+  youSaveTemplate: site.locale === "en" ? "You save {amount} €" : "Ahorras {amount} €",
+  openMenu: ui.nav.openMenu,
+  closeMenu: ui.nav.closeMenu,
+  whatsappBooking: ui.whatsappBooking,
+};
 ---
 
 <script
@@ -8,6 +26,7 @@ import { bonoTiers, rituals, siteMeta, treatments } from "../data/site";
     rituals,
     siteMeta,
     treatments,
+    uiClient,
   }}
 >
   const THEME_KEY = "marta-orozco-theme";
@@ -35,8 +54,8 @@ import { bonoTiers, rituals, siteMeta, treatments } from "../data/site";
     document.querySelector("aside.fixed"),
   ].filter(Boolean);
 
-  const ritualMap = new Map(rituals.map((ritual) => [ritual.bookingValue, ritual]));
-  const treatmentMap = new Map(treatments.map((treatment) => [treatment.bookingValue, treatment]));
+  const ritualMap = new Map(rituals.map((ritual) => [ritual.id, ritual]));
+  const treatmentMap = new Map(treatments.map((treatment) => [treatment.id, treatment]));
 
   const themeIconClasses = {
     light: "fa-solid fa-sun text-amber-500",
@@ -90,6 +109,12 @@ import { bonoTiers, rituals, siteMeta, treatments } from "../data/site";
     });
   }
 
+  function closeAllLangMenus() {
+    if (typeof window.__closeAllLangMenus === "function") {
+      window.__closeAllLangMenus();
+    }
+  }
+
   function menuForThemeButton(button) {
     return document.getElementById(button.getAttribute("aria-controls"));
   }
@@ -100,6 +125,7 @@ import { bonoTiers, rituals, siteMeta, treatments } from "../data/site";
 
     const open = forceOpen ?? menu.hidden;
     closeAllThemeMenus();
+    closeAllLangMenus();
 
     if (open) {
       menu.hidden = false;
@@ -116,7 +142,10 @@ import { bonoTiers, rituals, siteMeta, treatments } from "../data/site";
     mobileMenu.toggleAttribute("inert", !open);
     mobileMenu.setAttribute("aria-hidden", String(!open));
     mobileMenuBtn.setAttribute("aria-expanded", String(open));
-    mobileMenuBtn.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+    mobileMenuBtn.setAttribute(
+      "aria-label",
+      open ? uiClient.closeMenu : uiClient.openMenu,
+    );
 
     if (mobileMenuIcon) {
       mobileMenuIcon.className = open ? "fa-solid fa-xmark" : "fa-solid fa-bars";
@@ -124,6 +153,7 @@ import { bonoTiers, rituals, siteMeta, treatments } from "../data/site";
 
     setPageInert(open);
     closeAllThemeMenus();
+    closeAllLangMenus();
     syncBodyLock();
   }
 
@@ -156,14 +186,19 @@ import { bonoTiers, rituals, siteMeta, treatments } from "../data/site";
       return;
     }
 
+    const saveLabel = String(uiClient.youSaveTemplate).replace(
+      "{amount}",
+      String(quote.savings),
+    );
+
     display.innerHTML = `
       <div class="pricing-compare">
         <div class="pricing-compare-figures">
           <span class="pricing-original">${quote.fullTotal} €</span>
           <span class="pricing-discounted">${quote.discountedTotal} €</span>
         </div>
-        <p class="pricing-per-session">${quote.perSession} € / sesión</p>
-        <p class="pricing-savings-highlight"><i class="fa-solid fa-tag" aria-hidden="true"></i> Ahorras ${quote.savings} €</p>
+        <p class="pricing-per-session">${quote.perSession} € ${uiClient.perSession}</p>
+        <p class="pricing-savings-highlight"><i class="fa-solid fa-tag" aria-hidden="true"></i> ${saveLabel}</p>
       </div>
     `;
   }
@@ -197,7 +232,7 @@ import { bonoTiers, rituals, siteMeta, treatments } from "../data/site";
       const mount = card.querySelector("[data-pricing-mount]");
       mount.innerHTML =
         renderPillGroup({
-          label: "Duración",
+          label: uiClient.durationLabel,
           items: treatment.durations.map((duration) => ({
             value: String(duration.min),
             label: `${duration.min} min`,
@@ -206,7 +241,7 @@ import { bonoTiers, rituals, siteMeta, treatments } from "../data/site";
           selectedValue: card.dataset.selectedDuration,
         }) +
         renderPillGroup({
-          label: "Tipo de compra",
+          label: uiClient.purchaseTypeLabel,
           items: bonoTiers.map((tier) => ({
             value: tier.id,
             label: tier.shortLabel,
@@ -235,14 +270,14 @@ import { bonoTiers, rituals, siteMeta, treatments } from "../data/site";
   }
 
   function syncBookingFieldVisibility() {
-    const treatmentName = modalTreatment.value;
-    const ritual = ritualMap.get(treatmentName) ?? ritualMap.get(treatmentName.replace(/\s+\(.+$/, ""));
-    const treatment = treatmentMap.get(treatmentName);
+    const selectedId = modalTreatment.value;
+    const ritual = ritualMap.get(selectedId);
+    const treatment = treatmentMap.get(selectedId);
 
     if (ritual) {
       modalDurationGroup.hidden = true;
       modalPurchaseTypeGroup.hidden = true;
-      modalDuration.innerHTML = `<option value="${ritual.duration}">${ritual.duration} minutos</option>`;
+      modalDuration.innerHTML = `<option value="${ritual.duration}">${ritual.duration} ${uiClient.minutesSuffix}</option>`;
       modalPurchaseType.value = "single";
       modalPriceEstimate.value = `${ritual.price} €`;
       return;
@@ -253,7 +288,10 @@ import { bonoTiers, rituals, siteMeta, treatments } from "../data/site";
     modalDurationGroup.hidden = false;
     modalPurchaseTypeGroup.hidden = false;
     modalDuration.innerHTML = treatment.durations
-      .map((duration) => `<option value="${duration.min}">${duration.min} minutos</option>`)
+      .map(
+        (duration) =>
+          `<option value="${duration.min}">${duration.min} ${uiClient.minutesSuffix}</option>`,
+      )
       .join("");
 
     updateModalPriceEstimate();
@@ -263,31 +301,30 @@ import { bonoTiers, rituals, siteMeta, treatments } from "../data/site";
     const treatment = treatmentMap.get(modalTreatment.value);
     if (!treatment) return;
 
-    const duration = treatment.durations.find((entry) => entry.min === Number(modalDuration.value)) ?? treatment.durations[0];
+    const duration =
+      treatment.durations.find((entry) => entry.min === Number(modalDuration.value)) ??
+      treatment.durations[0];
     const tier = bonoTiers.find((entry) => entry.id === modalPurchaseType.value) ?? bonoTiers[0];
     const quote = calculateQuote(duration.price, tier);
     modalPriceEstimate.value =
       tier.sessions === 1
         ? `${duration.price} €`
-        : `${quote.discountedTotal} € (${quote.perSession} € / sesión)`;
+        : `${quote.discountedTotal} € (${quote.perSession} € ${uiClient.perSession})`;
   }
 
-  function openBookingModal(treatmentName, context = {}) {
-    if (treatmentName) {
-      const match = [...modalTreatment.options].find((option) =>
-        option.value.startsWith(treatmentName),
+  function openBookingModal(treatmentId, context = {}) {
+    if (treatmentId) {
+      const match = [...modalTreatment.options].find(
+        (option) => option.value === treatmentId,
       );
       if (match) modalTreatment.value = match.value;
     }
 
-    // Voucher CTAs need a massage treatment so "Tipo de compra" stays visible.
+    // Pack CTAs need a massage treatment so purchase type stays visible.
     if (context.bono) {
       const current = modalTreatment.value;
-      const isRitual =
-        ritualMap.has(current) ||
-        ritualMap.has(current.replace(/\s+\(.+$/, ""));
-      if (isRitual || !treatmentMap.has(current)) {
-        modalTreatment.value = treatments[0].bookingValue;
+      if (ritualMap.has(current) || !treatmentMap.has(current)) {
+        modalTreatment.value = treatments[0].id;
       }
     }
 
@@ -312,22 +349,29 @@ import { bonoTiers, rituals, siteMeta, treatments } from "../data/site";
   }
 
   function bookingMessage() {
+    const wb = uiClient.whatsappBooking;
     const purchaseTypeLabel =
-      bonoTiers.find((entry) => entry.id === modalPurchaseType.value)?.label ?? "Sesión suelta";
+      bonoTiers.find((entry) => entry.id === modalPurchaseType.value)?.label ??
+      wb.defaultSingle;
     const estimate = modalPriceEstimate.value;
     const durationLabel = modalDurationGroup.hidden
-      ? "80 minutos"
-      : `${modalDuration.value} minutos`;
+      ? wb.defaultDuration
+      : `${modalDuration.value} ${uiClient.minutesSuffix}`;
+
+    const selectedOption = [...modalTreatment.options].find(
+      (option) => option.value === modalTreatment.value,
+    );
+    const treatmentLabel = selectedOption?.textContent?.trim() || modalTreatment.value;
 
     return [
-      "Hola Marta! Me gustaría reservar una cita.",
+      wb.greeting,
       "",
-      `• *Tratamiento:* ${modalTreatment.value}`,
-      `• *Duración:* ${durationLabel}`,
-      `• *Tipo de compra:* ${purchaseTypeLabel}`,
-      estimate ? `• *Precio estimado:* ${estimate}` : "",
-      `• *Nombre:* ${modalName.value}`,
-      `• *Preferencia de Fecha/Hora:* ${modalDate.value}`,
+      `• *${wb.treatment}:* ${treatmentLabel}`,
+      `• *${wb.duration}:* ${durationLabel}`,
+      `• *${wb.purchaseType}:* ${purchaseTypeLabel}`,
+      estimate ? `• *${wb.priceEstimate}:* ${estimate}` : "",
+      `• *${wb.name}:* ${modalName.value}`,
+      `• *${wb.datePreference}:* ${modalDate.value}`,
     ]
       .filter(Boolean)
       .join("\n");
@@ -362,7 +406,7 @@ import { bonoTiers, rituals, siteMeta, treatments } from "../data/site";
 
   document.querySelectorAll("[data-open-booking]").forEach((button) => {
     button.addEventListener("click", () => {
-      const treatmentName = button.dataset.treatment;
+      const treatmentId = button.dataset.treatment;
       const card = button.closest("[data-pricing-card]");
       const context = card
         ? {
@@ -375,7 +419,7 @@ import { bonoTiers, rituals, siteMeta, treatments } from "../data/site";
         context.bono = button.dataset.bono;
       }
 
-      openBookingModal(treatmentName, context);
+      openBookingModal(treatmentId, context);
     });
   });
 
@@ -418,6 +462,7 @@ import { bonoTiers, rituals, siteMeta, treatments } from "../data/site";
   document.addEventListener("keydown", (event) => {
     if (event.key !== "Escape") return;
     closeAllThemeMenus();
+    closeAllLangMenus();
     toggleMobileMenu(false);
   });
 
@@ -448,7 +493,6 @@ import { bonoTiers, rituals, siteMeta, treatments } from "../data/site";
     ).observe(headerSentinel);
   }
 
-  // Expose for carousel panel switching (Massages.astro inline script)
   window.treatments = treatments;
   window.renderPricingWidgets = renderPricingWidgets;
   window.openBookingModal = openBookingModal;

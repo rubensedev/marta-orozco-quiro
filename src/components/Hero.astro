@@ -1,8 +1,15 @@
 ---
 import { Image } from "astro:assets";
 import heroBg from "../assets/images/hero.webp";
-import { heroContent } from "../data/site";
+import type { SiteBundle } from "../data/site";
 import HeroPortrait from "./HeroPortrait.astro";
+
+type Props = {
+  site: SiteBundle;
+};
+
+const { site } = Astro.props;
+const { hero } = site;
 ---
 
 <div class="hero-section">
@@ -11,7 +18,7 @@ import HeroPortrait from "./HeroPortrait.astro";
       <Image
         class="absolute inset-0 h-full w-full object-cover"
         src={heroBg}
-        alt={heroContent.backgroundImageAlt}
+        alt={hero.backgroundImageAlt}
         width={1536}
         height={1024}
         fetchpriority="high"
@@ -28,31 +35,33 @@ import HeroPortrait from "./HeroPortrait.astro";
         <h1
           class="hero-reveal hero-reveal--1 m-0 font-serif text-[clamp(2.5rem,7vw,5.25rem)] leading-tight font-normal lg:text-[clamp(2.25rem,3.5vw,3.75rem)]"
         >
-          {heroContent.title}
+          {hero.title}
         </h1>
         <p
           class="hero-reveal hero-reveal--2 mt-6 mb-0 max-w-2xl text-[1.15rem] leading-[1.45] text-brand-muted lg:mt-4 lg:text-[1rem]"
         >
-          {heroContent.description}
+          {hero.description}
         </p>
 
         <div
           class="hero-reveal hero-reveal--3 mt-8 flex flex-wrap items-center gap-4"
         >
           <button class="btn-brand" type="button" data-open-booking>
-            {heroContent.primaryCta}
+            {hero.primaryCta}
           </button>
-          <a class="btn-secondary" href={heroContent.secondaryCta.href}>
-            {heroContent.secondaryCta.label}
+          <a class="btn-secondary" href={hero.secondaryCta.href}>
+            {hero.secondaryCta.label}
           </a>
         </div>
       </div>
 
       <HeroPortrait
         class="hero-portrait--mobile hero-reveal hero-reveal--4 lg:hidden"
+        portraitAlt={hero.portraitAlt}
       />
       <HeroPortrait
         class="hero-reveal hero-reveal--4 hidden lg:block"
+        portraitAlt={hero.portraitAlt}
         priority
       />
     </div>

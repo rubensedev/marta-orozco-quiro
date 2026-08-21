@@ -1,5 +1,12 @@
 ---
-import { siteMeta } from "../data/site";
+import type { SiteBundle } from "../data/site";
+
+type Props = {
+  site: SiteBundle;
+};
+
+const { site } = Astro.props;
+const { meta, ui } = site;
 ---
 
 <aside
@@ -7,15 +14,15 @@ import { siteMeta } from "../data/site";
 >
   <a
     class="flex min-w-0 flex-col"
-    href={`https://wa.me/${siteMeta.whatsappNumber}?text=${encodeURIComponent(siteMeta.whatsappInquiry)}`}
+    href={`https://wa.me/${meta.whatsappNumber}?text=${encodeURIComponent(meta.whatsappInquiry)}`}
     data-whatsapp-direct
   >
-    <span class="m-0 text-[0.9rem] text-brand-muted">RESERVAR CITA</span>
-    <span class="text-[0.9rem] font-semibold">{siteMeta.whatsappDisplay}</span>
+    <span class="m-0 text-[0.9rem] text-brand-muted">{ui.reserveAppointment}</span>
+    <span class="text-[0.9rem] font-semibold">{meta.whatsappDisplay}</span>
   </a>
 
   <button class="btn-brand" type="button" data-open-booking>
-    RESERVAR AHORA
+    {ui.reserveNow}
     <i class="fa-solid fa-chevron-right text-[10px]"></i>
   </button>
 </aside>

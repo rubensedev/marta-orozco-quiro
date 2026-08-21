@@ -1,0 +1,16 @@
+---
+import HomePage from "../../components/HomePage.astro";
+import { getSite } from "../../data/site";
+import Layout from "../../layouts/Layout.astro";
+
+const site = getSite("en");
+---
+
+<Layout
+  lang={site.meta.lang}
+  title={site.meta.title}
+  description={site.meta.description}
+  locale={site.locale}
+>
+  <HomePage site={site} />
+</Layout>

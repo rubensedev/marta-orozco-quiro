@@ -67,7 +67,7 @@ rules:
 workflow:
   review_line_budget: 400
   init_next: sdd-verify
-  feature_name_hint: adopt-astro-tailwind
+  feature_name_hint: add-i18n-es-en
   phases:
     - sdd-explore
     - sdd-propose

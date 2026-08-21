@@ -1,7 +1,14 @@
 ---
 import { Image } from "astro:assets";
 import heroBg from "../assets/images/hero.webp";
-import { aboutStats } from "../data/site";
+import type { SiteBundle } from "../data/site";
+
+type Props = {
+  site: SiteBundle;
+};
+
+const { site } = Astro.props;
+const { aboutStats } = site;
 ---
 
 <section

@@ -1,13 +1,25 @@
+---
+import type { SiteBundle } from "../data/site";
+
+type Props = {
+  site: SiteBundle;
+};
+
+const { site } = Astro.props;
+const { footer } = site;
+const year = new Date().getFullYear();
+---
+
 <footer class="py-10">
   <div
     class="mx-auto flex w-[min(1120px,calc(100%-2rem))] flex-col items-center gap-4 text-center"
   >
-    <img class="site-logo h-14 w-auto" src="/assets/images/logo.svg" alt="Logo Marta Orozco" />
+    <img class="site-logo h-14 w-auto" src="/assets/images/logo.svg" alt={footer.logoAlt} />
     <p class="m-0 text-[0.9rem] text-brand-muted">
-      © {new Date().getFullYear()} Marta Orozco Quiromasajista. Todos los derechos reservados.
+      {footer.copyright(year)}
     </p>
     <p class="m-0 text-[0.85rem] text-brand-muted">
-      Con mucho ❤️, de&nbsp;
+      {footer.creditPrefix}&nbsp;
       <a
         class="font-medium text-brand-sage underline-offset-2 transition-opacity hover:opacity-80 hover:underline focus-visible:underline dark:text-brand-sage-bright"
         href="https://github.com/rubensedev"

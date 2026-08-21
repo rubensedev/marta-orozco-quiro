@@ -1,30 +1,17 @@
 ---
-import About from "../components/About.astro";
-import BookingModal from "../components/BookingModal.astro";
-import Contact from "../components/Contact.astro";
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
-import Hero from "../components/Hero.astro";
-import Massages from "../components/Massages.astro";
-import MobileBar from "../components/MobileBar.astro";
-import PageScripts from "../components/PageScripts.astro";
-import Rituals from "../components/Rituals.astro";
+import HomePage from "../components/HomePage.astro";
+import { getSite, type Locale } from "../data/site";
 import Layout from "../layouts/Layout.astro";
+
+const locale = (Astro.currentLocale ?? "es") as Locale;
+const site = getSite(locale === "en" ? "en" : "es");
 ---
 
-<Layout>
-  <Header />
-
-  <main id="inicio">
-    <Hero />
-    <About />
-    <Massages />
-    <Rituals />
-    <Contact />
-  </main>
-
-  <Footer />
-  <MobileBar />
-  <BookingModal />
-  <PageScripts />
+<Layout
+  lang={site.meta.lang}
+  title={site.meta.title}
+  description={site.meta.description}
+  locale={site.locale}
+>
+  <HomePage site={site} />
 </Layout>

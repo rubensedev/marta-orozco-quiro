@@ -1,13 +1,21 @@
 ---
-import {
+import type { SiteBundle } from "../data/site";
+import SectionHeading from "./SectionHeading.astro";
+
+type Props = {
+  site: SiteBundle;
+};
+
+const { site } = Astro.props;
+const {
   bonoExamples,
   bonoTiers,
-  bonosContent,
+  bonos: bonosContent,
   rituals,
   ritualsContent,
   treatments,
-} from "../data/site";
-import SectionHeading from "./SectionHeading.astro";
+  sectionIds,
+} = site;
 
 const packageTiers = bonoTiers.filter((tier) => tier.sessions > 1);
 
@@ -42,8 +50,9 @@ const exampleRows = bonoExamples.flatMap((example) => {
 ---
 
 <section
-  id="bonos"
+  id={sectionIds.packages}
   class="mx-auto my-8 w-[min(1120px,calc(100%-2rem))] rounded-4xl bg-brand-bg py-16 md:px-6 md:py-20 lg:px-8 dark:bg-brand-bg-dark"
+  data-packages-section
 >
   <SectionHeading
     title={ritualsContent.heading}
@@ -77,7 +86,7 @@ const exampleRows = bonoExamples.flatMap((example) => {
             class="mt-6 inline-flex w-full max-w-xs cursor-pointer items-center justify-center rounded-full bg-brand-lavender px-6 py-3.5 text-[0.72rem] font-semibold tracking-[0.14em] text-white uppercase transition hover:bg-brand-lavender-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-lavender dark:hover:bg-brand-lavender"
             type="button"
             data-open-booking
-            data-treatment={ritual.bookingValue}
+            data-treatment={ritual.id}
           >
             {ritualsContent.ctaLabel}
           </button>
@@ -112,14 +121,14 @@ const exampleRows = bonoExamples.flatMap((example) => {
             )}
             <article class="flex flex-col items-center text-center">
               <h4 class="m-0 text-[0.95rem] font-semibold tracking-[0.12em] text-brand-text-dark uppercase dark:text-brand-text-light">
-                {tier.sessions} sesiones
+                {bonosContent.sessionsLabel(tier.sessions)}
               </h4>
               <button
                 class="bono-discount mt-4"
                 type="button"
                 data-open-booking
                 data-bono={tier.id}
-                aria-label={`Reservar ${tier.label}`}
+                aria-label={site.ui.reserveTreatment(tier.label)}
               >
                 <span class="bono-discount__wave" aria-hidden="true"></span>
                 <span
@@ -253,7 +262,9 @@ const exampleRows = bonoExamples.flatMap((example) => {
 </style>
 
 <script>
-  const revealEls = document.querySelectorAll("#bonos .massage-card-reveal");
+  const revealEls = document.querySelectorAll(
+    "[data-packages-section] .massage-card-reveal",
+  );
 
   const revealObserver = new IntersectionObserver(
     (entries) => {

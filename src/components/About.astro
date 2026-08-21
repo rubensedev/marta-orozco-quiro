@@ -1,14 +1,22 @@
 ---
-import { aboutContent } from "../data/site";
+import type { SiteBundle } from "../data/site";
 import AboutStats from "./AboutStats.astro";
 import SectionHeading from "./SectionHeading.astro";
+
+type Props = {
+  site: SiteBundle;
+};
+
+const { site } = Astro.props;
+const { about, sectionIds } = site;
 ---
 
 <section
-  id="sobre-mi"
+  id={sectionIds.about}
   class="mx-auto w-[min(1120px,calc(100%-2rem))] py-[clamp(3rem,8vh,6rem)] md:px-6 lg:px-8"
+  data-about-section
 >
-  <SectionHeading title={aboutContent.heading} />
+  <SectionHeading title={about.heading} />
 
   <article
     class="about-reveal about-reveal--1 rounded-4xl bg-[color-mix(in_srgb,var(--color-brand-lavender)_22%,white_78%)] p-8 shadow-soft md:p-10 dark:bg-[color-mix(in_srgb,var(--color-brand-lavender-dark)_55%,black_45%)]"
@@ -16,18 +24,18 @@ import SectionHeading from "./SectionHeading.astro";
     <h3
       class="about-reveal about-reveal--3 m-0 font-serif text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.1] font-normal text-brand-lavender dark:text-brand-lavender-bright"
     >
-      {aboutContent.title}
+      {about.title}
     </h3>
     <p class="about-reveal about-reveal--4 mt-3 mb-0 text-lg font-medium text-brand-muted">
-      {aboutContent.subtitle}
+      {about.subtitle}
     </p>
     {
-      aboutContent.paragraphs.map((paragraph, i) => (
+      about.paragraphs.map((paragraph, i) => (
         <p class={`about-reveal about-reveal--${i + 5} mt-5 mb-0 leading-[1.8]`}>{paragraph}</p>
       ))
     }
   </article>
-  <AboutStats />
+  <AboutStats site={site} />
 </section>
 
 <style>
@@ -72,7 +80,7 @@ import SectionHeading from "./SectionHeading.astro";
     { threshold: 0.12 }
   );
 
-  document.querySelectorAll("#sobre-mi .about-reveal").forEach((el) => {
+  document.querySelectorAll("[data-about-section] .about-reveal").forEach((el) => {
     observer.observe(el);
   });
 </script>

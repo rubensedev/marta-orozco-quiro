@@ -1,5 +1,12 @@
 ---
-import { bonoTiers, bookingOptions } from "../data/site";
+import type { SiteBundle } from "../data/site";
+
+type Props = {
+  site: SiteBundle;
+};
+
+const { site } = Astro.props;
+const { bookingOptions, bonoTiers, ui } = site;
 ---
 
 <dialog
@@ -14,25 +21,25 @@ import { bonoTiers, bookingOptions } from "../data/site";
       class="absolute top-5 right-5 inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-brand-sage/14 bg-transparent text-inherit"
       type="button"
       data-close-booking
-      aria-label="Cerrar modal de reserva"
+      aria-label={ui.modal.closeAria}
     >
       <i class="fa-solid fa-xmark" aria-hidden="true"></i>
     </button>
 
     <p class="m-0 mb-4 inline-flex items-center gap-3 text-xs font-semibold tracking-[0.24em] text-brand-lavender uppercase">
-      Cita Directa
+      {ui.modal.eyebrow}
     </p>
     <h2
       id="bookingModalTitle"
       class="m-0 mb-6 font-serif text-3xl font-light uppercase"
     >
-      Reservar tratamiento
+      {ui.modal.title}
     </h2>
 
     <form id="bookingForm" class="grid gap-5">
       <div class="booking-field-group">
         <label class="mb-2 block text-[0.9rem] font-semibold tracking-[0.12em] uppercase" for="modalTreatment">
-          Tratamiento Deseado <span class="text-brand-lavender">*</span>
+          {ui.modal.treatmentLabel} <span class="text-brand-lavender">*</span>
         </label>
         <select
           id="modalTreatment"
@@ -42,7 +49,7 @@ import { bonoTiers, bookingOptions } from "../data/site";
         >
           {
             bookingOptions.map((option) => (
-              <option value={option}>{option}</option>
+              <option value={option.id}>{option.label}</option>
             ))
           }
         </select>
@@ -50,7 +57,7 @@ import { bonoTiers, bookingOptions } from "../data/site";
 
       <div class="booking-field-group" id="modalDurationGroup">
         <label class="mb-2 block text-[0.9rem] font-semibold tracking-[0.12em] uppercase" for="modalDuration">
-          Duración Preferida <span class="text-brand-lavender">*</span>
+          {ui.modal.durationLabel} <span class="text-brand-lavender">*</span>
         </label>
         <select
           id="modalDuration"
@@ -61,7 +68,7 @@ import { bonoTiers, bookingOptions } from "../data/site";
 
       <div class="booking-field-group" id="modalPurchaseTypeGroup">
         <label class="mb-2 block text-[0.9rem] font-semibold tracking-[0.12em] uppercase" for="modalPurchaseType">
-          Tipo de Compra <span class="text-brand-lavender">*</span>
+          {ui.modal.purchaseTypeLabel} <span class="text-brand-lavender">*</span>
         </label>
         <select
           id="modalPurchaseType"
@@ -77,7 +84,7 @@ import { bonoTiers, bookingOptions } from "../data/site";
       </div>
 
       <div class="booking-field-group">
-        <p class="mb-2 text-[0.9rem] font-semibold tracking-[0.12em] uppercase">Precio estimado</p>
+        <p class="mb-2 text-[0.9rem] font-semibold tracking-[0.12em] uppercase">{ui.modal.priceEstimateLabel}</p>
         <output
           id="modalPriceEstimate"
           class="inline-flex min-h-13 w-full items-center rounded-2xl border border-brand-sage/14 bg-white/70 px-4 py-[0.85rem] font-semibold text-brand-lavender dark:bg-white/6"
@@ -88,7 +95,7 @@ import { bonoTiers, bookingOptions } from "../data/site";
 
       <div class="booking-field-group">
         <label class="mb-2 block text-[0.9rem] font-semibold tracking-[0.12em] uppercase" for="modalName">
-          Tu Nombre <span class="text-brand-lavender">*</span>
+          {ui.modal.nameLabel} <span class="text-brand-lavender">*</span>
         </label>
         <input
           id="modalName"
@@ -102,22 +109,22 @@ import { bonoTiers, bookingOptions } from "../data/site";
 
       <div class="booking-field-group">
         <label class="mb-2 block text-[0.9rem] font-semibold tracking-[0.12em] uppercase" for="modalDate">
-          Preferencia de Fecha/Hora <span class="text-brand-lavender">*</span>
+          {ui.modal.dateLabel} <span class="text-brand-lavender">*</span>
         </label>
         <input
           id="modalDate"
           class="min-h-13 w-full rounded-2xl border border-brand-sage/14 bg-white/70 px-4 py-[0.85rem] text-inherit dark:bg-white/6"
           name="datePreference"
           type="text"
-          placeholder="Ej. Jueves 17:00"
+          placeholder={ui.modal.datePlaceholder}
           required
         />
         <p class="m-0 text-[0.9rem] text-brand-muted">
-          Disponibilidad solo jueves de 15:00 a 21:00.
+          {ui.modal.dateHint}
         </p>
       </div>
 
-      <button class="btn-brand" type="submit">Abrir WhatsApp</button>
+      <button class="btn-brand" type="submit">{ui.modal.submit}</button>
     </form>
   </article>
 </dialog>

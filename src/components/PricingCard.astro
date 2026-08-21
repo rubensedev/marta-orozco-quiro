@@ -3,9 +3,10 @@ import type { Treatment } from "../data/site";
 
 type Props = {
   treatment: Treatment;
+  reserveLabel: string;
 };
 
-const { treatment } = Astro.props;
+const { treatment, reserveLabel } = Astro.props;
 const align = treatment.imagePosition === "end" ? "start" : undefined;
 const reverse = treatment.imagePosition === "end";
 ---
@@ -18,7 +19,7 @@ const reverse = treatment.imagePosition === "end";
       : "flex-col md:flex-row",
   ]}
   data-pricing-card={treatment.id}
-  data-treatment={treatment.bookingValue}
+  data-treatment={treatment.id}
   data-pricing-align={align}
 >
   <div class="min-w-0 md:w-[46%] md:shrink-0">
@@ -45,9 +46,9 @@ const reverse = treatment.imagePosition === "end";
       class="btn-brand mt-8"
       type="button"
       data-open-booking
-      data-treatment={treatment.bookingValue}
+      data-treatment={treatment.id}
     >
-      Reservar {treatment.title}
+      {reserveLabel}
     </button>
   </div>
 </article>

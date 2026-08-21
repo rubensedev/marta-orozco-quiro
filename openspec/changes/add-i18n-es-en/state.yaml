@@ -1,0 +1,105 @@
+change: add-i18n-es-en
+
+status: verified
+
+branch: feat/i18n-es-en
+
+created: 2026-08-21
+
+mode: hybrid
+
+base_branch: develop
+
+delivery_strategy: exception-ok
+
+phases:
+
+  explore: done
+
+  propose: done
+
+  spec: done
+
+  design: done
+
+  tasks: done
+
+  apply: done
+
+  verify: done
+
+  archive: pending
+
+locked:
+
+  - Astro built-in i18n only (no extra i18n library)
+
+  - defaultLocale: es; locales: [es, en]; prefixDefaultLocale: false → / and /en/
+
+  - Content: getSite(locale) with typed locale modules (shared non-translated + es/en dictionaries); not JSON-heavy frameworks
+
+  - Translate everything on EN including section hashes (#about, #massages, #packages, #contact, …); nav hrefs match; hash map for switcher
+
+  - WhatsApp on /en/: fully English (treatment names + body) so Marta detects English speakers
+
+  - EN-GB glossary: Quiromasajista → professional massage therapist / massage therapist; Bonos → session packs / multi-session packs (anchor #packages); Descontracturante → deep tissue / muscle-release; Cráneo Facial → Craniofacial; brand "Marta Orozco" unchanged
+
+  - Switcher UI: translate icon + ES/EN + chevron; theme-like dropdown; desktop + mobile drawer next to theme
+
+  - SEO: site in astro.config; hreflang/alternate es+en; x-default → es
+
+  - Detection: Spain-related (es, es-*, ca, gl, eu) → ES; else → EN; localStorage explicit choice wins; early inline script; avoid loops; crawler-friendly skip when matching
+
+  - Language control navigates locales (not client dictionary swap); getRelativeLocaleUrl
+
+  - Layout sets html lang + meta from active locale
+
+  - Move hardcoded Spanish out of components/scripts into locale data
+
+  - Do not change Spanish meaning/wording
+
+  - Delivery: ALL in same PR; exception-ok vs 400-line review budget
+
+out_of_scope:
+
+  - Extra i18n libraries
+
+  - Client-only dictionary swap without URL locales
+
+  - Google Translate
+
+  - Changing Spanish wording
+
+  - Locales beyond es/en
+
+assumptions:
+
+  - Client maps key by treatment/ritual id, not Spanish bookingValue
+
+  - No automated tests; verify with astro build + manual smoke
+
+  - Engram store project resolves as ruben (config memory_project marta-orozco-quiro may not exist in store)
+
+  - Production site origin unknown; design uses SITE_URL_PLACEHOLDER until real canonical URL provided
+
+  - Data layout: src/data/site/{shared,es,en,hashes,index}.ts + HomePage.astro shared shell
+
+blocking_questions: []
+
+open_questions:
+
+  - Real production origin for astro.config site (placeholder until known)
+
+next: sdd-archive
+
+next_parallel: null
+
+next_gate: sdd-archive
+
+tasks_summary: >
+
+  Verify PASS WITH WARNINGS: 22/22 tasks, 8/8 req, 19/19 scenarios.
+
+  Build+smoke OK (/ and /en/). Warning: SITE_URL_PLACEHOLDER.
+
+  Ready for sdd-archive (do not archive until requested).

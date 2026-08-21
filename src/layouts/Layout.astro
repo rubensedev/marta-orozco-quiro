@@ -1,26 +1,37 @@
 ---
 import "../styles/global.css";
-import { siteMeta } from "../data/site";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import type { Locale } from "../data/site";
 
 type Props = {
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
+  lang: string;
+  locale: Locale;
 };
 
-const {
-  title = siteMeta.title,
-  description = siteMeta.description,
-} = Astro.props;
+const { title, description, lang, locale } = Astro.props;
+
+const siteOrigin = Astro.site ?? new URL("https://SITE_URL_PLACEHOLDER");
+const esUrl = new URL(getRelativeLocaleUrl("es"), siteOrigin).href;
+const enUrl = new URL(getRelativeLocaleUrl("en"), siteOrigin).href;
 ---
 
 <!doctype html>
-<html lang={siteMeta.lang} class="scroll-smooth scheme-light dark:scheme-dark">
+<html
+  lang={lang}
+  data-locale={locale}
+  class="scroll-smooth scheme-light dark:scheme-dark"
+>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" href="/favicon.svg" />
+    <link rel="alternate" hreflang="es" href={esUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="x-default" href={esUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -39,6 +50,79 @@ const {
           saved === "dark" || (saved !== "light" && (saved === "system" || !saved) && prefersDark);
         if (useDark) {
           document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
+    <script is:inline>
+      (function () {
+        try {
+          var LOCALE_KEY = "marta-orozco-locale";
+          var ua = (navigator.userAgent || "").toLowerCase();
+          if (
+            /bot|crawl|spider|slurp|facebookexternalhit|preview|lighthouse|pagespeed|pingdom|yandex|baidu|duckduck|semrush|ahrefs|bytespider/i.test(
+              ua,
+            )
+          ) {
+            return;
+          }
+
+          var pageLocale = document.documentElement.getAttribute("data-locale") || "es";
+          var stored = localStorage.getItem(LOCALE_KEY);
+          var preferred = stored === "es" || stored === "en" ? stored : null;
+
+          if (!preferred) {
+            var langs =
+              navigator.languages && navigator.languages.length
+                ? navigator.languages
+                : [navigator.language || "en"];
+            var spainRelated = false;
+            for (var i = 0; i < langs.length; i++) {
+              var code = String(langs[i] || "").toLowerCase();
+              var primary = code.split("-")[0];
+              if (
+                primary === "es" ||
+                primary === "ca" ||
+                primary === "gl" ||
+                primary === "eu" ||
+                code.indexOf("es-") === 0
+              ) {
+                spainRelated = true;
+                break;
+              }
+            }
+            preferred = spainRelated ? "es" : "en";
+          }
+
+          if (preferred === pageLocale) return;
+
+          var hash = window.location.hash || "";
+          var esToEn = {
+            inicio: "home",
+            "sobre-mi": "about",
+            masajes: "massages",
+            bonos: "packages",
+            contacto: "contact",
+          };
+          var enToEs = {
+            home: "inicio",
+            about: "sobre-mi",
+            massages: "masajes",
+            packages: "bonos",
+            contact: "contacto",
+          };
+          var raw = hash.replace(/^#/, "");
+          var mapped = "";
+          if (raw) {
+            mapped =
+              preferred === "en"
+                ? esToEn[raw] || (enToEs[raw] ? raw : raw)
+                : enToEs[raw] || (esToEn[raw] ? raw : raw);
+          }
+          var nextHash = mapped ? "#" + mapped : hash;
+          var nextPath = preferred === "en" ? "/en/" : "/";
+          window.location.replace(nextPath + nextHash);
+        } catch (e) {
+          /* ignore boot failures */
         }
       })();
     </script>
