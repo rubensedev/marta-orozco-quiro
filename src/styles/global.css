@@ -179,6 +179,14 @@
     filter: grayscale(1) invert(0.9) hue-rotate(180deg);
   }
 
+  .booking-modal {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    max-height: calc(100dvh - 2rem);
+    overflow: auto;
+  }
+
   .booking-modal::backdrop {
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(8px);
@@ -188,8 +196,43 @@
     border-color: #dc2626;
   }
 
+  .booking-price-card {
+    display: grid;
+    gap: 0.35rem;
+    border-radius: 1rem;
+    padding: 1rem 1.15rem;
+    background: color-mix(in srgb, var(--color-brand-lavender) 22%, white 78%);
+  }
+
+  .dark .booking-price-card {
+    background: color-mix(in srgb, var(--color-brand-lavender-dark) 55%, black 45%);
+  }
+
+  .booking-price-card__label {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-brand-muted);
+  }
+
+  .booking-price-card__value {
+    display: block;
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-brand-lavender);
+  }
+
+  .dark .booking-price-card__value {
+    color: var(--color-brand-lavender-bright);
+  }
+
   .btn-brand,
-  .btn-secondary {
+  .btn-secondary,
+  .btn-whatsapp {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -212,6 +255,21 @@
   .btn-brand:hover,
   .btn-brand:focus-visible {
     background: var(--color-brand-sage-hover);
+  }
+
+  .btn-whatsapp {
+    width: 100%;
+    background: #25d366;
+    color: #fff;
+  }
+
+  .btn-whatsapp:hover,
+  .btn-whatsapp:focus-visible {
+    background: #1ebe57;
+  }
+
+  .btn-whatsapp i {
+    font-size: 1.15rem;
   }
 
   .btn-secondary {

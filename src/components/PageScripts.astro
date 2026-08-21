@@ -38,6 +38,7 @@ const uiClient = {
   const modalPurchaseType = document.getElementById("modalPurchaseType");
   const modalPriceEstimate = document.getElementById("modalPriceEstimate");
   const modalName = document.getElementById("modalName");
+  const modalEmail = document.getElementById("modalEmail");
   const modalDate = document.getElementById("modalDate");
   const modalDurationGroup = document.getElementById("modalDurationGroup");
   const modalPurchaseTypeGroup = document.getElementById("modalPurchaseTypeGroup");
@@ -371,6 +372,7 @@ const uiClient = {
       `• *${wb.purchaseType}:* ${purchaseTypeLabel}`,
       estimate ? `• *${wb.priceEstimate}:* ${estimate}` : "",
       `• *${wb.name}:* ${modalName.value}`,
+      `• *${wb.email}:* ${modalEmail.value}`,
       `• *${wb.datePreference}:* ${modalDate.value}`,
     ]
       .filter(Boolean)

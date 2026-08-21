@@ -13,6 +13,7 @@ const { bookingOptions, bonoTiers, ui } = site;
   id="bookingModal"
   class="booking-modal w-[min(680px,calc(100%-1rem))] max-w-full rounded-[2rem] border-0 bg-transparent p-0"
   aria-labelledby="bookingModalTitle"
+  aria-describedby="bookingModalIntro"
 >
   <article
     class="relative rounded-[2rem] bg-brand-bg p-8 shadow-soft md:p-10 dark:bg-brand-card-dark"
@@ -26,15 +27,15 @@ const { bookingOptions, bonoTiers, ui } = site;
       <i class="fa-solid fa-xmark" aria-hidden="true"></i>
     </button>
 
-    <p class="m-0 mb-4 inline-flex items-center gap-3 text-xs font-semibold tracking-[0.24em] text-brand-lavender uppercase">
-      {ui.modal.eyebrow}
-    </p>
     <h2
       id="bookingModalTitle"
-      class="m-0 mb-6 font-serif text-3xl font-light uppercase"
+      class="m-0 mb-3 pr-12 font-serif text-3xl font-light uppercase"
     >
       {ui.modal.title}
     </h2>
+    <p id="bookingModalIntro" class="m-0 mb-6 text-brand-muted">
+      {ui.modal.intro}
+    </p>
 
     <form id="bookingForm" class="grid gap-5">
       <div class="booking-field-group">
@@ -84,16 +85,6 @@ const { bookingOptions, bonoTiers, ui } = site;
       </div>
 
       <div class="booking-field-group">
-        <p class="mb-2 text-[0.9rem] font-semibold tracking-[0.12em] uppercase">{ui.modal.priceEstimateLabel}</p>
-        <output
-          id="modalPriceEstimate"
-          class="inline-flex min-h-13 w-full items-center rounded-2xl border border-brand-sage/14 bg-white/70 px-4 py-[0.85rem] font-semibold text-brand-lavender dark:bg-white/6"
-        >
-          -
-        </output>
-      </div>
-
-      <div class="booking-field-group">
         <label class="mb-2 block text-[0.9rem] font-semibold tracking-[0.12em] uppercase" for="modalName">
           {ui.modal.nameLabel} <span class="text-brand-lavender">*</span>
         </label>
@@ -103,6 +94,23 @@ const { bookingOptions, bonoTiers, ui } = site;
           name="name"
           type="text"
           autocomplete="name"
+          placeholder={ui.modal.namePlaceholder}
+          required
+        />
+      </div>
+
+      <div class="booking-field-group">
+        <label class="mb-2 block text-[0.9rem] font-semibold tracking-[0.12em] uppercase" for="modalEmail">
+          {ui.modal.emailLabel} <span class="text-brand-lavender">*</span>
+        </label>
+        <input
+          id="modalEmail"
+          class="min-h-13 w-full rounded-2xl border border-brand-sage/14 bg-white/70 px-4 py-[0.85rem] text-inherit dark:bg-white/6"
+          name="email"
+          type="email"
+          autocomplete="email"
+          inputmode="email"
+          placeholder={ui.modal.emailPlaceholder}
           required
         />
       </div>
@@ -124,7 +132,15 @@ const { bookingOptions, bonoTiers, ui } = site;
         </p>
       </div>
 
-      <button class="btn-brand" type="submit">{ui.modal.submit}</button>
+      <div class="booking-price-card">
+        <p class="booking-price-card__label">{ui.modal.priceEstimateLabel}</p>
+        <output id="modalPriceEstimate" class="booking-price-card__value">-</output>
+      </div>
+
+      <button class="btn-whatsapp" type="submit">
+        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+        {ui.modal.submit}
+      </button>
     </form>
   </article>
 </dialog>
