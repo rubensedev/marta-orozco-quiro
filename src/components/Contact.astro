@@ -184,36 +184,47 @@ const whatsappHref = `https://wa.me/${siteMeta.whatsappNumber}?text=${encodeURIC
     width: 3.25rem;
     height: 3.25rem;
     border-radius: 999px;
-    font-size: 1.4rem;
-    color: #fff;
+    background: #ececec;
+    font-size: 1.45rem;
     text-decoration: none;
+    box-shadow: 0 2px 8px rgba(31, 45, 32, 0.08);
     transition:
       transform 0.2s ease,
-      filter 0.2s ease,
+      background-color 0.2s ease,
       box-shadow 0.2s ease;
   }
 
   .contact__social:hover,
   .contact__social:focus-visible {
     transform: translateY(-2px);
-    filter: brightness(1.06);
+    background: #e4e4e4;
+    box-shadow: 0 6px 14px rgba(31, 45, 32, 0.12);
   }
 
   .contact__social--instagram {
-    background: linear-gradient(
-      45deg,
-      #f09433 0%,
-      #e6683c 25%,
-      #dc2743 50%,
-      #cc2366 75%,
-      #bc1888 100%
-    );
-    box-shadow: 0 8px 18px rgba(188, 24, 136, 0.28);
+    color: #e4405f;
   }
 
   .contact__social--whatsapp {
-    background: #25d366;
-    box-shadow: 0 8px 18px rgba(37, 211, 102, 0.28);
+    color: #25d366;
+  }
+
+  :global(.dark) .contact__social {
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: none;
+  }
+
+  :global(.dark) .contact__social:hover,
+  :global(.dark) .contact__social:focus-visible {
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  :global(.dark) .contact__social--instagram {
+    color: #f56073;
+  }
+
+  :global(.dark) .contact__social--whatsapp {
+    color: #4adf7c;
   }
 
   .contact__open-maps {
