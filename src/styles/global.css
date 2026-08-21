@@ -32,6 +32,10 @@
     font-size-adjust: from-font;
   }
 
+  html.dark {
+    --color-brand-muted: #c5c2bb;
+  }
+
   [hidden],
   .booking-field-group[hidden] {
     display: none !important;
@@ -281,15 +285,25 @@
     background: var(--color-brand-sage-hover);
   }
 
+  .dark .btn-brand {
+    background: color-mix(in srgb, var(--color-brand-sage-bright) 55%, var(--color-brand-sage));
+    color: var(--color-brand-text-light);
+  }
+
+  .dark .btn-brand:hover,
+  .dark .btn-brand:focus-visible {
+    background: color-mix(in srgb, var(--color-brand-sage-bright) 72%, var(--color-brand-sage));
+  }
+
   .btn-whatsapp {
     width: 100%;
-    background: #25d366;
+    background: #00a884;
     color: #fff;
   }
 
   .btn-whatsapp:hover,
   .btn-whatsapp:focus-visible {
-    background: #1ebe57;
+    background: #008069;
   }
 
   .btn-whatsapp i {
@@ -369,6 +383,16 @@
     box-shadow: 0 8px 18px rgba(75, 57, 181, 0.28);
   }
 
+  .dark .pricing-pill-active {
+    background: var(--color-brand-sage);
+    color: var(--color-brand-text-light);
+  }
+
+  .dark .pricing-pill-bono.pricing-pill-active {
+    background: var(--color-brand-lavender);
+    color: var(--color-brand-text-light);
+  }
+
   .pricing-compare {
     display: flex;
     flex-wrap: wrap;
@@ -393,6 +417,10 @@
     color: var(--color-brand-sage);
   }
 
+  .dark .pricing-single {
+    color: var(--color-brand-sage-bright);
+  }
+
   .pricing-original {
     color: var(--color-brand-muted);
     text-decoration: line-through;
@@ -401,6 +429,10 @@
 
   .pricing-discounted {
     color: var(--color-brand-lavender);
+  }
+
+  .dark .pricing-discounted {
+    color: var(--color-brand-lavender-bright);
   }
 
   .pricing-per-session {
