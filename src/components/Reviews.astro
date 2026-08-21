@@ -1,0 +1,95 @@
+---
+import { reviews, reviewsContent } from "../data/site";
+import SectionHeading from "./SectionHeading.astro";
+
+const starIndexes = [0, 1, 2, 3, 4] as const;
+---
+
+<section
+  id="testimonios"
+  class="mx-auto w-[min(1120px,calc(100%-2rem))] overflow-visible py-[clamp(3rem,8vh,6rem)] md:px-6 lg:px-8"
+>
+  <SectionHeading
+    title={reviewsContent.heading}
+    description={reviewsContent.description}
+  />
+
+  <div class="site-carousel mt-2" id="reviewsCarousel">
+    <div class="site-carousel__viewport">
+      <ul
+        class="site-carousel__track"
+        id="reviewsCarouselTrack"
+        aria-label="Opiniones de clientas"
+      >
+        {
+          reviews.map((review) => (
+            <li class="site-carousel__slide">
+              <article class="flex h-full min-h-[11rem] flex-col gap-4 px-1 py-1">
+                <div class="flex items-center gap-1" aria-hidden="true">
+                  {starIndexes.map(() => (
+                    <i class="fa-solid fa-star text-amber-400" />
+                  ))}
+                </div>
+                <span class="sr-only">5 de 5</span>
+                <blockquote class="m-0 flex-1 text-[0.95rem] leading-[1.65] text-brand-muted italic">
+                  “{review.quote}”
+                </blockquote>
+                <footer class="mt-auto">
+                  <p class="m-0 text-[0.95rem] font-bold tracking-[0.02em] text-brand-sage dark:text-brand-sage-bright">
+                    {review.name}
+                  </p>
+                  <p class="mt-1 mb-0 text-[0.8rem] tracking-[0.04em] text-brand-muted uppercase">
+                    {review.treatmentName}
+                  </p>
+                </footer>
+              </article>
+            </li>
+          ))
+        }
+      </ul>
+
+      <button
+        type="button"
+        class="site-carousel__nav site-carousel__nav--prev"
+        id="reviewsCarouselPrev"
+        aria-controls="reviewsCarouselTrack"
+        aria-label="Opinión anterior"
+      >
+        <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+      </button>
+      <button
+        type="button"
+        class="site-carousel__nav site-carousel__nav--next"
+        id="reviewsCarouselNext"
+        aria-controls="reviewsCarouselTrack"
+        aria-label="Opinión siguiente"
+      >
+        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initHorizontalCarousel } from "../scripts/horizontal-carousel";
+
+  const track = document.getElementById(
+    "reviewsCarouselTrack",
+  ) as HTMLElement | null;
+  const prevBtn = document.getElementById(
+    "reviewsCarouselPrev",
+  ) as HTMLButtonElement | null;
+  const nextBtn = document.getElementById(
+    "reviewsCarouselNext",
+  ) as HTMLButtonElement | null;
+
+  if (track) {
+    initHorizontalCarousel({
+      track,
+      prevBtn,
+      nextBtn,
+      slideSelector: ".site-carousel__slide",
+      infinite: true,
+    });
+  }
+</script>

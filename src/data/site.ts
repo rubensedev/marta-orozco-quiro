@@ -19,6 +19,14 @@ export type Ritual = {
   price: number;
 };
 
+export type Review = {
+  id: string;
+  name: string;
+  stars: 5;
+  quote: string;
+  treatmentName: string;
+};
+
 export const siteMeta = {
   lang: "es",
   title: "Marta Orozco | Quiromasajista",
@@ -39,6 +47,7 @@ export const navItems = [
   { href: "#sobre-mi", label: "SOBRE MÍ" },
   { href: "#masajes", label: "MASAJES" },
   { href: "#bonos", label: "BONOS" },
+  { href: "#testimonios", label: "TESTIMONIOS" },
   { href: "#contacto", label: "CONTACTO" },
 ];
 
@@ -82,6 +91,12 @@ export const ritualsContent = {
   description:
     "Rituales completos para una renovación profunda o paquetes de bonos con descuento especial.",
   ctaLabel: "Reservar Ritual",
+};
+
+export const reviewsContent = {
+  heading: "¿Tienes dudas?",
+  description:
+    "Desde 2021 he acompañado a más de 1.500 personas en su camino hacia el bienestar. Estas voces cuentan cómo se sintieron después de la sesión — por si te ayuda a dar el paso.",
 };
 
 export const bonosContent = {
@@ -181,6 +196,81 @@ export const rituals: Ritual[] = [
     iconClass: "fa-solid fa-feather-pointed",
     duration: 80,
     price: 60,
+  },
+];
+
+export const reviews: Review[] = [
+  {
+    id: "review-01",
+    name: "Laura M.",
+    stars: 5,
+    quote:
+      "Salí como nueva. Noté el cuerpo blandito y la cabeza en silencio por primera vez en semanas.",
+    treatmentName: "Relajante",
+  },
+  {
+    id: "review-02",
+    name: "Carmen R.",
+    stars: 5,
+    quote:
+      "Tenía la espalda hecha un nudo y me fui caminando ligera. Marta tiene unas manos mágicas.",
+    treatmentName: "Descontracturante",
+  },
+  {
+    id: "review-03",
+    name: "Ana S.",
+    stars: 5,
+    quote:
+      "Piernas ligeras, sensación de frescura y una calma que me acompañó todo el día. Recomendadísimo.",
+    treatmentName: "Detox",
+  },
+  {
+    id: "review-04",
+    name: "Patricia G.",
+    stars: 5,
+    quote:
+      "Se me disolvió la tensión de mandíbula y cuello. Salí con la cara relajada y una sonrisa fácil.",
+    treatmentName: "Cráneo Facial",
+  },
+  {
+    id: "review-05",
+    name: "Elena V.",
+    stars: 5,
+    quote:
+      "Una desconexión total de verdad. Cerré los ojos y el mundo se quedó fuera. Volveré seguro.",
+    treatmentName: "Ritual Desconexión Total",
+  },
+  {
+    id: "review-06",
+    name: "Lucía P.",
+    stars: 5,
+    quote:
+      "Ambiente cálido, trato cercano y un masaje que me dejó flotando. Justo lo que necesitaba.",
+    treatmentName: "Relajante",
+  },
+  {
+    id: "review-07",
+    name: "Marta H.",
+    stars: 5,
+    quote:
+      "Me sentí liviana y con energía suave, sin agobio. Ideal cuando el cuerpo pide reset.",
+    treatmentName: "Ritual Cuerpo Ligero",
+  },
+  {
+    id: "review-08",
+    name: "Sofía N.",
+    stars: 5,
+    quote:
+      "Después de horas frente al ordenador, este masaje me devolvió el cuello. Super contenta.",
+    treatmentName: "Descontracturante",
+  },
+  {
+    id: "review-09",
+    name: "Irene C.",
+    stars: 5,
+    quote:
+      "Relajada, renovada y con ganas de cuidarme más. La sesión se me hizo un suspiro.",
+    treatmentName: "Detox",
   },
 ];
 

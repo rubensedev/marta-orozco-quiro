@@ -178,6 +178,8 @@ const firstImage = imageMap[first.id];
 </section>
 
 <script>
+  import { initHorizontalCarousel } from "../scripts/horizontal-carousel";
+
   const panel = document.getElementById(
     "massageMainPanel",
   ) as HTMLElement | null;
@@ -226,6 +228,17 @@ const firstImage = imageMap[first.id];
   ).matches;
   const supportsViewTransition =
     typeof document.startViewTransition === "function";
+
+  const carousel =
+    track != null
+      ? initHorizontalCarousel({
+          track,
+          prevBtn,
+          nextBtn,
+          slideSelector: ".massage-carousel__slide",
+          infinite: false,
+        })
+      : null;
 
   function wait(ms: number) {
     return new Promise<void>((resolve) => {
@@ -302,7 +315,9 @@ const firstImage = imageMap[first.id];
   }
 
   function getSlide(card: HTMLElement) {
-    return (card.closest(".massage-carousel__slide") as HTMLElement | null) ?? card;
+    return (
+      (card.closest(".massage-carousel__slide") as HTMLElement | null) ?? card
+    );
   }
 
   function scrollCardIntoView(index: number) {
@@ -346,7 +361,7 @@ const firstImage = imageMap[first.id];
       track.setAttribute("aria-activedescendant", active.id);
     }
     if (scroll) scrollCardIntoView(index);
-    updateNavButtons();
+    carousel?.updateNavButtons();
   }
 
   async function switchTreatment(id: string) {
@@ -379,107 +394,15 @@ const firstImage = imageMap[first.id];
     }
   }
 
-  function updateNavButtons() {
-    if (!track || !prevBtn || !nextBtn) return;
-    const maxScroll = track.scrollWidth - track.clientWidth;
-    const needsNav = maxScroll > 8;
-
-    prevBtn.hidden = !needsNav;
-    nextBtn.hidden = !needsNav;
-    if (!needsNav) return;
-
-    prevBtn.disabled = track.scrollLeft <= 4;
-    nextBtn.disabled = track.scrollLeft >= maxScroll - 4;
-  }
-
-  function scrollTrackBy(dir: -1 | 1) {
-    if (!track || cards.length === 0) return;
-    const slide = getSlide(cards[0]);
-    const gap = parseFloat(
-      getComputedStyle(track).columnGap || getComputedStyle(track).gap || "16",
-    );
-    const step = slide.offsetWidth + gap;
-    track.scrollBy({
-      left: dir * step,
-      behavior: prefersReduced ? "auto" : "smooth",
-    });
-  }
-
-  let dragging = false;
-  let dragPending = false;
-  let dragStartX = 0;
-  let dragScrollLeft = 0;
-  let dragMoved = false;
-  let dragPointerId: number | null = null;
-  const dragThreshold = 8;
-
-  track?.addEventListener("pointerdown", (e) => {
-    if (e.button !== 0 || !track) return;
-    // Defer capture/drag until the pointer actually moves — otherwise
-    // desktop clicks on cards never fire (capture steals the interaction).
-    dragPending = true;
-    dragging = false;
-    dragMoved = false;
-    dragPointerId = e.pointerId;
-    dragStartX = e.clientX;
-    dragScrollLeft = track.scrollLeft;
-  });
-
-  track?.addEventListener("pointermove", (e) => {
-    if (!track || dragPointerId !== e.pointerId) return;
-    if (!dragPending && !dragging) return;
-
-    const dx = e.clientX - dragStartX;
-
-    if (!dragging) {
-      if (Math.abs(dx) < dragThreshold) return;
-      dragging = true;
-      dragMoved = true;
-      dragPending = false;
-      track.setPointerCapture(e.pointerId);
-      track.classList.add("is-dragging");
-    }
-
-    track.scrollLeft = dragScrollLeft - dx;
-  });
-
-  function endDrag(e: PointerEvent) {
-    if (dragPointerId !== e.pointerId) return;
-    if (!dragPending && !dragging) return;
-
-    dragPending = false;
-    dragging = false;
-    dragPointerId = null;
-    track?.classList.remove("is-dragging");
-    try {
-      track?.releasePointerCapture(e.pointerId);
-    } catch {
-      /* already released */
-    }
-  }
-
-  track?.addEventListener("pointerup", endDrag);
-  track?.addEventListener("pointercancel", endDrag);
-
   cards.forEach((card) => {
     card.addEventListener("click", (e) => {
-      if (dragMoved) {
+      if (carousel?.consumeDragMoved()) {
         e.preventDefault();
         e.stopPropagation();
-        dragMoved = false;
         return;
       }
       switchTreatment(card.dataset.carouselCard!);
     });
-  });
-
-  prevBtn?.addEventListener("click", () => scrollTrackBy(-1));
-  nextBtn?.addEventListener("click", () => scrollTrackBy(1));
-  track?.addEventListener("scroll", () => updateNavButtons(), {
-    passive: true,
-  });
-  window.addEventListener("resize", () => updateNavButtons(), {
-    passive: true,
   });
 
   // Keyboard: left/right on focused track
@@ -521,5 +444,4 @@ const firstImage = imageMap[first.id];
   });
 
   setActiveCard(0, { scroll: false });
-  updateNavButtons();
 </script>

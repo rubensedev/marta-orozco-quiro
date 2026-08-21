@@ -1,0 +1,93 @@
+change: add-client-reviews
+status: applied
+phases:
+  explore: done
+  propose: done
+  spec: done
+  design: done
+  tasks: done
+  apply: done
+  verify: pending
+  archive: pending
+branch: feat/review-section
+created: 2026-08-21
+updated: 2026-08-21
+mode: hybrid
+delivery_strategy: ask-on-risk
+base_branch: develop
+artifact_store: hybrid
+assumptions:
+  - New homepage section for client reviews/testimonials with title "¿Tienes dudas?".
+  - Placement locked: after Rituals/Bonos, before Contact.
+  - Nav locked: TESTIMONIOS → #testimonios (id="testimonios").
+  - Cards: 5 yellow stars, italic quote, bold name, treatmentName subtitle below name.
+  - Reviews carousel infinite; massage carousel finite; shared/parameterized reuse preferred.
+  - Autoplay: none (manual + drag only).
+  - Intro copy locked (Spanish body with +1.500 / since 2021).
+  - CTA: text-only (no Reservar in section).
+  - ≥8 invented Spanish mocks drafted in exploration.md (not duplicated in proposal).
+  - Capability contract: new `client-reviews` only; Modified Capabilities: None.
+  - Approach A: data-first + parameterized shared carousel (exploration Approach 1).
+  - Design: shared horizontal-carousel.ts with infinite flag; dual-class CSS; Reviews.astro + site.ts data.
+  - User chose delivery strategy 1 = feature-branch-chain (PR1 helper+Massages → PR2 reviews).
+open_questions: false
+locked_decisions:
+  placement: before-contact-after-rituals
+  nav_label: TESTIMONIOS
+  anchor_id: testimonios
+  card_subtitle: treatmentName
+  reviews_loop: infinite
+  massages_loop: finite
+  autoplay: false
+  stars: always-5-yellow
+  copy: invented-mocks
+  intro: locked-recommended
+  section_cta: text-only
+approval:
+  proposal_ready: true
+  awaiting_user: false
+  user_approved: true
+  approved_at: 2026-08-21
+next: sdd-verify
+next_parallel: []
+artifacts:
+  proposal: openspec/changes/add-client-reviews/proposal.md
+  exploration: openspec/changes/add-client-reviews/exploration.md
+  spec: openspec/changes/add-client-reviews/specs/client-reviews/spec.md
+  design: openspec/changes/add-client-reviews/design.md
+  tasks: openspec/changes/add-client-reviews/tasks.md
+  engram_proposal: sdd/add-client-reviews/proposal
+  engram_explore: sdd/add-client-reviews/explore
+  engram_spec: sdd/add-client-reviews/spec
+  engram_design: sdd/add-client-reviews/design
+  engram_tasks: sdd/add-client-reviews/tasks
+  engram_apply_progress: sdd/add-client-reviews/apply-progress
+review_workload:
+  estimated_lines: 280-450
+  budget_risk: Medium
+  chained_prs_recommended: true
+  decision_needed_before_apply: false
+  chain_strategy: feature-branch-chain
+  delivery_strategy: ask-on-risk
+chain:
+  strategy: feature-branch-chain
+  tracker_branch: feat/review-section
+  intended_slices:
+    - name: PR1
+      branch: feat/review-section-01-carousel
+      base: feat/review-section
+      scope: horizontal-carousel helper + Massages finite wire + CSS dual-class
+    - name: PR2
+      branch: feat/review-section-02-reviews
+      base: feat/review-section-01-carousel
+      scope: reviews data + Reviews.astro + index mount + nav TESTIMONIOS + infinite
+  commits_created: false
+  prs_created: false
+  note: >
+    Apply implemented the full feature locally on the tracker branch without
+    git commits or GitHub PRs (user did not request commits; sdd-apply does not
+    require them). Child branch names recorded for a later chain cut.
+verification:
+  astro_check: "0 errors (5 pre-existing PageScripts hints)"
+  astro_build: pass
+  task_4_2_manual_interactive: pending-for-sdd-verify

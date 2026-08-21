@@ -600,7 +600,8 @@
   card left/right ≤ center of prev/next. Inset = half nav size;
   nav is centered on that inset line (half outside, half over card).
 */
-.massage-carousel {
+.massage-carousel,
+.site-carousel {
   --massage-card-gap: 1.125rem;
   --massage-visible: 1.15;
   --massage-nav-size: 2.75rem;
@@ -615,30 +616,35 @@
 }
 
 @media (min-width: 640px) {
-  .massage-carousel {
+  .massage-carousel,
+  .site-carousel {
     --massage-visible: 2.15;
   }
 }
 
 @media (min-width: 900px) {
-  .massage-carousel {
+  .massage-carousel,
+  .site-carousel {
     --massage-visible: 3.15;
   }
 }
 
 @media (min-width: 1100px) {
-  .massage-carousel {
+  .massage-carousel,
+  .site-carousel {
     --massage-visible: 4;
   }
 }
 
-.massage-carousel__viewport {
+.massage-carousel__viewport,
+.site-carousel__viewport {
   position: relative;
   width: 100%;
   overflow: visible;
 }
 
-.massage-carousel__track {
+.massage-carousel__track,
+.site-carousel__track {
   display: flex;
   gap: var(--massage-card-gap);
   list-style: none;
@@ -655,18 +661,21 @@
   scrollbar-width: none;
 }
 
-.massage-carousel__track::-webkit-scrollbar {
+.massage-carousel__track::-webkit-scrollbar,
+.site-carousel__track::-webkit-scrollbar {
   display: none;
 }
 
-.massage-carousel__track.is-dragging {
+.massage-carousel__track.is-dragging,
+.site-carousel__track.is-dragging {
   cursor: grabbing;
   scroll-behavior: auto;
   scroll-snap-type: none;
   user-select: none;
 }
 
-.massage-carousel__slide {
+.massage-carousel__slide,
+.site-carousel__slide {
   flex: 0 0
     calc((100% - (var(--massage-visible) - 1) * var(--massage-card-gap)) / var(--massage-visible));
   min-width: 0;
@@ -674,7 +683,8 @@
   scroll-snap-stop: normal;
 }
 
-.massage-carousel__nav {
+.massage-carousel__nav,
+.site-carousel__nav {
   position: absolute;
   top: 50%;
   z-index: 3;
@@ -696,41 +706,50 @@
 }
 
 /* Centers sit on the card-edge limit (track inline padding). */
-.massage-carousel__nav--prev {
+.massage-carousel__nav--prev,
+.site-carousel__nav--prev {
   left: var(--massage-edge-inset);
   transform: translate(-50%, -50%);
 }
 
-.massage-carousel__nav--next {
+.massage-carousel__nav--next,
+.site-carousel__nav--next {
   right: var(--massage-edge-inset);
   transform: translate(50%, -50%);
 }
 
-.massage-carousel__nav[hidden] {
+.massage-carousel__nav[hidden],
+.site-carousel__nav[hidden] {
   display: none;
 }
 
 .massage-carousel__nav:hover:not(:disabled),
-.massage-carousel__nav:focus-visible:not(:disabled) {
+.massage-carousel__nav:focus-visible:not(:disabled),
+.site-carousel__nav:hover:not(:disabled),
+.site-carousel__nav:focus-visible:not(:disabled) {
   background: #fff;
   border-color: var(--color-brand-sage);
   color: var(--color-brand-sage);
 }
 
-.massage-carousel__nav:disabled {
+.massage-carousel__nav:disabled,
+.site-carousel__nav:disabled {
   cursor: default;
   opacity: 0.35;
   pointer-events: none;
 }
 
-.dark .massage-carousel__nav {
+.dark .massage-carousel__nav,
+.dark .site-carousel__nav {
   border-color: rgba(255, 255, 255, 0.2);
   background: #fff;
   color: var(--color-brand-sage);
 }
 
 .dark .massage-carousel__nav:hover:not(:disabled),
-.dark .massage-carousel__nav:focus-visible:not(:disabled) {
+.dark .massage-carousel__nav:focus-visible:not(:disabled),
+.dark .site-carousel__nav:hover:not(:disabled),
+.dark .site-carousel__nav:focus-visible:not(:disabled) {
   background: #fff;
   border-color: var(--color-brand-sage);
   color: var(--color-brand-sage-dark);
@@ -958,10 +977,12 @@
 
 @media (prefers-reduced-motion: reduce) {
   .massage-carousel__track,
+  .site-carousel__track,
   .massage-carousel-card,
   .massage-carousel-card__image,
   .massage-carousel-card__cta,
-  .massage-carousel__nav {
+  .massage-carousel__nav,
+  .site-carousel__nav {
     transition: none;
     scroll-behavior: auto;
   }
