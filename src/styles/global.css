@@ -756,7 +756,8 @@
 }
 
 /* ── Massage carousel cards ─────────────────────────────────── */
-.massage-carousel-card {
+.massage-carousel-card,
+.review-carousel-card {
   --massage-img-rest: 5.25rem;
   --massage-img-pop: 6.5rem;
   --massage-img-rest-scale: calc(var(--massage-img-rest) / var(--massage-img-pop));
@@ -774,7 +775,6 @@
   box-shadow: none;
   color: inherit;
   text-align: left;
-  cursor: pointer;
   isolation: isolate;
   transition:
     background 0.3s ease,
@@ -782,20 +782,39 @@
     transform 0.3s ease;
 }
 
+.massage-carousel-card {
+  cursor: pointer;
+}
+
+.review-carousel-card {
+  min-height: 11rem;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1.1rem 1.15rem 1.15rem;
+}
+
 @media (min-width: 640px) {
-  .massage-carousel-card {
+  .massage-carousel-card,
+  .review-carousel-card {
     --massage-img-rest: 6rem;
     --massage-img-pop: 7.5rem;
     min-height: 10.5rem;
   }
+
+  .review-carousel-card {
+    min-height: 11.5rem;
+    padding: 1.2rem 1.25rem 1.3rem;
+  }
 }
 
 .massage-carousel-card:hover,
-.massage-carousel-card.is-selected {
+.massage-carousel-card.is-selected,
+.review-carousel-card:hover {
   z-index: 2;
 }
 
-.massage-carousel-card:hover {
+.massage-carousel-card:hover,
+.review-carousel-card:hover {
   transform: translateY(-2px);
 }
 
@@ -813,10 +832,44 @@
   outline-offset: 3px;
 }
 
-.dark .massage-carousel-card {
+.dark .massage-carousel-card,
+.dark .review-carousel-card {
   border-color: rgba(255, 255, 255, 0.08);
   background: color-mix(in srgb, var(--color-brand-card-dark) 88%, transparent);
   box-shadow: none;
+}
+
+.review-carousel-card__quote {
+  margin: 0;
+  flex: 1;
+  font-size: 0.95rem;
+  font-style: italic;
+  line-height: 1.65;
+  color: var(--color-brand-muted);
+}
+
+.review-carousel-card__footer {
+  margin-top: auto;
+}
+
+.review-carousel-card__name {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--color-brand-sage);
+}
+
+.dark .review-carousel-card__name {
+  color: var(--color-brand-sage-bright);
+}
+
+.review-carousel-card__treatment {
+  margin: 0.35rem 0 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-brand-muted);
 }
 
 .dark .massage-carousel-card.is-selected {
@@ -979,6 +1032,7 @@
   .massage-carousel__track,
   .site-carousel__track,
   .massage-carousel-card,
+  .review-carousel-card,
   .massage-carousel-card__image,
   .massage-carousel-card__cta,
   .massage-carousel__nav,
@@ -987,7 +1041,8 @@
     scroll-behavior: auto;
   }
 
-  .massage-carousel-card:hover {
+  .massage-carousel-card:hover,
+  .review-carousel-card:hover {
     transform: none;
   }
 

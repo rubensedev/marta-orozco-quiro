@@ -19,26 +19,24 @@ const starIndexes = [0, 1, 2, 3, 4] as const;
       <ul
         class="site-carousel__track"
         id="reviewsCarouselTrack"
-        aria-label="Opiniones de clientas"
+        aria-label="Opiniones de clientes"
       >
         {
           reviews.map((review) => (
             <li class="site-carousel__slide">
-              <article class="flex h-full min-h-[11rem] flex-col gap-4 px-1 py-1">
+              <article class="review-carousel-card">
                 <div class="flex items-center gap-1" aria-hidden="true">
                   {starIndexes.map(() => (
                     <i class="fa-solid fa-star text-amber-400" />
                   ))}
                 </div>
                 <span class="sr-only">5 de 5</span>
-                <blockquote class="m-0 flex-1 text-[0.95rem] leading-[1.65] text-brand-muted italic">
+                <blockquote class="review-carousel-card__quote">
                   “{review.quote}”
                 </blockquote>
-                <footer class="mt-auto">
-                  <p class="m-0 text-[0.95rem] font-bold tracking-[0.02em] text-brand-sage dark:text-brand-sage-bright">
-                    {review.name}
-                  </p>
-                  <p class="mt-1 mb-0 text-[0.8rem] tracking-[0.04em] text-brand-muted uppercase">
+                <footer class="review-carousel-card__footer">
+                  <p class="review-carousel-card__name">{review.name}</p>
+                  <p class="review-carousel-card__treatment">
                     {review.treatmentName}
                   </p>
                 </footer>

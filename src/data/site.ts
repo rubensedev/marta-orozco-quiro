@@ -67,7 +67,7 @@ export const heroContent = {
 
 export const aboutStats = [
   { value: "+5", label: "Años de experiencia" },
-  { value: "+1500", label: "Clientes satisfechos" },
+  { value: "+1500", label: "Personas satisfechas" },
 ];
 
 export const aboutContent = {
@@ -210,10 +210,10 @@ export const reviews: Review[] = [
   },
   {
     id: "review-02",
-    name: "Carmen R.",
+    name: "Javier R.",
     stars: 5,
     quote:
-      "Tenía la espalda hecha un nudo y me fui caminando ligera. Marta tiene unas manos mágicas.",
+      "Tenía la espalda hecha un nudo y me fui caminando ligero. Marta tiene unas manos mágicas.",
     treatmentName: "Descontracturante",
   },
   {
@@ -234,7 +234,7 @@ export const reviews: Review[] = [
   },
   {
     id: "review-05",
-    name: "Elena V.",
+    name: "Pablo V.",
     stars: 5,
     quote:
       "Una desconexión total de verdad. Cerré los ojos y el mundo se quedó fuera. Volveré seguro.",
@@ -252,24 +252,22 @@ export const reviews: Review[] = [
     id: "review-07",
     name: "Marta H.",
     stars: 5,
-    quote:
-      "Me sentí liviana y con energía suave, sin agobio. Ideal cuando el cuerpo pide reset.",
+    quote: "Me sentí liviana y con energía suave, sin agobio. Ideal cuando el cuerpo pide reset.",
     treatmentName: "Ritual Cuerpo Ligero",
   },
   {
     id: "review-08",
-    name: "Sofía N.",
+    name: "Andrés N.",
     stars: 5,
     quote:
-      "Después de horas frente al ordenador, este masaje me devolvió el cuello. Super contenta.",
+      "Después de horas frente al ordenador, este masaje me devolvió el cuello. Super contento.",
     treatmentName: "Descontracturante",
   },
   {
     id: "review-09",
     name: "Irene C.",
     stars: 5,
-    quote:
-      "Relajada, renovada y con ganas de cuidarme más. La sesión se me hizo un suspiro.",
+    quote: "Relajada, renovada y con ganas de cuidarme más. La sesión se me hizo un suspiro.",
     treatmentName: "Detox",
   },
 ];
