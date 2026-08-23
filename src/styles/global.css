@@ -57,9 +57,9 @@
     --color-glass-chrome: color-mix(in oklch, var(--color-brand-card-dark) 82%, transparent);
     --color-glass-edge: rgb(255 255 255 / 0.1);
     --color-glass-panel-lavender: color-mix(
-      in oklch,
-      color-mix(in oklch, var(--color-brand-lavender-dark) 42%, var(--color-brand-card-dark)) 75%,
-      transparent
+      in srgb,
+      var(--color-brand-lavender-dark) 55%,
+      black 45%
     );
     --color-glass-surface-stone: color-mix(
       in oklch,
