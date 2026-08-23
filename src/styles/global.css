@@ -216,14 +216,6 @@
     opacity: 0.95;
   }
 
-  .contact__map {
-    filter: grayscale(1);
-  }
-
-  .dark .contact__map {
-    filter: grayscale(1) invert(0.9) hue-rotate(180deg);
-  }
-
   .booking-modal {
     position: fixed;
     inset: 0;
