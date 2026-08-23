@@ -61,39 +61,10 @@
 
   body {
     background-color: var(--color-brand-bg);
-    background-image:
-      radial-gradient(
-        ellipse 90% 60% at 10% 0%,
-        color-mix(in oklch, var(--color-brand-sage) 9%, transparent),
-        transparent 55%
-      ),
-      radial-gradient(
-        ellipse 70% 50% at 95% 85%,
-        color-mix(in oklch, var(--color-brand-lavender) 11%, transparent),
-        transparent 50%
-      );
-    background-attachment: fixed;
   }
 
   html.dark body {
     background-color: var(--color-brand-bg-dark);
-    background-image:
-      radial-gradient(
-        ellipse 90% 60% at 10% 0%,
-        color-mix(in oklch, var(--color-brand-sage-bright) 6%, transparent),
-        transparent 55%
-      ),
-      radial-gradient(
-        ellipse 70% 50% at 95% 85%,
-        color-mix(in oklch, var(--color-brand-lavender-bright) 8%, transparent),
-        transparent 50%
-      );
-  }
-
-  @media (forced-colors: active) {
-    body {
-      background-image: none;
-    }
   }
 
   [hidden],
