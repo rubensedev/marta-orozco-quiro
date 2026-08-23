@@ -423,14 +423,24 @@
   header .theme-menu-btn:focus-visible,
   header .lang-menu-btn:hover,
   header .lang-menu-btn:focus-visible {
-    background: color-mix(in oklch, white 62%, var(--color-brand-bg));
+    background: color-mix(in oklch, var(--color-brand-sage) 26%, var(--color-glass-control));
+    border-color: rgba(255, 255, 255, 0.3);
   }
 
-  header.group[data-scrolled] .theme-menu-btn:hover,
-  header.group[data-scrolled] .theme-menu-btn:focus-visible,
-  header.group[data-scrolled] .lang-menu-btn:hover,
-  header.group[data-scrolled] .lang-menu-btn:focus-visible {
-    background: color-mix(in oklch, white 68%, var(--color-brand-bg));
+  html:not(.dark) header.group[data-scrolled] .theme-menu-btn:hover,
+  html:not(.dark) header.group[data-scrolled] .theme-menu-btn:focus-visible,
+  html:not(.dark) header.group[data-scrolled] .lang-menu-btn:hover,
+  html:not(.dark) header.group[data-scrolled] .lang-menu-btn:focus-visible {
+    background: color-mix(in oklch, white 62%, var(--color-brand-bg));
+    border-color: var(--color-brand-sage-light);
+  }
+
+  html.dark header .theme-menu-btn:hover,
+  html.dark header .theme-menu-btn:focus-visible,
+  html.dark header .lang-menu-btn:hover,
+  html.dark header .lang-menu-btn:focus-visible {
+    background: color-mix(in oklch, var(--color-brand-sage-bright) 14%, var(--color-glass-control));
+    border-color: rgba(255, 255, 255, 0.22);
   }
 
   .dark header .theme-menu-btn,
