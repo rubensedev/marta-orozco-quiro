@@ -1,0 +1,24 @@
+change: adopt-glassmorphism
+status: verify-pending
+phases:
+  explore: done
+  propose: done
+  spec: done
+  design: done
+  tasks: done
+  apply: done
+  verify: pending
+  archive: pending
+branch: feat/adopt-glassmorphism
+created: 2026-08-23
+mode: hybrid
+delivery_strategy: ask-on-risk
+base_branch: develop
+assumptions:
+  - Serenity-first: soft frost, low contrast borders, no heavy neon or high-saturation glass.
+  - Lightweight: CSS-only (backdrop-filter + tokens); no new dependencies.
+  - Tailwind utilities in .astro; extend @theme and minimal allow-list only where JS injects classes.
+  - Light and dark via html.dark custom variant; glass tokens defined per mode.
+  - Primary CTAs stay solid sage (user confirmed); glass on secondary controls and panels.
+  - Subtle ambient body gradient for glass legibility (user confirmed).
+  - Subtle frost intensity: blur 12-16px, softer opacity (user confirmed).

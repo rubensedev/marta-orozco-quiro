@@ -19,6 +19,16 @@
   --color-brand-text-dark: #2c3e2d;
   --color-brand-text-light: #fff;
   --color-brand-muted: #6b6863;
+  --color-glass-surface: color-mix(in oklch, white 58%, var(--color-brand-bg));
+  --color-glass-chrome: color-mix(in oklch, white 68%, var(--color-brand-bg));
+  --color-glass-edge: rgb(255 255 255 / 0.22);
+  --color-glass-panel-lavender: color-mix(in oklch, var(--color-brand-lavender) 18%, white 82%);
+  --color-glass-control: color-mix(in oklch, white 52%, transparent);
+  --blur-glass-chrome: 18px;
+  --blur-glass-panel: 14px;
+  --blur-glass-control: 10px;
+  --shadow-glass: 0 8px 32px rgba(31, 45, 32, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  --shadow-glass-dark: 0 8px 32px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   --font-sans: "Noto Sans", sans-serif;
   --font-serif: "Noto Serif", serif;
   --shadow-soft: 0 20px 50px rgba(31, 45, 32, 0.12);
@@ -34,6 +44,52 @@
 
   html.dark {
     --color-brand-muted: #c5c2bb;
+    --color-glass-surface: color-mix(in oklch, var(--color-brand-card-dark) 75%, transparent);
+    --color-glass-chrome: color-mix(in oklch, var(--color-brand-card-dark) 82%, transparent);
+    --color-glass-edge: rgb(255 255 255 / 0.1);
+    --color-glass-panel-lavender: color-mix(
+      in oklch,
+      var(--color-brand-lavender-dark) 42%,
+      var(--color-brand-card-dark) 58%
+    );
+    --color-glass-control: color-mix(in oklch, var(--color-brand-card-dark) 65%, transparent);
+  }
+
+  body {
+    background-color: var(--color-brand-bg);
+    background-image:
+      radial-gradient(
+        ellipse 90% 60% at 10% 0%,
+        color-mix(in oklch, var(--color-brand-sage) 9%, transparent),
+        transparent 55%
+      ),
+      radial-gradient(
+        ellipse 70% 50% at 95% 85%,
+        color-mix(in oklch, var(--color-brand-lavender) 11%, transparent),
+        transparent 50%
+      );
+    background-attachment: fixed;
+  }
+
+  html.dark body {
+    background-color: var(--color-brand-bg-dark);
+    background-image:
+      radial-gradient(
+        ellipse 90% 60% at 10% 0%,
+        color-mix(in oklch, var(--color-brand-sage-bright) 6%, transparent),
+        transparent 55%
+      ),
+      radial-gradient(
+        ellipse 70% 50% at 95% 85%,
+        color-mix(in oklch, var(--color-brand-lavender-bright) 8%, transparent),
+        transparent 50%
+      );
+  }
+
+  @media (forced-colors: active) {
+    body {
+      background-image: none;
+    }
   }
 
   [hidden],
@@ -192,8 +248,8 @@
   }
 
   .booking-modal::backdrop {
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(12px);
   }
 
   #bookingForm :user-invalid {
@@ -205,11 +261,14 @@
     gap: 0.35rem;
     border-radius: 1rem;
     padding: 1rem 1.15rem;
-    background: color-mix(in srgb, var(--color-brand-lavender) 22%, white 78%);
+    border: 1px solid var(--color-glass-edge);
+    background: var(--color-glass-panel-lavender);
+    backdrop-filter: blur(var(--blur-glass-panel));
+    box-shadow: var(--shadow-glass);
   }
 
   .dark .booking-price-card {
-    background: color-mix(in srgb, var(--color-brand-lavender-dark) 55%, black 45%);
+    box-shadow: var(--shadow-glass-dark);
   }
 
   .booking-price-card__label {
@@ -311,30 +370,75 @@
   }
 
   .btn-secondary {
-    border-color: var(--color-brand-sage-light);
-    background: rgb(255, 255, 255);
+    border-color: var(--color-glass-edge);
+    background: var(--color-glass-control);
     color: var(--color-brand-sage);
+    backdrop-filter: blur(var(--blur-glass-control));
+    box-shadow: var(--shadow-glass);
+  }
+
+  .btn-secondary:hover,
+  .btn-secondary:focus-visible {
+    background: color-mix(in oklch, white 68%, var(--color-brand-bg));
+    border-color: var(--color-brand-sage-light);
   }
 
   .dark .btn-secondary {
-    border-color: rgba(255, 255, 255, 0.24);
-    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--color-glass-edge);
+    background: var(--color-glass-control);
     color: var(--color-brand-text-light);
+    box-shadow: var(--shadow-glass-dark);
   }
 
-  header .theme-menu-btn {
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(8px);
+  .dark .btn-secondary:hover,
+  .dark .btn-secondary:focus-visible {
+    background: color-mix(in oklch, var(--color-brand-card-dark) 78%, transparent);
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+
+  @supports not (backdrop-filter: blur(1px)) {
+    .btn-secondary {
+      backdrop-filter: none;
+      background: rgb(255, 255, 255);
+    }
+
+    .dark .btn-secondary {
+      background: color-mix(in oklch, var(--color-brand-card-dark) 88%, black);
+    }
+  }
+
+  header .theme-menu-btn,
+  header .lang-menu-btn {
+    background: var(--color-glass-control);
+    border: 1px solid var(--color-glass-edge);
+    backdrop-filter: blur(var(--blur-glass-control));
+    box-shadow: var(--shadow-glass);
   }
 
   header .theme-menu-btn:hover,
-  header .theme-menu-btn:focus-visible {
-    background: rgba(255, 255, 255, 0.2);
+  header .theme-menu-btn:focus-visible,
+  header .lang-menu-btn:hover,
+  header .lang-menu-btn:focus-visible {
+    background: color-mix(in oklch, white 62%, var(--color-brand-bg));
   }
 
   header.group[data-scrolled] .theme-menu-btn:hover,
-  header.group[data-scrolled] .theme-menu-btn:focus-visible {
-    background: rgba(255, 255, 255, 0.22);
+  header.group[data-scrolled] .theme-menu-btn:focus-visible,
+  header.group[data-scrolled] .lang-menu-btn:hover,
+  header.group[data-scrolled] .lang-menu-btn:focus-visible {
+    background: color-mix(in oklch, white 68%, var(--color-brand-bg));
+  }
+
+  .dark header .theme-menu-btn,
+  .dark header .lang-menu-btn {
+    box-shadow: var(--shadow-glass-dark);
+  }
+
+  @supports not (backdrop-filter: blur(1px)) {
+    header .theme-menu-btn,
+    header .lang-menu-btn {
+      backdrop-filter: none;
+    }
   }
 
   .pricing-card__group + .pricing-card__group {
@@ -358,17 +462,19 @@
 
   .pricing-pill {
     padding: 0.5rem 0.85rem;
-    border: 1px solid var(--color-brand-sage-light);
+    border: 1px solid var(--color-glass-edge);
     border-radius: 999px;
-    background: #fff;
+    background: var(--color-glass-control);
+    backdrop-filter: blur(var(--blur-glass-control));
     color: inherit;
     font-size: 0.85rem;
     cursor: pointer;
   }
 
   .dark .pricing-pill {
-    background: rgba(255, 255, 255, 0.92);
-    color: var(--color-brand-sage-dark);
+    background: var(--color-glass-control);
+    color: var(--color-brand-text-light);
+    box-shadow: var(--shadow-glass-dark);
   }
 
   .pricing-pill-active {
@@ -516,12 +622,22 @@
 
 /* ── Massage main panel: content card + floating image ──────── */
 .massage-main-panel__content {
-  background: color-mix(in srgb, var(--color-brand-sage) 11%, #fff);
+  background: var(--color-glass-surface);
+  border: 1px solid var(--color-glass-edge);
+  backdrop-filter: blur(var(--blur-glass-panel));
+  box-shadow: var(--shadow-glass);
+  isolation: isolate;
   view-transition-name: massage-content;
 }
 
 .dark .massage-main-panel__content {
-  background: color-mix(in srgb, var(--color-brand-sage-bright) 14%, var(--color-brand-card-dark));
+  box-shadow: var(--shadow-glass-dark);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .massage-main-panel__content {
+    backdrop-filter: none;
+  }
 }
 
 .massage-main-panel__image {
@@ -807,9 +923,11 @@
   width: var(--massage-nav-size);
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(44, 62, 45, 0.12);
+  border: 1px solid var(--color-glass-edge);
   border-radius: 999px;
-  background: #fff;
+  background: var(--color-glass-control);
+  backdrop-filter: blur(var(--blur-glass-control));
+  box-shadow: var(--shadow-glass);
   color: var(--color-brand-sage);
   cursor: pointer;
   transition:
@@ -841,7 +959,7 @@
 .massage-carousel__nav:focus-visible:not(:disabled),
 .site-carousel__nav:hover:not(:disabled),
 .site-carousel__nav:focus-visible:not(:disabled) {
-  background: #fff;
+  background: color-mix(in oklch, white 72%, var(--color-brand-bg));
   border-color: var(--color-brand-sage);
   color: var(--color-brand-sage);
 }
@@ -855,18 +973,19 @@
 
 .dark .massage-carousel__nav,
 .dark .site-carousel__nav {
-  border-color: rgba(255, 255, 255, 0.2);
-  background: #fff;
-  color: var(--color-brand-sage);
+  border-color: var(--color-glass-edge);
+  background: var(--color-glass-control);
+  box-shadow: var(--shadow-glass-dark);
+  color: var(--color-brand-sage-bright);
 }
 
 .dark .massage-carousel__nav:hover:not(:disabled),
 .dark .massage-carousel__nav:focus-visible:not(:disabled),
 .dark .site-carousel__nav:hover:not(:disabled),
 .dark .site-carousel__nav:focus-visible:not(:disabled) {
-  background: #fff;
-  border-color: var(--color-brand-sage);
-  color: var(--color-brand-sage-dark);
+  background: color-mix(in oklch, var(--color-brand-card-dark) 78%, transparent);
+  border-color: var(--color-brand-sage-bright);
+  color: var(--color-brand-sage-bright);
 }
 
 /* ── Massage carousel cards ─────────────────────────────────── */
@@ -882,18 +1001,19 @@
   min-height: 9.75rem;
   align-items: stretch;
   overflow: visible;
-  border: 1px solid rgba(44, 62, 45, 0.1);
+  border: 1px solid var(--color-glass-edge);
   border-radius: 1.35rem;
-  background: color-mix(in srgb, var(--color-brand-sage) 8%, rgba(255, 255, 255, 0.55));
-  backdrop-filter: blur(10px);
-  box-shadow: none;
+  background: var(--color-glass-surface);
+  backdrop-filter: blur(var(--blur-glass-panel));
+  box-shadow: var(--shadow-glass);
   color: inherit;
   text-align: left;
   isolation: isolate;
   transition:
     background 0.3s ease,
     border-color 0.3s ease,
-    transform 0.3s ease;
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .massage-carousel-card {
@@ -933,8 +1053,9 @@
 }
 
 .massage-carousel-card.is-selected {
-  border-color: rgba(255, 255, 255, 0.72);
-  background: color-mix(in srgb, var(--color-brand-sage-bright) 28%, rgba(255, 255, 255, 0.82));
+  border-color: color-mix(in oklch, white 72%, var(--color-brand-sage-bright));
+  background: color-mix(in oklch, var(--color-brand-sage-bright) 22%, var(--color-glass-surface));
+  box-shadow: var(--shadow-glass);
 }
 
 .massage-carousel-card:focus {
@@ -948,9 +1069,9 @@
 
 .dark .massage-carousel-card,
 .dark .review-carousel-card {
-  border-color: rgba(255, 255, 255, 0.08);
-  background: color-mix(in srgb, var(--color-brand-card-dark) 88%, transparent);
-  box-shadow: none;
+  border-color: var(--color-glass-edge);
+  background: var(--color-glass-surface);
+  box-shadow: var(--shadow-glass-dark);
 }
 
 .review-carousel-card__quote {
@@ -988,7 +1109,7 @@
 
 .dark .massage-carousel-card.is-selected {
   border-color: rgba(255, 255, 255, 0.22);
-  background: color-mix(in srgb, var(--color-brand-sage-bright) 18%, var(--color-brand-card-dark));
+  background: color-mix(in oklch, var(--color-brand-sage-bright) 16%, var(--color-glass-surface));
 }
 
 .massage-carousel-card__media {

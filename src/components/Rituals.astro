@@ -63,10 +63,10 @@ const exampleRows = bonoExamples.flatMap((example) => {
     {
       rituals.map((ritual, index) => (
         <article
-          class={`massage-card-reveal flex flex-col items-center rounded-[1.75rem] bg-[color-mix(in_srgb,var(--color-brand-lavender)_22%,white_78%)] px-7 py-10 text-center shadow-soft md:px-10 md:py-12 dark:bg-[color-mix(in_srgb,var(--color-brand-lavender-dark)_55%,black_45%)]`}
+          class={`massage-card-reveal isolate flex flex-col items-center rounded-[1.75rem] border border-glass-edge bg-glass-panel-lavender px-7 py-10 text-center shadow-glass backdrop-blur-glass-panel md:px-10 md:py-12 dark:shadow-[var(--shadow-glass-dark)]`}
           style={`transition-delay: ${index * 120}ms`}
         >
-          <div class="inline-flex size-12 items-center justify-center rounded-full bg-white text-lg text-brand-lavender shadow-sm dark:bg-white/90">
+          <div class="inline-flex size-12 items-center justify-center rounded-full border border-glass-edge bg-glass-control text-lg text-brand-lavender shadow-glass backdrop-blur-glass-control dark:shadow-[var(--shadow-glass-dark)]">
             <i class={ritual.iconClass} aria-hidden="true" />
           </div>
           <h3 class="mt-6 mb-0 font-serif text-[clamp(1.35rem,2.4vw,1.65rem)] leading-tight font-normal tracking-[0.04em] text-brand-lavender uppercase dark:text-brand-lavender-bright">
@@ -96,7 +96,7 @@ const exampleRows = bonoExamples.flatMap((example) => {
   </div>
 
   <section
-    class="massage-card-reveal mt-8 rounded-[1.75rem] bg-[color-mix(in_srgb,var(--color-brand-surface)_72%,white_28%)] px-6 py-10 shadow-soft sm:px-8 md:px-12 md:py-12 dark:bg-brand-card-dark"
+    class="massage-card-reveal isolate mt-8 rounded-[1.75rem] border border-glass-edge bg-glass-surface px-6 py-10 shadow-glass backdrop-blur-glass-panel sm:px-8 md:px-12 md:py-12 dark:shadow-[var(--shadow-glass-dark)]"
     style="transition-delay: 240ms"
     aria-labelledby="bonos-title"
   >

@@ -16,10 +16,10 @@ const { bookingOptions, bonoTiers, ui } = site;
   aria-describedby="bookingModalIntro"
 >
   <article
-    class="relative rounded-[2rem] bg-brand-bg p-8 shadow-soft md:p-10 dark:bg-brand-card-dark"
+    class="relative isolate rounded-[2rem] border border-glass-edge bg-glass-surface p-8 shadow-glass backdrop-blur-glass-panel md:p-10 dark:shadow-[var(--shadow-glass-dark)]"
   >
     <button
-      class="absolute top-5 right-5 inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-brand-sage/14 bg-transparent text-inherit"
+      class="absolute top-5 right-5 inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-glass-edge bg-glass-control text-inherit shadow-glass backdrop-blur-glass-control focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-sage dark:shadow-[var(--shadow-glass-dark)]"
       type="button"
       data-close-booking
       aria-label={ui.modal.closeAria}
@@ -44,7 +44,7 @@ const { bookingOptions, bonoTiers, ui } = site;
         </label>
         <select
           id="modalTreatment"
-          class="min-h-13 w-full rounded-2xl border border-brand-sage/14 bg-white/70 px-4 py-[0.85rem] text-inherit dark:bg-white/6"
+          class="min-h-13 w-full rounded-2xl border border-glass-edge bg-glass-control px-4 py-[0.85rem] text-inherit shadow-glass backdrop-blur-glass-control dark:shadow-[var(--shadow-glass-dark)]"
           name="treatment"
           required
         >
@@ -62,7 +62,7 @@ const { bookingOptions, bonoTiers, ui } = site;
         </label>
         <select
           id="modalDuration"
-          class="min-h-13 w-full rounded-2xl border border-brand-sage/14 bg-white/70 px-4 py-[0.85rem] text-inherit dark:bg-white/6"
+          class="min-h-13 w-full rounded-2xl border border-glass-edge bg-glass-control px-4 py-[0.85rem] text-inherit shadow-glass backdrop-blur-glass-control dark:shadow-[var(--shadow-glass-dark)]"
           name="duration"
         ></select>
       </div>
@@ -73,7 +73,7 @@ const { bookingOptions, bonoTiers, ui } = site;
         </label>
         <select
           id="modalPurchaseType"
-          class="min-h-13 w-full rounded-2xl border border-brand-sage/14 bg-white/70 px-4 py-[0.85rem] text-inherit dark:bg-white/6"
+          class="min-h-13 w-full rounded-2xl border border-glass-edge bg-glass-control px-4 py-[0.85rem] text-inherit shadow-glass backdrop-blur-glass-control dark:shadow-[var(--shadow-glass-dark)]"
           name="purchaseType"
         >
           {
@@ -90,7 +90,7 @@ const { bookingOptions, bonoTiers, ui } = site;
         </label>
         <input
           id="modalName"
-          class="min-h-13 w-full rounded-2xl border border-brand-sage/14 bg-white/70 px-4 py-[0.85rem] text-inherit dark:bg-white/6"
+          class="min-h-13 w-full rounded-2xl border border-glass-edge bg-glass-control px-4 py-[0.85rem] text-inherit shadow-glass backdrop-blur-glass-control dark:shadow-[var(--shadow-glass-dark)]"
           name="name"
           type="text"
           autocomplete="name"
@@ -105,7 +105,7 @@ const { bookingOptions, bonoTiers, ui } = site;
         </label>
         <input
           id="modalEmail"
-          class="min-h-13 w-full rounded-2xl border border-brand-sage/14 bg-white/70 px-4 py-[0.85rem] text-inherit dark:bg-white/6"
+          class="min-h-13 w-full rounded-2xl border border-glass-edge bg-glass-control px-4 py-[0.85rem] text-inherit shadow-glass backdrop-blur-glass-control dark:shadow-[var(--shadow-glass-dark)]"
           name="email"
           type="email"
           autocomplete="email"
@@ -121,7 +121,7 @@ const { bookingOptions, bonoTiers, ui } = site;
         </label>
         <input
           id="modalDate"
-          class="min-h-13 w-full rounded-2xl border border-brand-sage/14 bg-white/70 px-4 py-[0.85rem] text-inherit dark:bg-white/6"
+          class="min-h-13 w-full rounded-2xl border border-glass-edge bg-glass-control px-4 py-[0.85rem] text-inherit shadow-glass backdrop-blur-glass-control dark:shadow-[var(--shadow-glass-dark)]"
           name="datePreference"
           type="text"
           placeholder={ui.modal.datePlaceholder}

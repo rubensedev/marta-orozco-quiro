@@ -71,7 +71,7 @@ rules:
 workflow:
   review_line_budget: 400
   init_next: sdd-verify
-  feature_name_hint: add-i18n-es-en
+  feature_name_hint: adopt-glassmorphism
   phases:
     - sdd-explore
     - sdd-propose

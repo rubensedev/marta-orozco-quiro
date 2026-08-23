@@ -25,15 +25,15 @@ const localeOptions: { value: Locale; label: string; code: string }[] = [
 ];
 
 const themeBtnClass =
-  "theme-menu-btn inline-flex h-12 w-[75%] text-2xl shrink-0 cursor-pointer items-center justify-center whitespace-nowrap rounded-full text-inherit transition-all duration-200";
+  "theme-menu-btn lang-menu-btn inline-flex h-12 w-[75%] text-2xl shrink-0 cursor-pointer items-center justify-center whitespace-nowrap rounded-full text-inherit transition-all duration-200";
 const themeDrawerBtnClass =
-  "inline-flex size-12 text-2xl shrink-0 cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-transparent text-inherit transition-all duration-200";
+  "inline-flex size-12 text-2xl shrink-0 cursor-pointer items-center justify-center whitespace-nowrap rounded-full border border-glass-edge bg-glass-control text-inherit shadow-glass backdrop-blur-glass-control transition-all duration-200 dark:shadow-[var(--shadow-glass-dark)]";
 const langBtnClass =
-  "inline-flex h-12 shrink-0 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-2.5 text-inherit transition-all duration-200";
+  "lang-menu-btn inline-flex h-12 shrink-0 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-2.5 text-inherit transition-all duration-200";
 const langDrawerBtnClass =
-  "inline-flex h-12 shrink-0 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-transparent px-2.5 text-inherit transition-all duration-200";
+  "inline-flex h-12 shrink-0 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-glass-edge bg-glass-control px-2.5 text-inherit shadow-glass backdrop-blur-glass-control transition-all duration-200 dark:shadow-[var(--shadow-glass-dark)]";
 const themeMenuClass =
-  "absolute top-full z-50 mt-2 flex w-max min-w-52 flex-col rounded-[1.5rem] bg-white p-1.5 text-brand-text-dark shadow-soft dark:bg-brand-card-dark dark:text-brand-text-light";
+  "absolute top-full z-50 mt-2 flex w-max min-w-52 flex-col rounded-[1.5rem] border border-glass-edge bg-glass-surface p-1.5 text-brand-text-dark shadow-glass backdrop-blur-glass-panel dark:text-brand-text-light dark:shadow-[var(--shadow-glass-dark)]";
 const themeOptionClass =
   "group flex w-full cursor-pointer items-center gap-3 rounded-2xl border-0 bg-transparent px-3 py-2.5 text-left text-sm text-brand-text-dark hover:bg-black/5 aria-checked:bg-black/5 dark:text-brand-text-light dark:hover:bg-white/8 dark:aria-checked:bg-white/10";
 
@@ -49,7 +49,7 @@ const enHrefBase = getRelativeLocaleUrl("en");
 >
 </div>
 <header
-  class="group fixed inset-x-0 top-0 z-40 border-b border-transparent bg-transparent text-brand-text-light transition-[background-color,border-color,backdrop-filter,color] duration-300 ease-out data-scrolled:border-brand-sage/8 data-scrolled:bg-brand-bg/90 data-scrolled:text-brand-text-dark data-scrolled:backdrop-blur-[18px] dark:text-brand-text-light dark:data-scrolled:border-white/8 dark:data-scrolled:bg-brand-bg-dark/90 dark:data-scrolled:text-brand-text-light"
+  class="group fixed inset-x-0 top-0 z-40 border-b border-transparent bg-transparent text-brand-text-light transition-[background-color,border-color,backdrop-filter,color,box-shadow] duration-300 ease-out data-scrolled:border-glass-edge data-scrolled:bg-glass-chrome/88 data-scrolled:text-brand-text-dark data-scrolled:shadow-glass data-scrolled:backdrop-blur-glass-chrome dark:text-brand-text-light dark:data-scrolled:text-brand-text-light"
 >
   <div
     class="mx-auto flex w-[min(1120px,calc(100%-2rem))] items-center justify-between gap-4 py-2 lg:py-4"
@@ -212,7 +212,7 @@ const enHrefBase = getRelativeLocaleUrl("en");
 
 <div
   id="mobileMenu"
-  class="pointer-events-none fixed inset-y-0 right-0 z-60 w-[min(20rem,90vw)] translate-x-full bg-white px-6 pt-3 pb-8 shadow-soft transition-transform duration-200 lg:hidden data-open:pointer-events-auto data-open:translate-x-0 dark:bg-brand-card-dark"
+  class="pointer-events-none fixed inset-y-0 right-0 z-60 w-[min(20rem,90vw)] translate-x-full border-l border-glass-edge bg-glass-chrome px-6 pt-3 pb-8 shadow-glass backdrop-blur-glass-chrome transition-transform duration-200 lg:hidden data-open:pointer-events-auto data-open:translate-x-0 dark:shadow-[var(--shadow-glass-dark)]"
   aria-hidden="true"
   inert
 >
