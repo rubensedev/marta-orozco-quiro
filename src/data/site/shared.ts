@@ -11,6 +11,16 @@ export const sharedMeta = {
 
 export const sharedTreatments = [
   {
+    id: "descontracturante",
+    image: "/assets/images/descontracturante.webp",
+    imagePosition: "start" as const,
+    durations: [
+      { min: 30, price: 25 },
+      { min: 50, price: 35 },
+      { min: 80, price: 50 },
+    ],
+  },
+  {
     id: "relajante",
     image: "/assets/images/relajante.webp",
     imagePosition: "start" as const,
@@ -27,16 +37,6 @@ export const sharedTreatments = [
     durations: [
       { min: 50, price: 40 },
       { min: 80, price: 55 },
-    ],
-  },
-  {
-    id: "descontracturante",
-    image: "/assets/images/descontracturante.webp",
-    imagePosition: "start" as const,
-    durations: [
-      { min: 30, price: 25 },
-      { min: 50, price: 35 },
-      { min: 80, price: 50 },
     ],
   },
   {

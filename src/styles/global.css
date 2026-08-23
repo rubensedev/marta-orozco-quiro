@@ -19,10 +19,6 @@
   --color-brand-text-dark: #2c3e2d;
   --color-brand-text-light: #fff;
   --color-brand-muted: #6b6863;
-  --color-massage-card-bg: color-mix(in oklch, var(--color-brand-sage-bright) 5%, var(--color-brand-bg));
-  --color-massage-selected-bg: color-mix(in oklch, var(--color-brand-sage-bright) 9%, var(--color-brand-bg));
-  --color-massage-selected-text: #2c3529;
-  --color-massage-selected-muted: #70756a;
   --color-glass-surface: color-mix(in oklch, var(--color-brand-bg) 72%, transparent);
   --color-glass-chrome: color-mix(in oklch, white 78%, transparent);
   --color-glass-edge: rgb(255 255 255 / 0.22);
@@ -57,18 +53,6 @@
 
   html.dark {
     --color-brand-muted: #c5c2bb;
-    --color-massage-card-bg: color-mix(
-      in oklch,
-      var(--color-brand-sage-bright) 7%,
-      var(--color-brand-card-dark)
-    );
-    --color-massage-selected-bg: color-mix(
-      in oklch,
-      var(--color-brand-sage-bright) 11%,
-      var(--color-brand-card-dark)
-    );
-    --color-massage-selected-text: var(--color-brand-text-light);
-    --color-massage-selected-muted: var(--color-brand-muted);
     --color-glass-surface: color-mix(in oklch, var(--color-brand-card-dark) 75%, transparent);
     --color-glass-chrome: color-mix(in oklch, var(--color-brand-card-dark) 82%, transparent);
     --color-glass-edge: rgb(255 255 255 / 0.1);
@@ -774,25 +758,16 @@
 
 /* ── Massage main panel: content card + floating image ──────── */
 .massage-main-panel__content {
-  background: var(--color-massage-selected-bg);
-  border: 1px solid color-mix(in oklch, var(--color-massage-selected-text) 6%, transparent);
+  background: color-mix(in srgb, var(--color-brand-sage) 11%, #fff);
+  border: 1px solid var(--color-glass-edge);
   backdrop-filter: blur(var(--blur-glass-panel));
   box-shadow: var(--shadow-glass);
   isolation: isolate;
   view-transition-name: massage-content;
-  color: var(--color-massage-selected-text);
-}
-
-.massage-main-panel__content .text-brand-muted,
-.massage-main-panel__content #panelDescription {
-  color: var(--color-massage-selected-muted);
-}
-
-.massage-main-panel__content .pricing-single {
-  color: var(--color-massage-selected-text);
 }
 
 .dark .massage-main-panel__content {
+  background: color-mix(in srgb, var(--color-brand-sage-bright) 14%, var(--color-brand-card-dark));
   box-shadow: var(--shadow-glass-dark);
 }
 
@@ -1179,8 +1154,10 @@
 
 .massage-carousel-card {
   cursor: pointer;
-  border-color: color-mix(in oklch, var(--color-massage-selected-text) 5%, transparent);
-  background: var(--color-massage-card-bg);
+  border-color: rgba(44, 62, 45, 0.1);
+  background: color-mix(in srgb, var(--color-brand-sage) 8%, rgba(255, 255, 255, 0.55));
+  backdrop-filter: blur(10px);
+  box-shadow: none;
 }
 
 .review-carousel-card {
@@ -1217,9 +1194,9 @@
 }
 
 .massage-carousel-card.is-selected {
-  border-color: color-mix(in oklch, var(--color-massage-selected-text) 8%, transparent);
-  background: var(--color-massage-selected-bg);
-  box-shadow: var(--shadow-glass);
+  border-color: rgba(255, 255, 255, 0.72);
+  background: color-mix(in srgb, var(--color-brand-sage-bright) 28%, rgba(255, 255, 255, 0.82));
+  box-shadow: none;
 }
 
 .massage-carousel-card:focus {
@@ -1232,9 +1209,9 @@
 }
 
 .dark .massage-carousel-card {
-  border-color: color-mix(in oklch, var(--color-brand-sage-bright) 10%, transparent);
-  background: var(--color-massage-card-bg);
-  box-shadow: var(--shadow-glass-dark);
+  border-color: rgba(255, 255, 255, 0.08);
+  background: color-mix(in srgb, var(--color-brand-card-dark) 88%, transparent);
+  box-shadow: none;
 }
 
 .dark .review-carousel-card {
@@ -1277,16 +1254,8 @@
 }
 
 .dark .massage-carousel-card.is-selected {
-  border-color: color-mix(in oklch, var(--color-brand-sage-bright) 18%, transparent);
-  background: var(--color-massage-selected-bg);
-}
-
-.massage-carousel-card.is-selected .massage-carousel-card__title {
-  color: var(--color-massage-selected-text);
-}
-
-.massage-carousel-card.is-selected .massage-carousel-card__desc {
-  color: var(--color-massage-selected-muted);
+  border-color: rgba(255, 255, 255, 0.22);
+  background: color-mix(in srgb, var(--color-brand-sage-bright) 18%, var(--color-brand-card-dark));
 }
 
 .massage-carousel-card__media {
@@ -1398,11 +1367,11 @@
 }
 
 .massage-carousel-card.is-selected .massage-carousel-card__price {
-  color: var(--color-massage-selected-text);
+  color: var(--color-brand-sage-dark);
 }
 
 .dark .massage-carousel-card.is-selected .massage-carousel-card__price {
-  color: var(--color-massage-selected-text);
+  color: var(--color-brand-sage-bright);
 }
 
 .massage-carousel-card__cta {
@@ -1422,12 +1391,7 @@
     color 0.25s ease;
 }
 
-.massage-carousel-card.is-selected .massage-carousel-card__cta {
-  border-color: transparent;
-  background: var(--color-massage-selected-text);
-  color: var(--color-brand-text-light);
-}
-
+.massage-carousel-card.is-selected .massage-carousel-card__cta,
 .massage-carousel-card:hover .massage-carousel-card__cta {
   border-color: transparent;
   background: var(--color-brand-sage);
@@ -1439,11 +1403,7 @@
   color: var(--color-brand-text-light);
 }
 
-.dark .massage-carousel-card.is-selected .massage-carousel-card__cta {
-  background: var(--color-brand-sage-bright);
-  color: var(--color-brand-sage-dark);
-}
-
+.dark .massage-carousel-card.is-selected .massage-carousel-card__cta,
 .dark .massage-carousel-card:hover .massage-carousel-card__cta {
   background: var(--color-brand-sage-bright);
   color: var(--color-brand-sage-dark);
