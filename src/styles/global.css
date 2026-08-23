@@ -19,12 +19,21 @@
   --color-brand-text-dark: #2c3e2d;
   --color-brand-text-light: #fff;
   --color-brand-muted: #6b6863;
+  --color-massage-card-bg: color-mix(in oklch, var(--color-brand-sage-bright) 5%, var(--color-brand-bg));
+  --color-massage-selected-bg: color-mix(in oklch, var(--color-brand-sage-bright) 9%, var(--color-brand-bg));
+  --color-massage-selected-text: #2c3529;
+  --color-massage-selected-muted: #70756a;
   --color-glass-surface: color-mix(in oklch, var(--color-brand-bg) 72%, transparent);
   --color-glass-chrome: color-mix(in oklch, white 78%, transparent);
   --color-glass-edge: rgb(255 255 255 / 0.22);
   --color-glass-panel-lavender: color-mix(
     in oklch,
     color-mix(in oklch, var(--color-brand-lavender) 22%, white) 70%,
+    transparent
+  );
+  --color-glass-surface-stone: color-mix(
+    in oklch,
+    color-mix(in oklch, var(--color-brand-surface) 62%, var(--color-brand-bg)) 92%,
     transparent
   );
   --color-glass-control: color-mix(in oklch, white 58%, transparent);
@@ -48,12 +57,29 @@
 
   html.dark {
     --color-brand-muted: #c5c2bb;
+    --color-massage-card-bg: color-mix(
+      in oklch,
+      var(--color-brand-sage-bright) 7%,
+      var(--color-brand-card-dark)
+    );
+    --color-massage-selected-bg: color-mix(
+      in oklch,
+      var(--color-brand-sage-bright) 11%,
+      var(--color-brand-card-dark)
+    );
+    --color-massage-selected-text: var(--color-brand-text-light);
+    --color-massage-selected-muted: var(--color-brand-muted);
     --color-glass-surface: color-mix(in oklch, var(--color-brand-card-dark) 75%, transparent);
     --color-glass-chrome: color-mix(in oklch, var(--color-brand-card-dark) 82%, transparent);
     --color-glass-edge: rgb(255 255 255 / 0.1);
     --color-glass-panel-lavender: color-mix(
       in oklch,
       color-mix(in oklch, var(--color-brand-lavender-dark) 42%, var(--color-brand-card-dark)) 75%,
+      transparent
+    );
+    --color-glass-surface-stone: color-mix(
+      in oklch,
+      color-mix(in oklch, var(--color-brand-sage-dark) 22%, var(--color-brand-card-dark)) 85%,
       transparent
     );
     --color-glass-control: color-mix(in oklch, var(--color-brand-card-dark) 65%, transparent);
@@ -748,12 +774,22 @@
 
 /* ── Massage main panel: content card + floating image ──────── */
 .massage-main-panel__content {
-  background: var(--color-glass-surface);
-  border: 1px solid var(--color-glass-edge);
+  background: var(--color-massage-selected-bg);
+  border: 1px solid color-mix(in oklch, var(--color-massage-selected-text) 6%, transparent);
   backdrop-filter: blur(var(--blur-glass-panel));
   box-shadow: var(--shadow-glass);
   isolation: isolate;
   view-transition-name: massage-content;
+  color: var(--color-massage-selected-text);
+}
+
+.massage-main-panel__content .text-brand-muted,
+.massage-main-panel__content #panelDescription {
+  color: var(--color-massage-selected-muted);
+}
+
+.massage-main-panel__content .pricing-single {
+  color: var(--color-massage-selected-text);
 }
 
 .dark .massage-main-panel__content {
@@ -1129,7 +1165,6 @@
   overflow: visible;
   border: 1px solid var(--color-glass-edge);
   border-radius: 1.35rem;
-  background: var(--color-glass-surface);
   backdrop-filter: blur(var(--blur-glass-panel));
   box-shadow: var(--shadow-glass);
   color: inherit;
@@ -1144,6 +1179,8 @@
 
 .massage-carousel-card {
   cursor: pointer;
+  border-color: color-mix(in oklch, var(--color-massage-selected-text) 5%, transparent);
+  background: var(--color-massage-card-bg);
 }
 
 .review-carousel-card {
@@ -1151,6 +1188,7 @@
   flex-direction: column;
   gap: 0.85rem;
   padding: 1.1rem 1.15rem 1.15rem;
+  background: var(--color-glass-surface);
 }
 
 @media (min-width: 640px) {
@@ -1179,8 +1217,8 @@
 }
 
 .massage-carousel-card.is-selected {
-  border-color: color-mix(in oklch, white 72%, var(--color-brand-sage-bright));
-  background: color-mix(in oklch, var(--color-brand-sage-bright) 22%, var(--color-glass-surface));
+  border-color: color-mix(in oklch, var(--color-massage-selected-text) 8%, transparent);
+  background: var(--color-massage-selected-bg);
   box-shadow: var(--shadow-glass);
 }
 
@@ -1193,7 +1231,12 @@
   outline-offset: 3px;
 }
 
-.dark .massage-carousel-card,
+.dark .massage-carousel-card {
+  border-color: color-mix(in oklch, var(--color-brand-sage-bright) 10%, transparent);
+  background: var(--color-massage-card-bg);
+  box-shadow: var(--shadow-glass-dark);
+}
+
 .dark .review-carousel-card {
   border-color: var(--color-glass-edge);
   background: var(--color-glass-surface);
@@ -1234,8 +1277,16 @@
 }
 
 .dark .massage-carousel-card.is-selected {
-  border-color: rgba(255, 255, 255, 0.22);
-  background: color-mix(in oklch, var(--color-brand-sage-bright) 16%, var(--color-glass-surface));
+  border-color: color-mix(in oklch, var(--color-brand-sage-bright) 18%, transparent);
+  background: var(--color-massage-selected-bg);
+}
+
+.massage-carousel-card.is-selected .massage-carousel-card__title {
+  color: var(--color-massage-selected-text);
+}
+
+.massage-carousel-card.is-selected .massage-carousel-card__desc {
+  color: var(--color-massage-selected-muted);
 }
 
 .massage-carousel-card__media {
@@ -1347,11 +1398,11 @@
 }
 
 .massage-carousel-card.is-selected .massage-carousel-card__price {
-  color: var(--color-brand-sage-dark);
+  color: var(--color-massage-selected-text);
 }
 
 .dark .massage-carousel-card.is-selected .massage-carousel-card__price {
-  color: var(--color-brand-sage-bright);
+  color: var(--color-massage-selected-text);
 }
 
 .massage-carousel-card__cta {
@@ -1371,7 +1422,12 @@
     color 0.25s ease;
 }
 
-.massage-carousel-card.is-selected .massage-carousel-card__cta,
+.massage-carousel-card.is-selected .massage-carousel-card__cta {
+  border-color: transparent;
+  background: var(--color-massage-selected-text);
+  color: var(--color-brand-text-light);
+}
+
 .massage-carousel-card:hover .massage-carousel-card__cta {
   border-color: transparent;
   background: var(--color-brand-sage);
@@ -1383,7 +1439,11 @@
   color: var(--color-brand-text-light);
 }
 
-.dark .massage-carousel-card.is-selected .massage-carousel-card__cta,
+.dark .massage-carousel-card.is-selected .massage-carousel-card__cta {
+  background: var(--color-brand-sage-bright);
+  color: var(--color-brand-sage-dark);
+}
+
 .dark .massage-carousel-card:hover .massage-carousel-card__cta {
   background: var(--color-brand-sage-bright);
   color: var(--color-brand-sage-dark);
