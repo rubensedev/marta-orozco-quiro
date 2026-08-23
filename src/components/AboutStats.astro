@@ -25,14 +25,16 @@ const { aboutStats } = site;
     />
     <div class="absolute inset-0 bg-brand-sage/75"></div>
 
-    <div class="relative z-10 flex divide-x divide-white/25">
+    <div class="relative z-10 flex flex-col divide-y divide-white/25 md:flex-row md:divide-x md:divide-y-0">
       {
         aboutStats.map((stat, i) => (
-          <div class={`about-reveal about-reveal--${i + 2} flex flex-1 flex-col items-center gap-2 px-8 py-14 text-center text-white`}>
-            <span class="font-serif text-[clamp(3rem,6vw,4.5rem)] leading-none font-light">
+          <div
+            class={`about-reveal about-reveal--${i + 2} flex min-w-0 flex-1 flex-col items-center gap-2 px-5 py-10 text-center text-white sm:px-6 md:px-8 md:py-14`}
+          >
+            <span class="font-serif text-[clamp(2.25rem,8vw,4.5rem)] leading-none font-light">
               {stat.value}
             </span>
-            <span class="text-sm font-semibold tracking-[0.18em] uppercase opacity-80">
+            <span class="max-w-full text-balance text-xs font-semibold tracking-[0.12em] uppercase opacity-80 sm:text-sm sm:tracking-[0.18em]">
               {stat.label}
             </span>
           </div>
