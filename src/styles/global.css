@@ -19,11 +19,15 @@
   --color-brand-text-dark: #2c3e2d;
   --color-brand-text-light: #fff;
   --color-brand-muted: #6b6863;
-  --color-glass-surface: color-mix(in oklch, white 58%, var(--color-brand-bg));
-  --color-glass-chrome: color-mix(in oklch, white 68%, var(--color-brand-bg));
+  --color-glass-surface: color-mix(in oklch, var(--color-brand-bg) 72%, transparent);
+  --color-glass-chrome: color-mix(in oklch, white 78%, transparent);
   --color-glass-edge: rgb(255 255 255 / 0.22);
-  --color-glass-panel-lavender: color-mix(in oklch, var(--color-brand-lavender) 18%, white 82%);
-  --color-glass-control: color-mix(in oklch, white 52%, transparent);
+  --color-glass-panel-lavender: color-mix(
+    in oklch,
+    color-mix(in oklch, var(--color-brand-lavender) 22%, white) 70%,
+    transparent
+  );
+  --color-glass-control: color-mix(in oklch, white 58%, transparent);
   --blur-glass-chrome: 18px;
   --blur-glass-panel: 14px;
   --blur-glass-control: 10px;
@@ -49,8 +53,8 @@
     --color-glass-edge: rgb(255 255 255 / 0.1);
     --color-glass-panel-lavender: color-mix(
       in oklch,
-      var(--color-brand-lavender-dark) 42%,
-      var(--color-brand-card-dark) 58%
+      color-mix(in oklch, var(--color-brand-lavender-dark) 42%, var(--color-brand-card-dark)) 75%,
+      transparent
     );
     --color-glass-control: color-mix(in oklch, var(--color-brand-card-dark) 65%, transparent);
   }
@@ -467,7 +471,7 @@
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.28), transparent 42%);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent 42%);
     pointer-events: none;
   }
 
@@ -491,6 +495,11 @@
   @supports not (backdrop-filter: blur(1px)) {
     .header-popover {
       backdrop-filter: none;
+      background: color-mix(in oklch, var(--color-brand-bg) 92%, white);
+    }
+
+    .dark .header-popover {
+      background: color-mix(in oklch, var(--color-brand-card-dark) 92%, black);
     }
   }
 

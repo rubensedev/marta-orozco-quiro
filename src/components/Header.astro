@@ -48,11 +48,16 @@ const enHrefBase = getRelativeLocaleUrl("en");
 >
 </div>
 <header
-  class="group fixed inset-x-0 top-0 z-40 border-b border-transparent bg-transparent text-brand-text-light transition-[background-color,border-color,backdrop-filter,color,box-shadow] duration-300 ease-out data-scrolled:border-glass-edge data-scrolled:bg-glass-chrome/88 data-scrolled:text-brand-text-dark data-scrolled:shadow-glass data-scrolled:backdrop-blur-glass-chrome dark:text-brand-text-light dark:data-scrolled:text-brand-text-light"
+  class="group fixed inset-x-0 top-0 z-40 bg-transparent text-brand-text-light transition-colors duration-300 ease-out data-scrolled:text-brand-text-dark dark:text-brand-text-light dark:data-scrolled:text-brand-text-light"
 >
-  <div
-    class="mx-auto flex w-[min(1120px,calc(100%-2rem))] items-center justify-between gap-4 py-2 lg:py-4"
-  >
+  <div class="relative">
+    <div
+      class="pointer-events-none absolute inset-0 border-b border-transparent transition-[background-color,border-color,backdrop-filter,box-shadow] duration-300 ease-out group-data-scrolled:border-glass-edge group-data-scrolled:bg-glass-chrome/88 group-data-scrolled:shadow-glass group-data-scrolled:backdrop-blur-glass-chrome"
+      aria-hidden="true"
+    ></div>
+    <div
+      class="relative z-10 mx-auto flex w-[min(1120px,calc(100%-2rem))] items-center justify-between gap-4 py-2 lg:py-4"
+    >
     <a href={`#${sectionIds.home}`} aria-label={ui.nav.homeAria}>
       <img
         class="site-logo h-10 w-auto brightness-0 invert transition-[filter] duration-300 ease-out group-data-scrolled:not-dark:brightness-100 group-data-scrolled:not-dark:invert-0"
@@ -199,6 +204,7 @@ const enHrefBase = getRelativeLocaleUrl("en");
         ></i>
       </button>
     </div>
+  </div>
   </div>
 </header>
 
