@@ -1125,6 +1125,14 @@
   color: var(--color-brand-sage-bright);
 }
 
+.site-carousel__nav {
+  box-shadow: none;
+}
+
+.dark .site-carousel__nav {
+  box-shadow: none;
+}
+
 /* ── Massage carousel cards ─────────────────────────────────── */
 .massage-carousel-card,
 .review-carousel-card {
@@ -1165,7 +1173,9 @@
   flex-direction: column;
   gap: 0.85rem;
   padding: 1.1rem 1.15rem 1.15rem;
-  background: var(--color-glass-surface);
+  border-color: color-mix(in oklch, var(--color-brand-sage) 14%, transparent);
+  background: var(--color-glass-surface-stone);
+  box-shadow: none;
 }
 
 @media (min-width: 640px) {
@@ -1215,9 +1225,9 @@
 }
 
 .dark .review-carousel-card {
-  border-color: var(--color-glass-edge);
-  background: var(--color-glass-surface);
-  box-shadow: var(--shadow-glass-dark);
+  border-color: color-mix(in oklch, white 12%, transparent);
+  background: var(--color-glass-surface-stone);
+  box-shadow: none;
 }
 
 .review-carousel-card__quote {
