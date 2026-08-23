@@ -32,10 +32,9 @@ const langBtnClass =
   "lang-menu-btn inline-flex h-12 shrink-0 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-2.5 text-inherit transition-all duration-200";
 const langDrawerBtnClass =
   "inline-flex h-12 shrink-0 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-glass-edge bg-glass-control px-2.5 text-inherit shadow-glass backdrop-blur-glass-control transition-all duration-200 dark:shadow-[var(--shadow-glass-dark)]";
-const themeMenuClass =
-  "absolute top-full z-50 mt-2 flex w-max min-w-52 flex-col rounded-[1.5rem] border border-glass-edge bg-glass-surface p-1.5 text-brand-text-dark shadow-glass backdrop-blur-glass-panel dark:text-brand-text-light dark:shadow-[var(--shadow-glass-dark)]";
-const themeOptionClass =
-  "group flex w-full cursor-pointer items-center gap-3 rounded-2xl border-0 bg-transparent px-3 py-2.5 text-left text-sm text-brand-text-dark hover:bg-black/5 aria-checked:bg-black/5 dark:text-brand-text-light dark:hover:bg-white/8 dark:aria-checked:bg-white/10";
+const themeMenuClass = "header-popover header-popover--end";
+const themeMenuDrawerClass = "header-popover header-popover--start";
+const themeOptionClass = "header-popover__option group";
 
 const currentCode = locale === "en" ? "EN" : "ES";
 const esHrefBase = getRelativeLocaleUrl("es");
@@ -98,12 +97,12 @@ const enHrefBase = getRelativeLocaleUrl("en");
           <span class="text-sm font-semibold tracking-wide" data-lang-code>
             {currentCode}
           </span>
-          <i class="fa-solid fa-chevron-down text-[10px]" aria-hidden="true"></i>
+          <i class="fa-solid fa-chevron-down header-menu-chevron text-[10px]" aria-hidden="true"></i>
         </button>
 
         <div
           id="langMenu"
-          class={`${themeMenuClass} right-0`}
+          class={themeMenuClass}
           data-lang-menu
           role="menu"
           hidden
@@ -154,7 +153,7 @@ const enHrefBase = getRelativeLocaleUrl("en");
 
         <div
           id="themeMenu"
-          class={`${themeMenuClass} right-0`}
+          class={themeMenuClass}
           data-theme-menu
           role="menu"
           hidden
@@ -260,12 +259,12 @@ const enHrefBase = getRelativeLocaleUrl("en");
           <span class="text-sm font-semibold tracking-wide" data-lang-code>
             {currentCode}
           </span>
-          <i class="fa-solid fa-chevron-down text-[10px]" aria-hidden="true"></i>
+          <i class="fa-solid fa-chevron-down header-menu-chevron text-[10px]" aria-hidden="true"></i>
         </button>
 
         <div
           id="langMenuDrawer"
-          class={`${themeMenuClass} left-0`}
+          class={themeMenuDrawerClass}
           data-lang-menu
           role="menu"
           hidden
@@ -313,7 +312,7 @@ const enHrefBase = getRelativeLocaleUrl("en");
 
         <div
           id="themeMenuDrawer"
-          class={`${themeMenuClass} left-0`}
+          class={themeMenuDrawerClass}
           data-theme-menu
           role="menu"
           hidden
