@@ -1,11 +1,22 @@
 // @ts-check
+import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  // Replace SITE_URL_PLACEHOLDER with the real canonical origin before production.
-  site: "https://SITE_URL_PLACEHOLDER",
+  site: "https://martaorozcoquiro.netlify.app",
+  integrations: [
+    sitemap({
+      i18n: {
+        defaultLocale: "es",
+        locales: {
+          es: "es-ES",
+          en: "en-GB",
+        },
+      },
+    }),
+  ],
   i18n: {
     defaultLocale: "es",
     locales: ["es", "en"],
