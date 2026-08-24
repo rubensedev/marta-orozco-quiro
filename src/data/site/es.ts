@@ -2,9 +2,11 @@
 export const es = {
   meta: {
     lang: "es" as const,
-    title: "Marta Orozco | Quiromasajista",
+    title: "Marta Orozco | Quiromasajista en Sevilla",
     description:
-      "Marta Orozco, quiromasajista profesional. Masajes relajantes, detox, descontracturantes y rituales de bienestar en Sevilla.",
+      "Quiromasajista profesional en Sevilla (41002). Masajes relajantes, descontracturantes, detox y rituales de bienestar. Reserva cita por WhatsApp.",
+    ogLocale: "es_ES",
+    ogLocaleAlternate: "en_GB",
     whatsappInquiry:
       "Hola Marta! Me gustaría reservar una cita. ¿Tienes disponibilidad?",
   },
@@ -13,6 +15,7 @@ export const es = {
     about: "sobre-mi",
     massages: "masajes",
     packages: "bonos",
+    faq: "preguntas-frecuentes",
     reviews: "testimonios",
     contact: "contacto",
   },
@@ -25,6 +28,7 @@ export const es = {
   ],
   hero: {
     title: "Espacio de calma, salud y equilibrio corporal",
+    subtitle: "Quiromasajista profesional en Sevilla",
     description:
       "Tratamientos de quiromasaje diseñados para aliviar tensiones físicas, activar tu energía vital y restablecer la paz en tu día a día.",
     primaryCta: "RESERVAR CITA",
@@ -47,10 +51,11 @@ export const es = {
     paragraphs: [
       "Siempre me han interesado las técnicas manuales, considerándolas un catalizador muy potente que nos enraíza directamente con energías primigenias, activando un estado de conciencia muy útil en nuestro día a día.",
       "Es por eso que, como quiromasajista, he encontrado una fórmula muy orgánica de entretejer esas energías con diferentes técnicas de masaje, ofreciéndote sesiones personalizadas en función de tus necesidades.",
+      "Llevo más de cinco años acompañando a clientes en Sevilla con masajes personalizados, desde sesiones relajantes hasta tratamientos descontracturantes y rituales de bienestar en mi espacio del centro (41002).",
     ],
   },
   massages: {
-    heading: "Masajes",
+    heading: "Masajes en Sevilla",
     description:
       "Elige duración y tipo de compra para ver tu precio. Compara el ahorro con bonos de 5 o 10 sesiones.",
   },
@@ -64,6 +69,43 @@ export const es = {
     heading: "¿Tienes dudas?",
     description:
       "Desde 2021 he acompañado a más de 1.500 personas en su camino hacia el bienestar. Estas voces cuentan cómo se sintieron después de la sesión — por si te ayuda a dar el paso.",
+  },
+  faq: {
+    heading: "Preguntas frecuentes",
+    description:
+      "Respuestas rápidas sobre reservas, sesiones y tratamientos de quiromasaje en Sevilla.",
+    items: [
+      {
+        question: "¿Cómo reservo una cita?",
+        answer:
+          "Puedes reservar por WhatsApp o desde el botón «Reservar cita» de esta web. Indica el tratamiento, duración y tu preferencia de horario. Las citas son bajo reserva previa.",
+      },
+      {
+        question: "¿Cuál es el horario de atención?",
+        answer:
+          "Atiendo los jueves de 15:00 a 21:00 en mi espacio de Sevilla (41002). Te confirmo la disponibilidad exacta al reservar.",
+      },
+      {
+        question: "¿Qué debo llevar o preparar para la sesión?",
+        answer:
+          "No necesitas traer material. Llega unos minutos antes y, si tienes alguna molestia concreta (espalda, cuello, piernas), coméntamelo al reservar para adaptar el masaje.",
+      },
+      {
+        question: "¿Qué masaje me conviene: relajante, descontracturante o detox?",
+        answer:
+          "El relajante reduce estrés y mejora el descanso. El descontracturante alivia tensiones musculares y contracturas. El detox favorece la circulación y la sensación de ligereza. Si tienes dudas, te oriento al reservar.",
+      },
+      {
+        question: "¿Ofrecéis bonos o paquetes de sesiones?",
+        answer:
+          "Sí. Hay bonos de 5 sesiones con un 10 % de descuento y de 10 sesiones con un 15 % de descuento. Consulta la sección de bonos o escríbeme por WhatsApp.",
+      },
+      {
+        question: "¿Dónde está el espacio en Sevilla?",
+        answer:
+          "En C. Esperanza Elena Caro, 2, 1°A4, 41002 Sevilla. Puedes ver la ubicación exacta y abrir indicaciones en Google Maps desde la sección de contacto.",
+      },
+    ],
   },
   reviews: [
     {
@@ -209,6 +251,15 @@ export const es = {
   },
   footer: {
     logoAlt: "Logo Marta Orozco",
+    navHeading: "Enlaces",
+    navLinks: [
+      { href: "#sobre-mi", label: "Sobre mí" },
+      { href: "#masajes", label: "Masajes" },
+      { href: "#bonos", label: "Bonos" },
+      { href: "#preguntas-frecuentes", label: "Preguntas frecuentes" },
+      { href: "#testimonios", label: "Testimonios" },
+      { href: "#contacto", label: "Contacto" },
+    ],
     copyright: (year: number) =>
       `© ${year} Marta Orozco Quiromasajista. Todos los derechos reservados.`,
     creditPrefix: "Con mucho ❤️, de",

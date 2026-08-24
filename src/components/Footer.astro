@@ -6,15 +6,47 @@ type Props = {
 };
 
 const { site } = Astro.props;
-const { footer } = site;
+const { footer, contact, meta } = site;
 const year = new Date().getFullYear();
+const whatsappHref = `https://wa.me/${meta.whatsappNumber}?text=${encodeURIComponent(meta.whatsappInquiry)}`;
 ---
 
 <footer class="py-10">
-  <div
-    class="mx-auto flex w-[min(1120px,calc(100%-2rem))] flex-col items-center gap-4 text-center"
-  >
+  <div class="mx-auto flex w-[min(1120px,calc(100%-2rem))] flex-col items-center gap-6 text-center">
     <img class="site-logo h-14 w-auto" src="/assets/images/logo.svg" alt={footer.logoAlt} />
+
+    <address class="m-0 max-w-md not-italic leading-[1.7] text-brand-muted">
+      <a href={meta.mapsUrl} target="_blank" rel="noreferrer">
+        {contact.addressLines.map((line) => <span class="block">{line}</span>)}
+      </a>
+      <a
+        class="mt-2 inline-block font-medium text-brand-sage underline-offset-2 transition-opacity hover:opacity-80 hover:underline focus-visible:underline dark:text-brand-sage-bright"
+        href={whatsappHref}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {meta.whatsappDisplay}
+      </a>
+      <span class="block mt-1">{contact.hours}</span>
+    </address>
+
+    <nav aria-label={footer.navHeading}>
+      <ul class="m-0 flex list-none flex-wrap items-center justify-center gap-x-5 gap-y-2 p-0">
+        {
+          footer.navLinks.map((link) => (
+            <li>
+              <a
+                class="text-[0.9rem] font-medium text-brand-sage underline-offset-2 transition-opacity hover:opacity-80 hover:underline focus-visible:underline dark:text-brand-sage-bright"
+                href={link.href}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
     <p class="m-0 text-[0.9rem] text-brand-muted">
       {footer.copyright(year)}
     </p>

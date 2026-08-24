@@ -2,9 +2,11 @@
 export const en = {
   meta: {
     lang: "en" as const,
-    title: "Marta Orozco | Massage Therapist",
+    title: "Marta Orozco | Massage Therapist in Seville",
     description:
-      "Marta Orozco, professional massage therapist. Relaxing, detox, deep tissue massages and wellness rituals in Seville.",
+      "Professional massage therapist in Seville (41002). Relaxing, deep tissue, detox massages and wellness rituals. Book via WhatsApp.",
+    ogLocale: "en_GB",
+    ogLocaleAlternate: "es_ES",
     whatsappInquiry:
       "Hello Marta! I would like to book an appointment. Do you have availability?",
   },
@@ -13,6 +15,7 @@ export const en = {
     about: "about",
     massages: "massages",
     packages: "packages",
+    faq: "faq",
     reviews: "testimonials",
     contact: "contact",
   },
@@ -25,6 +28,7 @@ export const en = {
   ],
   hero: {
     title: "A space for calm, health and bodily balance",
+    subtitle: "Professional massage therapist in Seville",
     description:
       "Massage treatments designed to ease physical tension, activate your vital energy and restore peace to your everyday life.",
     primaryCta: "BOOK APPOINTMENT",
@@ -47,10 +51,11 @@ export const en = {
     paragraphs: [
       "I have always been interested in manual techniques, considering them a very powerful catalyst that roots us directly in primordial energies, activating a state of awareness that is very useful in our everyday lives.",
       "That is why, as a massage therapist, I have found a very organic way of weaving those energies together with different massage techniques, offering you personalised sessions according to your needs.",
+      "For over five years I have been supporting clients in Seville with personalised massage sessions, from relaxing treatments to deep tissue work and wellness rituals in my space in the city centre (41002).",
     ],
   },
   massages: {
-    heading: "Massages",
+    heading: "Massages in Seville",
     description:
       "Choose duration and purchase type to see your price. Compare the savings with 5- or 10-session packs.",
   },
@@ -64,6 +69,43 @@ export const en = {
     heading: "Still unsure?",
     description:
       "Since 2021 I have supported more than 1,500 people on their path to wellbeing. These voices share how they felt after the session — in case it helps you take the next step.",
+  },
+  faq: {
+    heading: "Frequently asked questions",
+    description:
+      "Quick answers about bookings, sessions and massage treatments in Seville.",
+    items: [
+      {
+        question: "How do I book an appointment?",
+        answer:
+          "You can book via WhatsApp or using the «Book appointment» button on this site. Tell me the treatment, duration and your preferred time. Appointments are by prior booking only.",
+      },
+      {
+        question: "What are your opening hours?",
+        answer:
+          "I see clients on Thursdays from 3:00 pm to 9:00 pm at my space in Seville (41002). I confirm the exact slot when you book.",
+      },
+      {
+        question: "What should I bring or prepare for a session?",
+        answer:
+          "You do not need to bring anything. Arrive a few minutes early and, if you have a specific concern (back, neck, legs), mention it when booking so I can tailor the massage.",
+      },
+      {
+        question: "Which massage suits me: relaxing, deep tissue or detox?",
+        answer:
+          "Relaxing massage eases stress and supports rest. Deep tissue work targets muscle tension and knots. Detox massage supports circulation and a lighter feeling. If you are unsure, I can guide you when you book.",
+      },
+      {
+        question: "Do you offer session packs?",
+        answer:
+          "Yes. There are 5-session packs with a 10% discount and 10-session packs with a 15% discount. See the packs section or message me on WhatsApp.",
+      },
+      {
+        question: "Where is the space in Seville?",
+        answer:
+          "At C. Esperanza Elena Caro, 2, 1°A4, 41002 Seville. You can view the exact location and open directions in Google Maps from the contact section.",
+      },
+    ],
   },
   reviews: [
     {
@@ -209,6 +251,15 @@ export const en = {
   },
   footer: {
     logoAlt: "Marta Orozco logo",
+    navHeading: "Links",
+    navLinks: [
+      { href: "#about", label: "About" },
+      { href: "#massages", label: "Massages" },
+      { href: "#packages", label: "Packs" },
+      { href: "#faq", label: "FAQ" },
+      { href: "#testimonials", label: "Testimonials" },
+      { href: "#contact", label: "Contact" },
+    ],
     copyright: (year: number) =>
       `© ${year} Marta Orozco Massage Therapist. All rights reserved.`,
     creditPrefix: "With much ❤️, by",
