@@ -122,7 +122,28 @@ const exampleRows = bonoExamples.flatMap((example) => {
                 aria-hidden="true"
               />
             )}
-            <article class="flex flex-col items-center text-center">
+            <article class="bono-package flex flex-col items-center text-center">
+              {tier.id === "bono10" && (
+                <span class="bono-featured-badge">
+                  <span
+                    class="bono-featured-badge__spark bono-featured-badge__spark--a"
+                    aria-hidden="true"
+                  ></span>
+                  <span
+                    class="bono-featured-badge__spark bono-featured-badge__spark--b"
+                    aria-hidden="true"
+                  ></span>
+                  <span
+                    class="bono-featured-badge__spark bono-featured-badge__spark--c"
+                    aria-hidden="true"
+                  ></span>
+                  <span
+                    class="bono-featured-badge__spark bono-featured-badge__spark--d"
+                    aria-hidden="true"
+                  ></span>
+                  {bonosContent.bestValueLabel}
+                </span>
+              )}
               <h4 class="m-0 text-[0.95rem] font-semibold tracking-[0.12em] text-brand-text-dark uppercase dark:text-brand-text-light">
                 {bonosContent.sessionsLabel(tier.sessions)}
               </h4>
@@ -131,7 +152,11 @@ const exampleRows = bonoExamples.flatMap((example) => {
                 type="button"
                 data-open-booking
                 data-bono={tier.id}
-                aria-label={site.ui.reserveTreatment(tier.label)}
+                aria-label={
+                  tier.id === "bono10"
+                    ? `${bonosContent.bestValueLabel}. ${site.ui.reserveTreatment(tier.label)}`
+                    : site.ui.reserveTreatment(tier.label)
+                }
               >
                 <span class="bono-discount__wave" aria-hidden="true"></span>
                 <span
@@ -196,6 +221,124 @@ const exampleRows = bonoExamples.flatMap((example) => {
 </section>
 
 <style>
+  .bono-package {
+    position: relative;
+  }
+
+  .bono-featured-badge {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid
+      color-mix(in srgb, var(--color-brand-lavender) 28%, transparent);
+    background: color-mix(in srgb, var(--color-brand-lavender) 12%, white);
+    color: var(--color-brand-lavender-dark);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  :global(.dark) .bono-featured-badge {
+    border-color: color-mix(
+      in srgb,
+      var(--color-brand-lavender-bright) 32%,
+      transparent
+    );
+    background: color-mix(
+      in srgb,
+      var(--color-brand-lavender) 22%,
+      transparent
+    );
+    color: var(--color-brand-lavender-bright);
+  }
+
+  /* amber-500 — same as theme switcher sun icon */
+  .bono-featured-badge__spark {
+    position: absolute;
+    width: 0.75rem;
+    height: 0.75rem;
+    pointer-events: none;
+    background: #f59e0b;
+    clip-path: polygon(
+      50% 0%,
+      62% 38%,
+      100% 50%,
+      62% 62%,
+      50% 100%,
+      38% 62%,
+      0% 50%,
+      38% 38%
+    );
+    animation: bono-spark-twinkle 2.4s ease-in-out infinite;
+  }
+
+  .bono-featured-badge__spark--a {
+    top: -0.45rem;
+    left: 0.2rem;
+    width: 0.62rem;
+    height: 0.62rem;
+    animation-delay: 0s;
+  }
+
+  .bono-featured-badge__spark--b {
+    top: -0.3rem;
+    right: 0.05rem;
+    width: 0.72rem;
+    height: 0.72rem;
+    animation-delay: 0.6s;
+  }
+
+  .bono-featured-badge__spark--c {
+    bottom: -0.38rem;
+    left: -0.2rem;
+    width: 0.55rem;
+    height: 0.55rem;
+    animation-delay: 1.2s;
+  }
+
+  .bono-featured-badge__spark--d {
+    top: 0.05rem;
+    right: -0.48rem;
+    width: 0.48rem;
+    height: 0.48rem;
+    animation-delay: 1.8s;
+  }
+
+  @keyframes bono-spark-twinkle {
+    0%,
+    100% {
+      opacity: 0.45;
+      transform: scale(0.75);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+  }
+
+  @media (min-width: 640px) {
+    /* Equal reserved band so both columns share the same title baseline */
+    .bono-package {
+      padding-top: 2rem;
+    }
+
+    .bono-featured-badge {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      z-index: 1;
+      margin: 0;
+      transform: translateX(-50%);
+    }
+  }
+
   .bono-discount {
     position: relative;
     display: inline-flex;
@@ -266,6 +409,12 @@ const exampleRows = bonoExamples.flatMap((example) => {
     .bono-discount__wave {
       animation: none;
       opacity: 0;
+    }
+
+    .bono-featured-badge__spark {
+      animation: none;
+      opacity: 0.85;
+      transform: none;
     }
   }
 </style>

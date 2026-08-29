@@ -202,6 +202,7 @@ export const es = {
     examplesHeading: "Ejemplos de ahorro",
     ctaLabel: "Preguntar por Bonos",
     sessionsLabel: (n: number) => `${n} sesiones`,
+    bestValueLabel: "Máximo ahorro",
   },
   contact: {
     heading: "Ubicación y contacto",

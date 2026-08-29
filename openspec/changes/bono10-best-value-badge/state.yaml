@@ -1,0 +1,12 @@
+change: bono10-best-value-badge
+phase: apply
+artifact_store: hybrid
+status: applied
+artifacts:
+  proposal: false
+  specs: true
+  design: true
+  tasks: true
+last_updated: 2026-08-29
+next: sdd-verify
+note: "All 12 tasks complete. Standard mode (strict_tdd false). WIP locale copy edits preserved. astro check 0 errors; DOM harness ES/EN passed."

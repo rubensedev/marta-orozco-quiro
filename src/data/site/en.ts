@@ -200,6 +200,7 @@ export const en = {
     examplesHeading: "Savings examples",
     ctaLabel: "Ask about session packs",
     sessionsLabel: (n: number) => `${n} sessions`,
+    bestValueLabel: "Best value",
   },
   contact: {
     heading: "Location and contact",
