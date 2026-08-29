@@ -3,6 +3,7 @@ import type { SiteBundle } from "../data/site";
 import About from "./About.astro";
 import BookingModal from "./BookingModal.astro";
 import Contact from "./Contact.astro";
+import FAQ from "./FAQ.astro";
 import Footer from "./Footer.astro";
 import Header from "./Header.astro";
 import Hero from "./Hero.astro";
@@ -26,6 +27,7 @@ const { site } = Astro.props;
   <About site={site} />
   <Massages site={site} />
   <Rituals site={site} />
+  <FAQ site={site} />
   <Reviews site={site} />
   <Contact site={site} />
 </main>

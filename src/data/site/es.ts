@@ -4,11 +4,12 @@ export const es = {
     lang: "es" as const,
     title: "Marta Orozco | Quiromasajista en Sevilla",
     description:
-      "Quiromasajista profesional en Sevilla (41002). Masajes relajantes, descontracturantes, detox y rituales de bienestar. Reserva cita por WhatsApp.",
+      "Quiromasajista profesional en el centro deSevilla. Masajes descontracturantes, relajantes, detox y rituales de bienestar. Reserva cita por WhatsApp.",
     ogLocale: "es_ES",
     ogLocaleAlternate: "en_GB",
-    whatsappInquiry:
-      "Hola Marta! Me gustaría reservar una cita. ¿Tienes disponibilidad?",
+    whatsappInquiry: "Hola Marta! Me gustaría reservar una cita. ¿Tienes disponibilidad?",
+    whatsappBonosInquiry:
+      "Hola Marta! Quiero más información sobre los bonos de masajes",
   },
   sectionIds: {
     home: "inicio",
@@ -40,10 +41,7 @@ export const es = {
       "Toalla enrollada en un espacio de bienestar para tratamientos de quiromasaje.",
     portraitAlt: "Retrato de Marta Orozco.",
   },
-  aboutStats: [
-    { label: "Años de experiencia" },
-    { label: "Clientes satisfechos" },
-  ],
+  aboutStats: [{ label: "Años de experiencia" }, { label: "Clientes satisfechos" }],
   about: {
     heading: "Sobre mí",
     title: "Marta Orozco",
@@ -51,7 +49,7 @@ export const es = {
     paragraphs: [
       "Siempre me han interesado las técnicas manuales, considerándolas un catalizador muy potente que nos enraíza directamente con energías primigenias, activando un estado de conciencia muy útil en nuestro día a día.",
       "Es por eso que, como quiromasajista, he encontrado una fórmula muy orgánica de entretejer esas energías con diferentes técnicas de masaje, ofreciéndote sesiones personalizadas en función de tus necesidades.",
-      "Llevo más de cinco años acompañando a clientes en Sevilla con masajes personalizados, desde sesiones relajantes hasta tratamientos descontracturantes y rituales de bienestar en mi espacio del centro (41002).",
+      "Llevo más de cinco años acompañando a clientes con masajes personalizados, desde tratamientos descontracturantes hasta sesiones relajantes y rituales de bienestar en mi espacio del centro de Sevilla.",
     ],
   },
   massages: {
@@ -77,33 +75,52 @@ export const es = {
     items: [
       {
         question: "¿Cómo reservo una cita?",
-        answer:
-          "Puedes reservar por WhatsApp o desde el botón «Reservar cita» de esta web. Indica el tratamiento, duración y tu preferencia de horario. Las citas son bajo reserva previa.",
+        answer: [
+          "Puedes reservar por WhatsApp o desde el botón «",
+          { label: "Reservar ahora", action: "booking" as const },
+          "» de esta web. Indica el tratamiento, duración y tu preferencia de horario. Los masajes son siempre bajo reserva previa.",
+        ],
       },
       {
         question: "¿Cuál es el horario de atención?",
-        answer:
-          "Atiendo los jueves de 15:00 a 21:00 en mi espacio de Sevilla (41002). Te confirmo la disponibilidad exacta al reservar.",
+        answer: [
+          "Atiendo los jueves de 15:00 a 21:00 en mi espacio del centro de Sevilla. Te confirmo la disponibilidad exacta al reservar.",
+        ],
       },
       {
         question: "¿Qué debo llevar o preparar para la sesión?",
-        answer:
+        answer: [
           "No necesitas traer material. Llega unos minutos antes y, si tienes alguna molestia concreta (espalda, cuello, piernas), coméntamelo al reservar para adaptar el masaje.",
+        ],
       },
       {
         question: "¿Qué masaje me conviene: relajante, descontracturante o detox?",
-        answer:
+        answer: [
           "El relajante reduce estrés y mejora el descanso. El descontracturante alivia tensiones musculares y contracturas. El detox favorece la circulación y la sensación de ligereza. Si tienes dudas, te oriento al reservar.",
+        ],
       },
       {
         question: "¿Ofrecéis bonos o paquetes de sesiones?",
-        answer:
-          "Sí. Hay bonos de 5 sesiones con un 10 % de descuento y de 10 sesiones con un 15 % de descuento. Consulta la sección de bonos o escríbeme por WhatsApp.",
+        answer: [
+          "Sí. Hay bonos de 5 sesiones con un 10 % de descuento y de 10 sesiones con un 15 % de descuento. Consulta la ",
+          { label: "sección de bonos", action: "packages" as const },
+          " o ",
+          { label: "escríbeme por WhatsApp", action: "whatsapp" as const },
+          ".",
+        ],
       },
       {
         question: "¿Dónde está el espacio en Sevilla?",
-        answer:
-          "En C. Esperanza Elena Caro, 2, 1°A4, 41002 Sevilla. Puedes ver la ubicación exacta y abrir indicaciones en Google Maps desde la sección de contacto.",
+        answer: [
+          "En ",
+          {
+            label: "C. Esperanza Elena Caro, 2, 1°A4, 41002 Sevilla",
+            action: "maps" as const,
+          },
+          ". Puedes ver la ubicación exacta y abrir indicaciones en Google Maps haciendo click en la dirección o desde la ",
+          { label: "sección de contacto", action: "contact" as const },
+          ".",
+        ],
       },
     ],
   },
@@ -160,8 +177,7 @@ export const es = {
       id: "review-07",
       name: "Marta H.",
       stars: 5 as const,
-      quote:
-        "Me sentí liviana y con energía suave, sin agobio. Ideal cuando el cuerpo pide reset.",
+      quote: "Me sentí liviana y con energía suave, sin agobio. Ideal cuando el cuerpo pide reset.",
       treatmentName: "Ritual Cuerpo Ligero",
     },
     {
@@ -176,8 +192,7 @@ export const es = {
       id: "review-09",
       name: "Irene C.",
       stars: 5 as const,
-      quote:
-        "Relajada, renovada y con ganas de cuidarme más. La sesión se me hizo un suspiro.",
+      quote: "Relajada, renovada y con ganas de cuidarme más. La sesión se me hizo un suspiro.",
       treatmentName: "Detox",
     },
   ],
@@ -191,8 +206,7 @@ export const es = {
   contact: {
     heading: "Ubicación y contacto",
     hours: "Jueves de 15:00 a 21:00",
-    hoursNote:
-      "*Citas bajo reserva previa para garantizar tu atención personalizada.",
+    hoursNote: "*Citas bajo reserva previa para garantizar tu atención personalizada.",
     addressLines: ["C. Esperanza Elena Caro, 2, 1°A4", "41002 Sevilla"],
     ctaLabel: "Reservar Ahora",
     openInMapsLabel: "Abrir en Maps",

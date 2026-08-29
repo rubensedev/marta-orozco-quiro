@@ -15,7 +15,10 @@ const {
   ritualsContent,
   treatments,
   sectionIds,
+  meta,
 } = site;
+
+const bonosWhatsappHref = `https://wa.me/${meta.whatsappNumber}?text=${encodeURIComponent(meta.whatsappBonosInquiry)}`;
 
 const packageTiers = bonoTiers.filter((tier) => tier.sessions > 1);
 
@@ -178,10 +181,16 @@ const exampleRows = bonoExamples.flatMap((example) => {
     </div>
 
     <div class="mt-10 flex justify-center">
-      <button class="btn-brand" type="button" data-open-booking>
+      <a
+        class="btn-brand"
+        href={bonosWhatsappHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-whatsapp-direct
+      >
         <span>{bonosContent.ctaLabel}</span>
         <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-      </button>
+      </a>
     </div>
   </section>
 </section>

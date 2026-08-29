@@ -4,6 +4,7 @@ export const HASH_ES_TO_EN: Record<string, string> = {
   "sobre-mi": "about",
   masajes: "massages",
   bonos: "packages",
+  "preguntas-frecuentes": "faq",
   testimonios: "testimonials",
   contacto: "contact",
 };

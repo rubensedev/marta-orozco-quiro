@@ -4,11 +4,12 @@ export const en = {
     lang: "en" as const,
     title: "Marta Orozco | Massage Therapist in Seville",
     description:
-      "Professional massage therapist in Seville (41002). Relaxing, deep tissue, detox massages and wellness rituals. Book via WhatsApp.",
+      "Professional massage therapist in the centre of Seville. Deep tissue, relaxing, detox and wellness rituals. Book via WhatsApp.",
     ogLocale: "en_GB",
     ogLocaleAlternate: "es_ES",
-    whatsappInquiry:
-      "Hello Marta! I would like to book an appointment. Do you have availability?",
+    whatsappInquiry: "Hello Marta! I would like to book an appointment. Do you have availability?",
+    whatsappBonosInquiry:
+      "Hello Marta! I would like more information about the massage session packs",
   },
   sectionIds: {
     home: "home",
@@ -36,14 +37,10 @@ export const en = {
       label: "VIEW MASSAGES AND PRICES",
       href: "#massages",
     },
-    backgroundImageAlt:
-      "Rolled towel in a wellness space for massage treatments.",
+    backgroundImageAlt: "Rolled towel in a wellness space for massage treatments.",
     portraitAlt: "Portrait of Marta Orozco.",
   },
-  aboutStats: [
-    { label: "Years of experience" },
-    { label: "Satisfied clients" },
-  ],
+  aboutStats: [{ label: "Years of experience" }, { label: "Satisfied clients" }],
   about: {
     heading: "About me",
     title: "Marta Orozco",
@@ -51,7 +48,7 @@ export const en = {
     paragraphs: [
       "I have always been interested in manual techniques, considering them a very powerful catalyst that roots us directly in primordial energies, activating a state of awareness that is very useful in our everyday lives.",
       "That is why, as a massage therapist, I have found a very organic way of weaving those energies together with different massage techniques, offering you personalised sessions according to your needs.",
-      "For over five years I have been supporting clients in Seville with personalised massage sessions, from relaxing treatments to deep tissue work and wellness rituals in my space in the city centre (41002).",
+      "For over five years I have been supporting clients with personalised massage sessions, from deep tissue work to relaxing treatments and wellness rituals in my space in the city centre of Seville.",
     ],
   },
   massages: {
@@ -72,38 +69,56 @@ export const en = {
   },
   faq: {
     heading: "Frequently asked questions",
-    description:
-      "Quick answers about bookings, sessions and massage treatments in Seville.",
+    description: "Quick answers about bookings, sessions and massage treatments in Seville.",
     items: [
       {
         question: "How do I book an appointment?",
-        answer:
-          "You can book via WhatsApp or using the «Book appointment» button on this site. Tell me the treatment, duration and your preferred time. Appointments are by prior booking only.",
+        answer: [
+          "You can book via WhatsApp or using the «",
+          { label: "Book now", action: "booking" as const },
+          "» button on this site. Tell me the treatment, duration and your preferred time. Massages are always by prior booking only.",
+        ],
       },
       {
         question: "What are your opening hours?",
-        answer:
-          "I see clients on Thursdays from 3:00 pm to 9:00 pm at my space in Seville (41002). I confirm the exact slot when you book.",
+        answer: [
+          "I see clients on Thursdays from 3:00 pm to 9:00 pm at my space in central Seville. I confirm the exact slot when you book.",
+        ],
       },
       {
         question: "What should I bring or prepare for a session?",
-        answer:
+        answer: [
           "You do not need to bring anything. Arrive a few minutes early and, if you have a specific concern (back, neck, legs), mention it when booking so I can tailor the massage.",
+        ],
       },
       {
         question: "Which massage suits me: relaxing, deep tissue or detox?",
-        answer:
+        answer: [
           "Relaxing massage eases stress and supports rest. Deep tissue work targets muscle tension and knots. Detox massage supports circulation and a lighter feeling. If you are unsure, I can guide you when you book.",
+        ],
       },
       {
         question: "Do you offer session packs?",
-        answer:
-          "Yes. There are 5-session packs with a 10% discount and 10-session packs with a 15% discount. See the packs section or message me on WhatsApp.",
+        answer: [
+          "Yes. There are 5-session packs with a 10% discount and 10-session packs with a 15% discount. See the ",
+          { label: "packs section", action: "packages" as const },
+          " or ",
+          { label: "message me on WhatsApp", action: "whatsapp" as const },
+          ".",
+        ],
       },
       {
         question: "Where is the space in Seville?",
-        answer:
-          "At C. Esperanza Elena Caro, 2, 1°A4, 41002 Seville. You can view the exact location and open directions in Google Maps from the contact section.",
+        answer: [
+          "At ",
+          {
+            label: "C. Esperanza Elena Caro, 2, 1°A4, 41002 Seville",
+            action: "maps" as const,
+          },
+          ". You can view the exact location and open directions in Google Maps by clicking the address or from the ",
+          { label: "contact section", action: "contact" as const },
+          ".",
+        ],
       },
     ],
   },
@@ -120,8 +135,7 @@ export const en = {
       id: "review-02",
       name: "Javier R.",
       stars: 5 as const,
-      quote:
-        "My back was in knots and I walked out light on my feet. Marta has magic hands.",
+      quote: "My back was in knots and I walked out light on my feet. Marta has magic hands.",
       treatmentName: "Deep tissue",
     },
     {
@@ -168,8 +182,7 @@ export const en = {
       id: "review-08",
       name: "Andrés N.",
       stars: 5 as const,
-      quote:
-        "After hours at the computer, this massage gave me my neck back. Really pleased.",
+      quote: "After hours at the computer, this massage gave me my neck back. Really pleased.",
       treatmentName: "Deep tissue",
     },
     {
@@ -191,8 +204,7 @@ export const en = {
   contact: {
     heading: "Location and contact",
     hours: "Thursdays from 15:00 to 21:00",
-    hoursNote:
-      "*Appointments by prior booking only to ensure your personalised care.",
+    hoursNote: "*Appointments by prior booking only to ensure your personalised care.",
     addressLines: ["C. Esperanza Elena Caro, 2, 1°A4", "41002 Seville"],
     ctaLabel: "Book now",
     openInMapsLabel: "Open in Maps",
@@ -260,8 +272,7 @@ export const en = {
       { href: "#testimonials", label: "Testimonials" },
       { href: "#contact", label: "Contact" },
     ],
-    copyright: (year: number) =>
-      `© ${year} Marta Orozco Massage Therapist. All rights reserved.`,
+    copyright: (year: number) => `© ${year} Marta Orozco Massage Therapist. All rights reserved.`,
     creditPrefix: "With much ❤️, by",
   },
   ui: {

@@ -9,6 +9,9 @@ import {
   sharedTreatments,
 } from "./shared";
 
+export type { FaqAnswerPart, FaqItem } from "./faq";
+export { faqAnswerText } from "./faq";
+
 export type Locale = "es" | "en";
 export const LOCALE_KEY = "marta-orozco-locale";
 
@@ -49,7 +52,7 @@ export type BonoTier = {
   shortLabel: string;
 };
 
-type LocaleDict = typeof es;
+type LocaleDict = typeof es | typeof en;
 
 function buildTreatments(dict: LocaleDict): Treatment[] {
   return sharedTreatments.map((shared) => {
@@ -124,6 +127,7 @@ export function getSite(locale: Locale) {
     ritualsContent: dict.rituals,
     reviewsContent: dict.reviewsContent,
     reviews: dict.reviews,
+    faq: dict.faq,
     bonos: dict.bonos,
     contact: dict.contact,
     treatments,
