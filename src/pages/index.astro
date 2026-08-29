@@ -7,11 +7,6 @@ const locale = (Astro.currentLocale ?? "es") as Locale;
 const site = getSite(locale === "en" ? "en" : "es");
 ---
 
-<Layout
-  lang={site.meta.lang}
-  title={site.meta.title}
-  description={site.meta.description}
-  locale={site.locale}
->
+<Layout site={site}>
   <HomePage site={site} />
 </Layout>

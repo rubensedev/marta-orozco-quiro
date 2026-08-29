@@ -7,7 +7,30 @@ export const sharedMeta = {
     "https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1sCalle+Esperanza+Elena+Caro+2,+41002+Sevilla,+Espa%C3%B1a",
   mapsUrl:
     "https://www.google.com/maps/search/?api=1&query=C.+Esperanza+Elena+Caro,+2,+41002+Sevilla",
+  ogImage: "/og-image.jpg",
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
+  themeColor: "#2c3e2d",
 };
+
+export const businessInfo = {
+  name: {
+    es: "Marta Orozco Quiromasajista",
+    en: "Marta Orozco Massage Therapist",
+  },
+  streetAddress: "C. Esperanza Elena Caro, 2, 1°A4",
+  postalCode: "41002",
+  addressLocality: { es: "Sevilla", en: "Seville" },
+  addressRegion: "Andalucía",
+  addressCountry: "ES",
+  geo: { latitude: 37.3891, longitude: -5.9845 },
+  priceRange: "€€",
+  openingHours: {
+    dayOfWeek: "Thursday",
+    opens: "15:00",
+    closes: "21:00",
+  },
+} as const;
 
 export const sharedTreatments = [
   {

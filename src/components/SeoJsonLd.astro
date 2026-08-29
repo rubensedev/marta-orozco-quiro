@@ -1,0 +1,107 @@
+---
+import type { SiteBundle } from "../data/site";
+import { faqAnswerText } from "../data/site/faq";
+import { businessInfo, sharedMeta } from "../data/site/shared";
+
+type Props = {
+  site: SiteBundle;
+};
+
+const { site } = Astro.props;
+const { locale, meta, treatments, rituals, faq } = site;
+const siteOrigin = Astro.site ?? new URL("https://martaorozcoquiro.netlify.app");
+const pageUrl = new URL(Astro.url.pathname, siteOrigin).href;
+
+const businessName = businessInfo.name[locale];
+const addressLocality = businessInfo.addressLocality[locale];
+
+const services = [
+  ...treatments.map((treatment) => ({
+    "@type": "Service",
+    name: treatment.title,
+    description: treatment.description,
+    provider: { "@type": "HealthAndBeautyBusiness", name: businessName },
+    offers: {
+      "@type": "AggregateOffer",
+      lowPrice: Math.min(...treatment.durations.map((d) => d.price)),
+      highPrice: Math.max(...treatment.durations.map((d) => d.price)),
+      priceCurrency: "EUR",
+    },
+  })),
+  ...rituals.map((ritual) => ({
+    "@type": "Service",
+    name: ritual.title,
+    description: ritual.description,
+    provider: { "@type": "HealthAndBeautyBusiness", name: businessName },
+    offers: {
+      "@type": "Offer",
+      price: ritual.price,
+      priceCurrency: "EUR",
+    },
+  })),
+];
+
+const graph: Record<string, unknown>[] = [
+  {
+    "@type": "HealthAndBeautyBusiness",
+    "@id": `${pageUrl}#business`,
+    name: businessName,
+    url: pageUrl,
+    image: new URL(sharedMeta.ogImage, siteOrigin).href,
+    telephone: `+${sharedMeta.whatsappNumber}`,
+    priceRange: businessInfo.priceRange,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: businessInfo.streetAddress,
+      postalCode: businessInfo.postalCode,
+      addressLocality,
+      addressRegion: businessInfo.addressRegion,
+      addressCountry: businessInfo.addressCountry,
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: businessInfo.geo.latitude,
+      longitude: businessInfo.geo.longitude,
+    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: businessInfo.openingHours.dayOfWeek,
+        opens: businessInfo.openingHours.opens,
+        closes: businessInfo.openingHours.closes,
+      },
+    ],
+    sameAs: [sharedMeta.instagramUrl],
+  },
+  {
+    "@type": "Person",
+    "@id": `${pageUrl}#person`,
+    name: "Marta Orozco",
+    jobTitle: locale === "es" ? "Quiromasajista" : "Massage Therapist",
+    worksFor: { "@id": `${pageUrl}#business` },
+    url: pageUrl,
+  },
+  ...services,
+];
+
+if (faq.items.length > 0) {
+  graph.push({
+    "@type": "FAQPage",
+    mainEntity: faq.items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faqAnswerText(item.answer),
+      },
+    })),
+  });
+}
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": graph,
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
