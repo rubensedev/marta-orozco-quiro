@@ -4,12 +4,11 @@ export const es = {
     lang: "es" as const,
     title: "Marta Orozco | Quiromasajista en Sevilla",
     description:
-      "Quiromasajista profesional en el centro deSevilla. Masajes descontracturantes, relajantes, detox y rituales de bienestar. Reserva cita por WhatsApp.",
+      "Quiromasajista profesional en el centro de Sevilla. Masajes descontracturantes, relajantes, detox y rituales de bienestar. Reserva cita por WhatsApp.",
     ogLocale: "es_ES",
     ogLocaleAlternate: "en_GB",
     whatsappInquiry: "Hola Marta! Me gustaría reservar una cita. ¿Tienes disponibilidad?",
-    whatsappBonosInquiry:
-      "Hola Marta! Quiero más información sobre los bonos de masajes",
+    whatsappBonosInquiry: "Hola Marta! Quiero más información sobre los bonos de masajes",
   },
   sectionIds: {
     home: "inicio",
