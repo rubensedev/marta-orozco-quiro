@@ -127,7 +127,7 @@ const whatsappHref = `https://wa.me/${meta.whatsappNumber}?text=${encodeURICompo
         title={contact.mapTitle}
         src={meta.mapEmbedUrl}
         loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
+        referrerpolicy="strict-origin-when-cross-origin"
         allowfullscreen></iframe>
 
       <a class="contact__open-maps" href={meta.mapsUrl} target="_blank" rel="noreferrer">
