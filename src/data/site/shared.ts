@@ -3,10 +3,10 @@ export const sharedMeta = {
   whatsappNumber: "34601585508",
   whatsappDisplay: "+34 601 585 508",
   instagramUrl: "https://www.instagram.com/martaorozco.quiro",
+  googleReviewsUrl: "https://maps.app.goo.gl/94fTHacXPXbomvKB8",
   mapEmbedUrl:
     "https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1sCalle+Esperanza+Elena+Caro+2,+41002+Sevilla,+Espa%C3%B1a",
-  mapsUrl:
-    "https://www.google.com/maps/search/?api=1&query=C.+Esperanza+Elena+Caro,+2,+41002+Sevilla",
+  mapsUrl: "https://maps.app.goo.gl/94fTHacXPXbomvKB8",
   ogImage: "/og-image.jpg",
   ogImageWidth: 1200,
   ogImageHeight: 630,
@@ -23,7 +23,7 @@ export const businessInfo = {
   addressLocality: { es: "Sevilla", en: "Seville" },
   addressRegion: "Andalucía",
   addressCountry: "ES",
-  geo: { latitude: 37.3891, longitude: -5.9845 },
+  geo: { latitude: 37.3953758, longitude: -5.9947417 },
   priceRange: "€€",
   openingHours: {
     dayOfWeek: "Thursday",

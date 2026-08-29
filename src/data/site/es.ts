@@ -67,6 +67,7 @@ export const es = {
     heading: "¿Tienes dudas?",
     description:
       "Desde 2021 he acompañado a más de 1.500 personas en su camino hacia el bienestar. Estas voces cuentan cómo se sintieron después de la sesión — por si te ayuda a dar el paso.",
+    googleCta: "Ver todas las reseñas en Google",
   },
   faq: {
     heading: "Preguntas frecuentes",

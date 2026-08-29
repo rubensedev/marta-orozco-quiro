@@ -66,6 +66,7 @@ export const en = {
     heading: "Still unsure?",
     description:
       "Since 2021 I have supported more than 1,500 people on their path to wellbeing. These voices share how they felt after the session — in case it helps you take the next step.",
+    googleCta: "See all reviews on Google",
   },
   faq: {
     heading: "Frequently asked questions",
