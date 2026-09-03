@@ -81,6 +81,10 @@ export const en = {
         ],
       },
       {
+        question: "How far in advance can I cancel?",
+        answer: ["You can cancel or reschedule with at least 24 hours’ notice."],
+      },
+      {
         question: "What are your opening hours?",
         answer: [
           "I see clients on Thursdays from 3:00 pm to 9:00 pm at my space in central Seville. I confirm the exact slot when you book.",
@@ -107,6 +111,16 @@ export const en = {
           { label: "message me on WhatsApp", action: "whatsapp" as const },
           ".",
         ],
+      },
+      {
+        question: "Do session packs expire?",
+        answer: [
+          "5-session packs expire 6 months after purchase; 10-session packs expire 12 months after purchase.",
+        ],
+      },
+      {
+        question: "Can I share a pack?",
+        answer: ["Yes. Packs are not nominal: you can share them with anyone you like."],
       },
       {
         question: "Where is the space in Seville?",

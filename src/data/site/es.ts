@@ -82,6 +82,12 @@ export const es = {
         ],
       },
       {
+        question: "¿Con cuánta antelación puedo cancelar la cita?",
+        answer: [
+          "Puedes cancelar o cambiar tu cita avisando con al menos 24 horas de antelación.",
+        ],
+      },
+      {
         question: "¿Cuál es el horario de atención?",
         answer: [
           "Atiendo los jueves de 15:00 a 21:00 en mi espacio del centro de Sevilla. Te confirmo la disponibilidad exacta al reservar.",
@@ -108,6 +114,16 @@ export const es = {
           { label: "escríbeme por WhatsApp", action: "whatsapp" as const },
           ".",
         ],
+      },
+      {
+        question: "¿Cuál es la caducidad de los bonos?",
+        answer: [
+          "El bono de 5 sesiones caduca a los 6 meses desde la compra; el de 10 sesiones, a los 12 meses.",
+        ],
+      },
+      {
+        question: "¿Puedo compartir un bono?",
+        answer: ["Sí. Los bonos no son nominales: puedes compartirlos con quien quieras."],
       },
       {
         question: "¿Dónde está el espacio en Sevilla?",
