@@ -20,4 +20,4 @@
 
 ## Phase 2 — QA
 
-- [ ] 2.1 Manual: overlay vs shift; FA/X; theme dual; backdrop/Esc; lock; booking on top; `md–lg` Reservar+hamburger
+- [x] 2.1 Manual: overlay vs shift; FA/X; theme dual; backdrop/Esc; lock; booking on top; `md–lg` Reservar+hamburger (Confirmed 2026-09-03: Header fixed backdrop+drawer `data-open`, fa-bars/fa-xmark, theme options Claro/Oscuro/Dispositivo desktop+drawer, PageScripts is-locked/Escape/inert, dist smoke.)
