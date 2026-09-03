@@ -41,13 +41,15 @@ Layout MUST import `src/styles/global.css` as the only stylesheet entry. `global
 
 ### Requirement: Brand colors and fonts as theme utilities
 
-Brand colors and fonts MUST be available as Tailwind theme utilities.
+Brand colors, fonts, **and glass tokens** MUST be available as Tailwind theme utilities.
 
-#### Scenario: Brand utilities apply the brand
+(Previously: brand colors and fonts only.)
 
-- GIVEN brand color and sans/serif font utilities
-- WHEN a template uses them
-- THEN rendered colors and typefaces match the existing brand
+#### Scenario: Glass utilities apply tier styling
+
+- GIVEN glass theme utilities
+- WHEN chrome, panel, or control tier classes are applied
+- THEN rendered surfaces match the glass design system spec
 
 ### Requirement: Dark mode follows html.dark
 
@@ -72,20 +74,30 @@ Named leftover classes MUST be limited to:
 
 | Kind | Allowed leftovers |
 |------|-------------------|
-| Hard CSS | pseudos, `dialog::backdrop`, `:user-invalid`, keyframes, reduced-motion, logo/map filters, `font-size-adjust`, `[hidden]` |
-| Widgets | brand button; pricing pills and price rows (including JS-injected) |
+| Hard CSS | pseudos, `dialog::backdrop`, `:user-invalid`, keyframes, reduced-motion, logo/map filters, `font-size-adjust`, `[hidden]`, glass `@supports` fallbacks |
+| Widgets | brand button; **secondary button (glass control tier)**; pricing pills and price rows; **carousel cards and nav (glass recipes)**; **theme menu button (glass control)**; massage panel content hook |
+
+Glass-related leftover updates MUST only adjust existing widget class recipes — not introduce new layout BEM for ordinary sections.
+
+(Previously: widgets listed brand button and pricing only; carousel/theme glass existed ad hoc without spec coverage.)
 
 #### Scenario: Allow-listed widgets are styled
 
-- GIVEN a brand button or pricing pill/price row
+- GIVEN a brand button, secondary button, pricing pill, carousel card, or theme menu button
 - WHEN it is shown
 - THEN it is visibly styled via an allow-listed leftover class
 
-#### Scenario: Off-list named class is unused
+#### Scenario: Allow-list does not grow for ordinary layout
 
-- GIVEN a former BEM name not on the allow-list
-- WHEN the page is built
-- THEN templates and JS-injected HTML do not rely on that name for styling
+- GIVEN a template that needs layout, spacing, color, or type
+- WHEN styles are applied
+- THEN no new named leftover class is added for that need
+
+#### Scenario: Glass sections use utilities first
+
+- GIVEN a section card styled with glass
+- WHEN implementation is reviewed
+- THEN tier styling uses Tailwind utilities from glass tokens except on allow-listed widgets
 
 ### Requirement: Preserve brand, content, and JS contracts
 
