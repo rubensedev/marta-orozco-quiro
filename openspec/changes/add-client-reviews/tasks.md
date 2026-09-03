@@ -47,4 +47,4 @@ Threat matrix: N/A (no RED threat tasks).
 ## Phase 4: Verification
 
 - [x] 4.1 Run `npx astro check`.
-- [ ] 4.2 Manual: DOM order + `#testimonios`; TESTIMONIOS nav; locked intro; ≥8 cards; infinite loop both directions; massage finite ends; reduced-motion; no section booking CTA.
+- [x] 4.2 Manual: DOM order + `#testimonios`; TESTIMONIOS nav; locked intro; ≥8 cards; infinite loop both directions; massage finite ends; reduced-motion; no section booking CTA. (Confirmed in code/dist 2026-09-03: Reviews.astro `#testimonios`, HomePage mount, es.ts nav+locked copy+≥8 stars:5, infinite true/false, dist smoke.)
