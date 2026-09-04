@@ -70,3 +70,16 @@ The home page is assembled in `src/pages/index.astro` and includes:
 - The page is configured as a single-page marketing site in Spanish.
 - The layout includes Google Fonts, Font Awesome, and an inline theme script for dark mode initialization.
 - Booking options, pricing tiers, and ritual data are generated from `src/data/site.ts`.
+
+## Deploy / SEO
+
+Production origin is **`https://martaorozcoquiro.netlify.app`**. There is no custom domain; that Netlify hostname is intentional, not temporary.
+
+Keep these in sync with that origin:
+
+- `astro.config.mjs` — `site`
+- `public/robots.txt` — sitemap URL
+- `src/layouts/Layout.astro` — canonical and Open Graph URLs
+- `src/components/SeoJsonLd.astro` — JSON-LD absolute URLs
+
+If a custom domain is added later, update `site`, robots, redirects, Search Console, and schema/OG in one coordinated change. Do not treat a future domain as already in place.
