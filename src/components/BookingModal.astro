@@ -6,7 +6,7 @@ type Props = {
 };
 
 const { site } = Astro.props;
-const { bookingOptions, bonoTiers, ui } = site;
+const { bookingOptions, ui } = site;
 ---
 
 <dialog
@@ -67,79 +67,15 @@ const { bookingOptions, bonoTiers, ui } = site;
         ></select>
       </div>
 
-      <div class="booking-field-group" id="modalPurchaseTypeGroup">
-        <label class="mb-2 block text-[0.9rem] font-semibold tracking-[0.12em] uppercase" for="modalPurchaseType">
-          {ui.modal.purchaseTypeLabel} <span class="text-brand-lavender">*</span>
-        </label>
-        <select
-          id="modalPurchaseType"
-          class="min-h-13 w-full rounded-2xl border border-glass-edge bg-glass-control px-4 py-[0.85rem] text-inherit shadow-glass backdrop-blur-glass-control dark:shadow-[var(--shadow-glass-dark)]"
-          name="purchaseType"
-        >
-          {
-            bonoTiers.map((tier) => (
-              <option value={tier.id}>{tier.label}</option>
-            ))
-          }
-        </select>
-      </div>
-
-      <div class="booking-field-group">
-        <label class="mb-2 block text-[0.9rem] font-semibold tracking-[0.12em] uppercase" for="modalName">
-          {ui.modal.nameLabel} <span class="text-brand-lavender">*</span>
-        </label>
-        <input
-          id="modalName"
-          class="min-h-13 w-full rounded-2xl border border-glass-edge bg-glass-control px-4 py-[0.85rem] text-inherit shadow-glass backdrop-blur-glass-control dark:shadow-[var(--shadow-glass-dark)]"
-          name="name"
-          type="text"
-          autocomplete="name"
-          placeholder={ui.modal.namePlaceholder}
-          required
-        />
-      </div>
-
-      <div class="booking-field-group">
-        <label class="mb-2 block text-[0.9rem] font-semibold tracking-[0.12em] uppercase" for="modalEmail">
-          {ui.modal.emailLabel} <span class="text-brand-lavender">*</span>
-        </label>
-        <input
-          id="modalEmail"
-          class="min-h-13 w-full rounded-2xl border border-glass-edge bg-glass-control px-4 py-[0.85rem] text-inherit shadow-glass backdrop-blur-glass-control dark:shadow-[var(--shadow-glass-dark)]"
-          name="email"
-          type="email"
-          autocomplete="email"
-          inputmode="email"
-          placeholder={ui.modal.emailPlaceholder}
-          required
-        />
-      </div>
-
-      <div class="booking-field-group">
-        <label class="mb-2 block text-[0.9rem] font-semibold tracking-[0.12em] uppercase" for="modalDate">
-          {ui.modal.dateLabel} <span class="text-brand-lavender">*</span>
-        </label>
-        <input
-          id="modalDate"
-          class="min-h-13 w-full rounded-2xl border border-glass-edge bg-glass-control px-4 py-[0.85rem] text-inherit shadow-glass backdrop-blur-glass-control dark:shadow-[var(--shadow-glass-dark)]"
-          name="datePreference"
-          type="text"
-          placeholder={ui.modal.datePlaceholder}
-          required
-        />
-        <p class="m-0 text-[0.9rem] text-brand-muted">
-          {ui.modal.dateHint}
-        </p>
-      </div>
-
       <div class="booking-price-card">
         <p class="booking-price-card__label">{ui.modal.priceEstimateLabel}</p>
         <output id="modalPriceEstimate" class="booking-price-card__value">-</output>
-        <p id="modalPriceSavings" class="booking-price-card__savings" hidden></p>
       </div>
 
-      <button class="btn-whatsapp" type="submit">
-        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+      <p id="modalBookingError" class="m-0 text-[0.9rem] text-red-600 dark:text-red-400" hidden></p>
+
+      <button class="btn-brand w-full" type="submit" id="modalBookingSubmit">
+        <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
         {ui.modal.submit}
       </button>
     </form>
