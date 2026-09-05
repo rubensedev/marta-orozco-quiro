@@ -38,9 +38,21 @@ export const sharedTreatments = [
     image: "/assets/images/descontracturante.webp",
     imagePosition: "start" as const,
     durations: [
-      { min: 30, price: 25 },
-      { min: 50, price: 35 },
-      { min: 80, price: 50 },
+      {
+        min: 30,
+        price: 25,
+        tidycalUrl: "https://tidycal.com/martaorozcoquiro/masaje-descontracturante-30",
+      },
+      {
+        min: 50,
+        price: 35,
+        tidycalUrl: "https://tidycal.com/martaorozcoquiro/masaje-descontracturante-50",
+      },
+      {
+        min: 80,
+        price: 50,
+        tidycalUrl: "https://tidycal.com/martaorozcoquiro/masaje-descontracturante-80",
+      },
     ],
   },
   {
@@ -48,9 +60,21 @@ export const sharedTreatments = [
     image: "/assets/images/relajante.webp",
     imagePosition: "start" as const,
     durations: [
-      { min: 30, price: 20 },
-      { min: 50, price: 30 },
-      { min: 80, price: 45 },
+      {
+        min: 30,
+        price: 20,
+        tidycalUrl: "https://tidycal.com/martaorozcoquiro/masaje-relajante-30",
+      },
+      {
+        min: 50,
+        price: 30,
+        tidycalUrl: "https://tidycal.com/martaorozcoquiro/masaje-relajante-50",
+      },
+      {
+        min: 80,
+        price: 45,
+        tidycalUrl: "https://tidycal.com/martaorozcoquiro/masaje-relajante-80",
+      },
     ],
   },
   {
@@ -58,15 +82,29 @@ export const sharedTreatments = [
     image: "/assets/images/detox.webp",
     imagePosition: "end" as const,
     durations: [
-      { min: 50, price: 40 },
-      { min: 80, price: 55 },
+      {
+        min: 50,
+        price: 40,
+        tidycalUrl: "https://tidycal.com/martaorozcoquiro/masaje-detox-50",
+      },
+      {
+        min: 80,
+        price: 55,
+        tidycalUrl: "https://tidycal.com/martaorozcoquiro/masaje-detox-80",
+      },
     ],
   },
   {
     id: "craneo-facial",
     image: "/assets/images/craneofacial.webp",
     imagePosition: "end" as const,
-    durations: [{ min: 30, price: 20 }],
+    durations: [
+      {
+        min: 30,
+        price: 20,
+        tidycalUrl: "https://tidycal.com/martaorozcoquiro/masaje-craneofacial-30",
+      },
+    ],
   },
 ] as const;
 
@@ -76,12 +114,14 @@ export const sharedRituals = [
     iconClass: "fa-solid fa-spa",
     duration: 80,
     price: 55,
+    tidycalUrl: "https://tidycal.com/martaorozcoquiro/ritualdesconexiontotal-80",
   },
   {
     id: "ritual-cuerpo-ligero",
     iconClass: "fa-solid fa-feather-pointed",
     duration: 80,
     price: 60,
+    tidycalUrl: "https://tidycal.com/martaorozcoquiro/ritualcuerpoligero-80",
   },
 ] as const;
 

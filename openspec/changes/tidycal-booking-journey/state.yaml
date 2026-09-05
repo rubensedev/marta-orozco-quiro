@@ -1,0 +1,101 @@
+change: tidycal-booking-journey
+
+status: active
+
+phases:
+  explore: done
+  research: unselected
+  propose: done
+  spec: done
+  design: done
+  tasks: done
+  apply: pending
+  verify: pending
+  archive: pending
+
+created: 2026-09-05
+updated: 2026-09-05
+
+mode: hybrid
+
+delivery_strategy: ask-on-risk
+
+artifact_store: hybrid
+
+next: apply
+
+decision_needed_before_apply: false
+chain_strategy: stacked-to-main
+chained_prs_recommended: true
+line_budget_risk: High
+
+open_questions: false
+
+approval:
+  proposal_ready: true
+  awaiting_user: false
+  user_approved: false
+
+preproposal:
+  schema: gentle-ai.sdd-preproposal/v1
+  revision: 1
+  exploration: openspec/changes/tidycal-booking-journey/exploration.md
+  research_request: unselected
+  product_decisions: confirmed
+  proposal_ready: true
+
+locked_decisions:
+  descontracturante_80: added_on_tidycal
+  tidycal_slug_descontracturante_80: masaje-descontracturante-80
+  tidycal_slug_craneofacial: masaje-craneofacial-30
+  bonos_channel: whatsapp_packages_inquiry
+  tidycal_open: new_tab
+  untargeted_book: open_modal_default_treatment
+  keep_price_estimate: true
+  post_book_redirect: site_owned_handoff_current_tab
+  thank_you_es: /gracias
+  thank_you_en: /en/thank-you
+  thank_you_origin: https://martaorozcoquiro.netlify.app
+  tidycal_paid_redirect: out_of_scope
+  embed_v1: false
+  modal_purchase_type: remove_from_booking_modal
+  booking_cta: confirm_via_tidycal
+  whatsapp_role: questions_and_bonos_only
+  chain_strategy: stacked-to-main
+
+url_map:
+  descontracturante:
+    80: https://tidycal.com/martaorozcoquiro/masaje-descontracturante-80
+    50: https://tidycal.com/martaorozcoquiro/masaje-descontracturante-50
+    30: https://tidycal.com/martaorozcoquiro/masaje-descontracturante-30
+  relajante:
+    80: https://tidycal.com/martaorozcoquiro/masaje-relajante-80
+    50: https://tidycal.com/martaorozcoquiro/masaje-relajante-50
+    30: https://tidycal.com/martaorozcoquiro/masaje-relajante-30
+  detox:
+    80: https://tidycal.com/martaorozcoquiro/masaje-detox-80
+    50: https://tidycal.com/martaorozcoquiro/masaje-detox-50
+  ritual-cuerpo-ligero: https://tidycal.com/martaorozcoquiro/ritualcuerpoligero-80
+  ritual-desconexion: https://tidycal.com/martaorozcoquiro/ritualdesconexiontotal-80
+  craneo-facial:
+    30: https://tidycal.com/martaorozcoquiro/masaje-craneofacial-30
+
+artifacts:
+  exploration: openspec/changes/tidycal-booking-journey/exploration.md
+  proposal: openspec/changes/tidycal-booking-journey/proposal.md
+  specs:
+    - openspec/changes/tidycal-booking-journey/specs/booking-journey/spec.md
+    - openspec/changes/tidycal-booking-journey/specs/site-i18n/spec.md
+  design: openspec/changes/tidycal-booking-journey/design.md
+  tasks: openspec/changes/tidycal-booking-journey/tasks.md
+  engram_explore: sdd/tidycal-booking-journey/explore
+  engram_proposal: sdd/tidycal-booking-journey/proposal
+  engram_spec: sdd/tidycal-booking-journey/spec
+  engram_design: sdd/tidycal-booking-journey/design
+  engram_tasks: sdd/tidycal-booking-journey/tasks
+
+capabilities:
+  new:
+    - booking-journey
+  modified:
+    - site-i18n
