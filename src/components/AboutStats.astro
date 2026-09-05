@@ -105,16 +105,16 @@ const staggerDelaysMs = [150, 280] as const;
     return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   }
 
-  function easeOutCubic(t) {
+  function easeOutCubic(t: number): number {
     return 1 - Math.pow(1 - t, 3);
   }
 
-  function setStatNumber(el, value) {
+  function setStatNumber(el: HTMLElement, value: number): void {
     const numberEl = el.querySelector(".stat-value__number");
     if (numberEl) numberEl.textContent = String(value);
   }
 
-  function animateCount(el) {
+  function animateCount(el: HTMLElement): void {
     const target = Number(el.dataset.countTo || "0");
     const delay = Number(el.dataset.countDelay || "0");
 
@@ -126,7 +126,7 @@ const staggerDelaysMs = [150, 280] as const;
 
       const startedAt = performance.now();
 
-      const tick = (now) => {
+      const tick = (now: number) => {
         const progress = Math.min(1, (now - startedAt) / COUNT_DURATION_MS);
         setStatNumber(el, Math.round(easeOutCubic(progress) * target));
         if (progress < 1) requestAnimationFrame(tick);
@@ -142,17 +142,19 @@ const staggerDelaysMs = [150, 280] as const;
     }
   }
 
-  function startStatCount(statValue) {
+  function startStatCount(statValue: HTMLElement | null): void {
     if (!statValue || statValue.dataset.countStarted) return;
     statValue.dataset.countStarted = "true";
     animateCount(statValue);
   }
 
   if (prefersReducedMotion()) {
-    document.querySelectorAll("#about-stats .stat-value").forEach((el) => {
-      setStatNumber(el, Number(el.dataset.countTo || "0"));
-      el.dataset.countStarted = "true";
-    });
+    document
+      .querySelectorAll<HTMLElement>("#about-stats .stat-value")
+      .forEach((el) => {
+        setStatNumber(el, Number(el.dataset.countTo || "0"));
+        el.dataset.countStarted = "true";
+      });
   }
 
   const observer = new IntersectionObserver(
@@ -161,14 +163,17 @@ const staggerDelaysMs = [150, 280] as const;
         if (!entry.isIntersecting) return;
 
         entry.target.classList.add("is-visible");
-        startStatCount(entry.target.querySelector(".stat-value"));
+        const statValue = entry.target.querySelector(".stat-value");
+        startStatCount(statValue instanceof HTMLElement ? statValue : null);
         observer.unobserve(entry.target);
       });
     },
     { threshold: 0.12 },
   );
 
-  document.querySelectorAll("#about-stats .about-reveal").forEach((el) => {
-    observer.observe(el);
-  });
+  document
+    .querySelectorAll<HTMLElement>("#about-stats .about-reveal")
+    .forEach((el) => {
+      observer.observe(el);
+    });
 </script>

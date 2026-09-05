@@ -1,0 +1,196 @@
+change: fix-astro-check-ci
+
+status: archived
+
+phases:
+
+  explore: skipped
+
+  propose: done
+
+  spec: done
+
+  design: done
+
+  tasks: done
+
+  apply: done
+
+  verify: done
+
+  archive: done
+
+branch: fix/astro-check-ci
+
+created: 2026-09-05
+
+updated: 2026-09-05
+
+mode: hybrid
+
+delivery_strategy: ask-on-risk
+
+base_branch: feat/improved-seo
+
+github_issue: 6
+
+artifact_store: hybrid
+
+next: none
+
+next_parallel: []
+
+task_summary:
+
+  phases: 6
+
+  tasks: 13
+
+  completed: 13
+
+  forecast: Low (~80–150 lines); single PR; Decision needed before apply: No
+
+assumptions:
+
+  - Issue #6 primary SoT; proposal/spec bootstrapped in design phase (were missing).
+
+  - Deps already include @astrojs/check and typescript; engines node >=22.12.0.
+
+  - Baseline: 8 errors in AboutStats.astro only; 5 hints elsewhere out of scope.
+
+  - Design locks: in-place HTMLElement typing; separate check script; CI check→build→dist smoke; Node 22; ci.yml on PR+push main/develop.
+
+  - strict_tdd: false; out of scope: E2E and unrelated perf/LCP.
+
+  - Engram project store: ruben (config memory_project marta-orozco-quiro is unknown_project).
+
+locked_decisions:
+
+  typing: in-place-htmlelement
+
+  check_script: separate-not-chained-into-build
+
+  ci_workflow: .github/workflows/ci.yml
+
+  node: "22"
+
+  ci_triggers: pull_request_and_push_main_develop
+
+  dist_smoke: robots_and_sitemap
+
+  hints: leave-preexisting
+
+artifacts:
+
+  proposal: openspec/changes/archive/2026-09-05-fix-astro-check-ci/proposal.md
+
+  spec: openspec/changes/archive/2026-09-05-fix-astro-check-ci/specs/astro-check-ci/spec.md
+
+  design: openspec/changes/archive/2026-09-05-fix-astro-check-ci/design.md
+
+  tasks: openspec/changes/archive/2026-09-05-fix-astro-check-ci/tasks.md
+
+  apply_progress: openspec/changes/archive/2026-09-05-fix-astro-check-ci/tasks.md
+
+  verify_report: openspec/changes/archive/2026-09-05-fix-astro-check-ci/verify-report.md
+
+  archive_report: openspec/changes/archive/2026-09-05-fix-astro-check-ci/archive-report.md
+
+  main_spec: openspec/specs/astro-check-ci/spec.md
+
+  engram_proposal: sdd/fix-astro-check-ci/proposal
+
+  engram_spec: sdd/fix-astro-check-ci/spec
+
+  engram_design: sdd/fix-astro-check-ci/design
+
+  engram_tasks: sdd/fix-astro-check-ci/tasks
+
+  engram_state: sdd/fix-astro-check-ci/state
+
+  engram_apply_progress: sdd/fix-astro-check-ci/apply-progress
+
+  engram_verify: sdd/fix-astro-check-ci/verify
+
+  engram_verify_report: sdd/fix-astro-check-ci/verify-report
+
+  engram_archive_report: sdd/fix-astro-check-ci/archive-report
+
+open_questions: false
+
+approval:
+
+  proposal_ready: true
+
+  awaiting_user: false
+
+  user_approved: false
+
+review_workload:
+
+  estimated_lines: 80-150
+
+  budget_risk: Low
+
+  chained_prs_recommended: false
+
+  decision_needed_before_apply: false
+
+  delivery_strategy: ask-on-risk
+
+apply_summary:
+
+  mode: standard
+
+  check_exit: 0
+
+  build_exit: 0
+
+  leftover_diagnostics: 5 hints (Header/PageScripts/SeoJsonLd) — out of scope
+
+  files:
+
+    - src/components/AboutStats.astro
+
+    - package.json
+
+    - .github/workflows/ci.yml
+
+verify_summary:
+
+  verdict: PASS
+
+  mode: standard
+
+  requirements: 4/4
+
+  scenarios: 4/4
+
+  tasks: 13/13
+
+  test_command: npm run check
+
+  test_exit_code: 0
+
+  build_command: npm run build
+
+  build_exit_code: 0
+
+  evidence_revision: sha256:b0e51dc1a20a9dc5027654b3fdaf44b029d59c2f234a425fe436bd5309884418
+
+  dist_smoke: OK
+
+  blockers: 0
+
+  next: none
+
+archive_summary:
+
+  archived_to: openspec/changes/archive/2026-09-05-fix-astro-check-ci/
+
+  specs_synced:
+    - domain: astro-check-ci
+      action: created
+      requirements_added: 4
+  tasks: 13/13
+  verify_verdict: PASS
