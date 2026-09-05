@@ -3,10 +3,10 @@ export const sharedMeta = {
   whatsappNumber: "34601585508",
   whatsappDisplay: "+34 601 585 508",
   instagramUrl: "https://www.instagram.com/martaorozco.quiro",
-  googleReviewsUrl: "https://maps.app.goo.gl/AmCAaoFv7ad2Y17Y8",
+  googleReviewsUrl: "https://maps.app.goo.gl/HdZVpzvzBEGV6GAZ8",
   mapEmbedUrl:
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d288.3802210536092!2d-5.994944333855233!3d37.39530728128045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd126d6026a5b213%3A0x1d1171c85d46e49f!2sMarta%20Orozco%20Quiromasaje!5e0!3m2!1sen!2ses!4v1787998053536!5m2!1sen!2ses",
-  mapsUrl: "https://maps.app.goo.gl/AmCAaoFv7ad2Y17Y8",
+  mapsUrl: "https://maps.app.goo.gl/HdZVpzvzBEGV6GAZ8",
   ogImage: "/og-image.jpg",
   ogImageWidth: 1200,
   ogImageHeight: 630,
