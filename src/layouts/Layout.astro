@@ -1,4 +1,14 @@
 ---
+import "@fontsource/noto-sans/latin-300.css";
+import "@fontsource/noto-sans/latin-400.css";
+import "@fontsource/noto-sans/latin-500.css";
+import "@fontsource/noto-sans/latin-600.css";
+import "@fontsource/noto-serif/latin-300.css";
+import "@fontsource/noto-serif/latin-400.css";
+import "@fontsource/noto-serif/latin-500.css";
+import "@fontsource/noto-serif/latin-600.css";
+import notoSans400Woff2 from "@fontsource/noto-sans/files/noto-sans-latin-400-normal.woff2?url";
+import notoSerif400Woff2 from "@fontsource/noto-serif/files/noto-serif-latin-400-normal.woff2?url";
 import "../styles/global.css";
 import SeoJsonLd from "../components/SeoJsonLd.astro";
 import { getRelativeLocaleUrl } from "astro:i18n";
@@ -52,11 +62,19 @@ const ogImageUrl = new URL(meta.ogImage, siteOrigin).href;
     <meta name="twitter:title" content={meta.title} />
     <meta name="twitter:description" content={meta.description} />
     <meta name="twitter:image" content={ogImageUrl} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Serif:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href={notoSans400Woff2}
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href={notoSerif400Woff2}
+      crossorigin
     />
     <link
       rel="stylesheet"

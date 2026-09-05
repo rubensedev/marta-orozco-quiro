@@ -13,7 +13,13 @@ const whatsappHref = `https://wa.me/${meta.whatsappNumber}?text=${encodeURICompo
 
 <footer class="py-10">
   <div class="mx-auto flex w-[min(1120px,calc(100%-2rem))] flex-col items-center gap-6 text-center">
-    <img class="site-logo h-14 w-auto" src="/assets/images/logo.svg" alt={footer.logoAlt} />
+    <img
+      class="site-logo h-14 w-auto"
+      src="/assets/images/logo.svg"
+      alt={footer.logoAlt}
+      width="300"
+      height="56"
+    />
 
     <address class="m-0 max-w-md not-italic leading-[1.7] text-brand-muted">
       <a href={meta.mapsUrl} target="_blank" rel="noreferrer">

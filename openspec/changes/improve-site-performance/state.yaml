@@ -1,0 +1,87 @@
+change: improve-site-performance
+
+status: tasks
+
+branch: null
+
+created: 2026-09-05
+
+mode: hybrid
+
+base_branch: null
+
+delivery_strategy: ask-on-risk
+
+phases:
+  explore: done
+  propose: done
+  spec: done
+  design: done
+  tasks: done
+  apply: pending
+  verify: pending
+  archive: pending
+
+locked:
+  - Act now on remaining CWV floor (FA + Google Fonts unlocked — prior fix-critical-path deferral lifted)
+  - Fonts B2+ (user lock 2026-09-05): self-host Noto Sans + Noto Serif via @fontsource npm packages; keep tokens unchanged; drop GFonts; weights 300/400/500/600 (drop 700); preload Sans 400 + Serif 400; no manual Google zip → public/
+  - Reject B1 Niramit + Plus Jakarta family swap
+  - Icons A1: ~20 inline/SVG icons; remove cdnjs FA; MODIFY site-header FA hamburger requirement → SVG
+  - Include C1 AboutStats responsive widths/sizes and C2 footer logo width/height
+  - Verify LH only on astro build+preview or Netlify (never astro dev)
+  - Out: hero LCP C2 redo; favicon unless trivial; SEO trim; lucide (A3); B1; drop-Serif remap
+  - Engram project: ruben (marta-orozco-quiro unknown_project)
+  - Baseline cite: moqtest mobile after fix-critical-path — Perf 87, FCP 1.9s, LCP 3.9s, TBT 0; render-blocking ~890ms from GFonts+FA
+  - Design: @fontsource/noto-sans + @fontsource/noto-serif weights 300–600; Icon.astro + 20 glyphs; PageScripts hidden toggles (no FA className); chained PR1 icons | PR2 fonts+images if >400 lines
+  - Tasks: 5 phases / 15 tasks; High 400-line risk; ask-on-risk → Decision needed before apply; chain pending (stacked-to-main | feature-branch-chain | size:exception)
+
+out_of_scope:
+  - Hero LCP C2 rework
+  - Favicon slim (unless trivial)
+  - SEO HTML trim
+  - lucide / unplugin-icons (A3)
+  - FA subset keep-classes (A2)
+  - Niramit + Plus Jakarta (B1) family swap
+  - Dropping Noto Serif / remapping font-serif → Sans only
+  - Manual Google Fonts download into public/
+  - "@astrojs/font" experimental (B3)
+  - Layout/copy redesign
+  - Compress plugin as primary goal
+
+assumptions:
+  - fix-critical-path applied + pushed; authoritative remaining floor is GFonts+FA render-blocking (~890ms)
+  - This change is the deferred fonts/icons work previously named optimize-fonts-icons in fix-critical-path Out of Scope
+  - Relationship: follows / depends on fix-critical-path
+  - Multi-file icon+font migration may approach 400-line review budget — chain icons | fonts+images if needed
+  - Spanish accents must remain covered in font subsets
+  - User wants Noto look preserved; fontsource ships woff2 via npm (no hand-placed public/fonts)
+
+blocking_questions: []
+
+open_questions:
+  - Exact woff2 preload paths after fontsource install
+  - Whether latin-ext needed beyond latin for Spanish accents
+  - Chain strategy before apply (ask-on-risk): stacked-to-main vs feature-branch-chain vs size:exception
+
+next: sdd-apply
+
+next_parallel: null
+
+next_gate: ask-chain-strategy
+
+proposal_summary: >
+  Kill remaining CWV floor: B2+ self-host Noto Sans+Serif (keep faces);
+  A1 inline SVGs replace FA; C1+C2 image sizing; MODIFY site-header;
+  preview/Netlify LH verify. New capability site-perf-assets; depends on
+  fix-critical-path. B1 Niramit/Jakarta rejected by user.
+
+design_summary: >
+  fontsource noto-sans + noto-serif (300–600); tokens unchanged; preload
+  Sans/Serif 400; Icon.astro + 20 SVG glyphs; PageScripts dual/triple SVG
+  + hidden; AboutStats widths/sizes; Footer 300x56; chain PR1 icons /
+  PR2 fonts+images if over budget.
+
+tasks_summary: >
+  15 tasks / 5 phases. Unit1 icons+FA CDN kill; Unit2 Noto fonts+C1/C2.
+  High budget risk; ask-on-risk Decision needed before apply; chain
+  strategy pending.
