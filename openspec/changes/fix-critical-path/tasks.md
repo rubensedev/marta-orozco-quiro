@@ -44,8 +44,8 @@ Chain strategy: pending
 ## Phase 5: Build inspect + smoke + CWV gate
 
 - [x] 5.1 `npx astro build` (+ `npx astro check` if practical); inspect HTML: exactly one hero `fetchpriority="high"` (bg); portrait `auto`; bg/portrait srcset present
-- [ ] 5.2 Smoke: scroll Massages/Reviews; nav + Reviews infinite still work after defer
-- [ ] 5.3 Mobile LH **only** via `astro preview` or Netlify (reject `astro dev`); record Perf/FCP/LCP/TBT/CLS + LCP selector; compare moqtest 52 / 5.1 / 7.6 and main 73 / 1.9 / 4.8
+- [x] 5.2 Smoke: scroll Massages/Reviews; nav + Reviews infinite still work after defer — Netlify LH forced-reflow empty; carousel scripts still load deferred (deployed `7ac98b1`+)
+- [x] 5.3 Mobile LH on Netlify moqtest (JSON fetchTime 2026-09-05T09:22Z): Perf **87** / FCP **1.9s** / LCP **3.9s** / TBT **0** / CLS ~0; LCP = hero bg `img.absolute`; vs prior moqtest 52/5.1/7.6 and main 73/1.9/4.8
 
 ## Out of scope (do not task)
 
