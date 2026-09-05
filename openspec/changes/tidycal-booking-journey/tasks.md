@@ -40,9 +40,9 @@ Chain strategy: stacked-to-main
 
 ## Phase 3: Modal + TidyCal confirm
 
-- [ ] 3.1 Slim `src/components/BookingModal.astro`: drop PII + purchase-type; keep treatment/duration/price; TidyCal CTA
-- [ ] 3.2 In `src/components/PageScripts.astro` implement `resolveTidycalUrl` (fail-closed HTTPS); on confirm: `window.open` noopener → close modal → `location.assign` locale handoff; drop WA submit + purchase/`data-bono` logic
-- [ ] 3.3 Prefer existing `btn-brand` in `src/styles/global.css`; add named class only if required
+- [x] 3.1 Slim `src/components/BookingModal.astro`: drop PII + purchase-type; keep treatment/duration/price; TidyCal CTA
+- [x] 3.2 In `src/components/PageScripts.astro` implement `resolveTidycalUrl` (fail-closed HTTPS); on confirm: `window.open` noopener → close modal → `location.assign` locale handoff; drop WA submit + purchase/`data-bono` logic
+- [x] 3.3 Prefer existing `btn-brand` in `src/styles/global.css`; add named class only if required
 
 ## Phase 4: Channel split + i18n
 

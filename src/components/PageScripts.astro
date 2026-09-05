@@ -6,7 +6,7 @@ type Props = {
 };
 
 const { site } = Astro.props;
-const { bonoTiers, rituals, meta: siteMeta, treatments, ui } = site;
+const { bonoTiers, rituals, treatments, ui, locale } = site;
 
 const uiClient = {
   durationLabel: ui.durationLabel,
@@ -16,17 +16,22 @@ const uiClient = {
   youSaveTemplate: site.locale === "en" ? "You save {amount} €" : "Ahorras {amount} €",
   openMenu: ui.nav.openMenu,
   closeMenu: ui.nav.closeMenu,
-  whatsappBooking: ui.whatsappBooking,
+  bookingUnavailable:
+    site.locale === "en"
+      ? "This session is not available for online booking right now."
+      : "Esta sesión no está disponible para reserva online en este momento.",
 };
+
+const thankYouPath = locale === "en" ? "/en/thank-you" : "/gracias";
 ---
 
 <script
   define:vars={{
     bonoTiers,
     rituals,
-    siteMeta,
     treatments,
     uiClient,
+    thankYouPath,
   }}
 >
   const THEME_KEY = "marta-orozco-theme";
@@ -35,14 +40,10 @@ const uiClient = {
   const bookingForm = document.getElementById("bookingForm");
   const modalTreatment = document.getElementById("modalTreatment");
   const modalDuration = document.getElementById("modalDuration");
-  const modalPurchaseType = document.getElementById("modalPurchaseType");
   const modalPriceEstimate = document.getElementById("modalPriceEstimate");
-  const modalPriceSavings = document.getElementById("modalPriceSavings");
-  const modalName = document.getElementById("modalName");
-  const modalEmail = document.getElementById("modalEmail");
-  const modalDate = document.getElementById("modalDate");
+  const modalBookingError = document.getElementById("modalBookingError");
+  const modalBookingSubmit = document.getElementById("modalBookingSubmit");
   const modalDurationGroup = document.getElementById("modalDurationGroup");
-  const modalPurchaseTypeGroup = document.getElementById("modalPurchaseTypeGroup");
   const mobileMenuBtn = document.getElementById("mobileMenuBtn");
   const mobileMenu = document.getElementById("mobileMenu");
   const mobileMenuIcon = mobileMenuBtn?.querySelector("[data-mobile-menu-icon]");
@@ -271,21 +272,61 @@ const uiClient = {
     });
   }
 
-  function formatSaveLabel(amount) {
-    return String(uiClient.youSaveTemplate).replace("{amount}", String(amount));
+  function httpsOnly(url) {
+    if (typeof url !== "string" || !url) return null;
+    try {
+      const parsed = new URL(url);
+      return parsed.protocol === "https:" ? parsed.href : null;
+    } catch {
+      return null;
+    }
   }
 
-  function setModalPriceSavings(amount) {
-    if (!modalPriceSavings) return;
-    if (!amount) {
-      modalPriceSavings.hidden = true;
-      modalPriceSavings.textContent = "";
-      return;
+  function resolveTidycalUrl(id, durationMin) {
+    const ritual = ritualMap.get(id);
+    if (ritual) {
+      return httpsOnly(ritual.tidycalUrl);
     }
 
-    const saveLabel = formatSaveLabel(amount);
-    modalPriceSavings.hidden = false;
-    modalPriceSavings.innerHTML = `<i class="fa-solid fa-tag" aria-hidden="true"></i> ${saveLabel}`;
+    const treatment = treatmentMap.get(id);
+    if (!treatment) return null;
+
+    const duration =
+      typeof durationMin === "number"
+        ? treatment.durations.find((entry) => entry.min === durationMin)
+        : undefined;
+
+    return httpsOnly(duration?.tidycalUrl);
+  }
+
+  function setBookingError(message) {
+    if (!modalBookingError) return;
+    if (!message) {
+      modalBookingError.hidden = true;
+      modalBookingError.textContent = "";
+      return;
+    }
+    modalBookingError.hidden = false;
+    modalBookingError.textContent = message;
+  }
+
+  function syncBookingConfirmState() {
+    const selectedId = modalTreatment?.value;
+    const durationMin = modalDurationGroup?.hidden
+      ? undefined
+      : Number(modalDuration?.value);
+    const url = resolveTidycalUrl(selectedId, durationMin);
+    const available = Boolean(url);
+
+    if (modalBookingSubmit) {
+      modalBookingSubmit.disabled = !available;
+    }
+
+    if (available) {
+      setBookingError("");
+    } else if (selectedId) {
+      setBookingError(uiClient.bookingUnavailable);
+    }
   }
 
   function syncBookingFieldVisibility() {
@@ -295,18 +336,15 @@ const uiClient = {
 
     if (ritual) {
       modalDurationGroup.hidden = true;
-      modalPurchaseTypeGroup.hidden = true;
       modalDuration.innerHTML = `<option value="${ritual.duration}">${ritual.duration} ${uiClient.minutesSuffix}</option>`;
-      modalPurchaseType.value = "single";
       modalPriceEstimate.value = `${ritual.price} €`;
-      setModalPriceSavings(0);
+      syncBookingConfirmState();
       return;
     }
 
     if (!treatment) return;
 
     modalDurationGroup.hidden = false;
-    modalPurchaseTypeGroup.hidden = false;
     modalDuration.innerHTML = treatment.durations
       .map(
         (duration) =>
@@ -324,13 +362,8 @@ const uiClient = {
     const duration =
       treatment.durations.find((entry) => entry.min === Number(modalDuration.value)) ??
       treatment.durations[0];
-    const tier = bonoTiers.find((entry) => entry.id === modalPurchaseType.value) ?? bonoTiers[0];
-    const quote = calculateQuote(duration.price, tier);
-    modalPriceEstimate.value =
-      tier.sessions === 1
-        ? `${duration.price} €`
-        : `${quote.discountedTotal} € (${quote.perSession} € ${uiClient.perSession})`;
-    setModalPriceSavings(tier.sessions > 1 ? quote.savings : 0);
+    modalPriceEstimate.value = `${duration.price} €`;
+    syncBookingConfirmState();
   }
 
   function openBookingModal(treatmentId, context = {}) {
@@ -341,22 +374,10 @@ const uiClient = {
       if (match) modalTreatment.value = match.value;
     }
 
-    // Pack CTAs need a massage treatment so purchase type stays visible.
-    if (context.bono) {
-      const current = modalTreatment.value;
-      if (ritualMap.has(current) || !treatmentMap.has(current)) {
-        modalTreatment.value = treatments[0].id;
-      }
-    }
-
     syncBookingFieldVisibility();
 
     if (context.duration && !modalDurationGroup.hidden) {
       modalDuration.value = String(context.duration);
-    }
-
-    if (context.bono && !modalPurchaseTypeGroup.hidden) {
-      modalPurchaseType.value = context.bono;
     }
 
     updateModalPriceEstimate();
@@ -367,36 +388,6 @@ const uiClient = {
   function closeBookingModal() {
     dialog.close();
     syncBodyLock();
-  }
-
-  function bookingMessage() {
-    const wb = uiClient.whatsappBooking;
-    const purchaseTypeLabel =
-      bonoTiers.find((entry) => entry.id === modalPurchaseType.value)?.label ??
-      wb.defaultSingle;
-    const estimate = modalPriceEstimate.value;
-    const durationLabel = modalDurationGroup.hidden
-      ? wb.defaultDuration
-      : `${modalDuration.value} ${uiClient.minutesSuffix}`;
-
-    const selectedOption = [...modalTreatment.options].find(
-      (option) => option.value === modalTreatment.value,
-    );
-    const treatmentLabel = selectedOption?.textContent?.trim() || modalTreatment.value;
-
-    return [
-      wb.greeting,
-      "",
-      `• *${wb.treatment}:* ${treatmentLabel}`,
-      `• *${wb.duration}:* ${durationLabel}`,
-      `• *${wb.purchaseType}:* ${purchaseTypeLabel}`,
-      estimate ? `• *${wb.priceEstimate}:* ${estimate}` : "",
-      `• *${wb.name}:* ${modalName.value}`,
-      `• *${wb.email}:* ${modalEmail.value}`,
-      `• *${wb.datePreference}:* ${modalDate.value}`,
-    ]
-      .filter(Boolean)
-      .join("\n");
   }
 
   document.querySelectorAll("[data-theme-option]").forEach((button) => {
@@ -433,13 +424,8 @@ const uiClient = {
       const context = card
         ? {
             duration: Number(card.dataset.selectedDuration),
-            bono: card.dataset.selectedBono,
           }
         : {};
-
-      if (button.dataset.bono) {
-        context.bono = button.dataset.bono;
-      }
 
       openBookingModal(treatmentId, context);
     });
@@ -468,12 +454,25 @@ const uiClient = {
     updateModalPriceEstimate();
   });
   modalDuration?.addEventListener("change", updateModalPriceEstimate);
-  modalPurchaseType?.addEventListener("change", updateModalPriceEstimate);
 
   bookingForm?.addEventListener("submit", (event) => {
     event.preventDefault();
-    const url = `https://wa.me/${siteMeta.whatsappNumber}?text=${encodeURIComponent(bookingMessage())}`;
+
+    const selectedId = modalTreatment?.value;
+    const durationMin = modalDurationGroup?.hidden
+      ? undefined
+      : Number(modalDuration?.value);
+    const url = resolveTidycalUrl(selectedId, durationMin);
+
+    if (!url) {
+      setBookingError(uiClient.bookingUnavailable);
+      if (modalBookingSubmit) modalBookingSubmit.disabled = true;
+      return;
+    }
+
     window.open(url, "_blank", "noopener,noreferrer");
+    closeBookingModal();
+    location.assign(thankYouPath);
   });
 
   document.addEventListener("click", (event) => {
@@ -518,6 +517,7 @@ const uiClient = {
   window.treatments = treatments;
   window.renderPricingWidgets = renderPricingWidgets;
   window.openBookingModal = openBookingModal;
+  window.resolveTidycalUrl = resolveTidycalUrl;
 
   applyThemePreference(localStorage.getItem(THEME_KEY) || "system");
   syncBookingFieldVisibility();
