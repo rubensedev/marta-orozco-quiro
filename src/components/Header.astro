@@ -35,6 +35,9 @@ const langDrawerBtnClass =
 const themeMenuClass = "header-popover header-popover--end";
 const themeMenuDrawerClass = "header-popover header-popover--start";
 const themeOptionClass = "header-popover__option group";
+const langOptionClass = `${themeOptionClass} no-underline aria-current:bg-[color-mix(in_oklch,var(--color-brand-sage)_14%,var(--color-glass-control))] aria-current:border-[color-mix(in_oklch,var(--color-brand-sage)_22%,var(--color-glass-edge))] aria-current:shadow-[inset_0_1px_0_rgba(255,255,255,0.2)] dark:aria-current:bg-[color-mix(in_oklch,var(--color-brand-sage-bright)_16%,var(--color-glass-control))] dark:aria-current:border-[rgba(255,255,255,0.14)]`;
+const langSummaryClass = `${langBtnClass} list-none [&::-webkit-details-marker]:hidden`;
+const langDrawerSummaryClass = `${langDrawerBtnClass} list-none [&::-webkit-details-marker]:hidden`;
 
 const currentCode = locale === "en" ? "EN" : "ES";
 const esHrefBase = getRelativeLocaleUrl("es");
@@ -86,14 +89,13 @@ const enHrefBase = getRelativeLocaleUrl("en");
     </nav>
 
     <div class="flex shrink-0 flex-nowrap items-center gap-3">
-      <div
+      <details
         class="relative hidden shrink-0 items-center justify-center md:inline-flex"
         data-lang-widget
       >
-        <button
+        <summary
           id="langMenuBtn"
-          class={langBtnClass}
-          type="button"
+          class={langSummaryClass}
           data-lang-menu-btn
           aria-label={ui.lang.ariaLabel}
           aria-haspopup="true"
@@ -105,37 +107,35 @@ const enHrefBase = getRelativeLocaleUrl("en");
             {currentCode}
           </span>
           <i class="fa-solid fa-chevron-down header-menu-chevron text-[10px]" aria-hidden="true"></i>
-        </button>
+        </summary>
 
         <div
           id="langMenu"
           class={themeMenuClass}
           data-lang-menu
           role="menu"
-          hidden
         >
           {
             localeOptions.map((option) => (
-              <button
-                class={themeOptionClass}
-                type="button"
-                role="menuitemradio"
+              <a
+                class={langOptionClass}
+                href={option.value === "en" ? enHrefBase : esHrefBase}
+                role="menuitem"
                 data-lang-option={option.value}
-                data-lang-href={option.value === "en" ? enHrefBase : esHrefBase}
-                aria-checked={option.value === locale ? "true" : "false"}
+                aria-current={option.value === locale ? "page" : undefined}
               >
                 <span class="flex-1 whitespace-nowrap">
                   {option.code} — {option.label}
                 </span>
                 <i
-                  class="fa-solid fa-check text-sm opacity-0 group-aria-checked:opacity-100"
+                  class="fa-solid fa-check text-sm opacity-0 group-aria-current:opacity-100"
                   aria-hidden="true"
                 />
-              </button>
+              </a>
             ))
           }
         </div>
-      </div>
+      </details>
 
       <div
         class="relative hidden size-12 shrink-0 items-center justify-center md:inline-flex"
@@ -252,11 +252,10 @@ const enHrefBase = getRelativeLocaleUrl("en");
     <div
       class="flex items-center gap-3 border-t border-brand-sage/8 pt-4 dark:border-white/8"
     >
-      <div class="relative" data-lang-widget>
-        <button
+      <details class="relative" data-lang-widget>
+        <summary
           id="langMenuBtnDrawer"
-          class={langDrawerBtnClass}
-          type="button"
+          class={langDrawerSummaryClass}
           data-lang-menu-btn
           aria-label={ui.lang.ariaLabel}
           aria-haspopup="true"
@@ -268,37 +267,35 @@ const enHrefBase = getRelativeLocaleUrl("en");
             {currentCode}
           </span>
           <i class="fa-solid fa-chevron-down header-menu-chevron text-[10px]" aria-hidden="true"></i>
-        </button>
+        </summary>
 
         <div
           id="langMenuDrawer"
           class={themeMenuDrawerClass}
           data-lang-menu
           role="menu"
-          hidden
         >
           {
             localeOptions.map((option) => (
-              <button
-                class={themeOptionClass}
-                type="button"
-                role="menuitemradio"
+              <a
+                class={langOptionClass}
+                href={option.value === "en" ? enHrefBase : esHrefBase}
+                role="menuitem"
                 data-lang-option={option.value}
-                data-lang-href={option.value === "en" ? enHrefBase : esHrefBase}
-                aria-checked={option.value === locale ? "true" : "false"}
+                aria-current={option.value === locale ? "page" : undefined}
               >
                 <span class="flex-1 whitespace-nowrap">
                   {option.code} — {option.label}
                 </span>
                 <i
-                  class="fa-solid fa-check text-sm opacity-0 group-aria-checked:opacity-100"
+                  class="fa-solid fa-check text-sm opacity-0 group-aria-current:opacity-100"
                   aria-hidden="true"
                 />
-              </button>
+              </a>
             ))
           }
         </div>
-      </div>
+      </details>
 
       <div class="relative" data-theme-widget>
         <button
@@ -377,41 +374,42 @@ const enHrefBase = getRelativeLocaleUrl("en");
     return HASH_EN_TO_ES[raw] || (HASH_ES_TO_EN[raw] ? raw : raw);
   }
 
+  function syncLangExpanded(details) {
+    const btn = details.querySelector("[data-lang-menu-btn]");
+    btn?.setAttribute("aria-expanded", details.open ? "true" : "false");
+  }
+
   function closeAllLangMenus() {
-    document.querySelectorAll("[data-lang-menu]").forEach((menu) => {
-      menu.hidden = true;
-    });
-    document.querySelectorAll("[data-lang-menu-btn]").forEach((button) => {
-      button.setAttribute("aria-expanded", "false");
+    document.querySelectorAll("details[data-lang-widget]").forEach((details) => {
+      details.open = false;
+      syncLangExpanded(details);
     });
   }
 
-  function menuForLangButton(button) {
-    return document.getElementById(button.getAttribute("aria-controls"));
-  }
-
-  function toggleLangMenu(button, forceOpen) {
-    const menu = menuForLangButton(button);
-    if (!menu) return;
-    const open = forceOpen ?? menu.hidden;
-    closeAllLangMenus();
-    if (open) {
-      menu.hidden = false;
-      button.setAttribute("aria-expanded", "true");
-    }
-  }
-
-  document.querySelectorAll("[data-lang-menu-btn]").forEach((button) => {
-    button.addEventListener("click", (event) => {
+  document.querySelectorAll("details[data-lang-widget]").forEach((details) => {
+    details.querySelector("[data-lang-menu-btn]")?.addEventListener("click", (event) => {
       event.stopPropagation();
-      toggleLangMenu(button);
+    });
+
+    details.addEventListener("toggle", () => {
+      if (details.open) {
+        document.querySelectorAll("details[data-lang-widget]").forEach((other) => {
+          if (other !== details) {
+            other.open = false;
+            syncLangExpanded(other);
+          }
+        });
+      }
+      syncLangExpanded(details);
     });
   });
 
-  document.querySelectorAll("[data-lang-option]").forEach((button) => {
-    button.addEventListener("click", () => {
-      const nextLocale = button.dataset.langOption;
-      const base = button.dataset.langHref || (nextLocale === "en" ? "/en/" : "/");
+  document.querySelectorAll("[data-lang-option]").forEach((el) => {
+    el.addEventListener("click", (event) => {
+      event.preventDefault();
+      const nextLocale = el.dataset.langOption;
+      const href = el.getAttribute("href") || (nextLocale === "en" ? "/en/" : "/");
+      const base = new URL(href, window.location.origin).pathname;
       localStorage.setItem(LOCALE_KEY, nextLocale);
       const raw = (window.location.hash || "").replace(/^#/, "");
       const mapped = mapHash(raw, nextLocale);

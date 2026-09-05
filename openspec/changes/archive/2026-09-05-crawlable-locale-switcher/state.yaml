@@ -1,0 +1,106 @@
+change: crawlable-locale-switcher
+
+status: archived
+
+phases:
+  explore: skipped
+  propose: done
+  spec: done
+  design: done
+  tasks: done
+  apply: done
+  verify: skipped
+  archive: done
+
+branch: feat/improved-seo
+
+created: 2026-09-05
+
+updated: 2026-09-05
+
+mode: hybrid
+
+delivery_strategy: ask-on-risk
+
+base_branch: feat/improved-seo
+
+github_issue: 9
+
+artifact_store: hybrid
+
+next: none
+
+next_parallel: []
+
+task_summary:
+  phases: 3
+  tasks: 12
+  completed: 12
+  remaining: none
+  forecast: Low (~40–100 lines); single PR; Decision needed before apply: No
+
+assumptions:
+  - Issue #9 primary SoT; proposal/spec/design available before tasks.
+  - Engram project store: ruben (config memory_project marta-orozco-quiro is unknown_project).
+  - strict_tdd: false; no unit test runner; Threat Matrix N/A (no RED tasks).
+  - Do not modify openspec/changes/stabilize-json-ld-entities/.
+  - Layout hreflang already correct; Header-only implementation.
+
+locked_decisions:
+  option_element: anchor
+  href_source: getRelativeLocaleUrl
+  href_paths: "/_es_and_/en/_en"
+  disclosure: details_summary
+  active_state: aria-current_page
+  menu_roles: menu_plus_menuitem_links
+  data_lang_href: removed
+  js_navigation: progressive_enhancement_hash_and_localStorage
+  layout_astro: verify_only
+  theme_widget: unchanged_buttons
+  files_touched: Header.astro-only
+
+artifacts:
+  proposal: openspec/changes/crawlable-locale-switcher/proposal.md
+  spec: openspec/changes/crawlable-locale-switcher/specs/site-header/spec.md
+  design: openspec/changes/crawlable-locale-switcher/design.md
+  tasks: openspec/changes/crawlable-locale-switcher/tasks.md
+  apply_progress: openspec/changes/crawlable-locale-switcher/apply-progress.md
+  engram_proposal: sdd/crawlable-locale-switcher/proposal
+  engram_spec: sdd/crawlable-locale-switcher/spec
+  engram_design: sdd/crawlable-locale-switcher/design
+  engram_tasks: sdd/crawlable-locale-switcher/tasks
+  engram_state: sdd/crawlable-locale-switcher/state
+  engram_apply_progress: sdd/crawlable-locale-switcher/apply-progress
+  # verify-report intentionally absent — user skipped sdd-verify at archive
+  archive_report: openspec/changes/archive/2026-09-05-crawlable-locale-switcher/archive-report.md
+  engram_archive_report: sdd/crawlable-locale-switcher/archive-report
+
+open_questions: false
+
+approval:
+  proposal_ready: true
+  awaiting_user: false
+  user_approved: false
+
+review_workload:
+  estimated_lines: 40-100
+  budget_risk: Low
+  chained_prs_recommended: false
+  decision_needed_before_apply: false
+  delivery_strategy: ask-on-risk
+
+apply_result:
+  mode: standard
+  files_changed:
+    - src/components/Header.astro
+  smoke:
+    astro_check: pass
+    build_anchors: pass
+  residual_manual:
+    - no-JS browser click through details → non-current locale
+    - JS drawer Escape/outside-click/focus + hash remap
+
+archive_date: 2026-09-05
+archive_path: openspec/changes/archive/2026-09-05-crawlable-locale-switcher/
+archive_mode: intentional-with-warnings
+archive_residual: "sdd-verify skipped by explicit user /sdd-archive; no verify-report.md; residual interactive no-JS and JS drawer/hash checks may remain"
