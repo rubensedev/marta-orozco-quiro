@@ -33,10 +33,10 @@ Chain strategy: stacked-to-main
 
 ## Phase 2: Thank-you pages
 
-- [ ] 2.1 Add `thankYou` copy keys in `src/data/site/es.ts` and `src/data/site/en.ts` (handoff gratitude; calendar-in-other-tab; home + WA)
-- [ ] 2.2 Create `src/components/ThankYouPage.astro` (calm brand-first; home + WA)
-- [ ] 2.3 Create `src/pages/gracias.astro` and `src/pages/en/thank-you.astro`
-- [ ] 2.4 Update `src/layouts/Layout.astro` to skip auto-locale redirect on thank-you paths
+- [x] 2.1 Add `thankYou` copy keys in `src/data/site/es.ts` and `src/data/site/en.ts` (handoff gratitude; calendar-in-other-tab; home + WA)
+- [x] 2.2 Create `src/components/ThankYouPage.astro` (calm brand-first; home + WA)
+- [x] 2.3 Create `src/pages/gracias.astro` and `src/pages/en/thank-you.astro`
+- [x] 2.4 Update `src/layouts/Layout.astro` to skip auto-locale redirect on thank-you paths
 
 ## Phase 3: Modal + TidyCal confirm
 
