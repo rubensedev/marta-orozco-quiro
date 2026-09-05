@@ -23,6 +23,7 @@
 - Chain: stacked into `feat/improved-seo` (not develop)
 - Check: `npx astro check` pass (0 errors; 4 pre-existing hints)
 - Issue: #14 (Related to; no Closes)
+- PR: https://github.com/rubensedev/marta-orozco-quiro/pull/17
 - Files: `BookingModal.astro`, `PageScripts.astro`, `es.ts`/`en.ts` (modal intro+submit only), tasks/apply-progress
 - global.css: untouched (used existing `btn-brand` + `w-full`)
 
