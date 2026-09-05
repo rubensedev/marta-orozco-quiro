@@ -1,0 +1,141 @@
+change: stabilize-json-ld-entities
+
+status: active
+
+phases:
+
+  explore: skipped
+
+  propose: done
+
+  spec: done
+
+  design: done
+
+  tasks: done
+
+  apply: done
+
+  verify: pending
+
+  archive: pending
+
+branch: feat/improved-seo
+
+created: 2026-09-05
+
+updated: 2026-09-05
+
+mode: hybrid
+
+delivery_strategy: ask-on-risk
+
+base_branch: feat/improved-seo
+
+github_issue: 8
+
+artifact_store: hybrid
+
+next: sdd-verify
+
+next_parallel: []
+
+task_summary:
+
+  phases: 5
+
+  tasks: 16
+
+  completed: 15
+
+  remaining: "5.5 manual Rich Results / Schema.org (external)"
+
+  forecast: Low (~40–80 lines); single PR; Decision needed before apply: No
+
+assumptions:
+
+  - Issue #8 primary SoT; proposal/spec/design available before tasks.
+
+  - Production origin remains https://martaorozcoquiro.netlify.app (astro.config site).
+
+  - Engram project store: ruben (config memory_project marta-orozco-quiro is unknown_project).
+
+  - strict_tdd: false; no unit test runner; Threat Matrix N/A (no RED tasks).
+
+  - NAP street/phone/geo/hours + goo.gl sameAs unchanged; Place ID hasMap additive (user override).
+
+  - SeoJsonLd.astro-only edits; Layout/config read-only verification.
+
+locked_decisions:
+
+  business_id: "https://martaorozcoquiro.netlify.app/#business"
+
+  person_id: "https://martaorozcoquiro.netlify.app/#person"
+
+  website_id: "https://martaorozcoquiro.netlify.app/#website"
+
+  webpage_id_scheme: "{canonicalPageUrl}#webpage"
+
+  service_id_scheme: "https://martaorozcoquiro.netlify.app/#service-{sharedId}"
+
+  inLanguage: es-ES_en-GB
+
+  page_url_source: getRelativeLocaleUrl
+
+  provider: "@id-ref-to-business"
+
+  faq_linkage: webpage-isPartOf-and-business-mainEntity
+
+  nap_maps: street_phone_geo_hours_sameAs_unchanged
+
+  place_id: ChIJE7KlJmBtEg0Rn-RGXchxER0
+
+  hasMap: "https://www.google.com/maps/place/?q=place_id:ChIJE7KlJmBtEg0Rn-RGXchxER0"
+
+  files_touched: SeoJsonLd.astro-only
+
+artifacts:
+
+  proposal: openspec/changes/stabilize-json-ld-entities/proposal.md
+
+  spec: openspec/changes/stabilize-json-ld-entities/specs/seo-json-ld/spec.md
+
+  design: openspec/changes/stabilize-json-ld-entities/design.md
+
+  tasks: openspec/changes/stabilize-json-ld-entities/tasks.md
+
+  apply_progress: openspec/changes/stabilize-json-ld-entities/apply-progress.md
+
+  engram_proposal: sdd/stabilize-json-ld-entities/proposal
+
+  engram_spec: sdd/stabilize-json-ld-entities/spec
+
+  engram_design: sdd/stabilize-json-ld-entities/design
+
+  engram_tasks: sdd/stabilize-json-ld-entities/tasks
+
+  engram_state: sdd/stabilize-json-ld-entities/state
+
+  engram_apply_progress: sdd/stabilize-json-ld-entities/apply-progress
+
+open_questions: false
+
+approval:
+
+  proposal_ready: true
+
+  awaiting_user: false
+
+  user_approved: false
+
+review_workload:
+
+  estimated_lines: 40-80
+
+  budget_risk: Low
+
+  chained_prs_recommended: false
+
+  decision_needed_before_apply: false
+
+  delivery_strategy: ask-on-risk

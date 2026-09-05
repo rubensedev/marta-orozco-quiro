@@ -1,4 +1,5 @@
 ---
+import { getRelativeLocaleUrl } from "astro:i18n";
 import type { SiteBundle } from "../data/site";
 import { faqAnswerText } from "../data/site/faq";
 import { businessInfo, sharedMeta } from "../data/site/shared";
@@ -10,7 +11,19 @@ type Props = {
 const { site } = Astro.props;
 const { locale, meta, treatments, rituals, faq } = site;
 const siteOrigin = Astro.site ?? new URL("https://martaorozcoquiro.netlify.app");
-const pageUrl = new URL(Astro.url.pathname, siteOrigin).href;
+const homeUrl = new URL("/", siteOrigin).href;
+const canonicalPageUrl = new URL(getRelativeLocaleUrl(locale), siteOrigin).href;
+
+const businessId = new URL("/#business", siteOrigin).href;
+const personId = new URL("/#person", siteOrigin).href;
+const websiteId = new URL("/#website", siteOrigin).href;
+const webpageId = `${canonicalPageUrl}#webpage`;
+const serviceId = (id: string) => new URL(`/#service-${id}`, siteOrigin).href;
+const inLanguage = locale === "es" ? "es-ES" : "en-GB";
+
+/** Google Place ID for stable Maps identity (hasMap); NAP fields unchanged. */
+const googlePlaceId = "ChIJE7KlJmBtEg0Rn-RGXchxER0";
+const googlePlaceMapUrl = `https://www.google.com/maps/place/?q=place_id:${googlePlaceId}`;
 
 const businessName = businessInfo.name[locale];
 const addressLocality = businessInfo.addressLocality[locale];
@@ -18,9 +31,10 @@ const addressLocality = businessInfo.addressLocality[locale];
 const services = [
   ...treatments.map((treatment) => ({
     "@type": "Service",
+    "@id": serviceId(treatment.id),
     name: treatment.title,
     description: treatment.description,
-    provider: { "@type": "HealthAndBeautyBusiness", name: businessName },
+    provider: { "@id": businessId },
     offers: {
       "@type": "AggregateOffer",
       lowPrice: Math.min(...treatment.durations.map((d) => d.price)),
@@ -30,9 +44,10 @@ const services = [
   })),
   ...rituals.map((ritual) => ({
     "@type": "Service",
+    "@id": serviceId(ritual.id),
     name: ritual.title,
     description: ritual.description,
-    provider: { "@type": "HealthAndBeautyBusiness", name: businessName },
+    provider: { "@id": businessId },
     offers: {
       "@type": "Offer",
       price: ritual.price,
@@ -43,10 +58,29 @@ const services = [
 
 const graph: Record<string, unknown>[] = [
   {
+    "@type": "WebSite",
+    "@id": websiteId,
+    url: homeUrl,
+    name: "Marta Orozco",
+    inLanguage: ["es-ES", "en-GB"],
+    publisher: { "@id": businessId },
+  },
+  {
+    "@type": "WebPage",
+    "@id": webpageId,
+    url: canonicalPageUrl,
+    name: meta.title,
+    description: meta.description,
+    inLanguage,
+    isPartOf: { "@id": websiteId },
+    about: { "@id": businessId },
+    mainEntity: { "@id": businessId },
+  },
+  {
     "@type": "HealthAndBeautyBusiness",
-    "@id": `${pageUrl}#business`,
+    "@id": businessId,
     name: businessName,
-    url: pageUrl,
+    url: homeUrl,
     image: new URL(sharedMeta.ogImage, siteOrigin).href,
     telephone: `+${sharedMeta.whatsappNumber}`,
     priceRange: businessInfo.priceRange,
@@ -71,15 +105,16 @@ const graph: Record<string, unknown>[] = [
         closes: businessInfo.openingHours.closes,
       },
     ],
+    hasMap: googlePlaceMapUrl,
     sameAs: [sharedMeta.instagramUrl, sharedMeta.googleReviewsUrl],
   },
   {
     "@type": "Person",
-    "@id": `${pageUrl}#person`,
+    "@id": personId,
     name: "Marta Orozco",
     jobTitle: locale === "es" ? "Quiromasajista" : "Massage Therapist",
-    worksFor: { "@id": `${pageUrl}#business` },
-    url: pageUrl,
+    worksFor: { "@id": businessId },
+    url: homeUrl,
   },
   ...services,
 ];
@@ -87,6 +122,8 @@ const graph: Record<string, unknown>[] = [
 if (faq.items.length > 0) {
   graph.push({
     "@type": "FAQPage",
+    "@id": `${canonicalPageUrl}#faq`,
+    isPartOf: { "@id": webpageId },
     mainEntity: faq.items.map((item) => ({
       "@type": "Question",
       name: item.question,
