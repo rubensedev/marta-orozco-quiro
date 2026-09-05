@@ -1,0 +1,62 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import type { SiteBundle } from "../data/site";
+
+type Props = {
+  site: SiteBundle;
+};
+
+const { site } = Astro.props;
+const { locale, meta, ui } = site;
+const { thankYou } = ui;
+const homeHref = getRelativeLocaleUrl(locale);
+const whatsappHref = `https://wa.me/${meta.whatsappNumber}?text=${encodeURIComponent(meta.whatsappInquiry)}`;
+---
+
+<main
+  class="relative isolate flex min-h-[100svh] items-center justify-center overflow-hidden px-4 py-16"
+>
+  <div
+    class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,color-mix(in_srgb,var(--color-brand-sage)_18%,transparent),transparent_55%),linear-gradient(180deg,var(--color-brand-bg),color-mix(in_srgb,var(--color-brand-sage)_8%,var(--color-brand-bg)))]"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="pointer-events-none absolute inset-0 opacity-40 dark:opacity-25"
+    style="background-image: radial-gradient(color-mix(in srgb, var(--color-brand-lavender) 35%, transparent) 1px, transparent 1px); background-size: 22px 22px;"
+    aria-hidden="true"
+  >
+  </div>
+
+  <article
+    class="relative w-[min(36rem,100%)] rounded-[2rem] border border-glass-edge bg-glass-surface p-8 text-center shadow-glass backdrop-blur-glass-panel md:p-10 dark:shadow-[var(--shadow-glass-dark)]"
+  >
+    <p
+      class="m-0 mb-3 font-serif text-sm font-light tracking-[0.22em] text-brand-sage uppercase dark:text-brand-sage-bright"
+    >
+      Marta Orozco
+    </p>
+    <h1 class="m-0 font-serif text-[clamp(1.85rem,4vw,2.6rem)] font-light tracking-wide text-balance">
+      {thankYou.title}
+    </h1>
+    <p class="mx-auto mt-5 mb-0 max-w-[32ch] text-[1.05rem] leading-relaxed text-brand-muted text-pretty">
+      {thankYou.message}
+    </p>
+
+    <div class="mt-9 flex flex-col items-stretch gap-3 sm:flex-row sm:justify-center">
+      <a class="btn-brand inline-flex min-h-12 items-center justify-center no-underline" href={homeHref}>
+        {thankYou.homeLabel}
+      </a>
+      <a
+        class="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-glass-edge bg-glass-control px-5 text-inherit no-underline shadow-glass backdrop-blur-glass-control transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-sage dark:shadow-[var(--shadow-glass-dark)]"
+        href={whatsappHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-whatsapp-direct
+      >
+        <i class="fa-brands fa-whatsapp text-[1.15rem]" aria-hidden="true"></i>
+        {thankYou.whatsappLabel}
+      </a>
+    </div>
+  </article>
+</main>

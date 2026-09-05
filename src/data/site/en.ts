@@ -328,6 +328,16 @@ export const en = {
     reviewStarsSr: "5 out of 5",
     instagramAria: "Marta Orozco on Instagram",
     whatsappAria: "Marta Orozco on WhatsApp",
+    thankYou: {
+      title: "Thank you for taking this step",
+      message:
+        "We've opened the calendar in another tab. Choose your time there—and embrace this path back to your energy and peace.",
+      homeLabel: "Back to home",
+      whatsappLabel: "Message on WhatsApp",
+      metaTitle: "Thank you | Marta Orozco Massage",
+      metaDescription:
+        "Thank you for choosing yourself. Finish booking in the calendar and restore your energy and peace.",
+    },
     modal: {
       title: "Book a treatment",
       intro:
