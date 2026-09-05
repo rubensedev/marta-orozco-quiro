@@ -30,11 +30,7 @@ const ogImageUrl = new URL(meta.ogImage, siteOrigin).href;
 ---
 
 <!doctype html>
-<html
-  lang={meta.lang}
-  data-locale={locale}
-  class="scroll-smooth scheme-light dark:scheme-dark"
->
+<html lang={meta.lang} data-locale={locale} class="scroll-smooth scheme-light dark:scheme-dark">
   <head>
     <script is:inline>
       document.documentElement.classList.add("js");
@@ -65,20 +61,9 @@ const ogImageUrl = new URL(meta.ogImage, siteOrigin).href;
     <meta name="twitter:title" content={meta.title} />
     <meta name="twitter:description" content={meta.description} />
     <meta name="twitter:image" content={ogImageUrl} />
-    <link
-      rel="preload"
-      as="font"
-      type="font/woff2"
-      href={notoSans400Woff2}
-      crossorigin
-    />
-    <link
-      rel="preload"
-      as="font"
-      type="font/woff2"
-      href={notoSerif400Woff2}
-      crossorigin
-    />
+    <meta name="twitter:image:alt" content={meta.title} />
+    <link rel="preload" as="font" type="font/woff2" href={notoSans400Woff2} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={notoSerif400Woff2} crossorigin />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
