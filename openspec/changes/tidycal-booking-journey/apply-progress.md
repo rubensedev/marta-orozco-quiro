@@ -46,6 +46,7 @@
 - Chain: stacked 4/4 → modal → thankyou → data → **feat/improved-seo** (not develop)
 - Check: `npx astro check` pass (0 errors; 4 pre-existing hints)
 - Issue: #14 (**Closes #14** on this final PR only)
+- PR: https://github.com/rubensedev/marta-orozco-quiro/pull/18
 - Stack status: **implementation complete**; pending merges of PRs #15–#18 into `feat/improved-seo`
 - Files: `es.ts`, `en.ts`, `faq.ts`, `Rituals.astro`, `FAQ.astro`, `MobileBar` via `ui.reserveAppointment`, tasks/apply-progress
 
