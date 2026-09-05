@@ -1,26 +1,28 @@
 ---
+import { Image } from "astro:assets";
+import heroPortrait from "../assets/images/hero-marta.webp";
+
 interface Props {
   class?: string;
-  priority?: boolean;
   portraitAlt: string;
 }
 
-const {
-  class: className = "",
-  priority = false,
-  portraitAlt,
-} = Astro.props;
+const { class: className = "", portraitAlt } = Astro.props;
 ---
 
 <div class:list={["hero-portrait", className]}>
-  <img
+  <Image
     class="hero-portrait__image"
-    src="/assets/images/hero-marta.svg"
+    src={heroPortrait}
     alt={portraitAlt}
-    width="260"
-    height="514"
-    loading={priority ? "eager" : "lazy"}
-    fetchpriority={priority ? "high" : "auto"}
+    width={320}
+    height={634}
+    widths={[320, 480, 640]}
+    sizes="(min-width: 1024px) 20rem, min(92vw, 28rem)"
+    quality={90}
+    format="webp"
+    loading="eager"
+    fetchpriority="high"
     decoding="async"
   />
 </div>

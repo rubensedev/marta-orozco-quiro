@@ -170,14 +170,14 @@
       min-height: max(65vh, 100%);
     }
 
-    .hero-portrait--mobile {
+    .hero-portrait {
       width: 100%;
       margin-top: auto;
       padding-top: clamp(1.5rem, 5vh, 3rem);
       min-height: clamp(16rem, 52vw, 28rem);
     }
 
-    .hero-portrait--mobile .hero-portrait__image {
+    .hero-portrait .hero-portrait__image {
       width: 100%;
       max-width: none;
       max-height: clamp(28rem, 105vw, 40rem);

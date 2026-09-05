@@ -50,9 +50,7 @@ const { hero } = site;
           {hero.description}
         </p>
 
-        <div
-          class="hero-reveal hero-reveal--3 mt-8 flex flex-wrap items-center gap-4"
-        >
+        <div class="hero-reveal hero-reveal--3 mt-8 flex flex-wrap items-center gap-4">
           <button class="btn-brand" type="button" data-open-booking>
             {hero.primaryCta}
           </button>
@@ -62,15 +60,7 @@ const { hero } = site;
         </div>
       </div>
 
-      <HeroPortrait
-        class="hero-portrait--mobile hero-reveal hero-reveal--4 lg:hidden"
-        portraitAlt={hero.portraitAlt}
-      />
-      <HeroPortrait
-        class="hero-reveal hero-reveal--4 hidden lg:block"
-        portraitAlt={hero.portraitAlt}
-        priority
-      />
+      <HeroPortrait class="hero-reveal hero-reveal--4" portraitAlt={hero.portraitAlt} />
     </div>
   </section>
 </div>
