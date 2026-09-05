@@ -1,0 +1,52 @@
+change: improve-site-performance
+
+status: archive
+
+branch: feat/improved-seo
+
+created: 2026-09-05
+
+mode: hybrid
+
+delivery_strategy: ask-on-risk
+
+phases:
+  explore: done
+  propose: done
+  spec: done
+  design: done
+  tasks: done
+  apply: done
+  verify: done
+  archive: pending
+
+locked:
+  - Fonts B2+: self-host Noto Sans + Noto Serif via @fontsource; drop GFonts; keep FA CDN
+  - Reject B1 Niramit + Plus Jakarta
+  - C1 AboutStats + C2 Footer logo sizing
+  - Icons A1 / FA removal: CANCELLED by user 2026-09-05 — restore FA approach
+  - Engram project: ruben
+  - Shipped Unit 1 as commit 09fcf55
+
+out_of_scope:
+  - Icon SVG migration / FA CDN removal (cancelled)
+  - site-header FA→SVG MODIFIED (not applied)
+  - Hero LCP redo; favicon; SEO trim; lucide; B1
+
+assumptions:
+  - Fonts+images unit is the closed deliverable
+  - FA remains on critical path until a future change
+
+blocking_questions: []
+
+open_questions: []
+
+next: sdd-archive
+
+next_parallel: null
+
+next_gate: null
+
+tasks_summary: >
+  Fonts+images complete; icons phases cancelled; FA restored.
+  Ready to archive with reduced scope (no icon/site-header SVG delta).

@@ -1,6 +1,6 @@
 change: fix-critical-path
 
-status: verify
+status: archived
 
 branch: feat/improved-seo
 
@@ -19,8 +19,8 @@ phases:
   design: done
   tasks: done
   apply: done
-  verify: pending
-  archive: pending
+  verify: done
+  archive: done
 
 apply_progress:
   completed: [1.1, 1.2, 2.1, 3.1, 3.2, 3.3, 4.1, 5.1, 5.2, 5.3]
@@ -59,7 +59,7 @@ blocking_questions: []
 
 open_questions: []
 
-next: sdd-verify
+next: none
 
 next_parallel: null
 

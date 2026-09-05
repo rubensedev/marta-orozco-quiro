@@ -50,5 +50,5 @@ Chain strategy: pending
 
 ## Phase 6: Optional verify (post-apply; not required for apply done)
 
-- [ ] 6.1 Mobile Lighthouse vs ~24.6s / 55–57 baseline (prefer post-build preview)
-- [ ] 6.2 Note before/after LCP on issue #5
+- [x] 6.1 Mobile Lighthouse — **superseded** by later `fix-critical-path` Netlify moqtest (Perf 87 / LCP 3.9s) after portrait WebP + C2 priority work
+- [x] 6.2 Before/after LCP notes — covered in `fix-critical-path` verify-report / issue trail; portrait SVG→WebP shipped in `1abd288` / `7c2ffba` lineage

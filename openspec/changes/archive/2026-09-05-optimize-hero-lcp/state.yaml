@@ -1,0 +1,30 @@
+change: optimize-hero-lcp
+
+status: archived
+
+branch: feat/improved-seo
+
+created: 2026-09-04
+
+mode: hybrid
+
+phases:
+  explore: done
+  propose: done
+  spec: done
+  design: done
+  tasks: done
+  apply: done
+  verify: done
+  archive: done
+
+locked:
+  - SVG→WebP portrait via Astro Image
+  - C gate skipped (~53KB)
+  - Later C2 LCP winner (bg) owned by fix-critical-path — do not revert main specs
+
+next: none
+
+tasks_summary: >
+  Apply complete; Phase 6 optional LH superseded by fix-critical-path verify.
+  Spec sync skipped: main hero-lcp already has C2 from fix-critical-path.
