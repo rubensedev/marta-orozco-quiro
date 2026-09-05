@@ -332,6 +332,16 @@ export const es = {
     reviewStarsSr: "5 de 5",
     instagramAria: "Instagram de Marta Orozco",
     whatsappAria: "WhatsApp de Marta Orozco",
+    thankYou: {
+      title: "Gracias por dar este paso",
+      message:
+        "Hemos abierto el calendario en otra pestaña. Elige ahí tu momento, y abraza este camino para recuperar tu energía y tu paz.",
+      homeLabel: "Volver al inicio",
+      whatsappLabel: "Escribir por WhatsApp",
+      metaTitle: "Gracias | Marta Orozco Quiromasaje",
+      metaDescription:
+        "Gracias por cuidar de ti. Completa tu reserva en el calendario y recupera energía y paz.",
+    },
     modal: {
       title: "Reservar tratamiento",
       intro:
