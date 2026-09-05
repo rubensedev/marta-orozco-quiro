@@ -46,12 +46,12 @@ Chain strategy: stacked-to-main
 
 ## Phase 4: Channel split + i18n
 
-- [ ] 4.1 Update modal/FAQ/meta/MobileBar/WA copy in `src/data/site/es.ts` and `src/data/site/en.ts`; remove unused `whatsappBooking` PII fields; EN WA fully English
-- [ ] 4.2 Point bono discount CTAs in `src/components/Rituals.astro` to WA packages inquiry (not modal)
-- [ ] 4.3 Relabel WA vs Book in `src/components/MobileBar.astro` (WA = questions)
-- [ ] 4.4 Rewrite booking answer in `src/components/FAQ.astro` to site/TidyCal (not WA)
+- [x] 4.1 Update modal/FAQ/meta/MobileBar/WA copy in `src/data/site/es.ts` and `src/data/site/en.ts`; remove unused `whatsappBooking` PII fields; EN WA fully English
+- [x] 4.2 Point bono discount CTAs in `src/components/Rituals.astro` to WA packages inquiry (not modal)
+- [x] 4.3 Relabel WA vs Book in `src/components/MobileBar.astro` (WA = questions)
+- [x] 4.4 Rewrite booking answer in `src/components/FAQ.astro` to site/TidyCal (not WA)
 
 ## Phase 5: Verify
 
-- [ ] 5.1 Run `npx astro check`
+- [x] 5.1 Run `npx astro check`
 - [ ] 5.2 Smoke ES/EN: all `url_map` pairs + rituals; fail-closed; untargeted Book → default; confirm → TidyCal new tab + current handoff; no embed

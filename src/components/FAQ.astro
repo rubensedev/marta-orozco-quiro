@@ -12,6 +12,7 @@ const { faq, sectionIds, meta } = site;
 const linkClass =
   "cursor-pointer font-medium text-brand-sage underline-offset-2 transition-opacity hover:opacity-80 hover:underline focus-visible:underline dark:text-brand-sage-bright";
 
+const inquiryWhatsappHref = `https://wa.me/${meta.whatsappNumber}?text=${encodeURIComponent(meta.whatsappInquiry)}`;
 const bonosWhatsappHref = `https://wa.me/${meta.whatsappNumber}?text=${encodeURIComponent(meta.whatsappBonosInquiry)}`;
 ---
 
@@ -54,6 +55,16 @@ const bonosWhatsappHref = `https://wa.me/${meta.whatsappNumber}?text=${encodeURI
                   {part.label}
                 </a>
               ) : part.action === "whatsapp" ? (
+                <a
+                  class={linkClass}
+                  href={inquiryWhatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-whatsapp-direct
+                >
+                  {part.label}
+                </a>
+              ) : part.action === "whatsappPackages" ? (
                 <a
                   class={linkClass}
                   href={bonosWhatsappHref}

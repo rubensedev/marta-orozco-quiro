@@ -4,10 +4,10 @@ export const es = {
     lang: "es" as const,
     title: "Marta Orozco | Quiromasajista en Sevilla",
     description:
-      "Quiromasajista profesional en el centro de Sevilla. Masajes descontracturantes, relajantes, detox y rituales de bienestar. Reserva cita por WhatsApp.",
+      "Quiromasajista profesional en el centro de Sevilla. Masajes descontracturantes, relajantes, detox y rituales de bienestar. Reserva cita desde la web con TidyCal.",
     ogLocale: "es_ES",
     ogLocaleAlternate: "en_GB",
-    whatsappInquiry: "Hola Marta! Me gustaría reservar una cita. ¿Tienes disponibilidad?",
+    whatsappInquiry: "Hola Marta! Tengo una consulta. ¿Me puedes ayudar?",
     whatsappBonosInquiry: "Hola Marta! Quiero más información sobre los bonos de masajes",
   },
   sectionIds: {
@@ -76,9 +76,11 @@ export const es = {
       {
         question: "¿Cómo reservo una cita?",
         answer: [
-          "Puedes reservar por WhatsApp o desde el botón «",
+          "Reserva desde el botón «",
           { label: "Reservar ahora", action: "booking" as const },
-          "» de esta web. Indica el tratamiento, duración y tu preferencia de horario. Los masajes son siempre bajo reserva previa.",
+          "» de esta web: elige tratamiento y duración, y confirma para abrir el calendario de TidyCal. Si tienes dudas, ",
+          { label: "escríbeme por WhatsApp", action: "whatsapp" as const },
+          ". Los masajes son siempre bajo reserva previa.",
         ],
       },
       {
@@ -111,7 +113,7 @@ export const es = {
           "Sí. Hay bonos de 5 sesiones con un 10 % de descuento y de 10 sesiones con un 15 % de descuento. Consulta la ",
           { label: "sección de bonos", action: "packages" as const },
           " o ",
-          { label: "escríbeme por WhatsApp", action: "whatsapp" as const },
+          { label: "escríbeme por WhatsApp", action: "whatsappPackages" as const },
           ".",
         ],
       },
@@ -315,7 +317,7 @@ export const es = {
       homeAria: "Ir al inicio",
     },
     reserveNow: "RESERVAR AHORA",
-    reserveAppointment: "RESERVAR CITA",
+    reserveAppointment: "CONSULTAS",
     reserveTreatment: (title: string) => `Reservar ${title}`,
     fromPrice: (price: number) => `desde ${price}€`,
     minutesSuffix: "minutos",
@@ -359,18 +361,6 @@ export const es = {
       dateHint: "Disponibilidad solo jueves de 15:00 a 21:00.",
       submit: "Confirmar reserva en TidyCal",
       closeAria: "Cerrar modal de reserva",
-    },
-    whatsappBooking: {
-      greeting: "Hola Marta! Me gustaría reservar una cita.",
-      treatment: "Tratamiento",
-      duration: "Duración",
-      purchaseType: "Tipo de compra",
-      priceEstimate: "Precio estimado",
-      name: "Nombre",
-      email: "Email",
-      datePreference: "Preferencia de Fecha/Hora",
-      defaultSingle: "Sesión suelta",
-      defaultDuration: "80 minutos",
     },
   },
 };

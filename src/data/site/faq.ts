@@ -1,7 +1,10 @@
 /** Inline FAQ answer piece: plain text or an actionable link. */
 export type FaqAnswerPart =
   | string
-  | { label: string; action: "booking" | "maps" | "contact" | "packages" | "whatsapp" };
+  | {
+      label: string;
+      action: "booking" | "maps" | "contact" | "packages" | "whatsapp" | "whatsappPackages";
+    };
 
 export type FaqItem = {
   question: string;
