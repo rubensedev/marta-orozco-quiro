@@ -39,5 +39,37 @@
 - Minimal modal `intro`/`submit` copy updated so CTA is not WhatsApp (full channel copy remains PR4).
 - No `global.css` change (task 3.3).
 
+## Work unit 4 (PR4) — channel split + i18n
+- Completed: 4.1, 4.2, 4.3, 4.4, 5.1
+- Branch: `feat/tidycal-booking-channel`
+- Base: `feat/tidycal-booking-modal`
+- Chain: stacked 4/4 → modal → thankyou → data → **feat/improved-seo** (not develop)
+- Check: `npx astro check` pass (0 errors; 4 pre-existing hints)
+- Issue: #14 (**Closes #14** on this final PR only)
+- PR: https://github.com/rubensedev/marta-orozco-quiro/pull/18
+- Stack status: **implementation complete**; pending merges of PRs #15–#18 into `feat/improved-seo`
+- Files: `es.ts`, `en.ts`, `faq.ts`, `Rituals.astro`, `FAQ.astro`, `MobileBar` via `ui.reserveAppointment`, tasks/apply-progress
+
+### Work Unit Evidence
+
+| Evidence | Result |
+|---|---|
+| Focused test command | `npx astro check` → 0 errors |
+| Runtime harness | N/A automated — no browser in this apply; smoke notes for 5.2 below |
+| Rollback boundary | Revert `es.ts`/`en.ts`/`faq.ts` + `Rituals.astro` + `FAQ.astro` (MobileBar label via data) |
+
+### Smoke notes (task 5.2 — manual, not run here)
+- FAQ booking answer: Book → modal → TidyCal; WA link = questions inquiry
+- FAQ packages WA: `whatsappPackages` → bonos inquiry
+- MobileBar: WA label QUESTIONS/CONSULTAS; Book = `data-open-booking`
+- Rituals bono % CTAs: WA packages (`whatsappBonosInquiry`), not modal
+- Contact/Footer WA: `whatsappInquiry` (questions), not booking confirm
+- meta.description: site/TidyCal, not WhatsApp booking
+- `whatsappBooking` PII block removed (unused)
+
+### Deviations
+- MobileBar.astro markup unchanged; relabel via `ui.reserveAppointment` (CONSULTAS / QUESTIONS).
+- Added `whatsappPackages` FAQ action so packages WA keeps bonos template while booking FAQ WA stays questions.
+
 ## Next
-Work unit 4 — channel split + i18n copy (FAQ/MobileBar/Rituals/WA)
+`sdd-verify` (orchestrator). Stack complete pending merges into `feat/improved-seo`.
