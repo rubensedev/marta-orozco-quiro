@@ -1,6 +1,6 @@
 change: stabilize-json-ld-entities
 
-status: active
+status: archived
 
 phases:
 
@@ -16,9 +16,9 @@ phases:
 
   apply: done
 
-  verify: pending
+  verify: done
 
-  archive: pending
+  archive: done
 
 branch: feat/improved-seo
 
@@ -36,7 +36,7 @@ github_issue: 8
 
 artifact_store: hybrid
 
-next: sdd-verify
+next: none
 
 next_parallel: []
 
@@ -48,7 +48,7 @@ task_summary:
 
   completed: 15
 
-  remaining: "5.5 manual Rich Results / Schema.org (external)"
+  remaining: "5.5 accepted residual (external Rich Results not runnable in verify)"
 
   forecast: Low (~40–80 lines); single PR; Decision needed before apply: No
 
@@ -118,6 +118,10 @@ artifacts:
 
   engram_apply_progress: sdd/stabilize-json-ld-entities/apply-progress
 
+  verify_report: openspec/changes/stabilize-json-ld-entities/verify-report.md
+
+  engram_verify_report: sdd/stabilize-json-ld-entities/verify-report
+
 open_questions: false
 
 approval:
@@ -139,3 +143,8 @@ review_workload:
   decision_needed_before_apply: false
 
   delivery_strategy: ask-on-risk
+
+archive_date: 2026-09-05
+archive_path: openspec/changes/archive/2026-09-05-stabilize-json-ld-entities/
+archive_mode: intentional-with-warnings
+archive_residual: "5.5 Rich Results / Schema.org accepted residual"
