@@ -23,7 +23,7 @@ export type Treatment = {
   image: string;
   imageAlt: string;
   imagePosition: "start" | "end";
-  durations: { min: number; price: number }[];
+  durations: { min: number; price: number; tidycalUrl: string }[];
 };
 
 export type Ritual = {
@@ -34,6 +34,7 @@ export type Ritual = {
   iconClass: string;
   duration: number;
   price: number;
+  tidycalUrl: string;
 };
 
 export type Review = {
@@ -75,6 +76,7 @@ function buildRituals(dict: LocaleDict): Ritual[] {
       iconClass: shared.iconClass,
       duration: shared.duration,
       price: shared.price,
+      tidycalUrl: shared.tidycalUrl,
       ...copy,
     };
   });
