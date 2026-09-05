@@ -1,0 +1,101 @@
+change: optimize-hero-lcp
+
+status: apply
+
+branch: null
+
+created: 2026-09-04
+
+mode: hybrid
+
+base_branch: null
+
+delivery_strategy: ask-on-risk
+
+phases:
+
+  explore: done
+
+  propose: done
+
+  spec: done
+
+  design: done
+
+  tasks: done
+
+  apply: done
+
+  verify: pending
+
+  archive: pending
+
+locked:
+
+  - Goal: cut transfer/decode of true LCP asset; only one LCP candidate gets high fetch priority
+
+  - Swap SVG portrait for WebP via Astro Image from src/assets (not public static alone)
+
+  - Lossless ~1.1MB hero-marta.webp alone does NOT meet ~200–300 KB acceptance — Image pipeline and/or lossy re-encode required
+
+  - LCP priority winner: hero portrait (demote hero bg + Massages first panel)
+
+  - Prefer single HeroPortrait instance to avoid CSS-hidden eager download
+
+  - Out of scope: font/icon self-hosting; dedicated service pages
+
+  - Engram project for this change: ruben (marta-orozco-quiro unknown_project)
+
+  - Approach A primary; C only if largest served portrait variant still >~300 KB
+
+  - Remove SVG from critical path (delete or stop referencing)
+
+  - DELETE unused public/assets/images/hero-marta.svg (user locked)
+
+  - Precompress WebP master ONLY if Astro Image served bytes still >~300 KB (user locked)
+
+out_of_scope:
+
+  - Font/icon self-hosting
+
+  - Dedicated service pages
+
+  - Approach B as primary path
+
+  - Hero layout/copy redesign
+
+assumptions:
+
+  - Lighthouse baselines from orchestrator (dev localhost:4321) are authoritative starting point
+
+  - Display portrait ~260–320 CSS px; 2× needs ~520–640 px wide variants
+
+  - No automated tests; verify with build + Lighthouse / manual visual check
+
+  - Issue #5 before/after LCP notes required at verify
+
+blocking_questions: []
+
+open_questions: []
+
+next: sdd-verify
+
+next_parallel: null
+
+next_gate: null
+
+apply_progress: >
+
+  Phases 1–5 complete (1.1–5.1). Phase 6 optional left unchecked.
+
+  C gate: skipped — max dist/_astro/hero-marta*.webp = 54008 B (~52.7 KB) ≤~300 KB.
+
+  Build: npx astro build exit 0. Check: pre-existing AboutStats errors only.
+
+tasks_summary: >
+
+  6 phases / 12 tasks. Assets move+delete SVG/public webp; HeroPortrait Image
+
+  contract; Hero single+bg demote; Massages lazy/auto; CSS fold; build+C gate
+
+  only if max dist variant >~300KB; visual smoke; optional LH+#5 verify.

@@ -64,6 +64,94 @@ function withSnapDisabled(track: HTMLElement, fn: () => void) {
 }
 
 /**
+ * Defer work until the root nears the viewport (or idle/timeout fallback).
+ * Runs `run` at most once.
+ */
+export function whenNearIdle(
+  root: Element,
+  run: () => void,
+  opts?: { rootMargin?: string; timeoutMs?: number },
+): void {
+  let ran = false;
+  const rootMargin = opts?.rootMargin ?? "300px";
+  const timeoutMs = opts?.timeoutMs ?? 2000;
+
+  let idleHandle: number | null = null;
+  let fallbackHandle: number | null = null;
+  let observer: IntersectionObserver | null = null;
+  let idleIsRic = false;
+
+  const cleanup = () => {
+    observer?.disconnect();
+    observer = null;
+    if (idleHandle != null) {
+      if (idleIsRic) {
+        (
+          window as Window & { cancelIdleCallback?: (id: number) => void }
+        ).cancelIdleCallback?.(idleHandle);
+      } else {
+        window.clearTimeout(idleHandle);
+      }
+      idleHandle = null;
+    }
+    if (fallbackHandle != null) {
+      window.clearTimeout(fallbackHandle);
+      fallbackHandle = null;
+    }
+  };
+
+  const runOnce = () => {
+    if (ran) return;
+    ran = true;
+    cleanup();
+    run();
+  };
+
+  const scheduleIdle = () => {
+    if (ran || idleHandle != null) return;
+    const ric = (
+      window as Window & {
+        requestIdleCallback?: (
+          cb: IdleRequestCallback,
+          opts?: IdleRequestOptions,
+        ) => number;
+      }
+    ).requestIdleCallback;
+    if (typeof ric === "function") {
+      idleIsRic = true;
+      idleHandle = ric(() => runOnce(), { timeout: timeoutMs });
+    } else {
+      idleIsRic = false;
+      idleHandle = window.setTimeout(runOnce, 1);
+    }
+  };
+
+  // Absolute fallback if intersection never fires.
+  fallbackHandle = window.setTimeout(runOnce, timeoutMs);
+
+  if (typeof IntersectionObserver === "function") {
+    observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        if (fallbackHandle != null) {
+          window.clearTimeout(fallbackHandle);
+          fallbackHandle = null;
+        }
+        scheduleIdle();
+      },
+      { rootMargin, threshold: 0 },
+    );
+    observer.observe(root);
+  } else {
+    if (fallbackHandle != null) {
+      window.clearTimeout(fallbackHandle);
+      fallbackHandle = null;
+    }
+    scheduleIdle();
+  }
+}
+
+/**
  * Shared horizontal track: drag, step scroll, nav disable/hide, optional infinite loop.
  * No autoplay.
  */

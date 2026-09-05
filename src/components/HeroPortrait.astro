@@ -17,12 +17,12 @@ const { class: className = "", portraitAlt } = Astro.props;
     alt={portraitAlt}
     width={320}
     height={634}
-    widths={[320, 480, 640]}
+    widths={[240, 320, 480]}
     sizes="(min-width: 1024px) 20rem, min(92vw, 28rem)"
-    quality={90}
+    quality={80}
     format="webp"
     loading="eager"
-    fetchpriority="high"
+    fetchpriority="auto"
     decoding="async"
   />
 </div>

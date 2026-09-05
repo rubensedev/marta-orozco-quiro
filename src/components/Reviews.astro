@@ -82,19 +82,21 @@ const starIndexes = [0, 1, 2, 3, 4] as const;
 </section>
 
 <script>
-  import { initHorizontalCarousel } from "../scripts/horizontal-carousel";
+  import { initHorizontalCarousel, whenNearIdle } from "../scripts/horizontal-carousel";
 
   const track = document.getElementById("reviewsCarouselTrack") as HTMLElement | null;
   const prevBtn = document.getElementById("reviewsCarouselPrev") as HTMLButtonElement | null;
   const nextBtn = document.getElementById("reviewsCarouselNext") as HTMLButtonElement | null;
 
   if (track) {
-    initHorizontalCarousel({
-      track,
-      prevBtn,
-      nextBtn,
-      slideSelector: ".site-carousel__slide",
-      infinite: true,
+    whenNearIdle(track, () => {
+      initHorizontalCarousel({
+        track,
+        prevBtn,
+        nextBtn,
+        slideSelector: ".site-carousel__slide",
+        infinite: true,
+      });
     });
   }
 </script>

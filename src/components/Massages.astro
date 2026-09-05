@@ -188,7 +188,11 @@ const bookLabelTemplate =
 </section>
 
 <script>
-  import { initHorizontalCarousel } from "../scripts/horizontal-carousel";
+  import {
+    initHorizontalCarousel,
+    whenNearIdle,
+    type HorizontalCarouselController,
+  } from "../scripts/horizontal-carousel";
 
   const panel = document.getElementById(
     "massageMainPanel",
@@ -242,16 +246,18 @@ const bookLabelTemplate =
   const supportsViewTransition =
     typeof document.startViewTransition === "function";
 
-  const carousel =
-    track != null
-      ? initHorizontalCarousel({
-          track,
-          prevBtn,
-          nextBtn,
-          slideSelector: ".massage-carousel__slide",
-          infinite: false,
-        })
-      : null;
+  let carousel: HorizontalCarouselController | null = null;
+  if (track) {
+    whenNearIdle(track, () => {
+      carousel = initHorizontalCarousel({
+        track,
+        prevBtn,
+        nextBtn,
+        slideSelector: ".massage-carousel__slide",
+        infinite: false,
+      });
+    });
+  }
 
   function wait(ms: number) {
     return new Promise<void>((resolve) => {

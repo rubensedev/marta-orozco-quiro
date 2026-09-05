@@ -1,0 +1,74 @@
+change: fix-critical-path
+
+status: apply
+
+branch: null
+
+created: 2026-09-05
+
+mode: hybrid
+
+base_branch: null
+
+delivery_strategy: ask-on-risk
+
+phases:
+  explore: done
+  propose: done
+  spec: done
+  design: done
+  tasks: done
+  apply: in_progress
+  verify: pending
+  archive: pending
+
+apply_progress:
+  completed: [1.1, 1.2, 2.1, 3.1, 3.2, 3.3, 4.1, 5.1]
+  remaining: [5.2, 5.3]
+  notes: >
+    5.2 smoke (Massages/Reviews scroll after defer) and 5.3 preview/Netlify
+    mobile LH left for sdd-verify. Layout.astro FA/GFonts untouched.
+    Build HTML: 1× fetchpriority=high (hero bg srcset+sizes=100vw);
+    portrait auto + srcset 240/320/480; panelImage lazy+auto.
+
+locked:
+  - OUT OF SCOPE: Font Awesome CDN, Google Fonts, self-host fonts, FA→SVG, FA subset, font family swaps
+  - Fonts/icons deferred to later change (suggested: optimize-fonts-icons / defer-font-icon-cdn)
+  - IN SCOPE: non-font/icon perf regressions vs main
+  - LCP approach C2: hero background sole fetchpriority=high; portrait demote eager+auto
+  - Amend/reconcile optimize-hero-lcp portrait-sole-high lock with prod LH (LCP=bg)
+  - Keep Massages first-panel demotion
+  - Defer Massages+Reviews carousel init (idle/IO)
+  - Verify LH only on astro build+preview or Netlify
+  - Engram project: ruben (marta-orozco-quiro unknown_project)
+  - Authoritative baselines: main Perf 73 / FCP 1.9 / LCP 4.8; branch moqtest Perf 52 / FCP 5.1 / LCP 7.6
+
+out_of_scope:
+  - Font Awesome / Google Fonts / self-host / icon SVG migration / font swaps
+  - Hero layout/copy redesign
+  - Re-doing portrait SVG→WebP pipeline
+  - Compress plugin / major SEO HTML trim
+  - Explore approaches A and B
+
+assumptions:
+  - optimize-hero-lcp apply complete; bg still high is miss vs task 3.1 — reconcile via C2 not C1
+  - Prod Netlify LH is authoritative for LCP winner (bg)
+  - Shared FA+GFonts floor acknowledged but not fixed here
+
+blocking_questions: []
+
+open_questions: []
+
+next: sdd-verify
+
+next_parallel: null
+
+next_gate: null
+
+tasks_summary: >
+  8/10 tasks complete (1.1–5.1). Remaining: 5.2 smoke, 5.3 preview/Netlify LH.
+
+design_summary: >
+  C2 bg sole high + responsive widths/sizes; portrait eager/auto trimmed;
+  whenNearIdle carousel defer; amend hero-lcp winner; preview/prod LH only;
+  FA/GFonts out of scope.
