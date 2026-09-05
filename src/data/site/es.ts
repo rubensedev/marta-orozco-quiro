@@ -345,7 +345,7 @@ export const es = {
     modal: {
       title: "Reservar tratamiento",
       intro:
-        "Selecciona tu tratamiento y completa el mensaje de WhatsApp. Todos los campos visibles son obligatorios.",
+        "Selecciona tu tratamiento y duración. Confirma para abrir el calendario de TidyCal.",
       treatmentLabel: "Tratamiento Deseado",
       durationLabel: "Duración Preferida",
       purchaseTypeLabel: "Tipo de Compra",
@@ -357,7 +357,7 @@ export const es = {
       dateLabel: "Preferencia de Fecha/Hora",
       datePlaceholder: "Ej. Jueves 17:00",
       dateHint: "Disponibilidad solo jueves de 15:00 a 21:00.",
-      submit: "Confirmar reserva por WhatsApp",
+      submit: "Confirmar reserva en TidyCal",
       closeAria: "Cerrar modal de reserva",
     },
     whatsappBooking: {
