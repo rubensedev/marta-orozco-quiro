@@ -340,6 +340,17 @@ export const en = {
       metaDescription:
         "Thank you for choosing yourself. Finish booking in the calendar and restore your energy and peace.",
     },
+    notFound: {
+      statusMark: "404",
+      title: "Looking for a massage?",
+      message:
+        "Don't get lost in the vastness — find the perfect one for you below.",
+      massagesLabel: "Explore massages",
+      whatsappLabel: "Message on WhatsApp",
+      metaTitle: "Page not found | Marta Orozco Massage",
+      metaDescription:
+        "This page does not exist. Explore Marta Orozco's massages or message on WhatsApp.",
+    },
     modal: {
       title: "Book a treatment",
       intro:

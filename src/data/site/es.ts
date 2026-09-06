@@ -344,6 +344,17 @@ export const es = {
       metaDescription:
         "Gracias por cuidar de ti. Completa tu reserva en el calendario y recupera energía y paz.",
     },
+    notFound: {
+      statusMark: "404",
+      title: "¿Buscabas un masaje?",
+      message:
+        "No te pierdas en la inmensidad: encuentra el que mejor te va abajo.",
+      massagesLabel: "Ver masajes",
+      whatsappLabel: "Escribir por WhatsApp",
+      metaTitle: "Página no encontrada | Marta Orozco Quiromasaje",
+      metaDescription:
+        "Esta página no existe. Explora los masajes de Marta Orozco o escribe por WhatsApp.",
+    },
     modal: {
       title: "Reservar tratamiento",
       intro:

@@ -1,0 +1,83 @@
+---
+import NotFoundPage from "../components/NotFoundPage.astro";
+import { getSite } from "../data/site";
+import Layout from "../layouts/Layout.astro";
+
+const siteEs = getSite("es");
+const siteEn = getSite("en");
+const notFoundEs = siteEs.ui.notFound;
+const notFoundEn = siteEn.ui.notFound;
+---
+
+<Layout
+  site={siteEs}
+  pagePath="/404"
+  title={notFoundEs.metaTitle}
+  description={notFoundEs.metaDescription}
+  skipLocaleRedirect
+  includeJsonLd={false}
+  robots="noindex, nofollow"
+  alternateEsPath="/404"
+  alternateEnPath="/404"
+>
+  <script
+    is:inline
+    define:vars={{
+      titleEs: notFoundEs.metaTitle,
+      titleEn: notFoundEn.metaTitle,
+      descEs: notFoundEs.metaDescription,
+      descEn: notFoundEn.metaDescription,
+    }}
+  >
+    (function () {
+      var LOCALE_KEY = "marta-orozco-locale";
+      var path = window.location.pathname || "";
+      var locale = "es";
+      if (path.indexOf("/en") === 0) {
+        locale = "en";
+      } else {
+        try {
+          if (localStorage.getItem(LOCALE_KEY) === "en") locale = "en";
+        } catch (e) {
+          /* ignore storage failures */
+        }
+      }
+
+      var root = document.documentElement;
+      root.setAttribute("data-nf-locale", locale);
+      root.setAttribute("data-locale", locale);
+      root.setAttribute("lang", locale === "en" ? "en" : "es");
+      document.title = locale === "en" ? titleEn : titleEs;
+
+      var robotsMeta = document.querySelector('meta[name="robots"]');
+      if (robotsMeta) robotsMeta.setAttribute("content", "noindex, nofollow");
+
+      var descMeta = document.querySelector('meta[name="description"]');
+      if (descMeta) {
+        descMeta.setAttribute("content", locale === "en" ? descEn : descEs);
+      }
+    })();
+  </script>
+  <style is:inline>
+    [data-not-found-locale] {
+      display: none;
+    }
+    html[data-nf-locale="es"] [data-not-found-locale="es"],
+    html[data-nf-locale="en"] [data-not-found-locale="en"] {
+      display: block;
+    }
+  </style>
+
+  <div data-not-found-locale="es">
+    <NotFoundPage site={siteEs} />
+  </div>
+  <div data-not-found-locale="en">
+    <NotFoundPage site={siteEn} />
+  </div>
+</Layout>
+
+<script>
+  import { bootRelaxFlows } from "../scripts/relax-flow";
+
+  bootRelaxFlows();
+</script>
