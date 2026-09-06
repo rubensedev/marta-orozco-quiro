@@ -50,7 +50,7 @@ Chain strategy: stacked-to-main
 - [x] 4.2 Point bono discount CTAs in `src/components/Rituals.astro` to WA packages inquiry (not modal)
 - [x] 4.3 Relabel WA vs Book in `src/components/MobileBar.astro` (WA = questions)
 - [x] 4.4 Rewrite booking answer in `src/components/FAQ.astro` to site/TidyCal (not WA)
-- [ ] 4.5 Wire massage `[data-pricing-card]` Book/Reservar: if selected purchase type is package (`bono5`/`bono10`, sessions > 1) open WhatsApp with the same packages inquiry as Rituals (`meta.whatsappBonosInquiry` / `bonosWhatsappHref`); if `single`, keep current open-modal + duration → TidyCal path. MUST NOT open modal or TidyCal for packages. Lands on PR #18 (`feat/tidycal-booking-channel`). Spec/design already covered — no separate 4.6.
+- [x] 4.5 Wire massage `[data-pricing-card]` Book/Reservar: if selected purchase type is package (`bono5`/`bono10`, sessions > 1) open WhatsApp with the same packages inquiry as Rituals (`meta.whatsappBonosInquiry` / `bonosWhatsappHref`); if `single`, keep current open-modal + duration → TidyCal path. MUST NOT open modal or TidyCal for packages. Lands on PR #18 (`feat/tidycal-booking-channel`). Spec/design already covered — no separate 4.6.
 
 ## Phase 5: Verify
 
