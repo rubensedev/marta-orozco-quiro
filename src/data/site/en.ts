@@ -341,7 +341,7 @@ export const en = {
     modal: {
       title: "Book a treatment",
       intro:
-        "Select your treatment and complete the WhatsApp message. All visible fields are required.",
+        "Select your treatment and duration. Confirm to open the TidyCal calendar.",
       treatmentLabel: "Desired treatment",
       durationLabel: "Preferred duration",
       purchaseTypeLabel: "Purchase type",
@@ -353,7 +353,7 @@ export const en = {
       dateLabel: "Preferred date/time",
       datePlaceholder: "e.g. Thursday 17:00",
       dateHint: "Availability only on Thursdays from 15:00 to 21:00.",
-      submit: "Confirm booking via WhatsApp",
+      submit: "Confirm booking via TidyCal",
       closeAria: "Close booking modal",
     },
     whatsappBooking: {
