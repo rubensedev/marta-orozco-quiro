@@ -13,6 +13,7 @@ Replace WhatsApp booking confirmation with per-(treatment, duration) / ritual Ti
 - Bonos → WhatsApp packages ask only
 - Rewrite FAQ/meta/modal “book via WhatsApp”; relabel MobileBar WA vs Book
 - Thank-you: `/gracias`, `/en/thank-you` (calm confirm + optional WA + home)
+- Thank-you polish: logo brand mark (not text), dark-mode-safe BG, relax-flow pointer ripple on dots
 - Document TidyCal `redirect_url` operator step
 
 ### Out of Scope
@@ -44,7 +45,8 @@ Base `https://tidycal.com/martaorozcoquiro/{slug}` — massage durations; ritual
 | `Rituals`/`MobileBar`/`FAQ` | Modified | Bonos WA; WA vs Book |
 | CTA surfaces | Modified | Copy; modal still opens |
 | `/gracias`, `/en/thank-you` | New | Post-book confirmation |
-| `global.css` | Modified | CTA branding if needed |
+| `ThankYouPage.astro` | Modify (PR5) | Logo, dark BG, relax-flow |
+| `global.css` | Modify | CTA branding if needed |
 
 ## Risks
 
@@ -71,4 +73,5 @@ Revert modal/scripts/data/copy/thank-you to WA booking confirm. Clear or leave T
 - [ ] No PII/purchase-type on confirm; price shown; untargeted Book → default treatment
 - [ ] Bonos = WA packages only; FAQ/meta not “book via WhatsApp”
 - [ ] Thank-you calm branded; redirect_url documented/verified
+- [ ] Thank-you polish: logo, dark BG not bright, relax-flow + reduced-motion
 - [ ] `npx astro check` + smoke ES/EN

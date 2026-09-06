@@ -4,10 +4,10 @@
 
 | Field | Value |
 |-------|-------|
-| Estimated changed lines | 450–700 |
+| Estimated changed lines | 450–700 (+PR5 ~80–150) |
 | 400-line budget risk | High |
 | Chained PRs recommended | Yes |
-| Suggested split | PR1 data → PR2 thank-you → PR3 modal/scripts → PR4 channel copy |
+| Suggested split | PR1 data → PR2 thank-you → PR3 modal/scripts → PR4 channel copy → PR5 thank-you polish |
 | Delivery strategy | ask-on-risk |
 | Chain strategy | stacked-to-main |
 
@@ -24,6 +24,7 @@ Chain strategy: stacked-to-main
 | 2 | Bilingual handoff thank-you + skip locale redirect | PR 2 | `npx astro check` | Open `/gracias`, `/en/thank-you` | Remove thank-you pages + Layout skip |
 | 3 | Slim modal + open TidyCal + navigate handoff | PR 3 | `npx astro check` | Confirm: new tab + current→handoff; fail-closed | Revert `BookingModal.astro` + `PageScripts.astro` |
 | 4 | Channel copy + bonos WA | PR 4 | `npx astro check` | Smoke FAQ/MobileBar/Rituals WA; no WA booking claim | Revert es/en + Rituals/MobileBar/FAQ |
+| 5 | Thank-you polish: logo, dark BG, relax-flow | PR 5 | `npx astro check` | Light/dark handoff; pointer waves; reduced-motion | Revert `ThankYouPage.astro` (+ any PR5 CSS) |
 
 ## Phase 1: Data foundation
 
@@ -55,3 +56,10 @@ Chain strategy: stacked-to-main
 
 - [x] 5.1 Run `npx astro check`
 - [ ] 5.2 Smoke ES/EN: all `url_map` pairs + rituals; fail-closed; untargeted Book → default; confirm → TidyCal new tab + current handoff; no embed
+
+## Phase 6: Thank-you polish (PR5)
+
+- [ ] 6.1 Replace thank-you “MARTA OROZCO” text with site logo (`/assets/images/logo.svg`); match Header invert/brightness for glass contrast; keep brand-first hierarchy
+- [ ] 6.2 Fix dark-mode handoff background: stop using light-only `--color-brand-bg` gradient; use `--color-brand-bg-dark` / dark mixes so the page is not bright in dark theme
+- [ ] 6.3 Add relax-flow BG: pointer-driven calm-sea ripple/wave displacement on the dot field (rAF, no heavy libs; touch/pointer); `prefers-reduced-motion` → static or very subtle
+- [ ] 6.4 Run `npx astro check`; smoke light/dark + reduced-motion on `/gracias` and `/en/thank-you`

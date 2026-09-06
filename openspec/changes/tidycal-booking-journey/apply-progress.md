@@ -45,9 +45,9 @@
 - Base: `feat/tidycal-booking-modal`
 - Chain: stacked 4/4 → modal → thankyou → data → **feat/improved-seo** (not develop)
 - Check: `npx astro check` pass (0 errors; 4 pre-existing hints)
-- Issue: #14 (**Closes #14** on this final PR only)
+- Issue: #14 (**Closes #14** on this final PR only — note: Phase 6 / PR5 added after stack)
 - PR: https://github.com/rubensedev/marta-orozco-quiro/pull/18
-- Stack status: **implementation complete**; pending merges of PRs #15–#18 into `feat/improved-seo`
+- Stack status: WU1–4 **done** via PRs #15–#18; pending merges into `feat/improved-seo`
 - Files: `es.ts`, `en.ts`, `faq.ts`, `Rituals.astro`, `FAQ.astro`, `MobileBar` via `ui.reserveAppointment`, tasks/apply-progress
 
 ### Work Unit Evidence
@@ -71,5 +71,12 @@
 - MobileBar.astro markup unchanged; relabel via `ui.reserveAppointment` (CONSULTAS / QUESTIONS).
 - Added `whatsappPackages` FAQ action so packages WA keeps bonos template while booking FAQ WA stays questions.
 
+## Work unit 5 (PR5) — thank-you polish — NOT STARTED
+- Tasks: 6.1–6.4 (logo, dark BG, relax-flow, check)
+- Branch: `feat/tidycal-thankyou-polish`
+- Base: `feat/tidycal-booking-channel`
+- Chain: stacked into channel tip → … → **feat/improved-seo** (not develop)
+- Planning: Phase 6 docs amended on polish branch (design/spec/tasks/proposal/state)
+
 ## Next
-`sdd-verify` (orchestrator). Stack complete pending merges into `feat/improved-seo`.
+**Phase 6 / PR5** — `sdd-apply` thank-you polish on `feat/tidycal-thankyou-polish` (base `feat/tidycal-booking-channel`). Then `sdd-verify` after PR5.

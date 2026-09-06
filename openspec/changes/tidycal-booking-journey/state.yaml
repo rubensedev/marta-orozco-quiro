@@ -14,7 +14,7 @@ phases:
   archive: pending
 
 created: 2026-09-05
-updated: 2026-09-05
+updated: 2026-09-06
 
 mode: hybrid
 
@@ -56,6 +56,9 @@ locked_decisions:
   thank_you_es: /gracias
   thank_you_en: /en/thank-you
   thank_you_origin: https://martaorozcoquiro.netlify.app
+  thank_you_logo: site_logo_svg_header_filter
+  thank_you_dark_bg: brand_bg_dark_tokens
+  thank_you_relax_flow: pointer_rAF_dots_reduced_motion
   tidycal_paid_redirect: out_of_scope
   embed_v1: false
   modal_purchase_type: remove_from_booking_modal

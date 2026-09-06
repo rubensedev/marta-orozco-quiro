@@ -95,3 +95,41 @@ Contact, MobileBar WA, FAQ WA actions, Rituals packages MUST be questions/bonos 
 - GIVEN those WA entry points
 - WHEN activated
 - THEN body is questions/packages inquiry, not booking confirmation
+
+## ADDED Requirements
+
+### Requirement: Thank-you logo brand mark
+
+Thank-you pages MUST show the site logo (`/assets/images/logo.svg`) as the brand mark instead of plain “MARTA OROZCO” text. Logo treatment MUST follow the Header pattern (invert/brightness) so it remains legible on the glass card. Brand MUST remain a hero-level signal above the handoff title.
+
+#### Scenario: Logo on handoff
+
+- GIVEN `/gracias` or `/en/thank-you`
+- WHEN the glass card is inspected
+- THEN the site logo image is present as the brand mark (not text-only “MARTA OROZCO”); contrast remains readable on the glass surface
+
+### Requirement: Dark-mode handoff background
+
+Thank-you page background MUST NOT appear brightly lit in dark theme. Gradients and fills MUST use dark-aware tokens (e.g. `--color-brand-bg-dark` / dark mixes), not light-only `--color-brand-bg`.
+
+#### Scenario: Dark theme not bright
+
+- GIVEN dark theme (`html.dark`)
+- WHEN a thank-you route loads
+- THEN the page background reads as a dark calm surface, not a light peach/cream field
+
+### Requirement: Relax-flow pointer interaction
+
+Thank-you background MUST include a calm “relax flow” dot field whose dots react to pointer/touch with gentle wave/ripple displacement. Implementation MUST use lightweight `requestAnimationFrame` (no heavy animation libraries). When `prefers-reduced-motion: reduce` is set, motion MUST be static or very subtle.
+
+#### Scenario: Pointer waves
+
+- GIVEN thank-you page with motion allowed
+- WHEN the pointer or touch moves over the background
+- THEN dots displace in a gentle wave/ripple response without janky heavy libraries
+
+#### Scenario: Reduced motion
+
+- GIVEN `prefers-reduced-motion: reduce`
+- WHEN thank-you loads
+- THEN the dot field is static or only very subtly animated
