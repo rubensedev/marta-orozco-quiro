@@ -103,5 +103,22 @@
 - Dark BG: `dark:` gradient uses `--color-brand-bg-dark` / sage-dark mixes (no peach-only field).
 - Relax-flow: page-local canvas + rAF pointer ripple; `pointer-events-none` on canvas; reduced-motion → static paint only.
 
+## Work unit 6 (PR6) — modal copy + select UX
+- Status: **planned** (docs on `feat/tidycal-modal-copy-ux`; impl via sdd-apply)
+- Tasks: 7.1, 7.2, 7.3
+- Branch: `feat/tidycal-modal-copy-ux`
+- Base tip: `feat/tidycal-thankyou-polish` (PR #20); stack target **`feat/improved-seo`**
+- PR: leave creation to apply after implementation (do not open empty PR)
+- Planned files: `es.ts` / `en.ts` (`ui.modal.intro`/`submit`), `BookingModal.astro` (select `pr-*` / appearance), optional `global.css`
+- Out of scope: FAQ/meta “TidyCal” scrub (deferred optional)
+
+### Work Unit Evidence (after apply)
+
+| Evidence | Result |
+|---|---|
+| Focused test command | `npx astro check` (pending) |
+| Runtime harness | Modal ES/EN: no vendor in intro/submit; select text clears chevron |
+| Rollback boundary | Revert modal copy keys + select padding styles |
+
 ## Next
-**sdd-verify** after PR5 lands / stack ready. Full change (WU1–5) implemented via PRs #15–#20.
+**sdd-apply** — Phase 7 / PR6 (`feat/tidycal-modal-copy-ux` ← base `feat/tidycal-thankyou-polish`). Do not open PR until code lands.

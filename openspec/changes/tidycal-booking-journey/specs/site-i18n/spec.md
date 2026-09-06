@@ -4,13 +4,23 @@
 
 ### Requirement: Booking channel copy
 
-FAQ, meta, modal, MobileBar MUST NOT claim WhatsApp booking. Book = reserve/TidyCal; WA = questions or packages.
+FAQ, meta, modal, MobileBar MUST NOT claim WhatsApp booking. Book = reserve/calendar; WA = questions or packages.
 
 #### Scenario: FAQ meta MobileBar
 
 - GIVEN FAQ booking answer, meta, MobileBar WA/Book
 - WHEN inspected
-- THEN booking points to site/TidyCal not WA; WA ≠ Book label
+- THEN booking points to site/calendar not WA; WA ≠ Book label
+
+### Requirement: Modal UI copy without vendor name
+
+Modal `intro` and `submit` (ES+EN) MUST NOT contain the vendor name “TidyCal”. Intro MUST describe selecting treatment/duration and confirming to open the calendar. Submit MUST be “Confirmar reserva” (ES) / “Confirm booking” (EN). FAQ/meta strings that still mention TidyCal are deferred optional (out of Phase 7 modal scope).
+
+#### Scenario: Vendor-free modal strings
+
+- GIVEN `ui.modal.intro` and `ui.modal.submit` in `es.ts` / `en.ts`
+- WHEN inspected
+- THEN no “TidyCal” substring; submit matches Confirmar reserva / Confirm booking
 
 ## MODIFIED Requirements
 

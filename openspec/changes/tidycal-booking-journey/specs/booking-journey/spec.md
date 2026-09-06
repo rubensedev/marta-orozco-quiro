@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Modal → TidyCal URL → new tab; WA questions/bonos; thank-you; fail-closed; no embed.
+Modal → calendar URL → new tab; WA questions/bonos; thank-you; fail-closed; no embed.
 
 ## Requirements
 
@@ -26,15 +26,21 @@ MUST resolve HTTPS URLs from `state.yaml` `url_map` for every bookable massage `
 - WHEN confirm runs
 - THEN URL matches `url_map` exactly
 
-### Requirement: Confirm opens TidyCal then handoff page
+### Requirement: Confirm opens calendar then handoff page
 
-Confirm MUST indicate TidyCal, open the resolved URL in a new tab with `noopener` (SHOULD `noreferrer`), close the modal, and navigate the current tab to the locale thank-you/handoff route (`/gracias` or `/en/thank-you`). MUST NOT open a second thank-you tab. MUST NOT rely on TidyCal paid `redirect_url`.
+Confirm MUST open the resolved booking URL in a new tab with `noopener` (SHOULD `noreferrer`), close the modal, and navigate the current tab to the locale thank-you/handoff route (`/gracias` or `/en/thank-you`). Modal intro and submit label MUST NOT expose the vendor name “TidyCal” (use calendar/booking language; calendar icon MAY remain). MUST NOT open a second thank-you tab. MUST NOT rely on TidyCal paid `redirect_url`.
 
 #### Scenario: Confirm handoff
 
 - GIVEN mapped selection
-- WHEN Confirm via TidyCal activates
-- THEN TidyCal opens in a new tab with noopener; current tab goes to the locale handoff page; modal closes
+- WHEN Confirm booking activates
+- THEN the calendar URL opens in a new tab with noopener; current tab goes to the locale handoff page; modal closes
+
+#### Scenario: Modal copy has no vendor name
+
+- GIVEN booking modal open (ES or EN)
+- WHEN intro and submit are inspected
+- THEN neither string contains “TidyCal”; submit reads “Confirmar reserva” / “Confirm booking”
 
 ### Requirement: Untargeted Book opens modal
 
@@ -102,7 +108,7 @@ MUST NOT embed TidyCal (iframe/`tidycal-embed`).
 
 ### Requirement: Channel split
 
-Contact, MobileBar WA, FAQ WA actions, Rituals packages, and massage pricing-card Book when a package is selected MUST be questions/bonos only; single-session booking confirm MUST use TidyCal only.
+Contact, MobileBar WA, FAQ WA actions, Rituals packages, and massage pricing-card Book when a package is selected MUST be questions/bonos only; single-session booking confirm MUST use the calendar deep-link path only.
 
 #### Scenario: WA not booking confirm
 
@@ -147,3 +153,13 @@ Thank-you background MUST include a calm “relax flow” dot field whose dots r
 - GIVEN `prefers-reduced-motion: reduce`
 - WHEN thank-you loads
 - THEN the dot field is static or only very subtly animated
+
+### Requirement: Modal select chevron spacing
+
+Booking modal treatment and duration `<select>` controls MUST leave visible air/padding before the native trailing dropdown chevron so selected text does not collide with it. Glass select styling MUST be preserved (border, surface, blur). Custom `appearance` MAY be used if needed.
+
+#### Scenario: Select text clears chevron
+
+- GIVEN booking modal with treatment and (when shown) duration selects
+- WHEN a long option label is selected
+- THEN text remains readable and does not overlap the trailing chevron; glass styling remains

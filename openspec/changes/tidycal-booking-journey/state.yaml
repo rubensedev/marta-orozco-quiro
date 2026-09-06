@@ -22,7 +22,7 @@ delivery_strategy: ask-on-risk
 
 artifact_store: hybrid
 
-next: apply # task 4.5 on PR #18
+next: apply # Phase 7 / PR6 modal copy + select UX on feat/tidycal-modal-copy-ux
 
 decision_needed_before_apply: false
 chain_strategy: stacked-to-main
@@ -63,9 +63,15 @@ locked_decisions:
   tidycal_paid_redirect: out_of_scope
   embed_v1: false
   modal_purchase_type: remove_from_booking_modal
-  booking_cta: confirm_via_tidycal
+  booking_cta: confirm_booking_no_vendor_name
+  modal_intro_vendor_name: omit_tidycal
+  modal_select_chevron_padding: extra_trailing_air_glass_kept
+  faq_meta_tidycal_scrub: deferred_optional
   whatsapp_role: questions_and_bonos_only
   chain_strategy: stacked-to-main
+  phase7_branch: feat/tidycal-modal-copy-ux
+  phase7_base: feat/tidycal-thankyou-polish
+  stack_target: feat/improved-seo
 
 url_map:
   descontracturante:

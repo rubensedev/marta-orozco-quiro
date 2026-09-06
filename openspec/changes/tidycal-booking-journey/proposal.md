@@ -8,18 +8,20 @@ Replace WhatsApp booking confirmation with per-(treatment, duration) / ritual Ti
 
 ### In Scope
 - Slim modal: treatment + duration + price; drop name/email/date/purchase-type
-- CTA “Confirm via TidyCal” → resolve URL → new tab (`noopener`)
+- Confirm → resolve URL → new tab (`noopener`); CTA label vendor-free (“Confirm booking” / “Confirmar reserva”)
 - Locked URL map (state.yaml); default treatment on untargeted Book
 - Bonos → WhatsApp packages ask only
 - Massage pricing-card Book: package selected (`bono5`/`bono10`) → same WhatsApp packages inquiry; `single` → modal/TidyCal
 - Rewrite FAQ/meta/modal “book via WhatsApp”; relabel MobileBar WA vs Book
 - Thank-you: `/gracias`, `/en/thank-you` (calm confirm + optional WA + home)
 - Thank-you polish: logo brand mark (not text), dark-mode-safe BG, relax-flow pointer ripple on dots
+- Phase 7: modal intro/submit without “TidyCal”; select chevron trailing padding (glass kept)
 - Document TidyCal `redirect_url` operator step
 
 ### Out of Scope
 - iframe/embed; `/reservar`; TidyCal bono types; analytics
 - Changing site-header drawer→modal open contract
+- FAQ/meta “TidyCal” string scrub (deferred optional unless trivial)
 
 ## Capabilities
 
@@ -27,7 +29,7 @@ Replace WhatsApp booking confirmation with per-(treatment, duration) / ritual Ti
 - `booking-journey`: Modal → TidyCal resolve → new tab; channel split; thank-you; fail-closed
 
 ### Modified Capabilities
-- `site-i18n`: FAQ/meta/modal no longer claim WA booking; WA bodies = questions/packages only
+- `site-i18n`: FAQ/meta/modal no longer claim WA booking; WA bodies = questions/packages only; modal UI omits vendor name
 
 ## Approach
 
@@ -39,15 +41,15 @@ Base `https://tidycal.com/martaorozcoquiro/{slug}` — massage durations; ritual
 
 | Area | Impact | Description |
 |------|--------|-------------|
-| `BookingModal.astro` | Modified | Slim fields; TidyCal CTA |
+| `BookingModal.astro` | Modified | Slim fields; Phase 7 select padding |
 | `PageScripts.astro` | Modified | URL resolve; drop WA submit; pricing-card Book branches package→WA / single→modal |
 | `shared.ts`, `index.ts` | Modified | Per-duration/ritual URLs |
-| `es.ts`, `en.ts` | Modified | Modal/FAQ/meta/channel copy |
+| `es.ts`, `en.ts` | Modified | Modal/FAQ/meta/channel copy; Phase 7 vendor-free modal strings |
 | `Rituals`/`MobileBar`/`FAQ` | Modified | Bonos WA; WA vs Book |
 | CTA surfaces | Modified | Copy; pricing-card Book package-aware; single still opens modal |
 | `/gracias`, `/en/thank-you` | New | Post-book confirmation |
 | `ThankYouPage.astro` | Modify (PR5) | Logo, dark BG, relax-flow |
-| `global.css` | Modify | CTA branding if needed |
+| `global.css` | Modify | CTA / select appearance if needed |
 
 ## Risks
 
@@ -75,4 +77,5 @@ Revert modal/scripts/data/copy/thank-you to WA booking confirm. Clear or leave T
 - [ ] Bonos = WA packages only; pricing-card package Book → WA inquiry (not modal/TidyCal); FAQ/meta not “book via WhatsApp”
 - [ ] Thank-you calm branded; redirect_url documented/verified
 - [ ] Thank-you polish: logo, dark BG not bright, relax-flow + reduced-motion
+- [ ] Modal UI: no “TidyCal” in intro/submit; select chevron air
 - [ ] `npx astro check` + smoke ES/EN
