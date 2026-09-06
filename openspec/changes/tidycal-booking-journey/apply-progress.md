@@ -109,6 +109,7 @@
 - Base tip: `feat/tidycal-thankyou-polish` (PR #20); stack target **`feat/improved-seo`**
 - Check: `npx astro check` pass (0 errors; 4 pre-existing hints)
 - Issue: #14 (Related to; do **not** Closes)
+- PR: https://github.com/rubensedev/marta-orozco-quiro/pull/21
 - Planned files → landed: `es.ts` / `en.ts` (`ui.modal.intro`/`submit`), `BookingModal.astro` (`pl-4 pr-12` on selects)
 - Out of scope: FAQ/meta “TidyCal” scrub (deferred optional)
 - `global.css`: untouched (Tailwind padding sufficient)
