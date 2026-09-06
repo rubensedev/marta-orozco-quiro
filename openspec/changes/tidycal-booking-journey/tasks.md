@@ -23,7 +23,7 @@ Chain strategy: stacked-to-main
 | 1 | `tidycalUrl` on shared durations/rituals + types | PR 1 | `npx astro check` | N/A — data only | Revert `shared.ts` + `index.ts` |
 | 2 | Bilingual handoff thank-you + skip locale redirect | PR 2 | `npx astro check` | Open `/gracias`, `/en/thank-you` | Remove thank-you pages + Layout skip |
 | 3 | Slim modal + open TidyCal + navigate handoff | PR 3 | `npx astro check` | Confirm: new tab + current→handoff; fail-closed | Revert `BookingModal.astro` + `PageScripts.astro` |
-| 4 | Channel copy + bonos WA | PR 4 | `npx astro check` | Smoke FAQ/MobileBar/Rituals WA; no WA booking claim | Revert es/en + Rituals/MobileBar/FAQ |
+| 4 | Channel copy + bonos WA + pricing-card package CTA | PR 4 (#18) | `npx astro check` | Smoke FAQ/MobileBar/Rituals WA; pricing-card package→WA / single→modal | Revert es/en + Rituals/MobileBar/FAQ + PageScripts branch |
 
 ## Phase 1: Data foundation
 
@@ -46,12 +46,13 @@ Chain strategy: stacked-to-main
 
 ## Phase 4: Channel split + i18n
 
-- [ ] 4.1 Update modal/FAQ/meta/MobileBar/WA copy in `src/data/site/es.ts` and `src/data/site/en.ts`; remove unused `whatsappBooking` PII fields; EN WA fully English
-- [ ] 4.2 Point bono discount CTAs in `src/components/Rituals.astro` to WA packages inquiry (not modal)
-- [ ] 4.3 Relabel WA vs Book in `src/components/MobileBar.astro` (WA = questions)
-- [ ] 4.4 Rewrite booking answer in `src/components/FAQ.astro` to site/TidyCal (not WA)
+- [x] 4.1 Update modal/FAQ/meta/MobileBar/WA copy in `src/data/site/es.ts` and `src/data/site/en.ts`; remove unused `whatsappBooking` PII fields; EN WA fully English
+- [x] 4.2 Point bono discount CTAs in `src/components/Rituals.astro` to WA packages inquiry (not modal)
+- [x] 4.3 Relabel WA vs Book in `src/components/MobileBar.astro` (WA = questions)
+- [x] 4.4 Rewrite booking answer in `src/components/FAQ.astro` to site/TidyCal (not WA)
+- [x] 4.5 Wire massage `[data-pricing-card]` Book/Reservar: if selected purchase type is package (`bono5`/`bono10`, sessions > 1) open WhatsApp with the same packages inquiry as Rituals (`meta.whatsappBonosInquiry` / `bonosWhatsappHref`); if `single`, keep current open-modal + duration → TidyCal path. MUST NOT open modal or TidyCal for packages. Lands on PR #18 (`feat/tidycal-booking-channel`). Spec/design already covered — no separate 4.6.
 
 ## Phase 5: Verify
 
-- [ ] 5.1 Run `npx astro check`
-- [ ] 5.2 Smoke ES/EN: all `url_map` pairs + rituals; fail-closed; untargeted Book → default; confirm → TidyCal new tab + current handoff; no embed
+- [x] 5.1 Run `npx astro check`
+- [ ] 5.2 Smoke ES/EN: all `url_map` pairs + rituals; fail-closed; untargeted Book → default; confirm → TidyCal new tab + current handoff; pricing-card package→WA / single→modal; no embed

@@ -11,6 +11,7 @@ Replace WhatsApp booking confirmation with per-(treatment, duration) / ritual Ti
 - CTA “Confirm via TidyCal” → resolve URL → new tab (`noopener`)
 - Locked URL map (state.yaml); default treatment on untargeted Book
 - Bonos → WhatsApp packages ask only
+- Massage pricing-card Book: package selected (`bono5`/`bono10`) → same WhatsApp packages inquiry; `single` → modal/TidyCal
 - Rewrite FAQ/meta/modal “book via WhatsApp”; relabel MobileBar WA vs Book
 - Thank-you: `/gracias`, `/en/thank-you` (calm confirm + optional WA + home)
 - Document TidyCal `redirect_url` operator step
@@ -38,11 +39,11 @@ Base `https://tidycal.com/martaorozcoquiro/{slug}` — massage durations; ritual
 | Area | Impact | Description |
 |------|--------|-------------|
 | `BookingModal.astro` | Modified | Slim fields; TidyCal CTA |
-| `PageScripts.astro` | Modified | URL resolve; drop WA submit |
+| `PageScripts.astro` | Modified | URL resolve; drop WA submit; pricing-card Book branches package→WA / single→modal |
 | `shared.ts`, `index.ts` | Modified | Per-duration/ritual URLs |
 | `es.ts`, `en.ts` | Modified | Modal/FAQ/meta/channel copy |
 | `Rituals`/`MobileBar`/`FAQ` | Modified | Bonos WA; WA vs Book |
-| CTA surfaces | Modified | Copy; modal still opens |
+| CTA surfaces | Modified | Copy; pricing-card Book package-aware; single still opens modal |
 | `/gracias`, `/en/thank-you` | New | Post-book confirmation |
 | `global.css` | Modified | CTA branding if needed |
 
@@ -69,6 +70,6 @@ Revert modal/scripts/data/copy/thank-you to WA booking confirm. Clear or leave T
 
 - [ ] Confirm opens correct TidyCal URL in new tab for all mapped sessions/rituals
 - [ ] No PII/purchase-type on confirm; price shown; untargeted Book → default treatment
-- [ ] Bonos = WA packages only; FAQ/meta not “book via WhatsApp”
+- [ ] Bonos = WA packages only; pricing-card package Book → WA inquiry (not modal/TidyCal); FAQ/meta not “book via WhatsApp”
 - [ ] Thank-you calm branded; redirect_url documented/verified
 - [ ] `npx astro check` + smoke ES/EN

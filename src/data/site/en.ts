@@ -4,10 +4,10 @@ export const en = {
     lang: "en" as const,
     title: "Marta Orozco | Massage Therapist in Seville",
     description:
-      "Professional massage therapist in the centre of Seville. Deep tissue, relaxing, detox and wellness rituals. Book via WhatsApp.",
+      "Professional massage therapist in the centre of Seville. Deep tissue, relaxing, detox and wellness rituals. Book online via TidyCal.",
     ogLocale: "en_GB",
     ogLocaleAlternate: "es_ES",
-    whatsappInquiry: "Hello Marta! I would like to book an appointment. Do you have availability?",
+    whatsappInquiry: "Hello Marta! I have a question. Can you help me?",
     whatsappBonosInquiry:
       "Hello Marta! I would like more information about the massage session packs",
   },
@@ -75,9 +75,11 @@ export const en = {
       {
         question: "How do I book an appointment?",
         answer: [
-          "You can book via WhatsApp or using the «",
+          "Book with the «",
           { label: "Book now", action: "booking" as const },
-          "» button on this site. Tell me the treatment, duration and your preferred time. Massages are always by prior booking only.",
+          "» button on this site: choose your treatment and duration, then confirm to open the TidyCal calendar. If you have questions, ",
+          { label: "message me on WhatsApp", action: "whatsapp" as const },
+          ". Massages are always by prior booking only.",
         ],
       },
       {
@@ -108,7 +110,7 @@ export const en = {
           "Yes. There are 5-session packs with a 10% discount and 10-session packs with a 15% discount. See the ",
           { label: "packs section", action: "packages" as const },
           " or ",
-          { label: "message me on WhatsApp", action: "whatsapp" as const },
+          { label: "message me on WhatsApp", action: "whatsappPackages" as const },
           ".",
         ],
       },
@@ -311,7 +313,7 @@ export const en = {
       homeAria: "Go to top",
     },
     reserveNow: "BOOK NOW",
-    reserveAppointment: "BOOK APPOINTMENT",
+    reserveAppointment: "QUESTIONS",
     reserveTreatment: (title: string) => `Book ${title}`,
     fromPrice: (price: number) => `from ${price}€`,
     minutesSuffix: "minutes",
@@ -355,18 +357,6 @@ export const en = {
       dateHint: "Availability only on Thursdays from 15:00 to 21:00.",
       submit: "Confirm booking via TidyCal",
       closeAria: "Close booking modal",
-    },
-    whatsappBooking: {
-      greeting: "Hello Marta! I would like to book an appointment.",
-      treatment: "Treatment",
-      duration: "Duration",
-      purchaseType: "Purchase type",
-      priceEstimate: "Estimated price",
-      name: "Name",
-      email: "Email",
-      datePreference: "Preferred date/time",
-      defaultSingle: "Single session",
-      defaultDuration: "80 minutes",
     },
   },
 };

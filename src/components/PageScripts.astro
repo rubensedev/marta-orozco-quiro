@@ -6,7 +6,7 @@ type Props = {
 };
 
 const { site } = Astro.props;
-const { bonoTiers, rituals, treatments, ui, locale } = site;
+const { bonoTiers, rituals, treatments, ui, locale, meta } = site;
 
 const uiClient = {
   durationLabel: ui.durationLabel,
@@ -23,6 +23,7 @@ const uiClient = {
 };
 
 const thankYouPath = locale === "en" ? "/en/thank-you" : "/gracias";
+const bonosWhatsappHref = `https://wa.me/${meta.whatsappNumber}?text=${encodeURIComponent(meta.whatsappBonosInquiry)}`;
 ---
 
 <script
@@ -32,6 +33,7 @@ const thankYouPath = locale === "en" ? "/en/thank-you" : "/gracias";
     treatments,
     uiClient,
     thankYouPath,
+    bonosWhatsappHref,
   }}
 >
   const THEME_KEY = "marta-orozco-theme";
@@ -421,6 +423,16 @@ const thankYouPath = locale === "en" ? "/en/thank-you" : "/gracias";
     button.addEventListener("click", () => {
       const treatmentId = button.dataset.treatment;
       const card = button.closest("[data-pricing-card]");
+
+      if (card) {
+        const selectedBonoId = card.dataset.selectedBono;
+        const selectedTier = bonoTiers.find((tier) => tier.id === selectedBonoId);
+        if (selectedTier && selectedTier.sessions > 1) {
+          window.open(bonosWhatsappHref, "_blank", "noopener,noreferrer");
+          return;
+        }
+      }
+
       const context = card
         ? {
             duration: Number(card.dataset.selectedDuration),
