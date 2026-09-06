@@ -1,0 +1,21 @@
+---
+import ThankYouPage from "../../components/ThankYouPage.astro";
+import { getSite } from "../../data/site";
+import Layout from "../../layouts/Layout.astro";
+
+const site = getSite("en");
+const { thankYou } = site.ui;
+---
+
+<Layout
+  site={site}
+  pagePath="/en/thank-you"
+  title={thankYou.metaTitle}
+  description={thankYou.metaDescription}
+  skipLocaleRedirect
+  alternateEsPath="/gracias"
+  alternateEnPath="/en/thank-you"
+  includeJsonLd={false}
+>
+  <ThankYouPage site={site} />
+</Layout>
