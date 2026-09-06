@@ -78,6 +78,7 @@
 - Chain: stacked 5/5 → channel → modal → thankyou → data → **feat/improved-seo** (not develop)
 - Check: `npx astro check` pass (0 errors; 4 pre-existing hints)
 - Issue: #14 (Related to; do **not** Closes — already on PR #18)
+- PR: https://github.com/rubensedev/marta-orozco-quiro/pull/20
 - Files: `ThankYouPage.astro` (logo, dark-safe BG, canvas relax-flow), tasks/apply-progress
 
 ### Work Unit Evidence
