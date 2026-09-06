@@ -52,4 +52,4 @@ Peel bases: PR1 `feat/relax-flow-extract` ← `feat/improved-seo`; PR2 `feat/add
 
 - [x] 4.1 Run `npx astro check` — clean.
 - [x] 4.2 Run `npm run build` — confirm `dist/404.html` exists.
-- [ ] 4.3 Manual: unknown path keeps URL; `/en…` miss → EN; non-`/en` + stored EN → EN; else ES; no locale redirect; no home/chips; thank-you canvas still works; robots include `noindex`; no JSON-LD.
+- [x] 4.3 Manual: verified statically from `dist/404.html` + source (locale script, skip redirect, CTAs, no home/chips, robots noindex, no JSON-LD, shared relax-flow). Environment-only residual: live Netlify HTTP 404 + URL preserve + browser FOUC/canvas — see verify-report WARNINGs.

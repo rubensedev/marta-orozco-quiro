@@ -2,7 +2,7 @@
 
 **Mode**: Standard (`strict_tdd: false`)
 **Updated**: 2026-09-06
-**Status**: apply complete — ready for `sdd-verify`
+**Status**: verify complete — `pass_with_warnings` → ready for `sdd-archive`
 
 ## Chain strategy (locked)
 
@@ -59,7 +59,7 @@ feat/improved-seo
 - [x] 2.1–2.3 Layout + i18n
 - [x] 3.1–3.3 NotFoundPage + 404.astro + CTAs
 - [x] 4.1–4.2 check + build
-- [ ] 4.3 Manual browser verification (deferred to human / verify phase)
+- [x] 4.3 Manual/static verification (verify phase: dist smoke + code; Netlify live residual in verify-report)
 
 ## Deviations from design
 

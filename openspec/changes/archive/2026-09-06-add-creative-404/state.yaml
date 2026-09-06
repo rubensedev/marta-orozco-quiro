@@ -1,6 +1,6 @@
 change: add-creative-404
 
-status: apply_done
+status: archived
 
 phases:
   explore: done
@@ -10,8 +10,8 @@ phases:
   design: done
   tasks: done
   apply: done
-  verify: pending
-  archive: pending
+  verify: done
+  archive: done
 
 branch: feat/add-creative-404
 base_branch: feat/relax-flow-extract
@@ -23,11 +23,19 @@ updated: 2026-09-06
 mode: hybrid
 artifact_store: hybrid
 delivery_strategy: ask-on-risk
+archive_mode: intentional-with-warnings
 
-next: sdd-verify
+next: none
 next_parallel: []
 
 open_questions: false
+
+verify:
+  verdict: pass_with_warnings
+  report: openspec/changes/archive/2026-09-06-add-creative-404/verify-report.md
+  requirements: 10/10
+  scenarios: 18/18
+  archive_recommendation: proceed-with-warnings
 
 review_forecast:
   estimated_lines: "520-700"
@@ -49,7 +57,7 @@ approval:
 preproposal:
   schema: gentle-ai.sdd-preproposal/v1
   revision: 1
-  exploration: openspec/changes/add-creative-404/exploration.md
+  exploration: openspec/changes/archive/2026-09-06-add-creative-404/exploration.md
   research_request: unselected
   product_decisions: confirmed
   proposal_ready: true
@@ -75,3 +83,15 @@ locked_decisions:
   chain_strategy: feature-branch-chain
   housekeeping_config_yaml: done
   tidycal_active_folder: removed
+
+prs:
+  - number: 22
+    branch: feat/relax-flow-extract
+    base: feat/improved-seo
+    role: extract
+  - number: 23
+    branch: feat/add-creative-404
+    base: feat/relax-flow-extract
+    role: creative-404
+
+merge_note: Parent merges #22 then #23 into feat/improved-seo; archive does not merge PRs.
