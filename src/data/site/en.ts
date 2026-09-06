@@ -331,14 +331,24 @@ export const en = {
     instagramAria: "Marta Orozco on Instagram",
     whatsappAria: "Marta Orozco on WhatsApp",
     thankYou: {
-      title: "Thank you for taking this step",
+      title: "Thank you for choosing yourself",
       message:
         "We've opened the calendar in another tab. Choose your time there—and embrace this path back to your energy and peace.",
       homeLabel: "Back to home",
       whatsappLabel: "Message on WhatsApp",
-      metaTitle: "Thank you | Marta Orozco Massage",
+      metaTitle: "Thank you | Marta Orozco Massage Therapist in Seville",
       metaDescription:
         "Thank you for choosing yourself. Finish booking in the calendar and restore your energy and peace.",
+    },
+    notFound: {
+      statusMark: "404",
+      title: "Looking for a massage?",
+      message: "Don't get lost in the vastness, find the perfect one for you by clicking below.",
+      massagesLabel: "Explore massages",
+      whatsappLabel: "Message on WhatsApp",
+      metaTitle: "Page not found | Marta Orozco Massage Therapist in Seville",
+      metaDescription:
+        "This page does not exist. Explore Marta Orozco's massages or message on WhatsApp.",
     },
     modal: {
       title: "Book a treatment",

@@ -85,9 +85,7 @@ export const es = {
       },
       {
         question: "¿Con cuánta antelación puedo cancelar la cita?",
-        answer: [
-          "Puedes cancelar o cambiar tu cita avisando con al menos 24 horas de antelación.",
-        ],
+        answer: ["Puedes cancelar o cambiar tu cita avisando con al menos 24 horas de antelación."],
       },
       {
         question: "¿Cuál es el horario de atención?",
@@ -335,14 +333,24 @@ export const es = {
     instagramAria: "Instagram de Marta Orozco",
     whatsappAria: "WhatsApp de Marta Orozco",
     thankYou: {
-      title: "Gracias por dar este paso",
+      title: "Gracias por cuidar de ti",
       message:
         "Hemos abierto el calendario en otra pestaña. Elige ahí tu momento, y abraza este camino para recuperar tu energía y tu paz.",
       homeLabel: "Volver al inicio",
       whatsappLabel: "Escribir por WhatsApp",
-      metaTitle: "Gracias | Marta Orozco Quiromasaje",
+      metaTitle: "Gracias | Marta Orozco Quiromasajista en Sevilla",
       metaDescription:
         "Gracias por cuidar de ti. Completa tu reserva en el calendario y recupera energía y paz.",
+    },
+    notFound: {
+      statusMark: "404",
+      title: "¿Buscabas un masaje?",
+      message: "No te pierdas en la inmensidad, encuentra el que mejor te va haciendo click abajo.",
+      massagesLabel: "Ver masajes",
+      whatsappLabel: "Escribir por WhatsApp",
+      metaTitle: "Página no encontrada | Marta Orozco Quiromasajista en Sevilla",
+      metaDescription:
+        "Esta página no existe. Explora los masajes de Marta Orozco o escribe por WhatsApp.",
     },
     modal: {
       title: "Reservar tratamiento",
