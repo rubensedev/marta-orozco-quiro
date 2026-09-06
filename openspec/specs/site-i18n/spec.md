@@ -94,26 +94,52 @@ EN pages MUST use English section ids (at least `#about`, `#massages`, `#package
 
 ### Requirement: Locale WhatsApp messages
 
-`/en/` WhatsApp bodies MUST be fully English including treatment/ritual names. `/` messages MUST remain Spanish.
+`/en/` WA bodies MUST be fully English (incl. service names). `/` MUST stay Spanish. WA MUST be questions/packages only; booking confirm MUST NOT open WA; booking WA templates MUST be removed or unused.
 
 #### Scenario: EN WhatsApp
 
-- GIVEN `/en/` booking opens WhatsApp
-- WHEN message inspected
-- THEN names and chrome are English
+- GIVEN `/en/` WA for questions or packages
+- WHEN body inspected
+- THEN English chrome/names; not booking confirmation
 
 #### Scenario: ES WhatsApp
 
-- GIVEN `/` booking opens WhatsApp
-- WHEN message inspected
-- THEN message remains Spanish
+- GIVEN `/` WA for questions or packages
+- WHEN body inspected
+- THEN Spanish; not booking confirmation
 
 ### Requirement: Spanish copy preservation
 
-Spanish wording/meaning on `/` MUST NOT change. Brand “Marta Orozco” MUST remain in both locales.
+Spanish `/` MUST NOT change except booking-channel updates (FAQ, meta, modal, MobileBar, related CTA/WA). Brand “Marta Orozco” MUST remain both locales.
 
-#### Scenario: ES unchanged
+#### Scenario: ES outside booking channel
 
 - GIVEN `/` before vs after
-- WHEN Spanish copy reviewed
-- THEN wording and meaning are unchanged
+- WHEN non-booking-channel Spanish reviewed
+- THEN wording/meaning unchanged
+
+#### Scenario: Brand retained
+
+- GIVEN `/` or `/en/`
+- WHEN brand inspected
+- THEN “Marta Orozco” remains
+
+### Requirement: Booking channel copy
+
+FAQ, meta, modal, MobileBar MUST NOT claim WhatsApp booking. Book = reserve/calendar; WA = questions or packages.
+
+#### Scenario: FAQ meta MobileBar
+
+- GIVEN FAQ booking answer, meta, MobileBar WA/Book
+- WHEN inspected
+- THEN booking points to site/calendar not WA; WA ≠ Book label
+
+### Requirement: Modal UI copy without vendor name
+
+Modal `intro` and `submit` (ES+EN) MUST NOT contain the vendor name “TidyCal”. Intro MUST describe selecting treatment/duration and confirming to open the calendar. Submit MUST be “Confirmar reserva” (ES) / “Confirm booking” (EN). FAQ/meta strings that still mention TidyCal are deferred optional (out of Phase 7 modal scope).
+
+#### Scenario: Vendor-free modal strings
+
+- GIVEN `ui.modal.intro` and `ui.modal.submit` in `es.ts` / `en.ts`
+- WHEN inspected
+- THEN no “TidyCal” substring; submit matches Confirmar reserva / Confirm booking

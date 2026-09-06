@@ -80,5 +80,52 @@
 - Added `whatsappPackages` FAQ action so packages WA keeps bonos template while booking FAQ WA stays questions.
 - 4.5: JS `window.open(..., "_blank", "noopener,noreferrer")` (matches TidyCal confirm; WA anchors elsewhere use `target="_blank"`).
 
+## Work unit 5 (PR5) — thank-you polish
+- Completed: 6.1, 6.2, 6.3, 6.4
+- Branch: `feat/tidycal-thankyou-polish`
+- Base: `feat/tidycal-booking-channel`
+- Chain: stacked 5/5 → channel → modal → thankyou → data → **feat/improved-seo** (not develop)
+- Check: `npx astro check` pass (0 errors; 4 pre-existing hints)
+- Issue: #14 (Related to; do **not** Closes — already on PR #18)
+- PR: https://github.com/rubensedev/marta-orozco-quiro/pull/20
+- Files: `ThankYouPage.astro` (logo, dark-safe BG, canvas relax-flow), tasks/apply-progress
+
+### Work Unit Evidence
+
+| Evidence | Result |
+|---|---|
+| Focused test command | `npx astro check` → 0 errors |
+| Runtime harness | N/A automated — no e2e runner; manual: light/dark handoff BG; pointer waves; `prefers-reduced-motion` static dots; CTAs clickable above canvas |
+| Rollback boundary | Revert `ThankYouPage.astro` (+ tasks/apply-progress docs) |
+
+### Implementation notes
+- Logo: `/assets/images/logo.svg` + `footer.logoAlt`; `dark:brightness-0 dark:invert` for glass contrast (light = natural dark mark).
+- Dark BG: `dark:` gradient uses `--color-brand-bg-dark` / sage-dark mixes (no peach-only field).
+- Relax-flow: page-local canvas + rAF pointer ripple; `pointer-events-none` on canvas; reduced-motion → static paint only.
+
+## Work unit 6 (PR6) — modal copy + select UX
+- Completed: 7.1, 7.2, 7.3
+- Branch: `feat/tidycal-modal-copy-ux`
+- Base tip: `feat/tidycal-thankyou-polish` (PR #20); stack target **`feat/improved-seo`**
+- Check: `npx astro check` pass (0 errors; 4 pre-existing hints)
+- Issue: #14 (Related to; do **not** Closes)
+- PR: https://github.com/rubensedev/marta-orozco-quiro/pull/21
+- Planned files → landed: `es.ts` / `en.ts` (`ui.modal.intro`/`submit`), `BookingModal.astro` (`pl-4 pr-12` on selects)
+- Out of scope: FAQ/meta “TidyCal” scrub (deferred optional)
+- `global.css`: untouched (Tailwind padding sufficient)
+
+### Work Unit Evidence
+
+| Evidence | Result |
+|---|---|
+| Focused test command | `npx astro check` → 0 errors |
+| Runtime harness | N/A automated — no e2e runner; smoke: modal ES/EN intro/submit have no “TidyCal”; calendar icon kept; selects use `pr-12` |
+| Rollback boundary | Revert `es.ts`/`en.ts` modal keys + `BookingModal.astro` select padding |
+
+### Implementation notes
+- ES intro: vendor-free calendar wording; submit `Confirmar reserva`
+- EN intro: vendor-free calendar wording; submit `Confirm booking`
+- Selects: `px-4` → `pl-4 pr-12` on `#modalTreatment` / `#modalDuration`; glass classes unchanged
+
 ## Next
-**sdd-verify** (after optional 5.2 smoke) — Phase 4 complete including 4.5 on PR #18.
+**sdd-verify** after PR6 lands / stack ready. Full change (WU1–6) via PRs #15–#18 + #20 + this PR.

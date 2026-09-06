@@ -11,12 +11,12 @@ const { bookingOptions, ui } = site;
 
 <dialog
   id="bookingModal"
-  class="booking-modal w-[min(680px,calc(100%-1rem))] max-w-full rounded-[2rem] border-0 bg-transparent p-0"
+  class="booking-modal w-[min(680px,calc(100%-1rem))] max-w-full rounded-4xl border-0 bg-transparent p-0"
   aria-labelledby="bookingModalTitle"
   aria-describedby="bookingModalIntro"
 >
   <article
-    class="relative isolate rounded-[2rem] border border-glass-edge bg-glass-surface p-8 shadow-glass backdrop-blur-glass-panel md:p-10 dark:shadow-[var(--shadow-glass-dark)]"
+    class="relative isolate rounded-4xl border border-glass-edge bg-glass-surface p-8 shadow-glass backdrop-blur-glass-panel md:p-10 dark:shadow-[var(--shadow-glass-dark)]"
   >
     <button
       class="absolute top-5 right-5 inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-glass-edge bg-glass-control text-inherit shadow-glass backdrop-blur-glass-control focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-sage dark:shadow-[var(--shadow-glass-dark)]"
@@ -27,10 +27,7 @@ const { bookingOptions, ui } = site;
       <i class="fa-solid fa-xmark" aria-hidden="true"></i>
     </button>
 
-    <h2
-      id="bookingModalTitle"
-      class="m-0 mb-3 pr-12 font-serif text-3xl font-light uppercase"
-    >
+    <h2 id="bookingModalTitle" class="m-0 mb-3 pr-12 font-serif text-3xl font-light uppercase">
       {ui.modal.title}
     </h2>
     <p id="bookingModalIntro" class="m-0 mb-6 text-brand-muted">
@@ -39,32 +36,35 @@ const { bookingOptions, ui } = site;
 
     <form id="bookingForm" class="grid gap-5">
       <div class="booking-field-group">
-        <label class="mb-2 block text-[0.9rem] font-semibold tracking-[0.12em] uppercase" for="modalTreatment">
-          {ui.modal.treatmentLabel} <span class="text-brand-lavender">*</span>
+        <label
+          class="mb-2 block text-[0.9rem] font-semibold tracking-[0.12em] uppercase"
+          for="modalTreatment"
+        >
+          {ui.modal.treatmentLabel}
+          <span class="text-brand-lavender">*</span>
         </label>
         <select
           id="modalTreatment"
-          class="min-h-13 w-full rounded-2xl border border-glass-edge bg-glass-control px-4 py-[0.85rem] text-inherit shadow-glass backdrop-blur-glass-control dark:shadow-[var(--shadow-glass-dark)]"
+          class="min-h-13 w-full rounded-2xl border border-glass-edge bg-glass-control py-[0.85rem] pl-4 pr-12 text-inherit shadow-glass backdrop-blur-glass-control dark:shadow-[var(--shadow-glass-dark)]"
           name="treatment"
           required
         >
-          {
-            bookingOptions.map((option) => (
-              <option value={option.id}>{option.label}</option>
-            ))
-          }
+          {bookingOptions.map((option) => <option value={option.id}>{option.label}</option>)}
         </select>
       </div>
 
       <div class="booking-field-group" id="modalDurationGroup">
-        <label class="mb-2 block text-[0.9rem] font-semibold tracking-[0.12em] uppercase" for="modalDuration">
-          {ui.modal.durationLabel} <span class="text-brand-lavender">*</span>
+        <label
+          class="mb-2 block text-[0.9rem] font-semibold tracking-[0.12em] uppercase"
+          for="modalDuration"
+        >
+          {ui.modal.durationLabel}
+          <span class="text-brand-lavender">*</span>
         </label>
         <select
           id="modalDuration"
-          class="min-h-13 w-full rounded-2xl border border-glass-edge bg-glass-control px-4 py-[0.85rem] text-inherit shadow-glass backdrop-blur-glass-control dark:shadow-[var(--shadow-glass-dark)]"
-          name="duration"
-        ></select>
+          class="min-h-13 w-full rounded-2xl border border-glass-edge bg-glass-control py-[0.85rem] pl-4 pr-12 text-inherit shadow-glass backdrop-blur-glass-control dark:shadow-[var(--shadow-glass-dark)]"
+          name="duration"></select>
       </div>
 
       <div class="booking-price-card">

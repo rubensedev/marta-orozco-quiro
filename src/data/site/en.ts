@@ -343,7 +343,7 @@ export const en = {
     modal: {
       title: "Book a treatment",
       intro:
-        "Select your treatment and duration. Confirm to open the TidyCal calendar.",
+        "Select your treatment and duration. Confirm to open the calendar and book your session.",
       treatmentLabel: "Desired treatment",
       durationLabel: "Preferred duration",
       purchaseTypeLabel: "Purchase type",
@@ -355,7 +355,7 @@ export const en = {
       dateLabel: "Preferred date/time",
       datePlaceholder: "e.g. Thursday 17:00",
       dateHint: "Availability only on Thursdays from 15:00 to 21:00.",
-      submit: "Confirm booking via TidyCal",
+      submit: "Confirm booking",
       closeAria: "Close booking modal",
     },
   },

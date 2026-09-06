@@ -1,6 +1,6 @@
 change: tidycal-booking-journey
 
-status: active
+status: archived
 
 phases:
   explore: done
@@ -9,9 +9,9 @@ phases:
   spec: done
   design: done
   tasks: done
-  apply: pending
-  verify: pending
-  archive: pending
+  apply: done
+  verify: skipped
+  archive: done
 
 created: 2026-09-05
 updated: 2026-09-06
@@ -22,7 +22,11 @@ delivery_strategy: ask-on-risk
 
 artifact_store: hybrid
 
-next: apply # task 4.5 on PR #18
+next: none
+
+archive_mode: intentional-with-warnings
+archive_date: 2026-09-06
+archive_path: openspec/changes/archive/2026-09-06-tidycal-booking-journey/
 
 decision_needed_before_apply: false
 chain_strategy: stacked-to-main
@@ -34,7 +38,7 @@ open_questions: false
 approval:
   proposal_ready: true
   awaiting_user: false
-  user_approved: false
+  user_approved: true
 
 preproposal:
   schema: gentle-ai.sdd-preproposal/v1
@@ -57,12 +61,21 @@ locked_decisions:
   thank_you_es: /gracias
   thank_you_en: /en/thank-you
   thank_you_origin: https://martaorozcoquiro.netlify.app
+  thank_you_logo: site_logo_svg_header_filter
+  thank_you_dark_bg: brand_bg_dark_tokens
+  thank_you_relax_flow: pointer_rAF_dots_reduced_motion
   tidycal_paid_redirect: out_of_scope
   embed_v1: false
   modal_purchase_type: remove_from_booking_modal
-  booking_cta: confirm_via_tidycal
+  booking_cta: confirm_booking_no_vendor_name
+  modal_intro_vendor_name: omit_tidycal
+  modal_select_chevron_padding: extra_trailing_air_glass_kept
+  faq_meta_tidycal_scrub: deferred_optional
   whatsapp_role: questions_and_bonos_only
   chain_strategy: stacked-to-main
+  phase7_branch: feat/tidycal-modal-copy-ux
+  phase7_base: feat/tidycal-thankyou-polish
+  stack_target: feat/improved-seo
 
 url_map:
   descontracturante:
@@ -94,9 +107,18 @@ artifacts:
   engram_spec: sdd/tidycal-booking-journey/spec
   engram_design: sdd/tidycal-booking-journey/design
   engram_tasks: sdd/tidycal-booking-journey/tasks
+  engram_apply_progress: sdd/tidycal-booking-journey/apply-progress
+  engram_archive_report: sdd/tidycal-booking-journey/archive-report
 
 capabilities:
   new:
     - booking-journey
   modified:
     - site-i18n
+
+archive_notes:
+  intentional_override: explicit /sdd-archive; sdd-verify skipped (same pattern as crawlable-locale-switcher)
+  task_5_2: waived by maintainer at archive; marked [x]; residual interactive smoke may remain
+  verify_report: intentionally absent
+  prs_merged: "#15–#21 (stack pieces; #20/#21 into intermediate stack branches)"
+  next_delivery: merge-to-improved-seo
