@@ -15,7 +15,7 @@ const whatsappHref = `https://wa.me/${meta.whatsappNumber}?text=${encodeURICompo
 
 <main
   class="relative isolate flex min-h-[100svh] items-center justify-center overflow-hidden px-4 py-16"
-  data-thank-you-root
+  data-relax-flow-root
 >
   <div
     class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,color-mix(in_srgb,var(--color-brand-sage)_18%,transparent),transparent_55%),linear-gradient(180deg,var(--color-brand-bg),color-mix(in_srgb,var(--color-brand-sage)_8%,var(--color-brand-bg)))] dark:bg-[radial-gradient(ellipse_at_top,color-mix(in_srgb,var(--color-brand-sage-bright)_10%,transparent),transparent_58%),linear-gradient(180deg,var(--color-brand-bg-dark),color-mix(in_srgb,var(--color-brand-sage-dark)_45%,var(--color-brand-bg-dark)))]"
@@ -25,7 +25,7 @@ const whatsappHref = `https://wa.me/${meta.whatsappNumber}?text=${encodeURICompo
 
   <canvas
     class="pointer-events-none absolute inset-0 h-full w-full"
-    data-thank-you-relax
+    data-relax-flow-canvas
     aria-hidden="true"
   ></canvas>
 
@@ -65,161 +65,7 @@ const whatsappHref = `https://wa.me/${meta.whatsappNumber}?text=${encodeURICompo
 </main>
 
 <script>
-  type Dot = { x: number; y: number; ox: number; oy: number };
+  import { bootRelaxFlows } from "../scripts/relax-flow";
 
-  const rootEl = document.querySelector<HTMLElement>("[data-thank-you-root]");
-  const canvasEl = document.querySelector<HTMLCanvasElement>("[data-thank-you-relax]");
-  const ctxEl = canvasEl?.getContext("2d") ?? null;
-
-  if (!rootEl || !canvasEl || !ctxEl) {
-    // Thank-you markup missing — skip relax-flow.
-  } else {
-    const root: HTMLElement = rootEl;
-    const canvas: HTMLCanvasElement = canvasEl;
-    const ctx: CanvasRenderingContext2D = ctxEl;
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    let width = 0;
-    let height = 0;
-    let dots: Dot[] = [];
-    let pointerX = -9999;
-    let pointerY = -9999;
-    let targetX = -9999;
-    let targetY = -9999;
-    let rafId = 0;
-    let lastTs = 0;
-
-    const spacing = 22;
-    const influence = 140;
-    const maxDisplace = 14;
-
-    function isDark(): boolean {
-      return document.documentElement.classList.contains("dark");
-    }
-
-    /** Canvas cannot resolve CSS vars; match brand lavender / sage-bright opacities. */
-    function dotColor(): string {
-      return isDark() ? "rgba(140, 170, 142, 0.28)" : "rgba(75, 57, 181, 0.35)";
-    }
-
-    function rebuildGrid() {
-      const rect = root.getBoundingClientRect();
-      width = Math.max(1, Math.floor(rect.width));
-      height = Math.max(1, Math.floor(rect.height));
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = Math.floor(width * dpr);
-      canvas.height = Math.floor(height * dpr);
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-      dots = [];
-      const cols = Math.ceil(width / spacing) + 1;
-      const rows = Math.ceil(height / spacing) + 1;
-      for (let row = 0; row < rows; row += 1) {
-        for (let col = 0; col < cols; col += 1) {
-          const x = col * spacing;
-          const y = row * spacing;
-          dots.push({ x, y, ox: x, oy: y });
-        }
-      }
-    }
-
-    function paintStatic() {
-      ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = dotColor();
-      for (const dot of dots) {
-        ctx.beginPath();
-        ctx.arc(dot.ox, dot.oy, 1.1, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-
-    function paintFrame(ts: number) {
-      const dt = Math.min(32, ts - lastTs || 16);
-      lastTs = ts;
-
-      const ease = 1 - Math.exp(-dt / 120);
-      pointerX += (targetX - pointerX) * ease;
-      pointerY += (targetY - pointerY) * ease;
-
-      ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = dotColor();
-
-      for (const dot of dots) {
-        const dx = pointerX - dot.ox;
-        const dy = pointerY - dot.oy;
-        const dist = Math.hypot(dx, dy);
-        let tx = dot.ox;
-        let ty = dot.oy;
-
-        if (dist < influence && dist > 0.001) {
-          const t = 1 - dist / influence;
-          const wave = Math.sin(t * Math.PI);
-          const force = wave * maxDisplace;
-          const nx = dx / dist;
-          const ny = dy / dist;
-          // Soft outward ripple — calm sea, not a sharp push
-          tx = dot.ox - nx * force * 0.55;
-          ty = dot.oy - ny * force * 0.55 + wave * 2.2;
-        }
-
-        const settle = 1 - Math.exp(-dt / 90);
-        dot.x += (tx - dot.x) * settle;
-        dot.y += (ty - dot.y) * settle;
-
-        ctx.beginPath();
-        ctx.arc(dot.x, dot.y, 1.15, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      rafId = window.requestAnimationFrame(paintFrame);
-    }
-
-    function onPointer(event: PointerEvent) {
-      const rect = root.getBoundingClientRect();
-      targetX = event.clientX - rect.left;
-      targetY = event.clientY - rect.top;
-    }
-
-    function onLeave() {
-      targetX = -9999;
-      targetY = -9999;
-    }
-
-    rebuildGrid();
-    paintStatic();
-
-    if (!reduceMotion) {
-      rafId = window.requestAnimationFrame(paintFrame);
-      root.addEventListener("pointermove", onPointer, { passive: true });
-      root.addEventListener("pointerleave", onLeave);
-    }
-
-    const resizeObserver = new ResizeObserver(() => {
-      rebuildGrid();
-      if (reduceMotion) paintStatic();
-    });
-    resizeObserver.observe(root);
-
-    const themeObserver = new MutationObserver(() => {
-      if (reduceMotion) paintStatic();
-    });
-    themeObserver.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-
-    document.addEventListener(
-      "astro:before-swap",
-      () => {
-        window.cancelAnimationFrame(rafId);
-        resizeObserver.disconnect();
-        themeObserver.disconnect();
-        root.removeEventListener("pointermove", onPointer);
-        root.removeEventListener("pointerleave", onLeave);
-      },
-      { once: true },
-    );
-  }
+  bootRelaxFlows();
 </script>
