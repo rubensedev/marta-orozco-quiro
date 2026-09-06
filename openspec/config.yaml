@@ -1,20 +1,19 @@
 project:
   name: marta-orozco-quiro
-  goal: Single-page Astro landing page for "Marta Orozco | Quiromasajista" in Spanish.
+  goal: Bilingual (ES/EN) Astro landing page for "Marta Orozco | Quiromasajista" with booking journey and glass design system.
 
 context:
-  source_of_truth: astro-migration-context.md
+  source_of_truth: openspec/specs/
   repo_state: astro-landing-page
   current_artifacts:
     - README.md
-    - openspec/changes/adopt-astro-tailwind/
-    - openspec/changes/refactor-header/
-    - openspec/changes/add-client-reviews/
-    - openspec/changes/add-i18n-es-en/
+    - openspec/specs/
+    - openspec/changes/archive/
   intended_stack:
     - Astro 7
     - Tailwind CSS 4 (@tailwindcss/vite)
     - TypeScript (+ @astrojs/check)
+    - Netlify
   styling_convention: >
     Tailwind utilities in .astro templates for layout, spacing, color, and type.
     One stylesheet: src/styles/global.css with @import "tailwindcss",
@@ -31,7 +30,7 @@ persistence:
 strict_tdd: false
 
 testing:
-  detected_at: 2026-08-21
+  detected_at: 2026-09-06
   test_runner:
     available: false
     framework: null
@@ -70,8 +69,8 @@ rules:
 
 workflow:
   review_line_budget: 400
-  init_next: sdd-verify
-  feature_name_hint: adopt-glassmorphism
+  init_next: sdd-explore
+  feature_name_hint: add-creative-404
   phases:
     - sdd-explore
     - sdd-propose
