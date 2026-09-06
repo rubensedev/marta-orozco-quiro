@@ -68,9 +68,9 @@ Chain strategy: stacked-to-main
 
 ## Phase 7: Modal copy + select UX (PR6)
 
-- [ ] 7.1 Update `ui.modal.intro` / `ui.modal.submit` in `src/data/site/es.ts` and `en.ts` — remove “TidyCal”; ES intro ≈ “Selecciona tu tratamiento y duración. Confirma para abrir el calendario y reservar tu sesión.”; EN intro ≈ “Select your treatment and duration. Confirm to open the calendar and book your session.”; submit ES “Confirmar reserva” / EN “Confirm booking” (keep calendar icon in markup)
-- [ ] 7.2 Add trailing air before native select chevron on `#modalTreatment` and `#modalDuration` in `BookingModal.astro` (extra `pr-*` and/or custom appearance); preserve glass styling; touch `global.css` only if utilities are insufficient
-- [ ] 7.3 Run `npx astro check`; smoke modal ES/EN — no vendor name in intro/submit; long option labels clear the chevron
+- [x] 7.1 Update `ui.modal.intro` / `ui.modal.submit` in `src/data/site/es.ts` and `en.ts` — remove “TidyCal”; ES intro ≈ “Selecciona tu tratamiento y duración. Confirma para abrir el calendario y reservar tu sesión.”; EN intro ≈ “Select your treatment and duration. Confirm to open the calendar and book your session.”; submit ES “Confirmar reserva” / EN “Confirm booking” (keep calendar icon in markup)
+- [x] 7.2 Add trailing air before native select chevron on `#modalTreatment` and `#modalDuration` in `BookingModal.astro` (extra `pr-*` and/or custom appearance); preserve glass styling; touch `global.css` only if utilities are insufficient
+- [x] 7.3 Run `npx astro check`; smoke modal ES/EN — no vendor name in intro/submit; long option labels clear the chevron
 
 **Branch**: `feat/tidycal-modal-copy-ux`  
 **Base tip**: `feat/tidycal-thankyou-polish` (PR #20); fallback `feat/tidycal-booking-channel`  

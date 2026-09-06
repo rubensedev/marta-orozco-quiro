@@ -22,7 +22,7 @@ delivery_strategy: ask-on-risk
 
 artifact_store: hybrid
 
-next: apply # Phase 7 / PR6 modal copy + select UX on feat/tidycal-modal-copy-ux
+next: verify # Phase 7 / PR6 implemented on feat/tidycal-modal-copy-ux
 
 decision_needed_before_apply: false
 chain_strategy: stacked-to-main

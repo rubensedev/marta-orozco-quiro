@@ -104,21 +104,27 @@
 - Relax-flow: page-local canvas + rAF pointer ripple; `pointer-events-none` on canvas; reduced-motion → static paint only.
 
 ## Work unit 6 (PR6) — modal copy + select UX
-- Status: **planned** (docs on `feat/tidycal-modal-copy-ux`; impl via sdd-apply)
-- Tasks: 7.1, 7.2, 7.3
+- Completed: 7.1, 7.2, 7.3
 - Branch: `feat/tidycal-modal-copy-ux`
 - Base tip: `feat/tidycal-thankyou-polish` (PR #20); stack target **`feat/improved-seo`**
-- PR: leave creation to apply after implementation (do not open empty PR)
-- Planned files: `es.ts` / `en.ts` (`ui.modal.intro`/`submit`), `BookingModal.astro` (select `pr-*` / appearance), optional `global.css`
+- Check: `npx astro check` pass (0 errors; 4 pre-existing hints)
+- Issue: #14 (Related to; do **not** Closes)
+- Planned files → landed: `es.ts` / `en.ts` (`ui.modal.intro`/`submit`), `BookingModal.astro` (`pl-4 pr-12` on selects)
 - Out of scope: FAQ/meta “TidyCal” scrub (deferred optional)
+- `global.css`: untouched (Tailwind padding sufficient)
 
-### Work Unit Evidence (after apply)
+### Work Unit Evidence
 
 | Evidence | Result |
 |---|---|
-| Focused test command | `npx astro check` (pending) |
-| Runtime harness | Modal ES/EN: no vendor in intro/submit; select text clears chevron |
-| Rollback boundary | Revert modal copy keys + select padding styles |
+| Focused test command | `npx astro check` → 0 errors |
+| Runtime harness | N/A automated — no e2e runner; smoke: modal ES/EN intro/submit have no “TidyCal”; calendar icon kept; selects use `pr-12` |
+| Rollback boundary | Revert `es.ts`/`en.ts` modal keys + `BookingModal.astro` select padding |
+
+### Implementation notes
+- ES intro: vendor-free calendar wording; submit `Confirmar reserva`
+- EN intro: vendor-free calendar wording; submit `Confirm booking`
+- Selects: `px-4` → `pl-4 pr-12` on `#modalTreatment` / `#modalDuration`; glass classes unchanged
 
 ## Next
-**sdd-apply** — Phase 7 / PR6 (`feat/tidycal-modal-copy-ux` ← base `feat/tidycal-thankyou-polish`). Do not open PR until code lands.
+**sdd-verify** after PR6 lands / stack ready. Full change (WU1–6) via PRs #15–#18 + #20 + this PR.

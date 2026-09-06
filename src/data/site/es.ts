@@ -347,7 +347,7 @@ export const es = {
     modal: {
       title: "Reservar tratamiento",
       intro:
-        "Selecciona tu tratamiento y duración. Confirma para abrir el calendario de TidyCal.",
+        "Selecciona tu tratamiento y duración. Confirma para abrir el calendario y reservar tu sesión.",
       treatmentLabel: "Tratamiento Deseado",
       durationLabel: "Duración Preferida",
       purchaseTypeLabel: "Tipo de Compra",
@@ -359,7 +359,7 @@ export const es = {
       dateLabel: "Preferencia de Fecha/Hora",
       datePlaceholder: "Ej. Jueves 17:00",
       dateHint: "Disponibilidad solo jueves de 15:00 a 21:00.",
-      submit: "Confirmar reserva en TidyCal",
+      submit: "Confirmar reserva",
       closeAria: "Cerrar modal de reserva",
     },
   },
