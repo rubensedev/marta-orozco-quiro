@@ -1,0 +1,77 @@
+change: add-creative-404
+
+status: apply_done
+
+phases:
+  explore: done
+  research: unselected
+  propose: done
+  spec: done
+  design: done
+  tasks: done
+  apply: done
+  verify: pending
+  archive: pending
+
+branch: feat/add-creative-404
+base_branch: feat/relax-flow-extract
+tracker_branch: feat/improved-seo
+
+created: 2026-09-06
+updated: 2026-09-06
+
+mode: hybrid
+artifact_store: hybrid
+delivery_strategy: ask-on-risk
+
+next: sdd-verify
+next_parallel: []
+
+open_questions: false
+
+review_forecast:
+  estimated_lines: "520-700"
+  budget_risk: High
+  chained_prs_recommended: true
+  decision_needed_before_apply: false
+  chain_strategy: feature-branch-chain
+  preferred_shipping: extract_first_stacked
+  pr1_branch: feat/relax-flow-extract
+  pr1_base: feat/improved-seo
+  pr2_branch: feat/add-creative-404
+  pr2_base: feat/relax-flow-extract
+
+approval:
+  proposal_ready: true
+  awaiting_user: false
+  user_approved: true
+
+preproposal:
+  schema: gentle-ai.sdd-preproposal/v1
+  revision: 1
+  exploration: openspec/changes/add-creative-404/exploration.md
+  research_request: unselected
+  product_decisions: confirmed
+  proposal_ready: true
+
+locked_decisions:
+  slug: add-creative-404
+  branch: feat/add-creative-404
+  base: feat/improved-seo
+  copy: es_en_translate
+  primary_cta_es: "/#masajes"
+  primary_cta_en: "/en#massages"
+  home_link: false
+  quick_nav_chips: false
+  whatsapp: secondary_like_thank_you
+  visible_404: true
+  extract_relax_flow: true
+  locale: pathname_en_prefix_then_es
+  locale_localStorage: honor_preferred_only_when_no_en_prefix
+  structure: decorative_404_mark_plus_soft_h1
+  meta_robots: noindex
+  whatsapp_prefill: same_as_thank_you_inquiry
+  shipping: stacked_extract_then_404
+  chain_strategy: feature-branch-chain
+  housekeeping_config_yaml: done
+  tidycal_active_folder: removed
