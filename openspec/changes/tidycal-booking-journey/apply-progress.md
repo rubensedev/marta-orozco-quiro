@@ -41,14 +41,15 @@
 
 ## Work unit 4 (PR4) — channel split + i18n
 - Completed: 4.1, 4.2, 4.3, 4.4, 5.1
+- Pending: **4.5** (massage pricing-card package Book → WA packages inquiry)
 - Branch: `feat/tidycal-booking-channel`
 - Base: `feat/tidycal-booking-modal`
-- Chain: stacked 4/4 → modal → thankyou → data → **feat/improved-seo** (not develop)
-- Check: `npx astro check` pass (0 errors; 4 pre-existing hints)
-- Issue: #14 (**Closes #14** on this final PR only)
+- Chain: stacked → modal → thankyou → data → **feat/improved-seo** (not develop)
+- Check: `npx astro check` pass (0 errors; 4 pre-existing hints) — re-run after 4.5
+- Issue: #14 (**Closes #14** on this PR)
 - PR: https://github.com/rubensedev/marta-orozco-quiro/pull/18
-- Stack status: **implementation complete**; pending merges of PRs #15–#18 into `feat/improved-seo`
-- Files: `es.ts`, `en.ts`, `faq.ts`, `Rituals.astro`, `FAQ.astro`, `MobileBar` via `ui.reserveAppointment`, tasks/apply-progress
+- Stack status: WU4 **docs amended** for 4.5; apply 4.5 on this same PR before verify
+- Files: `es.ts`, `en.ts`, `faq.ts`, `Rituals.astro`, `FAQ.astro`, `MobileBar` via `ui.reserveAppointment`; 4.5 → `PageScripts.astro` (+ PricingCard only if needed)
 
 ### Work Unit Evidence
 
@@ -72,4 +73,4 @@
 - Added `whatsappPackages` FAQ action so packages WA keeps bonos template while booking FAQ WA stays questions.
 
 ## Next
-`sdd-verify` (orchestrator). Stack complete pending merges into `feat/improved-seo`.
+**4.5 on PR #18** (`feat/tidycal-booking-channel`) — sdd-apply: pricing-card package → WA packages inquiry; single → modal. Then re-check / smoke; verify after 4.5 lands.

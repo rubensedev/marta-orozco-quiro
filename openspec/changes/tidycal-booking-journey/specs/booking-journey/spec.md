@@ -48,13 +48,27 @@ Untargeted Book MUST open modal with default treatment. MUST NOT deep-link TidyC
 
 ### Requirement: Bonos WhatsApp only
 
-Package/bono CTAs MUST open WhatsApp packages inquiry. Confirm MUST NOT offer purchase-type or TidyCal bono types.
+Package/bono CTAs MUST open WhatsApp packages inquiry (`meta.whatsappBonosInquiry` / `bonosWhatsappHref` pattern). Confirm MUST NOT offer purchase-type or TidyCal bono types.
 
 #### Scenario: Bono CTA
 
-- GIVEN packages/bono control
+- GIVEN packages/bono control (Rituals/FAQ packages)
 - WHEN activated
 - THEN WhatsApp packages inquiry opens; no TidyCal bono URL
+
+#### Scenario: Massage pricing-card Book with package selected
+
+- GIVEN a massage `[data-pricing-card]` with purchase type `bono5` or `bono10` (sessions > 1)
+- WHEN the card’s Book/Reservar control is activated
+- THEN WhatsApp opens with the same packages-inquiry body as Rituals/FAQ bonos
+- AND the booking modal MUST NOT open
+- AND TidyCal MUST NOT open
+
+#### Scenario: Massage pricing-card Book with single session
+
+- GIVEN a massage `[data-pricing-card]` with purchase type `single`
+- WHEN the card’s Book/Reservar control is activated
+- THEN the booking modal opens with that treatment and selected duration (existing TidyCal path)
 
 ### Requirement: Fail-closed URL resolve
 
@@ -88,10 +102,10 @@ MUST NOT embed TidyCal (iframe/`tidycal-embed`).
 
 ### Requirement: Channel split
 
-Contact, MobileBar WA, FAQ WA actions, Rituals packages MUST be questions/bonos only; booking confirm MUST use TidyCal only.
+Contact, MobileBar WA, FAQ WA actions, Rituals packages, and massage pricing-card Book when a package is selected MUST be questions/bonos only; single-session booking confirm MUST use TidyCal only.
 
 #### Scenario: WA not booking confirm
 
-- GIVEN those WA entry points
+- GIVEN those WA entry points (incl. pricing-card Book with package selected)
 - WHEN activated
 - THEN body is questions/packages inquiry, not booking confirmation
