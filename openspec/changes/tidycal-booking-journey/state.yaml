@@ -22,7 +22,7 @@ delivery_strategy: ask-on-risk
 
 artifact_store: hybrid
 
-next: apply
+next: apply # task 4.5 on PR #18
 
 decision_needed_before_apply: false
 chain_strategy: stacked-to-main
@@ -49,6 +49,7 @@ locked_decisions:
   tidycal_slug_descontracturante_80: masaje-descontracturante-80
   tidycal_slug_craneofacial: masaje-craneofacial-30
   bonos_channel: whatsapp_packages_inquiry
+  massage_card_package_cta: whatsapp_bonos_inquiry
   tidycal_open: new_tab
   untargeted_book: open_modal_default_treatment
   keep_price_estimate: true

@@ -2,7 +2,7 @@
 
 ## Technical Approach
 
-Attach `tidycalUrl` on shared durations/rituals (source = `state.yaml` `url_map`). Slim modal keeps treatment + duration + single-session price; confirm resolves HTTPS URL and `window.open(..., "noopener,noreferrer")`. Bonos leave the modal (WA packages only). Ship `/gracias` + `/en/thank-you` calm pages; Phase 6 polishes logo, dark BG, and pointer relax-flow. Maps to booking-journey + site-i18n specs.
+Attach `tidycalUrl` on shared durations/rituals (source = `state.yaml` `url_map`). Slim modal keeps treatment + duration + single-session price; confirm resolves HTTPS URL and `window.open(..., "noopener,noreferrer")`. Bonos leave the modal (WA packages only). Massage pricing-card Book branches: package → same WA inquiry; single → modal. Ship `/gracias` + `/en/thank-you` calm pages; Phase 6 polishes logo, dark BG, and pointer relax-flow. Maps to booking-journey + site-i18n specs.
 
 ## Architecture Decisions
 
@@ -11,6 +11,7 @@ Attach `tidycalUrl` on shared durations/rituals (source = `state.yaml` `url_map`
 | URL storage | Central JS map vs `tidycalUrl` on shared data | `tidycalUrl` on durations + rituals in `shared.ts` | Same build path as prices; typed; fail-closed if missing |
 | Confirm open | Same-tab vs new tab vs embed | New tab `noopener,noreferrer` | Locked; landing stays open |
 | Purchase type | Keep in modal vs remove | Remove; bonos → WA | Locked; Rituals already has WA packages CTA |
+| Massage card Book + package | Modal / TidyCal / WA packages | WA packages inquiry (`whatsappBonosInquiry`) | Locked `massage_card_package_cta`; same body as Rituals/FAQ bonos; no modal/TidyCal |
 | Price | Drop vs keep single-session | Keep unit price; drop bono savings UI | Locked `keep_price_estimate` |
 | Untargeted Book | Profile listing vs modal | Modal + default treatment | Locked; no TidyCal listing deep-link |
 | Thank-you routing | One page vs ES+EN | `/gracias` + `/en/thank-you` | Locked bilingual handoff |
@@ -24,13 +25,19 @@ Attach `tidycalUrl` on shared durations/rituals (source = `state.yaml` `url_map`
 ## Data Flow
 
 ```
-Book CTA → openBookingModal(id?, {duration?})
-       → modal: treatment + duration + price
+Pricing-card Book [data-open-booking] + [data-pricing-card]
+  read card.dataset.selectedBono (+ selectedDuration)
+  ├── package (bono5|bono10 / sessions > 1)
+  │     → wa.me + meta.whatsappBonosInquiry  (same as Rituals bonosWhatsappHref)
+  │     → MUST NOT open modal; MUST NOT open TidyCal
+  └── single
+        → openBookingModal(id, {duration})
+              → modal: treatment + duration + price
 Confirm → resolveTidycalUrl(id, durationMin)
        → null? disable/error (fail-closed)
        → HTTPS? window.open(url, "_blank", "noopener,noreferrer")
        → close modal → location.assign(/gracias | /en/thank-you)
-Bonos CTA → wa.me + whatsappBonosInquiry (no modal)
+Rituals/FAQ Bonos CTA → wa.me + whatsappBonosInquiry (unchanged)
 Note: TidyCal paid redirect_url is out of scope; handoff is site-owned.
 ```
 
@@ -87,7 +94,7 @@ No TidyCal `redirect_url` (paid). Handoff is triggered by the site confirm handl
 |-------|------|----------|
 | Unit | N/A (no runner) | — |
 | Check | Types + Astro | `npx astro check` |
-| Smoke | All `url_map` pairs + rituals; fail-closed; bonos WA; routes | Manual ES/EN |
+| Smoke | All `url_map` pairs + rituals; fail-closed; bonos WA; pricing-card package→WA / single→modal; routes | Manual ES/EN |
 | Smoke (PR5) | Logo on glass; dark handoff not bright; pointer waves; reduced-motion | Manual light/dark + reduce |
 
 ## Threat Matrix

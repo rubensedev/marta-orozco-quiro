@@ -40,23 +40,30 @@
 - No `global.css` change (task 3.3).
 
 ## Work unit 4 (PR4) — channel split + i18n
-- Completed: 4.1, 4.2, 4.3, 4.4, 5.1
+- Completed: 4.1, 4.2, 4.3, 4.4, **4.5**, 5.1
+- Pending: 5.2 (manual smoke)
 - Branch: `feat/tidycal-booking-channel`
 - Base: `feat/tidycal-booking-modal`
-- Chain: stacked 4/4 → modal → thankyou → data → **feat/improved-seo** (not develop)
-- Check: `npx astro check` pass (0 errors; 4 pre-existing hints)
-- Issue: #14 (**Closes #14** on this final PR only — note: Phase 6 / PR5 added after stack)
+- Chain: stacked → modal → thankyou → data → **feat/improved-seo** (not develop)
+- Check: `npx astro check` pass (0 errors) — re-run after 4.5
+- Issue: #14 (**Closes #14** on this PR)
 - PR: https://github.com/rubensedev/marta-orozco-quiro/pull/18
-- Stack status: WU1–4 **done** via PRs #15–#18; pending merges into `feat/improved-seo`
-- Files: `es.ts`, `en.ts`, `faq.ts`, `Rituals.astro`, `FAQ.astro`, `MobileBar` via `ui.reserveAppointment`, tasks/apply-progress
+- Stack status: WU4 **4.5 landed** on PR #18; ready for verify / remaining 5.2 smoke
+- Files: `es.ts`, `en.ts`, `faq.ts`, `Rituals.astro`, `FAQ.astro`, `MobileBar` via `ui.reserveAppointment`; **4.5** → `PageScripts.astro` (`bonosWhatsappHref` + pricing-card package branch)
 
 ### Work Unit Evidence
 
 | Evidence | Result |
 |---|---|
 | Focused test command | `npx astro check` → 0 errors |
-| Runtime harness | N/A automated — no browser in this apply; smoke notes for 5.2 below |
-| Rollback boundary | Revert `es.ts`/`en.ts`/`faq.ts` + `Rituals.astro` + `FAQ.astro` (MobileBar label via data) |
+| Runtime harness | N/A automated — no browser/e2e runner; package Book → `window.open(bonosWhatsappHref)`; single → modal; untargeted Book unchanged |
+| Rollback boundary | Revert `PageScripts.astro` package-branch (and prior WU4 copy files if rolling back whole channel split) |
+
+### Task 4.5 notes
+- `[data-open-booking]` inside `[data-pricing-card]`: if `selectedBono` tier `sessions > 1` → open same WA packages URL as Rituals (`meta.whatsappBonosInquiry`); do not open modal/TidyCal
+- `single` (sessions === 1): existing `openBookingModal(treatmentId, { duration })`
+- Untargeted Book (hero/header/no card): unchanged → always modal
+- Main Massages panel + PricingCard both use `data-pricing-card` + `data-open-booking`
 
 ### Smoke notes (task 5.2 — manual, not run here)
 - FAQ booking answer: Book → modal → TidyCal; WA link = questions inquiry
@@ -66,10 +73,12 @@
 - Contact/Footer WA: `whatsappInquiry` (questions), not booking confirm
 - meta.description: site/TidyCal, not WhatsApp booking
 - `whatsappBooking` PII block removed (unused)
+- **Pricing-card Book + bono5/bono10 → WA packages; + single → modal**
 
 ### Deviations
 - MobileBar.astro markup unchanged; relabel via `ui.reserveAppointment` (CONSULTAS / QUESTIONS).
 - Added `whatsappPackages` FAQ action so packages WA keeps bonos template while booking FAQ WA stays questions.
+- 4.5: JS `window.open(..., "_blank", "noopener,noreferrer")` (matches TidyCal confirm; WA anchors elsewhere use `target="_blank"`).
 
 ## Work unit 5 (PR5) — thank-you polish
 - Completed: 6.1, 6.2, 6.3, 6.4
@@ -95,4 +104,4 @@
 - Relax-flow: page-local canvas + rAF pointer ripple; `pointer-events-none` on canvas; reduced-motion → static paint only.
 
 ## Next
-**sdd-verify** after PR5 lands / stack ready. Full change (WU1–5) implemented via PRs #15–#19.
+**sdd-verify** after PR5 lands / stack ready. Full change (WU1–5) implemented via PRs #15–#20.
