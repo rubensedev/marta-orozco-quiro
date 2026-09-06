@@ -59,7 +59,7 @@ Chain strategy: stacked-to-main
 
 ## Phase 6: Thank-you polish (PR5)
 
-- [ ] 6.1 Replace thank-you “MARTA OROZCO” text with site logo (`/assets/images/logo.svg`); match Header invert/brightness for glass contrast; keep brand-first hierarchy
-- [ ] 6.2 Fix dark-mode handoff background: stop using light-only `--color-brand-bg` gradient; use `--color-brand-bg-dark` / dark mixes so the page is not bright in dark theme
-- [ ] 6.3 Add relax-flow BG: pointer-driven calm-sea ripple/wave displacement on the dot field (rAF, no heavy libs; touch/pointer); `prefers-reduced-motion` → static or very subtle
-- [ ] 6.4 Run `npx astro check`; smoke light/dark + reduced-motion on `/gracias` and `/en/thank-you`
+- [x] 6.1 Replace thank-you “MARTA OROZCO” text with site logo (`/assets/images/logo.svg`); match Header invert/brightness for glass contrast; keep brand-first hierarchy
+- [x] 6.2 Fix dark-mode handoff background: stop using light-only `--color-brand-bg` gradient; use `--color-brand-bg-dark` / dark mixes so the page is not bright in dark theme
+- [x] 6.3 Add relax-flow BG: pointer-driven calm-sea ripple/wave displacement on the dot field (rAF, no heavy libs; touch/pointer); `prefers-reduced-motion` → static or very subtle
+- [x] 6.4 Run `npx astro check`; smoke light/dark + reduced-motion on `/gracias` and `/en/thank-you`
