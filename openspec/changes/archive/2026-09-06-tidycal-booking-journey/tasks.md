@@ -57,7 +57,7 @@ Chain strategy: stacked-to-main
 ## Phase 5: Verify
 
 - [x] 5.1 Run `npx astro check`
-- [ ] 5.2 Smoke ES/EN: all `url_map` pairs + rituals; fail-closed; untargeted Book → default; confirm → calendar new tab + current handoff; pricing-card package→WA / single→modal; no embed; Phase 7: modal copy vendor-free + select chevron air
+- [x] 5.2 Smoke ES/EN: all `url_map` pairs + rituals; fail-closed; untargeted Book → default; confirm → calendar new tab + current handoff; pricing-card package→WA / single→modal; no embed; Phase 7: modal copy vendor-free + select chevron air — waived at `/sdd-archive` (maintainer intentional; residual interactive smoke may remain)
 
 ## Phase 6: Thank-you polish (PR5)
 

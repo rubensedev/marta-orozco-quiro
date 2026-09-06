@@ -1,6 +1,6 @@
 change: tidycal-booking-journey
 
-status: active
+status: archived
 
 phases:
   explore: done
@@ -9,9 +9,9 @@ phases:
   spec: done
   design: done
   tasks: done
-  apply: pending
-  verify: pending
-  archive: pending
+  apply: done
+  verify: skipped
+  archive: done
 
 created: 2026-09-05
 updated: 2026-09-06
@@ -22,7 +22,11 @@ delivery_strategy: ask-on-risk
 
 artifact_store: hybrid
 
-next: verify # Phase 7 / PR6 implemented on feat/tidycal-modal-copy-ux
+next: none
+
+archive_mode: intentional-with-warnings
+archive_date: 2026-09-06
+archive_path: openspec/changes/archive/2026-09-06-tidycal-booking-journey/
 
 decision_needed_before_apply: false
 chain_strategy: stacked-to-main
@@ -34,7 +38,7 @@ open_questions: false
 approval:
   proposal_ready: true
   awaiting_user: false
-  user_approved: false
+  user_approved: true
 
 preproposal:
   schema: gentle-ai.sdd-preproposal/v1
@@ -103,9 +107,18 @@ artifacts:
   engram_spec: sdd/tidycal-booking-journey/spec
   engram_design: sdd/tidycal-booking-journey/design
   engram_tasks: sdd/tidycal-booking-journey/tasks
+  engram_apply_progress: sdd/tidycal-booking-journey/apply-progress
+  engram_archive_report: sdd/tidycal-booking-journey/archive-report
 
 capabilities:
   new:
     - booking-journey
   modified:
     - site-i18n
+
+archive_notes:
+  intentional_override: explicit /sdd-archive; sdd-verify skipped (same pattern as crawlable-locale-switcher)
+  task_5_2: waived by maintainer at archive; marked [x]; residual interactive smoke may remain
+  verify_report: intentionally absent
+  prs_merged: "#15–#21 (stack pieces; #20/#21 into intermediate stack branches)"
+  next_delivery: merge-to-improved-seo
