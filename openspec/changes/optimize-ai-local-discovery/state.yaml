@@ -1,0 +1,70 @@
+change: optimize-ai-local-discovery
+
+status: proposed
+
+phases:
+  explore: done
+  propose: done
+  spec: draft
+  design: pending
+  tasks: pending
+  apply: pending
+  verify: pending
+  archive: pending
+
+branch: feat-fixes-and-improvements
+
+created: 2026-09-17
+
+updated: 2026-09-17
+
+mode: hybrid
+
+delivery_strategy: ask-on-risk
+
+base_branch: feat-fixes-and-improvements
+
+github_issue: null
+
+artifact_store: hybrid
+
+next: sdd-design
+
+next_parallel: []
+
+task_summary:
+  phases: 0
+  tasks: 0
+  completed: 0
+  remaining: pending design/tasks
+  forecast: Medium (shared name/URL + copy blocks + thank-you noindex); Decision needed before apply: Yes (name + maps short link)
+
+assumptions:
+  - Audit SoT: Agent Store docs/ai-search-optimization-audit.md (2026-09-17).
+  - Google AI optimization guide is primary rubric; no llms.txt / chunking / fake mentions.
+  - Production origin remains https://martaorozcoquiro.netlify.app.
+  - Prefer aligning site name to GBP "Marta Orozco Quiromasaje" unless Ruben overrides.
+  - Both Maps short links resolve to the same place; pick one canonical URL in design.
+  - strict_tdd: false; quality gate npm run check + build.
+  - Do not implement apply in this init commit.
+
+locked_decisions:
+  production_origin: "https://martaorozcoquiro.netlify.app"
+  skip_aeo_hacks: true
+  approach: "C — name/maps align + thank-you noindex + unique local content"
+  preferred_gbp_name_default: "Marta Orozco Quiromasaje"
+
+open_questions:
+  - Final public business name (site vs GBP rename)
+  - Canonical maps.app.goo.gl short link
+  - New home section vs About/FAQ expansion only
+  - Approved Google review quotes for on-site use (P2)
+
+artifacts:
+  exploration: openspec/changes/optimize-ai-local-discovery/exploration.md
+  proposal: openspec/changes/optimize-ai-local-discovery/proposal.md
+  spec_seo_json_ld: openspec/changes/optimize-ai-local-discovery/specs/seo-json-ld/spec.md
+  spec_local_discovery: openspec/changes/optimize-ai-local-discovery/specs/local-discovery/spec.md
+  design: null
+  tasks: null
+  audit: "/cursor/stores/bc-c7d72091-1e98-4baa-90e1-54bf6d53fcea/docs/ai-search-optimization-audit.md"

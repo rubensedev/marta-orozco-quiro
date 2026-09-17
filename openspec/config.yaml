@@ -69,8 +69,8 @@ rules:
 
 workflow:
   review_line_budget: 400
-  init_next: sdd-explore
-  feature_name_hint: add-creative-404
+  init_next: sdd-design
+  feature_name_hint: optimize-ai-local-discovery
   phases:
     - sdd-explore
     - sdd-propose
