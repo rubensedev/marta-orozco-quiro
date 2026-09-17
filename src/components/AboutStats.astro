@@ -56,8 +56,8 @@ const staggerDelaysMs = [150, 280] as const;
                 class="stat-value font-serif text-[clamp(2.25rem,8vw,4.5rem)] leading-none font-light tabular-nums"
                 data-count-to={String(parsed.number)}
                 data-count-delay={String(staggerDelaysMs[i] ?? 0)}
-                aria-label={stat.value}
               >
+                <span class="sr-only">{stat.value}</span>
                 <span aria-hidden="true">
                   {parsed.prefix}
                   <span class="stat-value__number">0</span>
