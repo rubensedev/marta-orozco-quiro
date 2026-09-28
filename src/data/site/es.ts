@@ -53,9 +53,20 @@ export const es = {
     paragraphs: [
       "Siempre me han interesado las técnicas manuales, considerándolas un catalizador muy potente que nos enraíza directamente con energías primigenias, activando un estado de conciencia muy útil en nuestro día a día.",
       "Es por eso que, como quiromasajista, he encontrado una fórmula muy orgánica de entretejer esas energías con diferentes técnicas de masaje, ofreciéndote sesiones personalizadas en función de tus necesidades.",
-      "Llevo más de cinco años acompañando a clientes con masajes personalizados, desde tratamientos descontracturantes hasta sesiones relajantes y rituales de bienestar en mi espacio del centro de Sevilla.",
-      "En cada sesión empiezo preguntándote dónde notas la tensión o qué necesitas hoy; ajusto la presión durante el masaje y trabajo contigo en un espacio de uno a uno. Las citas son siempre con reserva previa.",
-      "Atiendo en C. Esperanza Elena Caro, 2, 1°A4, en el Casco Antiguo de Sevilla (41002), solo los jueves de 15:00 a 21:00, con cita previa.",
+      "Llevo más de cinco años acompañando a clientes con masajes personalizados, desde tratamientos descontracturantes hasta sesiones relajantes y rituales de bienestar, siempre acompañadas de aceites 100% naturales cuidadosamente diseñados para cada tipo de tratamiento.",
+    ],
+    techniquesHeading: "Técnicas",
+    techniques: [
+      "Masaje Sueco",
+      "Deportivo",
+      "Tejido Profundo",
+      "Lomi Lomi",
+      "Linfático",
+      "Drenaje Brasileño",
+      "Piedras Calientes",
+      "Reflexología Podal",
+      "Reiki",
+      "Aromaterapia",
     ],
   },
   massages: {
@@ -97,7 +108,7 @@ export const es = {
       {
         question: "¿Cuál es el horario de atención?",
         answer: [
-          "Atiendo los jueves de 15:00 a 21:00 en mi espacio del centro de Sevilla. Te confirmo la disponibilidad exacta al reservar.",
+          "Atiendo los jueves de 15:00 a 21:00 en C. Esperanza Elena Caro, 2, 1°A4, Casco Antiguo de Sevilla (41002), solo con cita previa. Te confirmo la disponibilidad exacta al reservar.",
         ],
       },
       {
@@ -135,7 +146,7 @@ export const es = {
       {
         question: "¿Dónde está el espacio en Sevilla?",
         answer: [
-          "En ",
+          "En el Casco Antiguo de Sevilla, en ",
           {
             label: "C. Esperanza Elena Caro, 2, 1°A4, 41002 Sevilla",
             action: "maps" as const,
@@ -263,7 +274,7 @@ export const es = {
     heading: "Ubicación y contacto",
     hours: "Jueves de 15:00 a 21:00",
     hoursNote: "*Citas bajo reserva previa para garantizar tu atención personalizada.",
-    addressLines: ["C. Esperanza Elena Caro, 2, 1°A4", "41002 Sevilla"],
+    addressLines: ["C. Esperanza Elena Caro, 2, 1°A4", "Casco Antiguo, 41002 Sevilla"],
     ctaLabel: "Reservar Ahora",
     openInMapsLabel: "Abrir en Maps",
     mapHint: "Consulta el mapa para indicaciones de llegada",

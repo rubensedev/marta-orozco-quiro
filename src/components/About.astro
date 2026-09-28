@@ -34,6 +34,17 @@ const { about, sectionIds } = site;
         <p class={`about-reveal about-reveal--${i + 5} mt-5 mb-0 leading-[1.8]`}>{paragraph}</p>
       ))
     }
+
+    <div class="about-reveal about-reveal--8 about-techniques mt-8">
+      <p class="about-techniques__label m-0">{about.techniquesHeading}</p>
+      <ul class="about-techniques__list m-0 mt-3 flex list-none flex-wrap gap-2 p-0" role="list">
+        {
+          about.techniques.map((technique: string) => (
+            <li class="about-techniques__item">{technique}</li>
+          ))
+        }
+      </ul>
+    </div>
   </article>
   <AboutStats site={site} />
 </section>
@@ -57,7 +68,35 @@ const { about, sectionIds } = site;
   .about-reveal--6  { transition-delay: 0.54s; }
   .about-reveal--7  { transition-delay: 0.64s; }
   .about-reveal--8  { transition-delay: 0.74s; }
-  .about-reveal--9  { transition-delay: 0.84s; }
+
+  .about-techniques__label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-brand-lavender);
+  }
+
+  :global(.dark) .about-techniques__label {
+    color: var(--color-brand-lavender-bright);
+  }
+
+  .about-techniques__item {
+    padding: 0.4rem 0.85rem;
+    border: 1px solid color-mix(in oklch, var(--color-brand-lavender) 22%, transparent);
+    border-radius: 0.55rem;
+    background: color-mix(in oklch, white 55%, transparent);
+    color: var(--color-brand-text-dark);
+    font-size: 0.875rem;
+    letter-spacing: 0.01em;
+    line-height: 1.3;
+  }
+
+  :global(.dark) .about-techniques__item {
+    border-color: color-mix(in oklch, var(--color-brand-lavender-bright) 28%, transparent);
+    background: color-mix(in oklch, var(--color-brand-card-dark) 55%, transparent);
+    color: var(--color-brand-text-light);
+  }
 
   @media (prefers-reduced-motion: reduce) {
     :global(html.js) .about-reveal:not(.is-visible),

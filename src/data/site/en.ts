@@ -48,9 +48,20 @@ export const en = {
     paragraphs: [
       "I have always been interested in manual techniques, considering them a very powerful catalyst that roots us directly in primordial energies, activating a state of awareness that is very useful in our everyday lives.",
       "That is why, as a massage therapist, I have found a very organic way of weaving those energies together with different massage techniques, offering you personalised sessions according to your needs.",
-      "For over five years I have been supporting clients with personalised massage sessions, from deep tissue work to relaxing treatments and wellness rituals in my space in the city centre of Seville.",
-      "In every session I start by asking where you feel tension or what you need today; I adjust the pressure during the massage and work with you one-to-one. Appointments are always by prior booking.",
-      "I see clients at C. Esperanza Elena Caro, 2, 1°A4, in Seville’s Casco Antiguo (41002), on Thursdays only from 3:00 pm to 9:00 pm, by appointment.",
+      "For over five years I have been supporting clients with personalised massage sessions, from deep tissue work to relaxing treatments and wellness rituals, always accompanied by 100% natural oils carefully designed for each type of treatment.",
+    ],
+    techniquesHeading: "Techniques",
+    techniques: [
+      "Swedish Massage",
+      "Sports",
+      "Deep Tissue",
+      "Lomi Lomi",
+      "Lymphatic",
+      "Brazilian Drainage",
+      "Hot Stones",
+      "Foot Reflexology",
+      "Reiki",
+      "Aromatherapy",
     ],
   },
   massages: {
@@ -91,7 +102,7 @@ export const en = {
       {
         question: "What are your opening hours?",
         answer: [
-          "I see clients on Thursdays from 3:00 pm to 9:00 pm at my space in central Seville. I confirm the exact slot when you book.",
+          "I see clients on Thursdays from 3:00 pm to 9:00 pm at C. Esperanza Elena Caro, 2, 1°A4, Casco Antiguo, Sevilla (41002), by appointment only. I confirm the exact slot when you book.",
         ],
       },
       {
@@ -129,7 +140,7 @@ export const en = {
       {
         question: "Where is the space in Seville?",
         answer: [
-          "At ",
+          "In Seville’s Casco Antiguo, at ",
           {
             label: "C. Esperanza Elena Caro, 2, 1°A4, 41002 Sevilla",
             action: "maps" as const,
@@ -255,7 +266,7 @@ export const en = {
     heading: "Location and contact",
     hours: "Thursdays from 15:00 to 21:00",
     hoursNote: "*Appointments by prior booking only to ensure your personalised care.",
-    addressLines: ["C. Esperanza Elena Caro, 2, 1°A4", "41002 Sevilla"],
+    addressLines: ["C. Esperanza Elena Caro, 2, 1°A4", "Casco Antiguo, 41002 Sevilla"],
     ctaLabel: "Book now",
     openInMapsLabel: "Open in Maps",
     mapHint: "Check the map for directions",
