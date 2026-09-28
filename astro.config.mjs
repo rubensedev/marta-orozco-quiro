@@ -4,10 +4,14 @@ import { defineConfig } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
 
+const SITEMAP_EXCLUDED_PATHS = new Set(["/gracias", "/en/thank-you"]);
+
 export default defineConfig({
   site: "https://martaorozcoquiro.netlify.app",
   integrations: [
     sitemap({
+      filter: (page) =>
+        !SITEMAP_EXCLUDED_PATHS.has(new URL(page).pathname.replace(/\/$/, "")),
       i18n: {
         defaultLocale: "es",
         locales: {

@@ -1,8 +1,13 @@
-/** Spanish copy — moved verbatim from the previous Spanish-only site.ts. Do not alter wording. */
+/**
+ * Spanish copy for the site.
+ * Entity name, NAP, and Maps identity live in shared.ts — keep those aligned.
+ * Marketing strings here may be revised when a change updates local-discovery copy;
+ * do not treat this file as frozen wording.
+ */
 export const es = {
   meta: {
     lang: "es" as const,
-    title: "Marta Orozco | Quiromasajista en Sevilla",
+    title: "Marta Orozco Quiromasaje | Masajes en Sevilla",
     description:
       "Quiromasajista profesional en el centro de Sevilla. Masajes descontracturantes, relajantes, detox y rituales de bienestar. Reserva cita desde la web con TidyCal.",
     ogLocale: "es_ES",
@@ -28,7 +33,7 @@ export const es = {
   ],
   hero: {
     title: "Espacio de calma, salud y equilibrio corporal",
-    subtitle: "Quiromasajista profesional en Sevilla",
+    subtitle: "Quiromasaje profesional en el centro de Sevilla",
     description:
       "Tratamientos de quiromasaje diseñados para aliviar tensiones físicas, activar tu energía vital y restablecer la paz en tu día a día.",
     primaryCta: "RESERVAR CITA",
@@ -49,6 +54,8 @@ export const es = {
       "Siempre me han interesado las técnicas manuales, considerándolas un catalizador muy potente que nos enraíza directamente con energías primigenias, activando un estado de conciencia muy útil en nuestro día a día.",
       "Es por eso que, como quiromasajista, he encontrado una fórmula muy orgánica de entretejer esas energías con diferentes técnicas de masaje, ofreciéndote sesiones personalizadas en función de tus necesidades.",
       "Llevo más de cinco años acompañando a clientes con masajes personalizados, desde tratamientos descontracturantes hasta sesiones relajantes y rituales de bienestar en mi espacio del centro de Sevilla.",
+      "En cada sesión empiezo preguntándote dónde notas la tensión o qué necesitas hoy; ajusto la presión durante el masaje y trabajo contigo en un espacio de uno a uno. Las citas son siempre con reserva previa.",
+      "Atiendo en C. Esperanza Elena Caro, 2, 1°A4, en el Casco Antiguo de Sevilla (41002), solo los jueves de 15:00 a 21:00, con cita previa.",
     ],
   },
   massages: {
@@ -138,9 +145,63 @@ export const es = {
           ".",
         ],
       },
+      {
+        question: "¿Cómo es una sesión contigo, paso a paso?",
+        answer: [
+          "Reservamos con antelación y, al llegar, me cuentas dónde notas la tensión o qué buscas hoy. Durante el masaje ajusto la presión contigo; al terminar te doy pautas sencillas de cuidados si encajan con tu caso. Todo es uno a uno y siempre con cita previa.",
+        ],
+      },
     ],
   },
   reviews: [
+    {
+      id: "gbp-01",
+      name: "Paula Szilagyi",
+      stars: 5 as const,
+      quote:
+        "Marta fue una persona muy amable y me encantó el ritual de masaje, me encantó la combinación de diferentes estilos, exactamente lo que necesitaba: relajación, algo de descontracturante y drenaje. Sin duda volvería.",
+      treatmentName: "Ritual",
+    },
+    {
+      id: "gbp-02",
+      name: "Alicia",
+      stars: 5 as const,
+      quote:
+        "Ya conocía a Marta de otro centro de masajes y vuelvo a repetir con ella sin duda! Muchas gracias por tu amabilidad y el amor que le pones a tu trabajo. Volveré con mi bono de masajes :)",
+      treatmentName: "Bonos",
+    },
+    {
+      id: "gbp-03",
+      name: "Valeria Delquiten",
+      stars: 5 as const,
+      quote:
+        "Cogí un bono descontracturante, llevo un par de sesiones y estoy muy contenta.",
+      treatmentName: "Descontracturante",
+    },
+    {
+      id: "gbp-04",
+      name: "Julia Morey",
+      stars: 5 as const,
+      quote:
+        "Marta simplemente es la mejor! Un espacio de mucho cuidado y amabilidad. Deseando el próximo masaje pronto! Gracias Marta ❤️",
+      treatmentName: "Quiromasaje",
+    },
+    {
+      id: "gbp-05",
+      name: "Amaia Cilla",
+      stars: 5 as const,
+      quote:
+        "Marta ha sido un descubrimiento. Su delicadeza y buen trato hicieron que fuera un masaje increíble. Buscaba relajarme, y lo consiguió con creces. ¡Sin duda repetiré!",
+      treatmentName: "Relajante",
+    },
+    {
+      id: "gbp-06",
+      name: "Rubén",
+      stars: 5 as const,
+      quote:
+        "Hacia tiempo que no me daba un masaje tan relajante. El masaje empieza desde la puerta, con lo amable que es Marta ya empiezas a entrar en modo relax. Gracias!! Repetiré con el bono de masaje!!",
+      treatmentName: "Relajante",
+    },
     {
       id: "review-01",
       name: "Laura M.",
@@ -156,14 +217,6 @@ export const es = {
       quote:
         "Tenía la espalda hecha un nudo y me fui caminando ligero. Marta tiene unas manos mágicas.",
       treatmentName: "Descontracturante",
-    },
-    {
-      id: "review-03",
-      name: "Ana S.",
-      stars: 5 as const,
-      quote:
-        "Piernas ligeras, sensación de frescura y una calma que me acompañó todo el día. Recomendadísimo.",
-      treatmentName: "Detox",
     },
     {
       id: "review-04",
@@ -190,26 +243,12 @@ export const es = {
       treatmentName: "Relajante",
     },
     {
-      id: "review-07",
-      name: "Marta H.",
-      stars: 5 as const,
-      quote: "Me sentí liviana y con energía suave, sin agobio. Ideal cuando el cuerpo pide reset.",
-      treatmentName: "Ritual Cuerpo Ligero",
-    },
-    {
       id: "review-08",
       name: "Andrés N.",
       stars: 5 as const,
       quote:
         "Después de horas frente al ordenador, este masaje me devolvió el cuello. Super contento.",
       treatmentName: "Descontracturante",
-    },
-    {
-      id: "review-09",
-      name: "Irene C.",
-      stars: 5 as const,
-      quote: "Relajada, renovada y con ganas de cuidarme más. La sesión se me hizo un suspiro.",
-      treatmentName: "Detox",
     },
   ],
   bonos: {
@@ -292,7 +331,7 @@ export const es = {
       { href: "#contacto", label: "Contacto" },
     ],
     copyright: (year: number) =>
-      `© ${year} Marta Orozco Quiromasajista. Todos los derechos reservados.`,
+      `© ${year} Marta Orozco Quiromasaje. Todos los derechos reservados.`,
     creditPrefix: "Con mucho ❤️, de",
   },
   ui: {
@@ -338,7 +377,7 @@ export const es = {
         "Hemos abierto el calendario en otra pestaña. Elige ahí tu momento, y abraza este camino para recuperar tu energía y tu paz.",
       homeLabel: "Volver al inicio",
       whatsappLabel: "Escribir por WhatsApp",
-      metaTitle: "Gracias | Marta Orozco Quiromasajista en Sevilla",
+      metaTitle: "Gracias | Marta Orozco Quiromasaje en Sevilla",
       metaDescription:
         "Gracias por cuidar de ti. Completa tu reserva en el calendario y recupera energía y paz.",
     },
@@ -348,7 +387,7 @@ export const es = {
       message: "No te pierdas en la inmensidad, encuentra el que mejor te va haciendo click abajo.",
       massagesLabel: "Ver masajes",
       whatsappLabel: "Escribir por WhatsApp",
-      metaTitle: "Página no encontrada | Marta Orozco Quiromasajista en Sevilla",
+      metaTitle: "Página no encontrada | Marta Orozco Quiromasaje en Sevilla",
       metaDescription:
         "Esta página no existe. Explora los masajes de Marta Orozco o escribe por WhatsApp.",
     },

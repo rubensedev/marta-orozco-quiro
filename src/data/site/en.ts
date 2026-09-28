@@ -1,8 +1,8 @@
-/** British English — faithful translation; glossary locked in design/state. */
+/** British English — faithful translation; glossary locked in design/state. Entity name is never translated. */
 export const en = {
   meta: {
     lang: "en" as const,
-    title: "Marta Orozco | Massage Therapist in Seville",
+    title: "Marta Orozco Quiromasaje | Massage Therapist in Seville",
     description:
       "Professional massage therapist in the centre of Seville. Deep tissue, relaxing, detox and wellness rituals. Book online via TidyCal.",
     ogLocale: "en_GB",
@@ -49,6 +49,8 @@ export const en = {
       "I have always been interested in manual techniques, considering them a very powerful catalyst that roots us directly in primordial energies, activating a state of awareness that is very useful in our everyday lives.",
       "That is why, as a massage therapist, I have found a very organic way of weaving those energies together with different massage techniques, offering you personalised sessions according to your needs.",
       "For over five years I have been supporting clients with personalised massage sessions, from deep tissue work to relaxing treatments and wellness rituals in my space in the city centre of Seville.",
+      "In every session I start by asking where you feel tension or what you need today; I adjust the pressure during the massage and work with you one-to-one. Appointments are always by prior booking.",
+      "I see clients at C. Esperanza Elena Caro, 2, 1°A4, in Seville’s Casco Antiguo (41002), on Thursdays only from 3:00 pm to 9:00 pm, by appointment.",
     ],
   },
   massages: {
@@ -129,7 +131,7 @@ export const en = {
         answer: [
           "At ",
           {
-            label: "C. Esperanza Elena Caro, 2, 1°A4, 41002 Seville",
+            label: "C. Esperanza Elena Caro, 2, 1°A4, 41002 Sevilla",
             action: "maps" as const,
           },
           ". You can view the exact location and open directions in Google Maps by clicking the address or from the ",
@@ -137,9 +139,63 @@ export const en = {
           ".",
         ],
       },
+      {
+        question: "What is a session with you like, step by step?",
+        answer: [
+          "We book ahead and, when you arrive, you tell me where you feel tension or what you need today. During the massage I adjust the pressure with you; afterwards I share simple aftercare tips when they fit your case. Sessions are one-to-one and always by prior appointment.",
+        ],
+      },
     ],
   },
   reviews: [
+    {
+      id: "gbp-01",
+      name: "Paula Szilagyi",
+      stars: 5 as const,
+      quote:
+        "Marta was such a friendly person and loved the massage ritual, loved the combination of different styles, exactly what I needed, relaxation, some deep tissue and drainage. I would definitely go back.",
+      treatmentName: "Ritual",
+    },
+    {
+      id: "gbp-02",
+      name: "Alicia",
+      stars: 5 as const,
+      quote:
+        "I already knew Marta from another massage centre and I'm booking with her again without a doubt! Thank you so much for your kindness and the love you put into your work. I'll be back with my massage pack :)",
+      treatmentName: "Session packs",
+    },
+    {
+      id: "gbp-03",
+      name: "Valeria Delquiten",
+      stars: 5 as const,
+      quote:
+        "I got a deep-tissue pack, I've had a couple of sessions and I'm very happy.",
+      treatmentName: "Deep tissue",
+    },
+    {
+      id: "gbp-04",
+      name: "Julia Morey",
+      stars: 5 as const,
+      quote:
+        "Marta is simply the best! A space full of care and kindness. Looking forward to the next massage soon! Thank you Marta ❤️",
+      treatmentName: "Massage",
+    },
+    {
+      id: "gbp-05",
+      name: "Amaia Cilla",
+      stars: 5 as const,
+      quote:
+        "Marta has been a discovery. Her gentleness and warm manner made for an incredible massage. I was looking to relax, and she more than delivered. I'll definitely be back!",
+      treatmentName: "Relaxing",
+    },
+    {
+      id: "gbp-06",
+      name: "Rubén",
+      stars: 5 as const,
+      quote:
+        "It had been a while since I'd had such a relaxing massage. The massage starts at the door — Marta is so kind you already slip into relax mode. Thank you!! I'll be back with the massage pack!!",
+      treatmentName: "Relaxing",
+    },
     {
       id: "review-01",
       name: "Laura M.",
@@ -154,14 +210,6 @@ export const en = {
       stars: 5 as const,
       quote: "My back was in knots and I walked out light on my feet. Marta has magic hands.",
       treatmentName: "Deep tissue",
-    },
-    {
-      id: "review-03",
-      name: "Ana S.",
-      stars: 5 as const,
-      quote:
-        "Light legs, a sense of freshness and a calm that stayed with me all day. Highly recommend.",
-      treatmentName: "Detox",
     },
     {
       id: "review-04",
@@ -188,27 +236,11 @@ export const en = {
       treatmentName: "Relaxing",
     },
     {
-      id: "review-07",
-      name: "Marta H.",
-      stars: 5 as const,
-      quote:
-        "I felt light and gently energised, with no overwhelm. Ideal when the body needs a reset.",
-      treatmentName: "Light Body Ritual",
-    },
-    {
       id: "review-08",
       name: "Andrés N.",
       stars: 5 as const,
       quote: "After hours at the computer, this massage gave me my neck back. Really pleased.",
       treatmentName: "Deep tissue",
-    },
-    {
-      id: "review-09",
-      name: "Irene C.",
-      stars: 5 as const,
-      quote:
-        "Relaxed, renewed and keen to look after myself more. The session felt like a sigh of relief.",
-      treatmentName: "Detox",
     },
   ],
   bonos: {
@@ -223,7 +255,7 @@ export const en = {
     heading: "Location and contact",
     hours: "Thursdays from 15:00 to 21:00",
     hoursNote: "*Appointments by prior booking only to ensure your personalised care.",
-    addressLines: ["C. Esperanza Elena Caro, 2, 1°A4", "41002 Seville"],
+    addressLines: ["C. Esperanza Elena Caro, 2, 1°A4", "41002 Sevilla"],
     ctaLabel: "Book now",
     openInMapsLabel: "Open in Maps",
     mapHint: "Check the map for directions",
@@ -290,7 +322,7 @@ export const en = {
       { href: "#testimonials", label: "Testimonials" },
       { href: "#contact", label: "Contact" },
     ],
-    copyright: (year: number) => `© ${year} Marta Orozco Massage Therapist. All rights reserved.`,
+    copyright: (year: number) => `© ${year} Marta Orozco Quiromasaje. All rights reserved.`,
     creditPrefix: "With much ❤️, by",
   },
   ui: {
@@ -336,7 +368,7 @@ export const en = {
         "We've opened the calendar in another tab. Choose your time there—and embrace this path back to your energy and peace.",
       homeLabel: "Back to home",
       whatsappLabel: "Message on WhatsApp",
-      metaTitle: "Thank you | Marta Orozco Massage Therapist in Seville",
+      metaTitle: "Thank you | Marta Orozco Quiromasaje in Seville",
       metaDescription:
         "Thank you for choosing yourself. Finish booking in the calendar and restore your energy and peace.",
     },
@@ -346,7 +378,7 @@ export const en = {
       message: "Don't get lost in the vastness, find the perfect one for you by clicking below.",
       massagesLabel: "Explore massages",
       whatsappLabel: "Message on WhatsApp",
-      metaTitle: "Page not found | Marta Orozco Massage Therapist in Seville",
+      metaTitle: "Page not found | Marta Orozco Quiromasaje in Seville",
       metaDescription:
         "This page does not exist. Explore Marta Orozco's massages or message on WhatsApp.",
     },
