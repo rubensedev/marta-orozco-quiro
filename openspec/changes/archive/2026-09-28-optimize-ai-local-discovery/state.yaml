@@ -1,16 +1,16 @@
 change: optimize-ai-local-discovery
 
-status: applied
+status: archived
 
 phases:
   explore: done
   propose: done
-  spec: draft
+  spec: done
   design: done
   tasks: done
   apply: done
   verify: done
-  archive: pending
+  archive: done
 
 branch: feat-fixes-and-improvements
 
@@ -28,17 +28,20 @@ github_issue: null
 
 artifact_store: hybrid
 
-next: sdd-archive
+next: none
 
 next_parallel: []
+
+archive_mode: intentional-with-warnings
+archive_date: 2026-09-28
+archive_path: openspec/changes/archive/2026-09-28-optimize-ai-local-discovery/
 
 task_summary:
   phases: 5
   tasks: 18
-  completed: 17
-  remaining: 1
-  deferred:
-    - "2.6 arrival About/FAQ until owner confirms access/parking/neighbourhood"
+  completed: 18
+  remaining: 0
+  deferred: []
   forecast: |
     Review Workload Forecast
     Estimated changed lines: ~90–140 authored (~50 code + ~8–10 copy strings/locale; About CSS + thank-you/sitemap)
@@ -70,25 +73,30 @@ locked_decisions:
   maps_single_source: "MAPS_PLACE_URL const in shared.ts feeds mapsUrl + googleReviewsUrl; googlePlaceId moves to shared.ts"
   content_placement: "About +2 paragraphs and FAQ +2 items; no new home section/component"
   h1_policy: "H1 unchanged; ES hero subtitle carries entity + city"
-  review_quotes: "P2 — out of scope; follow-up change use-verified-review-quotes"
-  arrival_copy: "optional/deferred until owner confirms building-access facts; session-flow alone satisfies local-discovery unique-content requirement"
+  review_quotes: "shipped in apply — gbp-01…gbp-06 verified Google quotes ES/EN; 3 mocks removed; still no Review/AggregateRating JSON-LD (supersedes design P2 out-of-scope for on-site quotes)"
+  arrival_copy: "closed — owner confirmed nothing to add for arrival About/FAQ; session-flow + NAP grounding satisfy local-discovery unique-content requirement"
 
-open_questions:
-  - Owner confirmation of building-access / arrival facts (blocks 2 content slots only, not the change)
+open_questions: []
 
 artifacts:
-  exploration: openspec/changes/optimize-ai-local-discovery/exploration.md
-  proposal: openspec/changes/optimize-ai-local-discovery/proposal.md
-  spec_seo_json_ld: openspec/changes/optimize-ai-local-discovery/specs/seo-json-ld/spec.md
-  spec_local_discovery: openspec/changes/optimize-ai-local-discovery/specs/local-discovery/spec.md
-  design: openspec/changes/optimize-ai-local-discovery/design.md
-  tasks: openspec/changes/optimize-ai-local-discovery/tasks.md
-  owner: openspec/changes/optimize-ai-local-discovery/OWNER.md
+  exploration: openspec/changes/archive/2026-09-28-optimize-ai-local-discovery/exploration.md
+  proposal: openspec/changes/archive/2026-09-28-optimize-ai-local-discovery/proposal.md
+  spec_seo_json_ld: openspec/changes/archive/2026-09-28-optimize-ai-local-discovery/specs/seo-json-ld/spec.md
+  spec_local_discovery: openspec/changes/archive/2026-09-28-optimize-ai-local-discovery/specs/local-discovery/spec.md
+  design: openspec/changes/archive/2026-09-28-optimize-ai-local-discovery/design.md
+  tasks: openspec/changes/archive/2026-09-28-optimize-ai-local-discovery/tasks.md
+  owner: openspec/changes/archive/2026-09-28-optimize-ai-local-discovery/OWNER.md
+  apply_progress: openspec/changes/archive/2026-09-28-optimize-ai-local-discovery/apply-progress.md
+  archive_report: openspec/changes/archive/2026-09-28-optimize-ai-local-discovery/archive-report.md
   audit: "/cursor/stores/bc-c7d72091-1e98-4baa-90e1-54bf6d53fcea/docs/ai-search-optimization-audit.md"
+  engram_apply_progress: sdd/optimize-ai-local-discovery/apply-progress
+  engram_archive_report: sdd/optimize-ai-local-discovery/archive-report
+  main_spec_seo_json_ld: openspec/specs/seo-json-ld/spec.md
+  main_spec_local_discovery: openspec/specs/local-discovery/spec.md
 
 apply_notes:
-  shipped: "Phase 1 entity + Phase 3 crawl hygiene + Phase 2 session-flow About/FAQ + Sevilla NAP grounding (no invented arrival); Phase 4 gates green; Phase 5 OWNER.md"
-  deferred: "2.6 arrival FAQ/About (buzzer/lift/parking)"
+  shipped: "Phase 1 entity + Phase 3 crawl hygiene + Phase 2 session-flow About/FAQ + Sevilla NAP grounding (no invented arrival); Phase 4 gates green; Phase 5 OWNER.md; verified Google reviews gbp-01…gbp-06"
+  deferred: "none — 2.6 closed with nothing to add"
   verification:
     check: "0 errors, 0 warnings, 4 pre-existing hints"
     build: "success; site origin unchanged"
@@ -96,3 +104,22 @@ apply_notes:
     robots: "thank-you noindex,follow; home index,follow"
     sitemap: "locs / and /en/ only"
     aeo: "no llms.txt; no AggregateRating/Review"
+  implementation_commit: c8c1fc6
+
+verify:
+  verdict: pass_with_warnings
+  report: null
+  note: "No formal verify-report.md; Phase 4 apply gates + spot-checks stand as evidence. Inventing PASS verify-report forbidden."
+  archive_recommendation: proceed-with-warnings
+
+capabilities:
+  new:
+    - local-discovery
+  modified:
+    - seo-json-ld
+
+archive_notes:
+  intentional_override: "archive authorized without formal verify-report; apply Phase 4 gates recorded"
+  task_2_6: "CLOSED nothing-to-add (owner confirmed); Engram #536 deferred line is stale"
+  review_quotes: "GBP quotes shipped; design P2 superseded for on-site quotes only"
+  push: "not performed by archive; leave to orchestrator/user"

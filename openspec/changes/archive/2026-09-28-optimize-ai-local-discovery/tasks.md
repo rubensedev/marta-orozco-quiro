@@ -43,7 +43,7 @@ Session-flow slots are required. Arrival slots are **optional / deferred** until
 - [x] 2.3 In `src/data/site/es.ts`: append **two** `faq.items` as single-paragraph `FaqAnswerPart[]` — session paso-a-paso; arrival Q with `{ label, action: "maps" }` part. **If arrival facts unknown:** ship session FAQ only (+ session About paragraphs) and leave arrival FAQ/paragraph deferred
 - [x] 2.4 In `src/data/site/en.ts`: EN parity of 2.1–2.3; keep `hero.subtitle` as `Professional massage therapist in Seville`; set `contact.addressLines[1]` → `41002 Sevilla`; `footer.copyright` uses untranslated entity name; never translate `businessInfo.name`
 - [x] 2.5 In `src/components/About.astro`: add CSS only `.about-reveal--8 { transition-delay: 0.74s; }` and `.about-reveal--9 { transition-delay: 0.84s; }` (paragraphs use `--${i + 5}`; five paragraphs need `--5`…`--9`)
-- [ ] 2.6 **Deferred / optional (owner-dependent):** fill or refine arrival-specific About/FAQ copy once building access (buzzer/lift/stairs), parking/transport policy, and neighbourhood naming are confirmed — does not block ship of entity + session-flow + crawl hygiene
+- [x] 2.6 **Closed — nothing to add:** owner confirmed no arrival-specific About/FAQ copy (buzzer/lift/stairs, parking/transport, neighbourhood). Session-flow + NAP grounding already shipped; no further content for this task.
 
 ## Phase 3: Crawl hygiene
 
