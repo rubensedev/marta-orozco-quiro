@@ -28,10 +28,10 @@ export const en = {
     { href: "#contact", label: "CONTACT" },
   ],
   hero: {
-    title: "A space for calm, health and bodily balance",
+    title: "Your place for stillness, wellbeing and bodily harmony",
     subtitle: "Professional massage therapist in Seville",
     description:
-      "Massage treatments designed to ease physical tension, activate your vital energy and restore peace to your everyday life.",
+      "Exclusive massage treatments tailored to your needs to release tension and awaken your vital energy. All the oils we use are 100% natural and handcrafted for each type of massage.",
     primaryCta: "BOOK APPOINTMENT",
     secondaryCta: {
       label: "VIEW MASSAGES AND PRICES",

@@ -32,10 +32,10 @@ export const es = {
     { href: "#contacto", label: "CONTACTO" },
   ],
   hero: {
-    title: "Espacio de calma, salud y equilibrio corporal",
+    title: "Tu lugar para la quietud, el bienestar y alcanzar la armonía corporal",
     subtitle: "Quiromasaje profesional en el centro de Sevilla",
     description:
-      "Tratamientos de quiromasaje diseñados para aliviar tensiones físicas, activar tu energía vital y restablecer la paz en tu día a día.",
+      "Tratamientos de masaje exclusivos y adaptados a tus necesidades para desbloquear tensiones y despertar tu energía vital. Todos los aceites que usamos son 100% naturales y están artesanalmente creados para cada tipo de masaje.",
     primaryCta: "RESERVAR CITA",
     secondaryCta: {
       label: "VER MASAJES Y PRECIOS",
