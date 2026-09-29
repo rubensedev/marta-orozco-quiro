@@ -278,28 +278,28 @@ export const en = {
       bookingValue: "Relaxing Massage",
       title: "Relaxing",
       description:
-        "Ideal for reducing stress, improving rest and giving yourself a moment for you.",
+        "Ideal for reducing stress, improving rest and giving yourself a moment just for you. One of the main goals of this massage is to relax the whole body through long, gliding strokes over the muscles.",
       imageAlt: "Relaxing setting for a body massage.",
     },
     detox: {
       bookingValue: "Detox Massage",
       title: "Detox",
       description:
-        "Supports circulation, eases the feeling of heavy legs and brings a deep sense of lightness.",
+        "It stimulates the lymphatic system, helping to clear excess fluid and toxins, thereby reducing swelling and improving circulation and tissue quality, leaving a deep sense of lightness.",
       imageAlt: "Detox treatment focused on wellness and circulation.",
     },
     descontracturante: {
       bookingValue: "Deep Tissue Massage",
       title: "Deep tissue",
       description:
-        "Designed to ease muscle knots, muscular tension and discomfort from work or sport.",
+        "Higher-pressure techniques are used to release muscular tension through slow, deep movements and firm pressure, easing knots and working beyond the superficial muscles.",
       imageAlt: "Deep tissue massage focused on muscular relief.",
     },
     "craneo-facial": {
       bookingValue: "Craniofacial Massage",
       title: "Craniofacial",
       description:
-        "Releases tension in the face, jaw and neck. Relaxes, rejuvenates and brings wellbeing.",
+        "Releases tension in the face, jaw, neck and upper back, bringing a deeper state of relaxation and wellbeing. Ideal for easing stress and migraines and improving rest.",
       imageAlt: "Craniofacial massage for face, jaw and neck.",
     },
   },

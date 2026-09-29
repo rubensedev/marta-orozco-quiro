@@ -286,28 +286,28 @@ export const es = {
       bookingValue: "Masaje Relajante",
       title: "Relajante",
       description:
-        "Ideal para reducir el estrés, mejorar el descanso y regalarte un momento para ti.",
+        "Ideal para reducir el estrés, mejorar el descanso y regalarte un momento para ti. Uno de los objetivos principales de este masaje es relajar todo el cuerpo mediante movimientos largos y deslizantes sobre los músculos.",
       imageAlt: "Ambiente relajante para masaje corporal.",
     },
     detox: {
       bookingValue: "Masaje Detox",
       title: "Detox",
       description:
-        "Favorece la circulación, alivia la sensación de piernas pesadas y aporta una profunda ligereza.",
+        "Estimula el sistema linfático, ayudando a eliminar el exceso de líquido y toxinas, reduciendo así la hinchazón y mejorando la circulación y calidad de los tejidos, aportando una sensación de profunda ligereza.",
       imageAlt: "Tratamiento detox orientado al bienestar y la circulación.",
     },
     descontracturante: {
       bookingValue: "Masaje Descontracturante",
       title: "Descontracturante",
       description:
-        "Pensado para aliviar contracturas, tensión muscular y molestias derivadas del trabajo o el deporte.",
+        "Se emplean técnicas de mayor presión, beneficiosas para liberar tensión muscular mediante movimientos lentos y profundos, así como una presión firme, con el fin de aliviar contracturas y llegar más allá de los músculos superficiales.",
       imageAlt: "Masaje descontracturante orientado al alivio muscular.",
     },
     "craneo-facial": {
       bookingValue: "Masaje Cráneo Facial",
       title: "Cráneo Facial",
       description:
-        "Libera la tensión del rostro, mandíbula y cuello. Relaja, rejuvenece y aporta bienestar.",
+        "Libera la tensión del rostro, mandíbula, cuello y espalda alta, aportando un estado superior de relajación y bienestar. Ideal para reducir el estrés, migrañas y mejorar el descanso.",
       imageAlt: "Masaje cráneo facial para rostro, mandíbula y cuello.",
     },
   },
