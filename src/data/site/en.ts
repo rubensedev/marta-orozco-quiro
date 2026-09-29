@@ -308,13 +308,13 @@ export const en = {
       bookingValue: "Total Disconnect Ritual",
       title: "Total Disconnect Ritual",
       description:
-        "Combines relaxing and/or deep tissue techniques with focused work on the shoulders, neck, face and scalp.",
+        "Let yourself sink into deep stillness with this ritual that combines relaxing and/or deep tissue techniques with focused finishing work on the neck, face and scalp. It uses neurosedative movements ideal for easing mental fatigue, stress and anxiety.",
     },
     "ritual-cuerpo-ligero": {
       bookingValue: "Light Body Ritual",
       title: "Light Body Ritual",
       description:
-        "A treatment designed to ease heaviness and restore general wellbeing. It combines a relaxing and/or deep tissue massage with circulatory techniques.",
+        "Step into lightness and deep calm with this treatment designed to ease heaviness and restore general wellbeing. It combines relaxing and/or deep tissue massage techniques with draining manoeuvres.",
     },
   },
   bonoTiers: {

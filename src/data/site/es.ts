@@ -316,13 +316,13 @@ export const es = {
       bookingValue: "Ritual Desconexión Total",
       title: "Ritual Desconexión Total",
       description:
-        "Combina técnicas relajantes y/o descontracturantes con un trabajo específico en hombros, cuello, rostro y cráneo.",
+        "Déjate llevar hacia un estado de profunda quietud con este ritual que combina técnicas relajantes y/o descontracturantes con un trabajo final específico en la zona de cuello, rostro y cráneo. Se emplean movimientos neurosedantes ideales para reducir la fatiga mental, el estrés y la ansiedad.",
     },
     "ritual-cuerpo-ligero": {
       bookingValue: "Ritual Cuerpo Ligero",
       title: "Ritual Cuerpo Ligero",
       description:
-        "Tratamiento diseñado para aliviar la pesadez y recuperar el bienestar general. Se combina un masaje relajante y/o descontracturante con técnicas circulatorias.",
+        "Adéntrate hacia la ligereza y tranquilidad máxima con este tratamiento específicamente diseñado para aliviar la pesadez y recuperar el bienestar general. Se combinan técnicas de masaje relajante y/o descontracturante con maniobras drenantes.",
     },
   },
   bonoTiers: {
