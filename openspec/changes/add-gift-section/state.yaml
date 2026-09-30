@@ -1,0 +1,91 @@
+change: add-gift-section
+
+status: applying
+
+phases:
+  explore: done
+  research: unselected
+  propose: done
+  spec: done
+  design: done
+  tasks: done
+  apply: in_progress
+  verify: pending
+  archive: pending
+
+created: 2026-09-30
+updated: 2026-09-30
+
+mode: hybrid
+
+delivery_strategy: ask-on-risk
+
+artifact_store: hybrid
+
+next: sdd-apply
+
+open_questions: false
+
+locked_decisions:
+  placement: after-reviews-before-contact
+  typo: Regala_not_Regla
+  modal_fields_all_required: true
+  pricing: same_as_booking_journey
+  gift_image: mocked_placeholder
+  gift_placeholder: inline_svg
+  ritual_wa_duration: concrete_minutes_always
+  whatsapp: curated_then_existing_thank_you
+  thank_you_routes: reuse_/gracias_and_/en/thank-you
+  no_new_gift_thank_you: true
+  faq_es: locked_two_items
+  faq_action: gift_deep_link
+  faq_gift_opens_modal: false
+  section_slug_es: tarjeta-regalo
+  section_slug_en: gift-card
+  approach: dedicated_GiftSection_GiftModal
+  nav_es: REGALA
+  nav_en: GIFT CARD
+  en_field_labels: full_who_is_giving_receiving
+  dual_dialog: syncBodyLock_OR_mutual_exclusion_native_escape
+
+artifacts:
+  exploration: openspec/changes/add-gift-section/exploration.md
+  proposal: openspec/changes/add-gift-section/proposal.md
+  design: openspec/changes/add-gift-section/design.md
+  tasks: openspec/changes/add-gift-section/tasks.md
+  specs:
+    - openspec/changes/add-gift-section/specs/gift-section/spec.md
+    - openspec/changes/add-gift-section/specs/client-reviews/spec.md
+    - openspec/changes/add-gift-section/specs/site-i18n/spec.md
+  engram_explore: sdd/add-gift-section/explore
+  engram_proposal: sdd/add-gift-section/proposal
+  engram_spec: sdd/add-gift-section/spec
+  engram_design: sdd/add-gift-section/design
+  engram_tasks: sdd/add-gift-section/tasks
+
+spec_summary:
+  gift_section: new full spec — 10 requirements / 23 scenarios
+  client_reviews: 2 MODIFIED requirements / 2 scenarios
+  site_i18n: 2 ADDED + 4 MODIFIED requirements / 11 scenarios
+  booking_journey: no delta (parallel channel)
+  total_requirements: 18
+  total_scenarios: 36
+
+design_summary:
+  approach: GiftSection + GiftModal + PageScripts gift path parallel to booking
+  ritual_wa_duration: concrete_minutes_always
+  placeholder: inline_svg
+  dual_dialog: syncBodyLock OR + mutual exclusion; no page inert for modals
+  pr_budget_risk: High
+  chained_prs_recommended: true
+  chain_hint: PR1 data/FAQ → PR2 GiftSection/GiftModal/PageScripts
+
+tasks_summary:
+  phases: 4
+  total_tasks: 18
+  pr_split: PR1 data/i18n/FAQ → PR2 UI/scripts/HomePage
+  budget_risk: High
+  decision_needed_before_apply: false
+  chain_strategy: feature-branch-chain
+  commits_on: current_branch
+  hard_constraint: no BookingModal/TidyCal path edits

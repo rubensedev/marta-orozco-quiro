@@ -19,6 +19,7 @@ export const en = {
     packages: "packages",
     faq: "faq",
     reviews: "testimonials",
+    gift: "gift-card",
     contact: "contact",
   },
   navItems: [
@@ -27,6 +28,7 @@ export const en = {
     { href: "#rituals", label: "RITUALS" },
     { href: "#packages", label: "PACKAGES" },
     { href: "#testimonials", label: "TESTIMONIALS" },
+    { href: "#gift-card", label: "GIFT CARD" },
     { href: "#contact", label: "CONTACT" },
   ],
   hero: {
@@ -81,6 +83,13 @@ export const en = {
     description:
       "Since 2021 I have supported more than 1,500 people on their path to wellbeing. These voices share how they felt after the session — in case it helps you take the next step.",
     googleCta: "See all reviews on Google",
+  },
+  gift: {
+    heading: "GIFT CARD",
+    body: "Give special moments and surprise someone with an experience of relaxation, wellbeing and personal care. Arrange it easily online by telling us the treatment type, your name and the name of the person receiving the gift.",
+    cta: "Gift a treatment",
+    whatsappTemplate:
+      "Hello Marta! I would like a gift card. Treatment: {treatment}. Duration: {duration}. From: {from}. To: {to}. Estimated price: {price}.",
   },
   faq: {
     heading: "Frequently asked questions",
@@ -155,6 +164,20 @@ export const en = {
         question: "What is a session with you like, step by step?",
         answer: [
           "We book ahead and, when you arrive, you tell me where you feel tension or what you need today. During the massage I adjust the pressure with you; afterwards I share simple aftercare tips when they fit your case. Sessions are one-to-one and always by prior appointment.",
+        ],
+      },
+      {
+        question: "Do you offer gift cards?",
+        answer: [
+          "Yes. In our ",
+          { label: "gift card section", action: "gift" as const },
+          " you can fill in the form that opens, and once we have the details we will email you a PDF of the card.",
+        ],
+      },
+      {
+        question: "How long is the gift card valid?",
+        answer: [
+          "The gift card is valid for one year from the date of purchase.",
         ],
       },
     ],
@@ -421,6 +444,16 @@ export const en = {
       dateHint: "Availability only on Thursdays from 15:00 to 21:00.",
       submit: "Confirm booking",
       closeAria: "Close booking modal",
+    },
+    giftModal: {
+      title: "Gift a treatment",
+      treatmentLabel: "Treatment desired",
+      durationLabel: "Duration",
+      giverLabel: "Who is giving this gift",
+      receiverLabel: "Who is receiving this gift",
+      priceEstimateLabel: "Estimated price",
+      submit: "Request gift card",
+      closeAria: "Close gift modal",
     },
   },
 };

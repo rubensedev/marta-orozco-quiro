@@ -7,6 +7,7 @@
   bonos: "packages",
   "preguntas-frecuentes": "faq",
   testimonios: "testimonials",
+  "tarjeta-regalo": "gift-card",
   contacto: "contact",
 };
 

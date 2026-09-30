@@ -78,6 +78,10 @@ const bonosWhatsappHref = `https://wa.me/${meta.whatsappNumber}?text=${encodeURI
                 <a class={linkClass} href={`#${sectionIds.packages}`}>
                   {part.label}
                 </a>
+              ) : part.action === "gift" ? (
+                <a class={linkClass} href={`#${sectionIds.gift}`}>
+                  {part.label}
+                </a>
               ) : (
                 <a class={linkClass} href={`#${sectionIds.contact}`}>
                   {part.label}

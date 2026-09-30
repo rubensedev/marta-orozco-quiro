@@ -23,6 +23,7 @@ export const es = {
     packages: "bonos",
     faq: "preguntas-frecuentes",
     reviews: "testimonios",
+    gift: "tarjeta-regalo",
     contact: "contacto",
   },
   navItems: [
@@ -31,6 +32,7 @@ export const es = {
     { href: "#rituales", label: "RITUALES" },
     { href: "#bonos", label: "BONOS" },
     { href: "#testimonios", label: "TESTIMONIOS" },
+    { href: "#tarjeta-regalo", label: "REGALA" },
     { href: "#contacto", label: "CONTACTO" },
   ],
   hero: {
@@ -86,6 +88,13 @@ export const es = {
     description:
       "Desde 2021 he acompañado a más de 1.500 personas en su camino hacia el bienestar. Estas voces cuentan cómo se sintieron después de la sesión — por si te ayuda a dar el paso.",
     googleCta: "Ver todas las reseñas en Google",
+  },
+  gift: {
+    heading: "TARJETA REGALO",
+    body: "Regala momentos especiales y sorprende con una experiencia de relajación, bienestar y cuidado personal. Consíguelo fácilmente online indicándonos el tipo de tratamiento, tu nombre y el nombre de la persona a quién va dirigido el regalo.",
+    cta: "Regalar tratamiento",
+    whatsappTemplate:
+      "Hola Marta! Quiero una tarjeta regalo. Tratamiento: {treatment}. Duración: {duration}. De: {from}. Para: {to}. Precio estimado: {price}.",
   },
   faq: {
     heading: "Preguntas frecuentes",
@@ -161,6 +170,20 @@ export const es = {
         question: "¿Cómo es una sesión contigo, paso a paso?",
         answer: [
           "Reservamos con antelación y, al llegar, me cuentas dónde notas la tensión o qué buscas hoy. Durante el masaje ajusto la presión contigo; al terminar te doy pautas sencillas de cuidados si encajan con tu caso. Todo es uno a uno y siempre con cita previa.",
+        ],
+      },
+      {
+        question: "¿Tenéis tarjetas regalo?",
+        answer: [
+          "Sí, en nuestra ",
+          { label: "sección tarjeta regalo", action: "gift" as const },
+          " puedes completar el formulario que se te despliega y, en cuanto tengamos los datos, te haremos llegar a tu correo un pdf con la tarjeta.",
+        ],
+      },
+      {
+        question: "¿Cuál es la caducidad de la tarjeta regalo?",
+        answer: [
+          "La caducidad de la tarjeta regalo es de un año a partir del día de la compra.",
         ],
       },
     ],
@@ -430,6 +453,16 @@ export const es = {
       dateHint: "Disponibilidad solo jueves de 15:00 a 21:00.",
       submit: "Confirmar reserva",
       closeAria: "Cerrar modal de reserva",
+    },
+    giftModal: {
+      title: "Regalar tratamiento",
+      treatmentLabel: "Tratamiento deseado",
+      durationLabel: "Duración",
+      giverLabel: "Quién lo regala",
+      receiverLabel: "Quién lo recibe",
+      priceEstimateLabel: "Precio estimado",
+      submit: "Solicitar tarjeta regalo",
+      closeAria: "Cerrar modal de regalo",
     },
   },
 };
