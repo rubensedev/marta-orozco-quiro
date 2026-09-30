@@ -1,0 +1,130 @@
+---
+import type { SiteBundle } from "../data/site";
+import SectionHeading from "./SectionHeading.astro";
+
+type Props = {
+  site: SiteBundle;
+};
+
+const { site } = Astro.props;
+const { gift, sectionIds } = site;
+---
+
+<section
+  id={sectionIds.gift}
+  class="mx-auto w-[min(1120px,calc(100%-2rem))] py-[clamp(3rem,8vh,6rem)] md:px-6 lg:px-8"
+  data-gift-section
+>
+  <SectionHeading title={gift.heading} />
+
+  <div
+    class="gift-reveal isolate grid items-center gap-10 rounded-4xl border border-glass-edge bg-glass-surface p-8 shadow-glass backdrop-blur-glass-panel md:grid-cols-[minmax(0,1.15fr)_minmax(12rem,0.85fr)] md:gap-12 md:p-10 dark:shadow-[var(--shadow-glass-dark)]"
+  >
+    <div class="min-w-0">
+      <p class="m-0 leading-[1.8] text-brand-muted">{gift.body}</p>
+      <button class="btn-brand mt-8" type="button" data-open-gift>
+        <i class="fa-solid fa-gift" aria-hidden="true"></i>
+        {gift.cta}
+      </button>
+    </div>
+
+    <div class="flex justify-center md:justify-end" aria-hidden="true">
+      <svg
+        class="h-auto w-full max-w-[14rem] text-brand-lavender dark:text-brand-lavender-bright"
+        viewBox="0 0 200 140"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        role="presentation"
+      >
+        <rect
+          x="18"
+          y="28"
+          width="164"
+          height="96"
+          rx="16"
+          fill="currentColor"
+          fill-opacity="0.08"
+          stroke="currentColor"
+          stroke-opacity="0.45"
+          stroke-width="2"
+        ></rect>
+        <rect
+          x="34"
+          y="44"
+          width="132"
+          height="64"
+          rx="10"
+          fill="currentColor"
+          fill-opacity="0.06"
+          stroke="currentColor"
+          stroke-opacity="0.3"
+          stroke-width="1.5"
+        ></rect>
+        <path
+          d="M100 44V108"
+          stroke="currentColor"
+          stroke-opacity="0.55"
+          stroke-width="2"
+          stroke-linecap="round"
+        ></path>
+        <path
+          d="M34 76H166"
+          stroke="currentColor"
+          stroke-opacity="0.55"
+          stroke-width="2"
+          stroke-linecap="round"
+        ></path>
+        <path
+          d="M100 28C90 18 78 18 72 26C66 34 74 42 100 48C126 42 134 34 128 26C122 18 110 18 100 28Z"
+          fill="currentColor"
+          fill-opacity="0.22"
+          stroke="currentColor"
+          stroke-opacity="0.55"
+          stroke-width="1.5"
+        ></path>
+        <circle cx="56" cy="58" r="3" fill="currentColor" fill-opacity="0.4"></circle>
+        <circle cx="144" cy="58" r="3" fill="currentColor" fill-opacity="0.4"></circle>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gift-reveal {
+    transition:
+      opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  :global(html.js) .gift-reveal:not(.is-visible) {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(html.js) .gift-reveal:not(.is-visible),
+    .gift-reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12 },
+  );
+
+  document.querySelectorAll("[data-gift-section] .gift-reveal").forEach((el) => {
+    observer.observe(el);
+  });
+</script>

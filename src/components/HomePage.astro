@@ -5,6 +5,8 @@ import BookingModal from "./BookingModal.astro";
 import Contact from "./Contact.astro";
 import FAQ from "./FAQ.astro";
 import Footer from "./Footer.astro";
+import GiftModal from "./GiftModal.astro";
+import GiftSection from "./GiftSection.astro";
 import Header from "./Header.astro";
 import Hero from "./Hero.astro";
 import Massages from "./Massages.astro";
@@ -31,10 +33,12 @@ const { site } = Astro.props;
   <Packages site={site} />
   <FAQ site={site} />
   <Reviews site={site} />
+  <GiftSection site={site} />
   <Contact site={site} />
 </main>
 
 <Footer site={site} />
 <MobileBar site={site} />
 <BookingModal site={site} />
+<GiftModal site={site} />
 <PageScripts site={site} />

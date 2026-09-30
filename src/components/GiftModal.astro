@@ -1,0 +1,116 @@
+---
+import type { SiteBundle } from "../data/site";
+
+type Props = {
+  site: SiteBundle;
+};
+
+const { site } = Astro.props;
+const { bookingOptions, ui } = site;
+const giftModal = ui.giftModal;
+---
+
+<dialog
+  id="giftModal"
+  class="booking-modal w-[min(680px,calc(100%-1rem))] max-w-full rounded-4xl border-0 bg-transparent p-0"
+  aria-labelledby="giftModalTitle"
+>
+  <article
+    class="relative isolate rounded-4xl border border-glass-edge bg-glass-surface p-8 shadow-glass backdrop-blur-glass-panel md:p-10 dark:shadow-[var(--shadow-glass-dark)]"
+  >
+    <button
+      class="absolute top-5 right-5 inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-glass-edge bg-glass-control text-inherit shadow-glass backdrop-blur-glass-control focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-sage dark:shadow-[var(--shadow-glass-dark)]"
+      type="button"
+      data-close-gift
+      aria-label={giftModal.closeAria}
+    >
+      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>
+
+    <h2 id="giftModalTitle" class="m-0 mb-6 pr-12 font-serif text-3xl font-light uppercase">
+      {giftModal.title}
+    </h2>
+
+    <form id="giftForm" class="grid gap-5">
+      <div class="booking-field-group">
+        <label
+          class="mb-2 block text-[0.9rem] font-semibold tracking-[0.12em] uppercase"
+          for="giftTreatment"
+        >
+          {giftModal.treatmentLabel}
+          <span class="text-brand-lavender">*</span>
+        </label>
+        <select
+          id="giftTreatment"
+          class="min-h-13 w-full rounded-2xl border border-glass-edge bg-glass-control py-[0.85rem] pl-4 pr-12 text-inherit shadow-glass backdrop-blur-glass-control dark:shadow-[var(--shadow-glass-dark)]"
+          name="treatment"
+          required
+        >
+          {bookingOptions.map((option) => <option value={option.id}>{option.label}</option>)}
+        </select>
+      </div>
+
+      <div class="booking-field-group" id="giftDurationGroup">
+        <label
+          class="mb-2 block text-[0.9rem] font-semibold tracking-[0.12em] uppercase"
+          for="giftDuration"
+        >
+          {giftModal.durationLabel}
+          <span class="text-brand-lavender">*</span>
+        </label>
+        <select
+          id="giftDuration"
+          class="min-h-13 w-full rounded-2xl border border-glass-edge bg-glass-control py-[0.85rem] pl-4 pr-12 text-inherit shadow-glass backdrop-blur-glass-control dark:shadow-[var(--shadow-glass-dark)]"
+          name="duration"
+          required
+        ></select>
+      </div>
+
+      <div class="booking-field-group">
+        <label
+          class="mb-2 block text-[0.9rem] font-semibold tracking-[0.12em] uppercase"
+          for="giftFrom"
+        >
+          {giftModal.giverLabel}
+          <span class="text-brand-lavender">*</span>
+        </label>
+        <input
+          id="giftFrom"
+          class="min-h-13 w-full rounded-2xl border border-glass-edge bg-glass-control py-[0.85rem] px-4 text-inherit shadow-glass backdrop-blur-glass-control dark:shadow-[var(--shadow-glass-dark)]"
+          type="text"
+          name="from"
+          autocomplete="name"
+          required
+        />
+      </div>
+
+      <div class="booking-field-group">
+        <label
+          class="mb-2 block text-[0.9rem] font-semibold tracking-[0.12em] uppercase"
+          for="giftTo"
+        >
+          {giftModal.receiverLabel}
+          <span class="text-brand-lavender">*</span>
+        </label>
+        <input
+          id="giftTo"
+          class="min-h-13 w-full rounded-2xl border border-glass-edge bg-glass-control py-[0.85rem] px-4 text-inherit shadow-glass backdrop-blur-glass-control dark:shadow-[var(--shadow-glass-dark)]"
+          type="text"
+          name="to"
+          autocomplete="off"
+          required
+        />
+      </div>
+
+      <div class="booking-price-card">
+        <p class="booking-price-card__label">{giftModal.priceEstimateLabel}</p>
+        <output id="giftPriceEstimate" class="booking-price-card__value">-</output>
+      </div>
+
+      <button class="btn-brand w-full" type="submit" id="giftSubmit">
+        <i class="fa-solid fa-gift" aria-hidden="true"></i>
+        {giftModal.submit}
+      </button>
+    </form>
+  </article>
+</dialog>

@@ -9,7 +9,7 @@ phases:
   spec: done
   design: done
   tasks: done
-  apply: in_progress
+  apply: done
   verify: pending
   archive: pending
 
@@ -22,7 +22,7 @@ delivery_strategy: ask-on-risk
 
 artifact_store: hybrid
 
-next: sdd-apply
+next: sdd-verify
 
 open_questions: false
 
@@ -83,9 +83,19 @@ design_summary:
 tasks_summary:
   phases: 4
   total_tasks: 18
+  completed_apply_tasks: 16
+  pending_manual_verify: 4.3 4.4 success_criteria
   pr_split: PR1 data/i18n/FAQ → PR2 UI/scripts/HomePage
   budget_risk: High
   decision_needed_before_apply: false
   chain_strategy: feature-branch-chain
   commits_on: current_branch
   hard_constraint: no BookingModal/TidyCal path edits
+
+apply_notes: >
+  Applied on feat-fixes-and-improvements as two work-unit commits.
+  Commit 1: gift locale/nav/hashes/FAQ (+ openspec planning).
+  Commit 2: GiftSection + GiftModal + PageScripts dual-dialog WA handoff + HomePage.
+  Also synced gift hashes into Header.astro + Layout.astro inline maps (locale remapping).
+  BookingModal.astro / resolveTidycalUrl / booking TidyCal submit path untouched.
+  Manual smoke (4.3–4.4) deferred to sdd-verify.
