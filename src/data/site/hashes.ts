@@ -1,8 +1,9 @@
 /** Bidirectional ES ↔ EN section hash map (without leading #). */
-export const HASH_ES_TO_EN: Record<string, string> = {
+  export const HASH_ES_TO_EN: Record<string, string> = {
   inicio: "home",
   "sobre-mi": "about",
   masajes: "massages",
+  rituales: "rituals",
   bonos: "packages",
   "preguntas-frecuentes": "faq",
   testimonios: "testimonials",

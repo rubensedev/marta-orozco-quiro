@@ -19,6 +19,7 @@ export const es = {
     home: "inicio",
     about: "sobre-mi",
     massages: "masajes",
+    rituals: "rituales",
     packages: "bonos",
     faq: "preguntas-frecuentes",
     reviews: "testimonios",
@@ -27,6 +28,7 @@ export const es = {
   navItems: [
     { href: "#sobre-mi", label: "SOBRE MÍ" },
     { href: "#masajes", label: "MASAJES" },
+    { href: "#rituales", label: "RITUALES" },
     { href: "#bonos", label: "BONOS" },
     { href: "#testimonios", label: "TESTIMONIOS" },
     { href: "#contacto", label: "CONTACTO" },
@@ -75,9 +77,8 @@ export const es = {
       "Elige duración y tipo de compra para ver tu precio. Compara el ahorro con bonos de 5 o 10 sesiones.",
   },
   rituals: {
-    heading: "Rituales y bonos",
-    description:
-      "Rituales completos para una renovación profunda o paquetes de bonos con descuento especial.",
+    heading: "Rituales",
+    description: "Rituales completos para una renovación profunda.",
     ctaLabel: "Reservar Ritual",
   },
   reviewsContent: {
@@ -264,6 +265,7 @@ export const es = {
   ],
   bonos: {
     heading: "Bonos",
+    description: "Paquetes de sesiones con descuento especial.",
     discountLabel: "Descuento",
     examplesHeading: "Ejemplos de ahorro",
     ctaLabel: "Preguntar por Bonos",
@@ -336,6 +338,7 @@ export const es = {
     navLinks: [
       { href: "#sobre-mi", label: "Sobre mí" },
       { href: "#masajes", label: "Masajes" },
+      { href: "#rituales", label: "Rituales" },
       { href: "#bonos", label: "Bonos" },
       { href: "#preguntas-frecuentes", label: "Preguntas frecuentes" },
       { href: "#testimonios", label: "Testimonios" },

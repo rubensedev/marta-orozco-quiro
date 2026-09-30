@@ -15,6 +15,7 @@ export const en = {
     home: "home",
     about: "about",
     massages: "massages",
+    rituals: "rituals",
     packages: "packages",
     faq: "faq",
     reviews: "testimonials",
@@ -23,6 +24,7 @@ export const en = {
   navItems: [
     { href: "#about", label: "ABOUT" },
     { href: "#massages", label: "MASSAGES" },
+    { href: "#rituals", label: "RITUALS" },
     { href: "#packages", label: "PACKAGES" },
     { href: "#testimonials", label: "TESTIMONIALS" },
     { href: "#contact", label: "CONTACT" },
@@ -70,9 +72,8 @@ export const en = {
       "Choose duration and purchase type to see your price. Compare the savings with 5- or 10-session packs.",
   },
   rituals: {
-    heading: "Rituals and session packs",
-    description:
-      "Complete rituals for deep renewal, or multi-session packs with a special discount.",
+    heading: "Rituals",
+    description: "Complete rituals for deep renewal.",
     ctaLabel: "Book ritual",
   },
   reviewsContent: {
@@ -256,6 +257,7 @@ export const en = {
   ],
   bonos: {
     heading: "Session packs",
+    description: "Multi-session packs with a special discount.",
     discountLabel: "Discount",
     examplesHeading: "Savings examples",
     ctaLabel: "Ask about session packs",
@@ -328,6 +330,7 @@ export const en = {
     navLinks: [
       { href: "#about", label: "About" },
       { href: "#massages", label: "Massages" },
+      { href: "#rituals", label: "Rituals" },
       { href: "#packages", label: "Packs" },
       { href: "#faq", label: "FAQ" },
       { href: "#testimonials", label: "Testimonials" },
