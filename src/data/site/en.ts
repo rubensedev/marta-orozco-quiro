@@ -263,6 +263,14 @@ export const en = {
     ctaLabel: "Ask about session packs",
     sessionsLabel: (n: number) => `${n} sessions`,
     bestValueLabel: "Best value",
+    mixto: {
+      title: "Mixed pack",
+      description: "Combine the five 50-minute sessions you like most.",
+      priceLabel: "Fixed price",
+      price: 165,
+      sessions: 5,
+      durationMin: 50,
+    },
   },
   contact: {
     heading: "Location and contact",

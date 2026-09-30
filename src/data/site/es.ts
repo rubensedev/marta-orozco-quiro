@@ -271,6 +271,14 @@ export const es = {
     ctaLabel: "Preguntar por Bonos",
     sessionsLabel: (n: number) => `${n} sesiones`,
     bestValueLabel: "Máximo ahorro",
+    mixto: {
+      title: "Bono Mixto",
+      description: "Combina las 5 sesiones de 50 minutos que más te gusten.",
+      priceLabel: "Precio fijo",
+      price: 165,
+      sessions: 5,
+      durationMin: 50,
+    },
   },
   contact: {
     heading: "Ubicación y contacto",
