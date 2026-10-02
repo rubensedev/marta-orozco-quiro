@@ -51,13 +51,13 @@ Delegated/direct inline mixed — primarily `GiftSection.astro` (non-trivial) + 
 - [x] T2 Replace SVG with Astro Image front/back 3D flip (hover + tap)
 - [x] T3 Verify reduced-motion + a11y wiring; run check
 - [x] T4 Work-unit commit on feature branch — `8e6bd35`
-- [ ] T5 Card click opens GiftModal (`data-open-gift`) + work-unit commit
+- [x] T5 Card click opens GiftModal (`data-open-gift`) + work-unit commit — `25d614c`
 
 ## Progress
 - Recovered under ODD after classification miss.
 - T3: `nub run check` → 0 errors (pre-existing hints only).
 - T4: committed on `feat-fixes-and-improvements` as `8e6bd35`.
-- User follow-up: card click must open modal too.
+- T5: card click opens modal via `data-open-gift`; commit `25d614c`.
 
 ## Next step
-T5 — wire `data-open-gift` on card; commit.
+(none — await user review / push)
