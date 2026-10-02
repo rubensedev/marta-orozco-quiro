@@ -36,8 +36,9 @@ const { gift, sectionIds } = site;
         type="button"
         class="gift-card relative w-full max-w-[18rem] cursor-pointer border-0 bg-transparent p-0 text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-sage"
         data-gift-card
+        data-open-gift
         aria-pressed="false"
-        aria-label={gift.cardToggleLabel}
+        aria-label={gift.cta}
       >
         <span class="gift-card__stage block w-full" style={`aspect-ratio: ${giftCardFront.width} / ${giftCardFront.height}`}>
           <span class="gift-card__inner relative block h-full w-full">

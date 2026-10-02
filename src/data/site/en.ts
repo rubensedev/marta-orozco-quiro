@@ -89,7 +89,6 @@ export const en = {
     body: "Give special moments and surprise someone with an experience of relaxation, wellbeing and personal care. Arrange it easily online by telling us the treatment type, your name and the name of the person receiving the gift.",
     cta: "Gift a treatment",
     cardFrontAlt: "Front of the Marta Orozco gift card",
-    cardToggleLabel: "Flip the gift card",
     whatsappTemplate:
       "Hello Marta! I would like a gift card. Treatment: {treatment}. Duration: {duration}. From: {from}. To: {to}. Estimated price: {price}.",
   },

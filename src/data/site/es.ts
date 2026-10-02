@@ -94,7 +94,6 @@ export const es = {
     body: "Regala momentos especiales y sorprende con una experiencia de relajación, bienestar y cuidado personal. Consíguelo fácilmente online indicándonos el tipo de tratamiento, tu nombre y el nombre de la persona a quién va dirigido el regalo.",
     cta: "Regalar tratamiento",
     cardFrontAlt: "Anverso de la tarjeta regalo Marta Orozco",
-    cardToggleLabel: "Girar la tarjeta regalo",
     whatsappTemplate:
       "Hola Marta! Quiero una tarjeta regalo. Tratamiento: {treatment}. Duración: {duration}. De: {from}. Para: {to}. Precio estimado: {price}.",
   },

@@ -31,6 +31,7 @@ User wants rounded card imagery with elevate + smooth flip to the back on hover 
 - Front shown by default; rounded corners
 - Hover (fine pointer) elevates and flips to back smoothly
 - Tap/click toggles flip; `aria-pressed` updates
+- Click/tap also opens GiftModal via shared `data-open-gift`
 - Prefer `prefers-reduced-motion`: instant face swap, no 3D spin
 - ES/EN a11y strings present
 - `nub run check` (or project check) passes
@@ -50,12 +51,13 @@ Delegated/direct inline mixed — primarily `GiftSection.astro` (non-trivial) + 
 - [x] T2 Replace SVG with Astro Image front/back 3D flip (hover + tap)
 - [x] T3 Verify reduced-motion + a11y wiring; run check
 - [x] T4 Work-unit commit on feature branch — `8e6bd35`
+- [ ] T5 Card click opens GiftModal (`data-open-gift`) + work-unit commit
 
 ## Progress
 - Recovered under ODD after classification miss.
 - T3: `nub run check` → 0 errors (pre-existing hints only).
 - T4: committed on `feat-fixes-and-improvements` as `8e6bd35`.
-- Feature complete locally; push/PR deferred to user.
+- User follow-up: card click must open modal too.
 
 ## Next step
-(none — await user review / push)
+T5 — wire `data-open-gift` on card; commit.
