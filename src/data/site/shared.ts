@@ -1,12 +1,16 @@
+/** Canonical Google place identity — single source for every Maps surface. */
+const MAPS_PLACE_URL = "https://maps.app.goo.gl/HdZVpzvzBEGV6GAZ8";
+export const googlePlaceId = "ChIJE7KlJmBtEg0Rn-RGXchxER0";
+
 export const sharedMeta = {
   location: "Sevilla, Spain",
   whatsappNumber: "34601585508",
   whatsappDisplay: "+34 601 585 508",
   instagramUrl: "https://www.instagram.com/martaorozco.quiro",
-  googleReviewsUrl: "https://maps.app.goo.gl/HdZVpzvzBEGV6GAZ8",
+  googleReviewsUrl: MAPS_PLACE_URL,
   mapEmbedUrl:
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d288.3802210536092!2d-5.994944333855233!3d37.39530728128045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd126d6026a5b213%3A0x1d1171c85d46e49f!2sMarta%20Orozco%20Quiromasaje!5e0!3m2!1sen!2ses!4v1787998053536!5m2!1sen!2ses",
-  mapsUrl: "https://maps.app.goo.gl/HdZVpzvzBEGV6GAZ8",
+  mapsUrl: MAPS_PLACE_URL,
   ogImage: "/og-image.jpg",
   ogImageWidth: 1200,
   ogImageHeight: 630,
@@ -14,13 +18,11 @@ export const sharedMeta = {
 };
 
 export const businessInfo = {
-  name: {
-    es: "Marta Orozco Quiromasajista",
-    en: "Marta Orozco Massage Therapist",
-  },
+  /** Must equal the Google Business Profile display name, in every locale. */
+  name: "Marta Orozco Quiromasaje",
   streetAddress: "C. Esperanza Elena Caro, 2, 1°A4",
   postalCode: "41002",
-  addressLocality: { es: "Sevilla", en: "Seville" },
+  addressLocality: "Sevilla",
   addressRegion: "Andalucía",
   addressCountry: "ES",
   geo: { latitude: 37.3953758, longitude: -5.9947417 },

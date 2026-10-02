@@ -59,9 +59,9 @@ const enHrefBase = getRelativeLocaleUrl("en");
       aria-hidden="true"
     ></div>
     <div
-      class="relative z-10 mx-auto flex w-[min(1120px,calc(100%-2rem))] items-center justify-between gap-4 py-2 lg:py-4"
+      class="relative z-10 mx-auto flex w-[min(1120px,calc(100%-2rem))] items-center justify-between gap-3 py-2 lg:gap-4 lg:py-4"
     >
-    <a href={`#${sectionIds.home}`} aria-label={ui.nav.homeAria}>
+    <a href={`#${sectionIds.home}`} aria-label={ui.nav.homeAria} class="shrink-0">
       <img
         class="site-logo h-10 w-auto brightness-0 invert transition-[filter] duration-300 ease-out group-data-scrolled:not-dark:brightness-100 group-data-scrolled:not-dark:invert-0"
         src="/assets/images/logo.svg"
@@ -71,13 +71,13 @@ const enHrefBase = getRelativeLocaleUrl("en");
       />
     </a>
 
-    <nav class="hidden lg:block" aria-label={ui.nav.primaryAria}>
-      <ul class="m-0 flex list-none items-center gap-8 p-0">
+    <nav class="hidden min-w-0 flex-1 lg:block" aria-label={ui.nav.primaryAria}>
+      <ul class="m-0 flex list-none items-center justify-center gap-[clamp(0.65rem,1.35vw,1.75rem)] p-0">
         {
           navItems.map((item) => (
-            <li>
+            <li class="shrink-0">
               <a
-                class="text-[0.95rem] font-medium transition-colors duration-200 hover:text-brand-lavender"
+                class="whitespace-nowrap text-[clamp(0.7rem,0.82vw,0.84rem)] font-medium tracking-[0.08em] transition-colors duration-200 hover:text-brand-lavender"
                 href={item.href}
               >
                 {item.label}
@@ -352,16 +352,22 @@ const enHrefBase = getRelativeLocaleUrl("en");
       inicio: "home",
       "sobre-mi": "about",
       masajes: "massages",
+      rituales: "rituals",
       bonos: "packages",
+      "preguntas-frecuentes": "faq",
       testimonios: "testimonials",
+      "tarjeta-regalo": "gift-card",
       contacto: "contact",
     },
     HASH_EN_TO_ES: {
       home: "inicio",
       about: "sobre-mi",
       massages: "masajes",
+      rituals: "rituales",
       packages: "bonos",
+      faq: "preguntas-frecuentes",
       testimonials: "testimonios",
+      "gift-card": "tarjeta-regalo",
       contact: "contacto",
     },
   }}

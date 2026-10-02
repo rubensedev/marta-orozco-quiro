@@ -129,6 +129,7 @@ export function getSite(locale: Locale) {
     ritualsContent: dict.rituals,
     reviewsContent: dict.reviewsContent,
     reviews: dict.reviews,
+    gift: dict.gift,
     faq: dict.faq,
     bonos: dict.bonos,
     contact: dict.contact,

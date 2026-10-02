@@ -1,8 +1,13 @@
-/** Spanish copy — moved verbatim from the previous Spanish-only site.ts. Do not alter wording. */
+/**
+ * Spanish copy for the site.
+ * Entity name, NAP, and Maps identity live in shared.ts — keep those aligned.
+ * Marketing strings here may be revised when a change updates local-discovery copy;
+ * do not treat this file as frozen wording.
+ */
 export const es = {
   meta: {
     lang: "es" as const,
-    title: "Marta Orozco | Quiromasajista en Sevilla",
+    title: "Marta Orozco Quiromasaje | Masajes en Sevilla",
     description:
       "Quiromasajista profesional en el centro de Sevilla. Masajes descontracturantes, relajantes, detox y rituales de bienestar. Reserva cita desde la web con TidyCal.",
     ogLocale: "es_ES",
@@ -14,23 +19,27 @@ export const es = {
     home: "inicio",
     about: "sobre-mi",
     massages: "masajes",
+    rituals: "rituales",
     packages: "bonos",
     faq: "preguntas-frecuentes",
     reviews: "testimonios",
+    gift: "tarjeta-regalo",
     contact: "contacto",
   },
   navItems: [
     { href: "#sobre-mi", label: "SOBRE MÍ" },
     { href: "#masajes", label: "MASAJES" },
+    { href: "#rituales", label: "RITUALES" },
     { href: "#bonos", label: "BONOS" },
     { href: "#testimonios", label: "TESTIMONIOS" },
+    { href: "#tarjeta-regalo", label: "REGALA" },
     { href: "#contacto", label: "CONTACTO" },
   ],
   hero: {
-    title: "Espacio de calma, salud y equilibrio corporal",
-    subtitle: "Quiromasajista profesional en Sevilla",
+    title: "Tu lugar para la quietud, el bienestar y alcanzar la armonía corporal",
+    subtitle: "Quiromasaje profesional en el centro de Sevilla",
     description:
-      "Tratamientos de quiromasaje diseñados para aliviar tensiones físicas, activar tu energía vital y restablecer la paz en tu día a día.",
+      "Tratamientos de masaje exclusivos y adaptados a tus necesidades para desbloquear tensiones y despertar tu energía vital. Todos los aceites que usamos son 100% naturales y están artesanalmente creados para cada tipo de masaje.",
     primaryCta: "RESERVAR CITA",
     secondaryCta: {
       label: "VER MASAJES Y PRECIOS",
@@ -48,7 +57,20 @@ export const es = {
     paragraphs: [
       "Siempre me han interesado las técnicas manuales, considerándolas un catalizador muy potente que nos enraíza directamente con energías primigenias, activando un estado de conciencia muy útil en nuestro día a día.",
       "Es por eso que, como quiromasajista, he encontrado una fórmula muy orgánica de entretejer esas energías con diferentes técnicas de masaje, ofreciéndote sesiones personalizadas en función de tus necesidades.",
-      "Llevo más de cinco años acompañando a clientes con masajes personalizados, desde tratamientos descontracturantes hasta sesiones relajantes y rituales de bienestar en mi espacio del centro de Sevilla.",
+      "Llevo más de cinco años acompañando a clientes con masajes personalizados, desde tratamientos descontracturantes hasta sesiones relajantes y rituales de bienestar, siempre acompañadas de aceites 100% naturales cuidadosamente diseñados para cada tipo de tratamiento.",
+    ],
+    techniquesHeading: "Técnicas",
+    techniques: [
+      "Masaje Sueco",
+      "Deportivo",
+      "Tejido Profundo",
+      "Lomi Lomi",
+      "Linfático",
+      "Drenaje Brasileño",
+      "Piedras Calientes",
+      "Reflexología Podal",
+      "Reiki",
+      "Aromaterapia",
     ],
   },
   massages: {
@@ -57,9 +79,8 @@ export const es = {
       "Elige duración y tipo de compra para ver tu precio. Compara el ahorro con bonos de 5 o 10 sesiones.",
   },
   rituals: {
-    heading: "Rituales y bonos",
-    description:
-      "Rituales completos para una renovación profunda o paquetes de bonos con descuento especial.",
+    heading: "Rituales",
+    description: "Rituales completos para una renovación profunda.",
     ctaLabel: "Reservar Ritual",
   },
   reviewsContent: {
@@ -67,6 +88,14 @@ export const es = {
     description:
       "Desde 2021 he acompañado a más de 1.500 personas en su camino hacia el bienestar. Estas voces cuentan cómo se sintieron después de la sesión — por si te ayuda a dar el paso.",
     googleCta: "Ver todas las reseñas en Google",
+  },
+  gift: {
+    heading: "TARJETA REGALO",
+    body: "Regala momentos especiales y sorprende con una experiencia de relajación, bienestar y cuidado personal. Consíguelo fácilmente online indicándonos el tipo de tratamiento, tu nombre y el nombre de la persona a quién va dirigido el regalo.",
+    cta: "Regalar tratamiento",
+    cardFrontAlt: "Anverso de la tarjeta regalo Marta Orozco",
+    whatsappTemplate:
+      "Hola Marta! Quiero una tarjeta regalo. Tratamiento: {treatment}. Duración: {duration}. De: {from}. Para: {to}. Precio estimado: {price}.",
   },
   faq: {
     heading: "Preguntas frecuentes",
@@ -90,7 +119,7 @@ export const es = {
       {
         question: "¿Cuál es el horario de atención?",
         answer: [
-          "Atiendo los jueves de 15:00 a 21:00 en mi espacio del centro de Sevilla. Te confirmo la disponibilidad exacta al reservar.",
+          "Atiendo los jueves de 15:00 a 21:00 en C. Esperanza Elena Caro, 2, 1°A4, Casco Antiguo de Sevilla (41002), solo con cita previa. Te confirmo la disponibilidad exacta al reservar.",
         ],
       },
       {
@@ -128,7 +157,7 @@ export const es = {
       {
         question: "¿Dónde está el espacio en Sevilla?",
         answer: [
-          "En ",
+          "En el Casco Antiguo de Sevilla, en ",
           {
             label: "C. Esperanza Elena Caro, 2, 1°A4, 41002 Sevilla",
             action: "maps" as const,
@@ -138,9 +167,77 @@ export const es = {
           ".",
         ],
       },
+      {
+        question: "¿Cómo es una sesión contigo, paso a paso?",
+        answer: [
+          "Reservamos con antelación y, al llegar, me cuentas dónde notas la tensión o qué buscas hoy. Durante el masaje ajusto la presión contigo; al terminar te doy pautas sencillas de cuidados si encajan con tu caso. Todo es uno a uno y siempre con cita previa.",
+        ],
+      },
+      {
+        question: "¿Tenéis tarjetas regalo?",
+        answer: [
+          "Sí, en nuestra ",
+          { label: "sección tarjeta regalo", action: "gift" as const },
+          " puedes completar el formulario que se te despliega y, en cuanto tengamos los datos, te haremos llegar a tu correo un pdf con la tarjeta.",
+        ],
+      },
+      {
+        question: "¿Cuál es la caducidad de la tarjeta regalo?",
+        answer: [
+          "La caducidad de la tarjeta regalo es de un año a partir del día de la compra.",
+        ],
+      },
     ],
   },
   reviews: [
+    {
+      id: "gbp-01",
+      name: "Paula Szilagyi",
+      stars: 5 as const,
+      quote:
+        "Marta fue una persona muy amable y me encantó el ritual de masaje, me encantó la combinación de diferentes estilos, exactamente lo que necesitaba: relajación, algo de descontracturante y drenaje. Sin duda volvería.",
+      treatmentName: "Ritual",
+    },
+    {
+      id: "gbp-02",
+      name: "Alicia",
+      stars: 5 as const,
+      quote:
+        "Ya conocía a Marta de otro centro de masajes y vuelvo a repetir con ella sin duda! Muchas gracias por tu amabilidad y el amor que le pones a tu trabajo. Volveré con mi bono de masajes :)",
+      treatmentName: "Bonos",
+    },
+    {
+      id: "gbp-03",
+      name: "Valeria Delquiten",
+      stars: 5 as const,
+      quote:
+        "Cogí un bono descontracturante, llevo un par de sesiones y estoy muy contenta.",
+      treatmentName: "Descontracturante",
+    },
+    {
+      id: "gbp-04",
+      name: "Julia Morey",
+      stars: 5 as const,
+      quote:
+        "Marta simplemente es la mejor! Un espacio de mucho cuidado y amabilidad. Deseando el próximo masaje pronto! Gracias Marta ❤️",
+      treatmentName: "Quiromasaje",
+    },
+    {
+      id: "gbp-05",
+      name: "Amaia Cilla",
+      stars: 5 as const,
+      quote:
+        "Marta ha sido un descubrimiento. Su delicadeza y buen trato hicieron que fuera un masaje increíble. Buscaba relajarme, y lo consiguió con creces. ¡Sin duda repetiré!",
+      treatmentName: "Relajante",
+    },
+    {
+      id: "gbp-06",
+      name: "Rubén",
+      stars: 5 as const,
+      quote:
+        "Hacia tiempo que no me daba un masaje tan relajante. El masaje empieza desde la puerta, con lo amable que es Marta ya empiezas a entrar en modo relax. Gracias!! Repetiré con el bono de masaje!!",
+      treatmentName: "Relajante",
+    },
     {
       id: "review-01",
       name: "Laura M.",
@@ -156,14 +253,6 @@ export const es = {
       quote:
         "Tenía la espalda hecha un nudo y me fui caminando ligero. Marta tiene unas manos mágicas.",
       treatmentName: "Descontracturante",
-    },
-    {
-      id: "review-03",
-      name: "Ana S.",
-      stars: 5 as const,
-      quote:
-        "Piernas ligeras, sensación de frescura y una calma que me acompañó todo el día. Recomendadísimo.",
-      treatmentName: "Detox",
     },
     {
       id: "review-04",
@@ -190,13 +279,6 @@ export const es = {
       treatmentName: "Relajante",
     },
     {
-      id: "review-07",
-      name: "Marta H.",
-      stars: 5 as const,
-      quote: "Me sentí liviana y con energía suave, sin agobio. Ideal cuando el cuerpo pide reset.",
-      treatmentName: "Ritual Cuerpo Ligero",
-    },
-    {
       id: "review-08",
       name: "Andrés N.",
       stars: 5 as const,
@@ -204,27 +286,29 @@ export const es = {
         "Después de horas frente al ordenador, este masaje me devolvió el cuello. Super contento.",
       treatmentName: "Descontracturante",
     },
-    {
-      id: "review-09",
-      name: "Irene C.",
-      stars: 5 as const,
-      quote: "Relajada, renovada y con ganas de cuidarme más. La sesión se me hizo un suspiro.",
-      treatmentName: "Detox",
-    },
   ],
   bonos: {
     heading: "Bonos",
+    description: "Paquetes de sesiones con descuento especial.",
     discountLabel: "Descuento",
     examplesHeading: "Ejemplos de ahorro",
     ctaLabel: "Preguntar por Bonos",
     sessionsLabel: (n: number) => `${n} sesiones`,
     bestValueLabel: "Máximo ahorro",
+    mixto: {
+      title: "Bono Mixto",
+      description: "Combina las 5 sesiones de 50 minutos que más te gusten.",
+      priceLabel: "Precio fijo",
+      price: 165,
+      sessions: 5,
+      durationMin: 50,
+    },
   },
   contact: {
     heading: "Ubicación y contacto",
     hours: "Jueves de 15:00 a 21:00",
     hoursNote: "*Citas bajo reserva previa para garantizar tu atención personalizada.",
-    addressLines: ["C. Esperanza Elena Caro, 2, 1°A4", "41002 Sevilla"],
+    addressLines: ["C. Esperanza Elena Caro, 2, 1°A4", "Casco Antiguo, 41002 Sevilla"],
     ctaLabel: "Reservar Ahora",
     openInMapsLabel: "Abrir en Maps",
     mapHint: "Consulta el mapa para indicaciones de llegada",
@@ -236,28 +320,28 @@ export const es = {
       bookingValue: "Masaje Relajante",
       title: "Relajante",
       description:
-        "Ideal para reducir el estrés, mejorar el descanso y regalarte un momento para ti.",
+        "Ideal para reducir el estrés, mejorar el descanso y regalarte un momento para ti. Uno de los objetivos principales de este masaje es relajar todo el cuerpo mediante movimientos largos y deslizantes sobre los músculos.",
       imageAlt: "Ambiente relajante para masaje corporal.",
     },
     detox: {
       bookingValue: "Masaje Detox",
       title: "Detox",
       description:
-        "Favorece la circulación, alivia la sensación de piernas pesadas y aporta una profunda ligereza.",
+        "Estimula el sistema linfático, ayudando a eliminar el exceso de líquido y toxinas, reduciendo así la hinchazón y mejorando la circulación y calidad de los tejidos, aportando una sensación de profunda ligereza.",
       imageAlt: "Tratamiento detox orientado al bienestar y la circulación.",
     },
     descontracturante: {
       bookingValue: "Masaje Descontracturante",
       title: "Descontracturante",
       description:
-        "Pensado para aliviar contracturas, tensión muscular y molestias derivadas del trabajo o el deporte.",
+        "Se emplean técnicas de mayor presión, beneficiosas para liberar tensión muscular mediante movimientos lentos y profundos, así como una presión firme, con el fin de aliviar contracturas y llegar más allá de los músculos superficiales.",
       imageAlt: "Masaje descontracturante orientado al alivio muscular.",
     },
     "craneo-facial": {
       bookingValue: "Masaje Cráneo Facial",
       title: "Cráneo Facial",
       description:
-        "Libera la tensión del rostro, mandíbula y cuello. Relaja, rejuvenece y aporta bienestar.",
+        "Libera la tensión del rostro, mandíbula, cuello y espalda alta, aportando un estado superior de relajación y bienestar. Ideal para reducir el estrés, migrañas y mejorar el descanso.",
       imageAlt: "Masaje cráneo facial para rostro, mandíbula y cuello.",
     },
   },
@@ -266,13 +350,13 @@ export const es = {
       bookingValue: "Ritual Desconexión Total",
       title: "Ritual Desconexión Total",
       description:
-        "Combina técnicas relajantes y/o descontracturantes con un trabajo específico en hombros, cuello, rostro y cráneo.",
+        "Déjate llevar hacia un estado de profunda quietud con este ritual que combina técnicas relajantes y/o descontracturantes con un trabajo final específico en la zona de cuello, rostro y cráneo. Se emplean movimientos neurosedantes ideales para reducir la fatiga mental, el estrés y la ansiedad.",
     },
     "ritual-cuerpo-ligero": {
       bookingValue: "Ritual Cuerpo Ligero",
       title: "Ritual Cuerpo Ligero",
       description:
-        "Tratamiento diseñado para aliviar la pesadez y recuperar el bienestar general. Se combina un masaje relajante y/o descontracturante con técnicas circulatorias.",
+        "Adéntrate hacia la ligereza y tranquilidad máxima con este tratamiento específicamente diseñado para aliviar la pesadez y recuperar el bienestar general. Se combinan técnicas de masaje relajante y/o descontracturante con maniobras drenantes.",
     },
   },
   bonoTiers: {
@@ -286,13 +370,14 @@ export const es = {
     navLinks: [
       { href: "#sobre-mi", label: "Sobre mí" },
       { href: "#masajes", label: "Masajes" },
+      { href: "#rituales", label: "Rituales" },
       { href: "#bonos", label: "Bonos" },
       { href: "#preguntas-frecuentes", label: "Preguntas frecuentes" },
       { href: "#testimonios", label: "Testimonios" },
       { href: "#contacto", label: "Contacto" },
     ],
     copyright: (year: number) =>
-      `© ${year} Marta Orozco Quiromasajista. Todos los derechos reservados.`,
+      `© ${year} Marta Orozco Quiromasaje. Todos los derechos reservados.`,
     creditPrefix: "Con mucho ❤️, de",
   },
   ui: {
@@ -338,7 +423,7 @@ export const es = {
         "Hemos abierto el calendario en otra pestaña. Elige ahí tu momento, y abraza este camino para recuperar tu energía y tu paz.",
       homeLabel: "Volver al inicio",
       whatsappLabel: "Escribir por WhatsApp",
-      metaTitle: "Gracias | Marta Orozco Quiromasajista en Sevilla",
+      metaTitle: "Gracias | Marta Orozco Quiromasaje en Sevilla",
       metaDescription:
         "Gracias por cuidar de ti. Completa tu reserva en el calendario y recupera energía y paz.",
     },
@@ -348,7 +433,7 @@ export const es = {
       message: "No te pierdas en la inmensidad, encuentra el que mejor te va haciendo click abajo.",
       massagesLabel: "Ver masajes",
       whatsappLabel: "Escribir por WhatsApp",
-      metaTitle: "Página no encontrada | Marta Orozco Quiromasajista en Sevilla",
+      metaTitle: "Página no encontrada | Marta Orozco Quiromasaje en Sevilla",
       metaDescription:
         "Esta página no existe. Explora los masajes de Marta Orozco o escribe por WhatsApp.",
     },
@@ -369,6 +454,16 @@ export const es = {
       dateHint: "Disponibilidad solo jueves de 15:00 a 21:00.",
       submit: "Confirmar reserva",
       closeAria: "Cerrar modal de reserva",
+    },
+    giftModal: {
+      title: "Regalar tratamiento",
+      treatmentLabel: "Tratamiento deseado",
+      durationLabel: "Duración",
+      giverLabel: "Quién lo regala",
+      receiverLabel: "Quién lo recibe",
+      priceEstimateLabel: "Precio estimado",
+      submit: "Solicitar tarjeta regalo",
+      closeAria: "Cerrar modal de regalo",
     },
   },
 };

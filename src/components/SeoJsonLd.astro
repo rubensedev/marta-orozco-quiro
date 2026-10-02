@@ -1,8 +1,8 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
-import type { SiteBundle } from "../data/site";
+import type { FaqAnswerPart, Ritual, SiteBundle, Treatment } from "../data/site";
 import { faqAnswerText } from "../data/site/faq";
-import { businessInfo, sharedMeta } from "../data/site/shared";
+import { businessInfo, googlePlaceId, sharedMeta } from "../data/site/shared";
 
 type Props = {
   site: SiteBundle;
@@ -21,15 +21,13 @@ const webpageId = `${canonicalPageUrl}#webpage`;
 const serviceId = (id: string) => new URL(`/#service-${id}`, siteOrigin).href;
 const inLanguage = locale === "es" ? "es-ES" : "en-GB";
 
-/** Google Place ID for stable Maps identity (hasMap); NAP fields unchanged. */
-const googlePlaceId = "ChIJE7KlJmBtEg0Rn-RGXchxER0";
 const googlePlaceMapUrl = `https://www.google.com/maps/place/?q=place_id:${googlePlaceId}`;
 
-const businessName = businessInfo.name[locale];
-const addressLocality = businessInfo.addressLocality[locale];
+const businessName = businessInfo.name;
+const addressLocality = businessInfo.addressLocality;
 
 const services = [
-  ...treatments.map((treatment) => ({
+  ...treatments.map((treatment: Treatment) => ({
     "@type": "Service",
     "@id": serviceId(treatment.id),
     name: treatment.title,
@@ -42,7 +40,7 @@ const services = [
       priceCurrency: "EUR",
     },
   })),
-  ...rituals.map((ritual) => ({
+  ...rituals.map((ritual: Ritual) => ({
     "@type": "Service",
     "@id": serviceId(ritual.id),
     name: ritual.title,
@@ -124,7 +122,7 @@ if (faq.items.length > 0) {
     "@type": "FAQPage",
     "@id": `${canonicalPageUrl}#faq`,
     isPartOf: { "@id": webpageId },
-    mainEntity: faq.items.map((item) => ({
+    mainEntity: faq.items.map((item: { question: string; answer: FaqAnswerPart[] }) => ({
       "@type": "Question",
       name: item.question,
       acceptedAnswer: {

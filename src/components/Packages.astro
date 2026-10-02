@@ -1,0 +1,390 @@
+---
+import type { SiteBundle } from "../data/site";
+import SectionHeading from "./SectionHeading.astro";
+
+type Props = {
+  site: SiteBundle;
+};
+
+const { site } = Astro.props;
+const {
+  bonoExamples,
+  bonoTiers,
+  bonos: bonosContent,
+  treatments,
+  sectionIds,
+  meta,
+} = site;
+
+const bonosWhatsappHref = `https://wa.me/${meta.whatsappNumber}?text=${encodeURIComponent(meta.whatsappBonosInquiry)}`;
+
+const packageTiers = bonoTiers.filter((tier) => tier.sessions > 1);
+const mixto = bonosContent.mixto;
+
+
+function calculateQuote(unitPrice: number, sessions: number, discount: number) {
+  const fullTotal = unitPrice * sessions;
+  const discountedTotal = Math.round(fullTotal * (1 - discount));
+  return {
+    fullTotal,
+    discountedTotal,
+    savings: fullTotal - discountedTotal,
+  };
+}
+
+const exampleRows = bonoExamples.flatMap((example) => {
+  const treatment = treatments.find((entry) => entry.id === example.treatmentId);
+  const duration = treatment?.durations.find((entry) => entry.min === example.durationMin);
+  const tier = bonoTiers.find((entry) => entry.id === example.bonoId);
+  if (!treatment || !duration || !tier) return [];
+
+  const quote = calculateQuote(duration.price, tier.sessions, tier.discount);
+  return [
+    {
+      label: `${treatment.bookingValue} · ${duration.min} min · ${tier.label}`,
+      ...quote,
+    },
+  ];
+});
+---
+
+<section
+  id={sectionIds.packages}
+  class="mx-auto w-[min(1120px,calc(100%-2rem))] py-[clamp(3rem,8vh,6rem)] md:px-6 lg:px-8"
+  data-packages-section
+>
+  <SectionHeading title={bonosContent.heading} description={bonosContent.description} />
+
+  <div
+    class="massage-card-reveal isolate rounded-[1.75rem] border border-glass-edge bg-glass-surface-stone px-6 py-10 shadow-glass backdrop-blur-glass-panel sm:px-8 md:px-12 md:py-12 dark:shadow-[var(--shadow-glass-dark)]"
+  >
+    <div
+      class="mx-auto grid max-w-3xl grid-cols-1 gap-10 sm:grid-cols-3 sm:items-start sm:gap-4 md:gap-6"
+    >
+      {
+        packageTiers.map((tier) => (
+          <article class="bono-package flex flex-col items-center gap-3 text-center">
+            {tier.id === "bono10" && (
+              <span class="bono-featured-badge">
+                <span
+                  class="bono-featured-badge__spark bono-featured-badge__spark--a"
+                  aria-hidden="true"
+                />
+                <span
+                  class="bono-featured-badge__spark bono-featured-badge__spark--b"
+                  aria-hidden="true"
+                />
+                <span
+                  class="bono-featured-badge__spark bono-featured-badge__spark--c"
+                  aria-hidden="true"
+                />
+                <span
+                  class="bono-featured-badge__spark bono-featured-badge__spark--d"
+                  aria-hidden="true"
+                />
+                {bonosContent.bestValueLabel}
+              </span>
+            )}
+            <h3 class="m-0 text-[0.95rem] font-semibold tracking-[0.12em] text-brand-text-dark uppercase dark:text-brand-text-light">
+              {bonosContent.sessionsLabel(tier.sessions)}
+            </h3>
+            <a
+              class:list={[
+                "bono-discount mt-4",
+                tier.id === "bono10" && "bono-discount--featured",
+              ]}
+              href={bonosWhatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-whatsapp-direct
+              aria-label={
+                tier.id === "bono10"
+                  ? `${bonosContent.bestValueLabel}. ${bonosContent.ctaLabel}: ${tier.label}`
+                  : `${bonosContent.ctaLabel}: ${tier.label}`
+              }
+            >
+              <span class="bono-discount__wave" aria-hidden="true" />
+              <span class="bono-discount__wave bono-discount__wave--late" aria-hidden="true" />
+              <span class="bono-discount__core">{Math.round(tier.discount * 100)}%</span>
+            </a>
+            <p class="mt-3 mb-0 text-[0.78rem] font-semibold tracking-[0.16em] text-brand-muted uppercase">
+              {bonosContent.discountLabel}
+            </p>
+          </article>
+        ))
+      }
+
+      <article class="bono-package flex flex-col items-center gap-3 text-center">
+        <h3 class="m-0 text-[0.95rem] font-semibold tracking-[0.12em] text-brand-text-dark uppercase dark:text-brand-text-light">
+          {mixto.title}
+        </h3>
+        <a
+          class="bono-discount bono-discount--price mt-4"
+          href={bonosWhatsappHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-whatsapp-direct
+          aria-label={`${bonosContent.ctaLabel}: ${mixto.title}, ${mixto.price} €`}
+        >
+          <span class="bono-discount__wave" aria-hidden="true" />
+          <span class="bono-discount__wave bono-discount__wave--late" aria-hidden="true" />
+          <span class="bono-discount__core">{mixto.price} €</span>
+        </a>
+        <p class="mt-3 mb-0 text-[0.78rem] font-semibold tracking-[0.16em] text-brand-muted uppercase">
+          {mixto.priceLabel}
+        </p>
+        <p class="mt-1 mb-0 max-w-[22ch] text-[0.85rem] leading-[1.55] text-brand-muted">
+          {mixto.description}
+        </p>
+      </article>
+    </div>
+
+    <div class="mx-auto mt-10 h-px max-w-3xl bg-brand-muted/20 dark:bg-white/12" aria-hidden="true">
+    </div>
+
+    <h3
+      class="mt-8 mb-0 text-center text-[0.78rem] font-semibold tracking-[0.18em] text-brand-muted uppercase"
+    >
+      {bonosContent.examplesHeading}
+    </h3>
+
+    <div class="mx-auto mt-6 grid max-w-3xl gap-4" id="bonoExamples">
+      {
+        exampleRows.map((row) => (
+          <article class="bonos-example">
+            <p class="bonos-example__label">{row.label}</p>
+            <div class="bonos-example__prices">
+              <span class="pricing-original">{row.fullTotal} €</span>
+              <span class="pricing-discounted">{row.discountedTotal} €</span>
+              <span class="pricing-savings-highlight">
+                <i class="fa-solid fa-tag" aria-hidden="true" />-{row.savings} €
+              </span>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="mt-10 flex justify-center">
+      <a
+        class="btn-brand"
+        href={bonosWhatsappHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-whatsapp-direct
+      >
+        <span>{bonosContent.ctaLabel}</span>
+        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bono-package {
+    position: relative;
+  }
+
+  .bono-featured-badge {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--color-brand-lavender) 28%, transparent);
+    background: color-mix(in srgb, var(--color-brand-lavender) 12%, white);
+    color: var(--color-brand-lavender-dark);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  :global(.dark) .bono-featured-badge {
+    border-color: color-mix(in srgb, var(--color-brand-lavender-bright) 32%, transparent);
+    background: color-mix(in srgb, var(--color-brand-lavender) 22%, transparent);
+    color: var(--color-brand-lavender-bright);
+  }
+
+  /* amber-500 — same as theme switcher sun icon */
+  .bono-featured-badge__spark {
+    position: absolute;
+    width: 0.75rem;
+    height: 0.75rem;
+    pointer-events: none;
+    background: #f59e0b;
+    clip-path: polygon(50% 0%, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0% 50%, 38% 38%);
+    animation: bono-spark-twinkle 2.4s ease-in-out infinite;
+  }
+
+  .bono-featured-badge__spark--a {
+    top: -0.45rem;
+    left: 0.2rem;
+    width: 0.62rem;
+    height: 0.62rem;
+    animation-delay: 0s;
+  }
+
+  .bono-featured-badge__spark--b {
+    top: -0.3rem;
+    right: 0.05rem;
+    width: 0.72rem;
+    height: 0.72rem;
+    animation-delay: 0.6s;
+  }
+
+  .bono-featured-badge__spark--c {
+    bottom: -0.38rem;
+    left: -0.2rem;
+    width: 0.55rem;
+    height: 0.55rem;
+    animation-delay: 1.2s;
+  }
+
+  .bono-featured-badge__spark--d {
+    top: 0.05rem;
+    right: -0.48rem;
+    width: 0.48rem;
+    height: 0.48rem;
+    animation-delay: 1.8s;
+  }
+
+  @keyframes bono-spark-twinkle {
+    0%,
+    100% {
+      opacity: 0.45;
+      transform: scale(0.75);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+  }
+
+  @media (min-width: 640px) {
+    /* Equal reserved band so both columns share the same title baseline */
+    .bono-package {
+      padding-top: 2rem;
+    }
+
+    .bono-featured-badge {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      z-index: 1;
+      margin: 0;
+      transform: translateX(-50%);
+    }
+  }
+
+  .bono-discount {
+    position: relative;
+    display: inline-flex;
+    width: 4.5rem;
+    height: 4.5rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .bono-discount:focus-visible {
+    outline: 2px solid var(--color-brand-lavender);
+    outline-offset: 4px;
+    border-radius: 999px;
+  }
+
+  .bono-discount:hover .bono-discount__core {
+    background: var(--color-brand-lavender-dark);
+  }
+
+  .bono-discount__core {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: var(--color-brand-lavender);
+    color: var(--color-brand-text-light);
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+
+  .bono-discount__wave {
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    border: 2.5px solid color-mix(in srgb, var(--color-brand-lavender) 78%, transparent);
+    pointer-events: none;
+    animation: bono-discount-wave 3.2s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+  }
+
+  .bono-discount__wave--late {
+    animation-delay: 1.6s;
+  }
+
+  .bono-discount--featured .bono-discount__wave {
+    border-color: color-mix(in srgb, #f59e0b 88%, transparent);
+    box-shadow: 0 0 0 1px color-mix(in srgb, #f59e0b 35%, transparent);
+  }
+
+  .bono-discount--price .bono-discount__core {
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+  }
+
+  @keyframes bono-discount-wave {
+    0% {
+      transform: scale(1);
+      opacity: 0.92;
+    }
+    70% {
+      opacity: 0.28;
+    }
+    100% {
+      transform: scale(1.65);
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bono-discount__wave {
+      animation: none;
+      opacity: 0;
+    }
+
+    .bono-featured-badge__spark {
+      animation: none;
+      opacity: 0.85;
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  const revealEls = document.querySelectorAll("[data-packages-section] .massage-card-reveal");
+
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("massage-card-visible");
+        revealObserver.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.05 },
+  );
+
+  revealEls.forEach((el) => revealObserver.observe(el));
+</script>

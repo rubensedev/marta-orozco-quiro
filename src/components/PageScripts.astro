@@ -6,7 +6,7 @@ type Props = {
 };
 
 const { site } = Astro.props;
-const { bonoTiers, rituals, treatments, ui, locale, meta } = site;
+const { bonoTiers, rituals, treatments, ui, locale, meta, gift } = site;
 
 const uiClient = {
   durationLabel: ui.durationLabel,
@@ -24,6 +24,8 @@ const uiClient = {
 
 const thankYouPath = locale === "en" ? "/en/thank-you" : "/gracias";
 const bonosWhatsappHref = `https://wa.me/${meta.whatsappNumber}?text=${encodeURIComponent(meta.whatsappBonosInquiry)}`;
+const giftWhatsappTemplate = gift.whatsappTemplate;
+const whatsappNumber = meta.whatsappNumber;
 ---
 
 <script
@@ -34,6 +36,8 @@ const bonosWhatsappHref = `https://wa.me/${meta.whatsappNumber}?text=${encodeURI
     uiClient,
     thankYouPath,
     bonosWhatsappHref,
+    giftWhatsappTemplate,
+    whatsappNumber,
   }}
 >
   const THEME_KEY = "marta-orozco-theme";
@@ -46,6 +50,14 @@ const bonosWhatsappHref = `https://wa.me/${meta.whatsappNumber}?text=${encodeURI
   const modalBookingError = document.getElementById("modalBookingError");
   const modalBookingSubmit = document.getElementById("modalBookingSubmit");
   const modalDurationGroup = document.getElementById("modalDurationGroup");
+  const giftDialog = document.getElementById("giftModal");
+  const giftForm = document.getElementById("giftForm");
+  const giftTreatment = document.getElementById("giftTreatment");
+  const giftDuration = document.getElementById("giftDuration");
+  const giftDurationGroup = document.getElementById("giftDurationGroup");
+  const giftFrom = document.getElementById("giftFrom");
+  const giftTo = document.getElementById("giftTo");
+  const giftPriceEstimate = document.getElementById("giftPriceEstimate");
   const mobileMenuBtn = document.getElementById("mobileMenuBtn");
   const mobileMenu = document.getElementById("mobileMenu");
   const mobileMenuIcon = mobileMenuBtn?.querySelector("[data-mobile-menu-icon]");
@@ -96,7 +108,10 @@ const bonosWhatsappHref = `https://wa.me/${meta.whatsappNumber}?text=${encodeURI
   }
 
   function syncBodyLock() {
-    document.body.classList.toggle("is-locked", isNavOpen() || Boolean(dialog?.open));
+    document.body.classList.toggle(
+      "is-locked",
+      isNavOpen() || Boolean(dialog?.open) || Boolean(giftDialog?.open),
+    );
   }
 
   function setPageInert(inert) {
@@ -368,7 +383,83 @@ const bonosWhatsappHref = `https://wa.me/${meta.whatsappNumber}?text=${encodeURI
     syncBookingConfirmState();
   }
 
+  function syncGiftFieldVisibility() {
+    if (!giftTreatment || !giftDuration || !giftDurationGroup || !giftPriceEstimate) return;
+
+    const selectedId = giftTreatment.value;
+    const ritual = ritualMap.get(selectedId);
+    const treatment = treatmentMap.get(selectedId);
+
+    if (ritual) {
+      giftDurationGroup.hidden = true;
+      giftDuration.innerHTML = `<option value="${ritual.duration}">${ritual.duration} ${uiClient.minutesSuffix}</option>`;
+      giftPriceEstimate.value = `${ritual.price} €`;
+      return;
+    }
+
+    if (!treatment) return;
+
+    giftDurationGroup.hidden = false;
+    giftDuration.innerHTML = treatment.durations
+      .map(
+        (duration) =>
+          `<option value="${duration.min}">${duration.min} ${uiClient.minutesSuffix}</option>`,
+      )
+      .join("");
+
+    updateGiftPriceEstimate();
+  }
+
+  function updateGiftPriceEstimate() {
+    if (!giftTreatment || !giftDuration || !giftPriceEstimate) return;
+
+    const treatment = treatmentMap.get(giftTreatment.value);
+    if (!treatment) return;
+
+    const duration =
+      treatment.durations.find((entry) => entry.min === Number(giftDuration.value)) ??
+      treatment.durations[0];
+    giftPriceEstimate.value = `${duration.price} €`;
+  }
+
+  function giftDurationLabelForWa() {
+    if (!giftTreatment || !giftDuration) return "";
+
+    const selectedId = giftTreatment.value;
+    const ritual = ritualMap.get(selectedId);
+    if (ritual) {
+      return `${ritual.duration} ${uiClient.minutesSuffix}`;
+    }
+
+    return `${giftDuration.value} ${uiClient.minutesSuffix}`;
+  }
+
+  function buildGiftWhatsappHref({ treatmentLabel, durationLabel, from, to, price }) {
+    const body = giftWhatsappTemplate
+      .replace("{treatment}", treatmentLabel)
+      .replace("{duration}", durationLabel)
+      .replace("{from}", from)
+      .replace("{to}", to)
+      .replace("{price}", price);
+    return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(body)}`;
+  }
+
+  function openGiftModal() {
+    if (dialog?.open) closeBookingModal();
+    syncGiftFieldVisibility();
+    updateGiftPriceEstimate();
+    giftDialog?.showModal();
+    syncBodyLock();
+  }
+
+  function closeGiftModal() {
+    giftDialog?.close();
+    syncBodyLock();
+  }
+
   function openBookingModal(treatmentId, context = {}) {
+    if (giftDialog?.open) closeGiftModal();
+
     if (treatmentId) {
       const match = [...modalTreatment.options].find(
         (option) => option.value === treatmentId,
@@ -487,6 +578,62 @@ const bonosWhatsappHref = `https://wa.me/${meta.whatsappNumber}?text=${encodeURI
     location.assign(thankYouPath);
   });
 
+  document.querySelectorAll("[data-open-gift]").forEach((button) => {
+    button.addEventListener("click", openGiftModal);
+  });
+
+  document.querySelectorAll("[data-close-gift]").forEach((button) => {
+    button.addEventListener("click", closeGiftModal);
+  });
+
+  giftDialog?.addEventListener("click", (event) => {
+    const rect = giftDialog.getBoundingClientRect();
+    const inDialog =
+      rect.top <= event.clientY &&
+      event.clientY <= rect.top + rect.height &&
+      rect.left <= event.clientX &&
+      event.clientX <= rect.left + rect.width;
+    if (!inDialog) closeGiftModal();
+  });
+
+  giftDialog?.addEventListener("close", () => {
+    syncBodyLock();
+  });
+
+  giftTreatment?.addEventListener("change", () => {
+    syncGiftFieldVisibility();
+    updateGiftPriceEstimate();
+  });
+  giftDuration?.addEventListener("change", updateGiftPriceEstimate);
+
+  giftForm?.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    if (!giftTreatment || !giftFrom || !giftTo || !giftPriceEstimate) return;
+
+    const from = giftFrom.value.trim();
+    const to = giftTo.value.trim();
+    if (!from || !to || !giftTreatment.value) return;
+
+    const treatmentLabel =
+      giftTreatment.options[giftTreatment.selectedIndex]?.textContent?.trim() ||
+      giftTreatment.value;
+    const durationLabel = giftDurationLabelForWa();
+    const price = giftPriceEstimate.value || "-";
+
+    const href = buildGiftWhatsappHref({
+      treatmentLabel,
+      durationLabel,
+      from,
+      to,
+      price,
+    });
+
+    window.open(href, "_blank", "noopener,noreferrer");
+    closeGiftModal();
+    location.assign(thankYouPath);
+  });
+
   document.addEventListener("click", (event) => {
     const insideThemeWidget = event.target.closest("[data-theme-widget]");
     if (!insideThemeWidget) closeAllThemeMenus();
@@ -534,5 +681,7 @@ const bonosWhatsappHref = `https://wa.me/${meta.whatsappNumber}?text=${encodeURI
   applyThemePreference(localStorage.getItem(THEME_KEY) || "system");
   syncBookingFieldVisibility();
   updateModalPriceEstimate();
+  syncGiftFieldVisibility();
+  updateGiftPriceEstimate();
   renderPricingWidgets();
 </script>

@@ -3,7 +3,14 @@ export type FaqAnswerPart =
   | string
   | {
       label: string;
-      action: "booking" | "maps" | "contact" | "packages" | "whatsapp" | "whatsappPackages";
+      action:
+        | "booking"
+        | "maps"
+        | "contact"
+        | "packages"
+        | "gift"
+        | "whatsapp"
+        | "whatsappPackages";
     };
 
 export type FaqItem = {

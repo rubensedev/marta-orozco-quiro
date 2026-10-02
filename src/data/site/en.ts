@@ -1,8 +1,8 @@
-/** British English — faithful translation; glossary locked in design/state. */
+/** British English — faithful translation; glossary locked in design/state. Entity name is never translated. */
 export const en = {
   meta: {
     lang: "en" as const,
-    title: "Marta Orozco | Massage Therapist in Seville",
+    title: "Marta Orozco Quiromasaje | Massage Therapist in Seville",
     description:
       "Professional massage therapist in the centre of Seville. Deep tissue, relaxing, detox and wellness rituals. Book online via TidyCal.",
     ogLocale: "en_GB",
@@ -15,23 +15,27 @@ export const en = {
     home: "home",
     about: "about",
     massages: "massages",
+    rituals: "rituals",
     packages: "packages",
     faq: "faq",
     reviews: "testimonials",
+    gift: "gift-card",
     contact: "contact",
   },
   navItems: [
     { href: "#about", label: "ABOUT" },
     { href: "#massages", label: "MASSAGES" },
+    { href: "#rituals", label: "RITUALS" },
     { href: "#packages", label: "PACKAGES" },
     { href: "#testimonials", label: "TESTIMONIALS" },
+    { href: "#gift-card", label: "GIFT CARD" },
     { href: "#contact", label: "CONTACT" },
   ],
   hero: {
-    title: "A space for calm, health and bodily balance",
+    title: "Your place for stillness, wellbeing and bodily harmony",
     subtitle: "Professional massage therapist in Seville",
     description:
-      "Massage treatments designed to ease physical tension, activate your vital energy and restore peace to your everyday life.",
+      "Exclusive massage treatments tailored to your needs to release tension and awaken your vital energy. All the oils we use are 100% natural and handcrafted for each type of massage.",
     primaryCta: "BOOK APPOINTMENT",
     secondaryCta: {
       label: "VIEW MASSAGES AND PRICES",
@@ -48,7 +52,20 @@ export const en = {
     paragraphs: [
       "I have always been interested in manual techniques, considering them a very powerful catalyst that roots us directly in primordial energies, activating a state of awareness that is very useful in our everyday lives.",
       "That is why, as a massage therapist, I have found a very organic way of weaving those energies together with different massage techniques, offering you personalised sessions according to your needs.",
-      "For over five years I have been supporting clients with personalised massage sessions, from deep tissue work to relaxing treatments and wellness rituals in my space in the city centre of Seville.",
+      "For over five years I have been supporting clients with personalised massage sessions, from deep tissue work to relaxing treatments and wellness rituals, always accompanied by 100% natural oils carefully designed for each type of treatment.",
+    ],
+    techniquesHeading: "Techniques",
+    techniques: [
+      "Swedish Massage",
+      "Sports",
+      "Deep Tissue",
+      "Lomi Lomi",
+      "Lymphatic",
+      "Brazilian Drainage",
+      "Hot Stones",
+      "Foot Reflexology",
+      "Reiki",
+      "Aromatherapy",
     ],
   },
   massages: {
@@ -57,9 +74,8 @@ export const en = {
       "Choose duration and purchase type to see your price. Compare the savings with 5- or 10-session packs.",
   },
   rituals: {
-    heading: "Rituals and session packs",
-    description:
-      "Complete rituals for deep renewal, or multi-session packs with a special discount.",
+    heading: "Rituals",
+    description: "Complete rituals for deep renewal.",
     ctaLabel: "Book ritual",
   },
   reviewsContent: {
@@ -67,6 +83,14 @@ export const en = {
     description:
       "Since 2021 I have supported more than 1,500 people on their path to wellbeing. These voices share how they felt after the session — in case it helps you take the next step.",
     googleCta: "See all reviews on Google",
+  },
+  gift: {
+    heading: "GIFT CARD",
+    body: "Give special moments and surprise someone with an experience of relaxation, wellbeing and personal care. Arrange it easily online by telling us the treatment type, your name and the name of the person receiving the gift.",
+    cta: "Gift a treatment",
+    cardFrontAlt: "Front of the Marta Orozco gift card",
+    whatsappTemplate:
+      "Hello Marta! I would like a gift card. Treatment: {treatment}. Duration: {duration}. From: {from}. To: {to}. Estimated price: {price}.",
   },
   faq: {
     heading: "Frequently asked questions",
@@ -89,7 +113,7 @@ export const en = {
       {
         question: "What are your opening hours?",
         answer: [
-          "I see clients on Thursdays from 3:00 pm to 9:00 pm at my space in central Seville. I confirm the exact slot when you book.",
+          "I see clients on Thursdays from 3:00 pm to 9:00 pm at C. Esperanza Elena Caro, 2, 1°A4, Casco Antiguo, Sevilla (41002), by appointment only. I confirm the exact slot when you book.",
         ],
       },
       {
@@ -127,9 +151,9 @@ export const en = {
       {
         question: "Where is the space in Seville?",
         answer: [
-          "At ",
+          "In Seville’s Casco Antiguo, at ",
           {
-            label: "C. Esperanza Elena Caro, 2, 1°A4, 41002 Seville",
+            label: "C. Esperanza Elena Caro, 2, 1°A4, 41002 Sevilla",
             action: "maps" as const,
           },
           ". You can view the exact location and open directions in Google Maps by clicking the address or from the ",
@@ -137,9 +161,77 @@ export const en = {
           ".",
         ],
       },
+      {
+        question: "What is a session with you like, step by step?",
+        answer: [
+          "We book ahead and, when you arrive, you tell me where you feel tension or what you need today. During the massage I adjust the pressure with you; afterwards I share simple aftercare tips when they fit your case. Sessions are one-to-one and always by prior appointment.",
+        ],
+      },
+      {
+        question: "Do you offer gift cards?",
+        answer: [
+          "Yes. In our ",
+          { label: "gift card section", action: "gift" as const },
+          " you can fill in the form that opens, and once we have the details we will email you a PDF of the card.",
+        ],
+      },
+      {
+        question: "How long is the gift card valid?",
+        answer: [
+          "The gift card is valid for one year from the date of purchase.",
+        ],
+      },
     ],
   },
   reviews: [
+    {
+      id: "gbp-01",
+      name: "Paula Szilagyi",
+      stars: 5 as const,
+      quote:
+        "Marta was such a friendly person and loved the massage ritual, loved the combination of different styles, exactly what I needed, relaxation, some deep tissue and drainage. I would definitely go back.",
+      treatmentName: "Ritual",
+    },
+    {
+      id: "gbp-02",
+      name: "Alicia",
+      stars: 5 as const,
+      quote:
+        "I already knew Marta from another massage centre and I'm booking with her again without a doubt! Thank you so much for your kindness and the love you put into your work. I'll be back with my massage pack :)",
+      treatmentName: "Session packs",
+    },
+    {
+      id: "gbp-03",
+      name: "Valeria Delquiten",
+      stars: 5 as const,
+      quote:
+        "I got a deep-tissue pack, I've had a couple of sessions and I'm very happy.",
+      treatmentName: "Deep tissue",
+    },
+    {
+      id: "gbp-04",
+      name: "Julia Morey",
+      stars: 5 as const,
+      quote:
+        "Marta is simply the best! A space full of care and kindness. Looking forward to the next massage soon! Thank you Marta ❤️",
+      treatmentName: "Massage",
+    },
+    {
+      id: "gbp-05",
+      name: "Amaia Cilla",
+      stars: 5 as const,
+      quote:
+        "Marta has been a discovery. Her gentleness and warm manner made for an incredible massage. I was looking to relax, and she more than delivered. I'll definitely be back!",
+      treatmentName: "Relaxing",
+    },
+    {
+      id: "gbp-06",
+      name: "Rubén",
+      stars: 5 as const,
+      quote:
+        "It had been a while since I'd had such a relaxing massage. The massage starts at the door — Marta is so kind you already slip into relax mode. Thank you!! I'll be back with the massage pack!!",
+      treatmentName: "Relaxing",
+    },
     {
       id: "review-01",
       name: "Laura M.",
@@ -154,14 +246,6 @@ export const en = {
       stars: 5 as const,
       quote: "My back was in knots and I walked out light on my feet. Marta has magic hands.",
       treatmentName: "Deep tissue",
-    },
-    {
-      id: "review-03",
-      name: "Ana S.",
-      stars: 5 as const,
-      quote:
-        "Light legs, a sense of freshness and a calm that stayed with me all day. Highly recommend.",
-      treatmentName: "Detox",
     },
     {
       id: "review-04",
@@ -188,42 +272,35 @@ export const en = {
       treatmentName: "Relaxing",
     },
     {
-      id: "review-07",
-      name: "Marta H.",
-      stars: 5 as const,
-      quote:
-        "I felt light and gently energised, with no overwhelm. Ideal when the body needs a reset.",
-      treatmentName: "Light Body Ritual",
-    },
-    {
       id: "review-08",
       name: "Andrés N.",
       stars: 5 as const,
       quote: "After hours at the computer, this massage gave me my neck back. Really pleased.",
       treatmentName: "Deep tissue",
     },
-    {
-      id: "review-09",
-      name: "Irene C.",
-      stars: 5 as const,
-      quote:
-        "Relaxed, renewed and keen to look after myself more. The session felt like a sigh of relief.",
-      treatmentName: "Detox",
-    },
   ],
   bonos: {
     heading: "Session packs",
+    description: "Multi-session packs with a special discount.",
     discountLabel: "Discount",
     examplesHeading: "Savings examples",
     ctaLabel: "Ask about session packs",
     sessionsLabel: (n: number) => `${n} sessions`,
     bestValueLabel: "Best value",
+    mixto: {
+      title: "Mixed pack",
+      description: "Combine the five 50-minute sessions you like most.",
+      priceLabel: "Fixed price",
+      price: 165,
+      sessions: 5,
+      durationMin: 50,
+    },
   },
   contact: {
     heading: "Location and contact",
     hours: "Thursdays from 15:00 to 21:00",
     hoursNote: "*Appointments by prior booking only to ensure your personalised care.",
-    addressLines: ["C. Esperanza Elena Caro, 2, 1°A4", "41002 Seville"],
+    addressLines: ["C. Esperanza Elena Caro, 2, 1°A4", "Casco Antiguo, 41002 Sevilla"],
     ctaLabel: "Book now",
     openInMapsLabel: "Open in Maps",
     mapHint: "Check the map for directions",
@@ -235,28 +312,28 @@ export const en = {
       bookingValue: "Relaxing Massage",
       title: "Relaxing",
       description:
-        "Ideal for reducing stress, improving rest and giving yourself a moment for you.",
+        "Ideal for reducing stress, improving rest and giving yourself a moment just for you. One of the main goals of this massage is to relax the whole body through long, gliding strokes over the muscles.",
       imageAlt: "Relaxing setting for a body massage.",
     },
     detox: {
       bookingValue: "Detox Massage",
       title: "Detox",
       description:
-        "Supports circulation, eases the feeling of heavy legs and brings a deep sense of lightness.",
+        "It stimulates the lymphatic system, helping to clear excess fluid and toxins, thereby reducing swelling and improving circulation and tissue quality, leaving a deep sense of lightness.",
       imageAlt: "Detox treatment focused on wellness and circulation.",
     },
     descontracturante: {
       bookingValue: "Deep Tissue Massage",
       title: "Deep tissue",
       description:
-        "Designed to ease muscle knots, muscular tension and discomfort from work or sport.",
+        "Higher-pressure techniques are used to release muscular tension through slow, deep movements and firm pressure, easing knots and working beyond the superficial muscles.",
       imageAlt: "Deep tissue massage focused on muscular relief.",
     },
     "craneo-facial": {
       bookingValue: "Craniofacial Massage",
       title: "Craniofacial",
       description:
-        "Releases tension in the face, jaw and neck. Relaxes, rejuvenates and brings wellbeing.",
+        "Releases tension in the face, jaw, neck and upper back, bringing a deeper state of relaxation and wellbeing. Ideal for easing stress and migraines and improving rest.",
       imageAlt: "Craniofacial massage for face, jaw and neck.",
     },
   },
@@ -265,13 +342,13 @@ export const en = {
       bookingValue: "Total Disconnect Ritual",
       title: "Total Disconnect Ritual",
       description:
-        "Combines relaxing and/or deep tissue techniques with focused work on the shoulders, neck, face and scalp.",
+        "Let yourself sink into deep stillness with this ritual that combines relaxing and/or deep tissue techniques with focused finishing work on the neck, face and scalp. It uses neurosedative movements ideal for easing mental fatigue, stress and anxiety.",
     },
     "ritual-cuerpo-ligero": {
       bookingValue: "Light Body Ritual",
       title: "Light Body Ritual",
       description:
-        "A treatment designed to ease heaviness and restore general wellbeing. It combines a relaxing and/or deep tissue massage with circulatory techniques.",
+        "Step into lightness and deep calm with this treatment designed to ease heaviness and restore general wellbeing. It combines relaxing and/or deep tissue massage techniques with draining manoeuvres.",
     },
   },
   bonoTiers: {
@@ -285,12 +362,13 @@ export const en = {
     navLinks: [
       { href: "#about", label: "About" },
       { href: "#massages", label: "Massages" },
+      { href: "#rituals", label: "Rituals" },
       { href: "#packages", label: "Packs" },
       { href: "#faq", label: "FAQ" },
       { href: "#testimonials", label: "Testimonials" },
       { href: "#contact", label: "Contact" },
     ],
-    copyright: (year: number) => `© ${year} Marta Orozco Massage Therapist. All rights reserved.`,
+    copyright: (year: number) => `© ${year} Marta Orozco Quiromasaje. All rights reserved.`,
     creditPrefix: "With much ❤️, by",
   },
   ui: {
@@ -336,7 +414,7 @@ export const en = {
         "We've opened the calendar in another tab. Choose your time there—and embrace this path back to your energy and peace.",
       homeLabel: "Back to home",
       whatsappLabel: "Message on WhatsApp",
-      metaTitle: "Thank you | Marta Orozco Massage Therapist in Seville",
+      metaTitle: "Thank you | Marta Orozco Quiromasaje in Seville",
       metaDescription:
         "Thank you for choosing yourself. Finish booking in the calendar and restore your energy and peace.",
     },
@@ -346,7 +424,7 @@ export const en = {
       message: "Don't get lost in the vastness, find the perfect one for you by clicking below.",
       massagesLabel: "Explore massages",
       whatsappLabel: "Message on WhatsApp",
-      metaTitle: "Page not found | Marta Orozco Massage Therapist in Seville",
+      metaTitle: "Page not found | Marta Orozco Quiromasaje in Seville",
       metaDescription:
         "This page does not exist. Explore Marta Orozco's massages or message on WhatsApp.",
     },
@@ -367,6 +445,16 @@ export const en = {
       dateHint: "Availability only on Thursdays from 15:00 to 21:00.",
       submit: "Confirm booking",
       closeAria: "Close booking modal",
+    },
+    giftModal: {
+      title: "Gift a treatment",
+      treatmentLabel: "Treatment desired",
+      durationLabel: "Duration",
+      giverLabel: "Who is giving this gift",
+      receiverLabel: "Who is receiving this gift",
+      priceEstimateLabel: "Estimated price",
+      submit: "Request gift card",
+      closeAria: "Close gift modal",
     },
   },
 };
