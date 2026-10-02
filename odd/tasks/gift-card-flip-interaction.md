@@ -49,12 +49,13 @@ Delegated/direct inline mixed — primarily `GiftSection.astro` (non-trivial) + 
 - [x] T1 Add ES/EN `cardFrontAlt` + `cardToggleLabel`
 - [x] T2 Replace SVG with Astro Image front/back 3D flip (hover + tap)
 - [x] T3 Verify reduced-motion + a11y wiring; run check
-- [ ] T4 Work-unit commit on feature branch
+- [x] T4 Work-unit commit on feature branch — `8e6bd35`
 
 ## Progress
 - Recovered under ODD after classification miss.
-- T3: `nub run check` → 0 errors (pre-existing hints only in Header/PageScripts/SeoJsonLd).
-- Next: T4 commit (include gift WebP assets + GiftSection + i18n + this task doc).
+- T3: `nub run check` → 0 errors (pre-existing hints only).
+- T4: committed on `feat-fixes-and-improvements` as `8e6bd35`.
+- Feature complete locally; push/PR deferred to user.
 
 ## Next step
-T4 — work-unit commit on `feat-fixes-and-improvements`.
+(none — await user review / push)
