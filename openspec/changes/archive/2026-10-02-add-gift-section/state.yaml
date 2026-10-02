@@ -1,6 +1,6 @@
 change: add-gift-section
 
-status: applying
+status: archived
 
 phases:
   explore: done
@@ -10,11 +10,13 @@ phases:
   design: done
   tasks: done
   apply: done
-  verify: pending
-  archive: pending
+  verify: skipped-with-warnings
+  archive: done
+
+branch: feat-fixes-and-improvements
 
 created: 2026-09-30
-updated: 2026-09-30
+updated: 2026-10-02
 
 mode: hybrid
 
@@ -22,9 +24,13 @@ delivery_strategy: ask-on-risk
 
 artifact_store: hybrid
 
-next: sdd-verify
+next: none
 
 open_questions: false
+
+archive_mode: intentional-with-warnings
+archive_date: 2026-10-02
+archive_path: openspec/changes/archive/2026-10-02-add-gift-section/
 
 locked_decisions:
   placement: after-reviews-before-contact
@@ -49,19 +55,25 @@ locked_decisions:
   dual_dialog: syncBodyLock_OR_mutual_exclusion_native_escape
 
 artifacts:
-  exploration: openspec/changes/add-gift-section/exploration.md
-  proposal: openspec/changes/add-gift-section/proposal.md
-  design: openspec/changes/add-gift-section/design.md
-  tasks: openspec/changes/add-gift-section/tasks.md
+  exploration: openspec/changes/archive/2026-10-02-add-gift-section/exploration.md
+  proposal: openspec/changes/archive/2026-10-02-add-gift-section/proposal.md
+  design: openspec/changes/archive/2026-10-02-add-gift-section/design.md
+  tasks: openspec/changes/archive/2026-10-02-add-gift-section/tasks.md
+  archive_report: openspec/changes/archive/2026-10-02-add-gift-section/archive-report.md
   specs:
-    - openspec/changes/add-gift-section/specs/gift-section/spec.md
-    - openspec/changes/add-gift-section/specs/client-reviews/spec.md
-    - openspec/changes/add-gift-section/specs/site-i18n/spec.md
+    - openspec/changes/archive/2026-10-02-add-gift-section/specs/gift-section/spec.md
+    - openspec/changes/archive/2026-10-02-add-gift-section/specs/client-reviews/spec.md
+    - openspec/changes/archive/2026-10-02-add-gift-section/specs/site-i18n/spec.md
   engram_explore: sdd/add-gift-section/explore
   engram_proposal: sdd/add-gift-section/proposal
   engram_spec: sdd/add-gift-section/spec
   engram_design: sdd/add-gift-section/design
   engram_tasks: sdd/add-gift-section/tasks
+  engram_apply_progress: sdd/add-gift-section/apply-progress
+  engram_archive_report: sdd/add-gift-section/archive-report
+  main_spec_gift_section: openspec/specs/gift-section/spec.md
+  main_spec_client_reviews: openspec/specs/client-reviews/spec.md
+  main_spec_site_i18n: openspec/specs/site-i18n/spec.md
 
 spec_summary:
   gift_section: new full spec — 10 requirements / 23 scenarios
@@ -94,8 +106,32 @@ tasks_summary:
 
 apply_notes: >
   Applied on feat-fixes-and-improvements as two work-unit commits.
-  Commit 1: gift locale/nav/hashes/FAQ (+ openspec planning).
-  Commit 2: GiftSection + GiftModal + PageScripts dual-dialog WA handoff + HomePage.
+  Commit 1 (5bbe87b): gift locale/nav/hashes/FAQ (+ openspec planning).
+  Commit 2 (20410a8): GiftSection + GiftModal + PageScripts dual-dialog WA handoff + HomePage.
   Also synced gift hashes into Header.astro + Layout.astro inline maps (locale remapping).
   BookingModal.astro / resolveTidycalUrl / booking TidyCal submit path untouched.
-  Manual smoke (4.3–4.4) deferred to sdd-verify.
+  Manual smoke (4.3–4.4) deferred; archive authorized intentional-with-warnings without formal verify-report.
+
+verify:
+  verdict: pass_with_warnings
+  report: null
+  note: >
+    No formal verify-report.md. Tasks 4.3–4.4 and success-criteria remain unchecked.
+    Phase 4.1–4.2 (astro check + build) stand as evidence. Inventing verify-report PASS forbidden.
+  archive_recommendation: proceed-with-warnings
+
+capabilities:
+  new:
+    - gift-section
+  modified:
+    - client-reviews
+    - site-i18n
+
+archive_notes:
+  intentional_override: >
+    archive authorized without formal sdd-verify / verify-report;
+    Phase 4.1–4.2 gates recorded; 4.3–4.4 + success-criteria left unchecked
+  apply_commits:
+    - 5bbe87b
+    - 20410a8
+  push: not performed by archive; leave to orchestrator/user

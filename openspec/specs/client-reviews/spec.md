@@ -2,32 +2,34 @@
 
 ## Purpose
 
-Homepage social-proof section (`#testimonios`) with mocked Spanish reviews in an infinite manual carousel, placed before Contact, without changing massage finite-end behavior.
+Homepage social-proof section (`#testimonios`) with mocked Spanish reviews in an infinite manual carousel, placed before the gift section (and therefore before Contact), without changing massage finite-end behavior.
 
 ## Requirements
 
 ### Requirement: Section placement and anchor
 
-The homepage MUST render the client-reviews section after Rituals/Bonos and before Contact. The section root MUST expose `id="testimonios"`.
+The homepage MUST render the client-reviews section after Rituals/Bonos and before the gift section (and therefore before Contact). The section root MUST expose `id="testimonios"` on Spanish pages (English reviews id unchanged if already localized elsewhere). Client-reviews MUST remain immediately before the gift section; Contact MUST NOT sit between reviews and gift.
 
-#### Scenario: DOM order before Contact
+#### Scenario: DOM order before Gift and Contact
 
 - GIVEN the homepage is rendered
 - WHEN section order is inspected
 - THEN Rituals appears before client-reviews
-- AND client-reviews appears before Contact
-- AND the reviews section has `id="testimonios"`
+- AND client-reviews appears immediately before the gift section
+- AND the gift section appears before Contact
+- AND the reviews section has `id="testimonios"` on Spanish pages
 
 ### Requirement: Navigation entry
 
-`navItems` MUST include `{ href: "#testimonios", label: "TESTIMONIOS" }` immediately before Contact. Header MUST surface that item in desktop and mobile nav via `navItems` only.
+`navItems` MUST include the reviews item (ES `{ href: "#testimonios", label: "TESTIMONIOS" }` or the EN equivalent) immediately before the gift nav item (`REGALA` / `GIFT CARD`). Header MUST surface that item in desktop and mobile nav via `navItems` only. Reviews MUST NOT be immediately before Contact after the gift item is inserted.
 
-#### Scenario: TESTIMONIOS precedes CONTACTO
+#### Scenario: TESTIMONIOS precedes gift nav item
 
 - GIVEN `navItems` is loaded
 - WHEN the list is read in order
-- THEN an item with label `TESTIMONIOS` and href `#testimonios` appears immediately before Contact
-- AND activating it targets `#testimonios`
+- THEN the reviews item appears immediately before the gift item (`REGALA` / `GIFT CARD`)
+- AND Contact appears after the gift item
+- AND activating the reviews item targets the reviews section hash
 
 ### Requirement: Locked intro copy
 
