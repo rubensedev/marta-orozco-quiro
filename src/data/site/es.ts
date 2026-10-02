@@ -137,7 +137,7 @@ export const es = {
       {
         question: "¿Ofrecéis bonos o paquetes de sesiones?",
         answer: [
-          "Sí. Hay bonos de 5 sesiones con un 10 % de descuento y de 10 sesiones con un 15 % de descuento. Consulta la ",
+          "Sí. Hay bonos de 5 sesiones con un 10 % de descuento y de 10 sesiones con un 15 % de descuento. También tenemos un bono mixto donde puedes combinar los 5 tratamientos que más te gusten de 50 minutos. Consulta la ",
           { label: "sección de bonos", action: "packages" as const },
           " o ",
           { label: "escríbeme por WhatsApp", action: "whatsappPackages" as const },
@@ -147,7 +147,7 @@ export const es = {
       {
         question: "¿Cuál es la caducidad de los bonos?",
         answer: [
-          "El bono de 5 sesiones caduca a los 6 meses desde la compra; el de 10 sesiones, a los 12 meses.",
+          "El bono de 5 sesiones y el mixto de 5 sesiones caducan a los 6 meses desde la compra; el de 10 sesiones, a los 12 meses.",
         ],
       },
       {

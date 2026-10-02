@@ -131,7 +131,7 @@ export const en = {
       {
         question: "Do you offer session packs?",
         answer: [
-          "Yes. There are 5-session packs with a 10% discount and 10-session packs with a 15% discount. See the ",
+          "Yes. There are 5-session packs with a 10% discount and 10-session packs with a 15% discount. We also have a mixed pack where you can combine the 5 treatments you like most from the 50-minute options. See the ",
           { label: "packs section", action: "packages" as const },
           " or ",
           { label: "message me on WhatsApp", action: "whatsappPackages" as const },
@@ -141,7 +141,7 @@ export const en = {
       {
         question: "Do session packs expire?",
         answer: [
-          "5-session packs expire 6 months after purchase; 10-session packs expire 12 months after purchase.",
+          "5-session packs and the mixed 5-session pack expire 6 months after purchase; 10-session packs expire 12 months after purchase.",
         ],
       },
       {
