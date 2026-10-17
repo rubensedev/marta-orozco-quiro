@@ -59,11 +59,11 @@ const enHrefBase = getRelativeLocaleUrl("en");
       aria-hidden="true"
     ></div>
     <div
-      class="relative z-10 mx-auto flex w-[min(1120px,calc(100%-2rem))] items-center justify-between gap-3 py-2 lg:gap-4 lg:py-4"
+      class="relative z-10 mx-auto flex w-[min(1120px,calc(100%-2rem))] items-center justify-between gap-2 py-2 lg:gap-3 lg:py-4"
     >
     <a href={`#${sectionIds.home}`} aria-label={ui.nav.homeAria} class="shrink-0">
       <img
-        class="site-logo h-10 w-auto brightness-0 invert transition-[filter] duration-300 ease-out group-data-scrolled:not-dark:brightness-100 group-data-scrolled:not-dark:invert-0"
+        class="site-logo h-9 w-auto brightness-0 invert transition-[filter] duration-300 ease-out group-data-scrolled:not-dark:brightness-100 group-data-scrolled:not-dark:invert-0 xl:h-10"
         src="/assets/images/logo.svg"
         alt={site.footer.logoAlt}
         width="214"
@@ -72,12 +72,12 @@ const enHrefBase = getRelativeLocaleUrl("en");
     </a>
 
     <nav class="hidden min-w-0 flex-1 lg:block" aria-label={ui.nav.primaryAria}>
-      <ul class="m-0 flex list-none items-center justify-center gap-[clamp(0.65rem,1.35vw,1.75rem)] p-0">
+      <ul class="m-0 flex list-none items-center justify-center gap-[clamp(0.4rem,0.9vw,1.15rem)] p-0">
         {
           navItems.map((item) => (
             <li class="shrink-0">
               <a
-                class="whitespace-nowrap text-[clamp(0.7rem,0.82vw,0.84rem)] font-medium tracking-[0.08em] transition-colors duration-200 hover:text-brand-lavender"
+                class="whitespace-nowrap text-[clamp(0.72rem,0.78vw,0.82rem)] font-medium tracking-[0.06em] transition-colors duration-200 hover:text-brand-lavender"
                 href={item.href}
               >
                 {item.label}
@@ -88,7 +88,7 @@ const enHrefBase = getRelativeLocaleUrl("en");
       </ul>
     </nav>
 
-    <div class="flex shrink-0 flex-nowrap items-center gap-3">
+    <div class="flex shrink-0 flex-nowrap items-center gap-2">
       <details
         class="relative hidden shrink-0 items-center justify-center md:inline-flex"
         data-lang-widget
@@ -186,7 +186,7 @@ const enHrefBase = getRelativeLocaleUrl("en");
       </div>
 
       <button
-        class="btn-brand hidden md:inline-flex"
+        class="btn-brand hidden gap-1.5! px-3.5! py-2.5! md:inline-flex lg:px-4!"
         type="button"
         data-open-booking
       >
