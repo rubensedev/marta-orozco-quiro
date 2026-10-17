@@ -58,6 +58,7 @@ export const es = {
       "Siempre me han interesado las técnicas manuales, considerándolas un catalizador muy potente que nos enraíza directamente con energías primigenias, activando un estado de conciencia muy útil en nuestro día a día.",
       "Es por eso que, como quiromasajista, he encontrado una fórmula muy orgánica de entretejer esas energías con diferentes técnicas de masaje, ofreciéndote sesiones personalizadas en función de tus necesidades.",
       "Llevo más de cinco años acompañando a clientes con masajes personalizados, desde tratamientos descontracturantes hasta sesiones relajantes y rituales de bienestar, siempre acompañadas de aceites 100% naturales cuidadosamente diseñados para cada tipo de tratamiento.",
+      "Formo parte de Protenat, la Asociación Profesional de las Terapias Naturales, con el número de socia 1351-SP-V.",
     ],
     techniquesHeading: "Técnicas",
     techniques: [
@@ -119,7 +120,9 @@ export const es = {
       {
         question: "¿Cuál es el horario de atención?",
         answer: [
-          "Atiendo los jueves de 15:00 a 21:00 en C. Esperanza Elena Caro, 2, 1°A4, Casco Antiguo de Sevilla (41002), solo con cita previa. Te confirmo la disponibilidad exacta al reservar.",
+          "Mi horario habitual es los jueves de 15:00 a 21:00. ¿Te viene mejor otro día? ¡No te quedes sin tu masaje! Puedes ",
+          { label: "consultarme", action: "whatsapp" as const },
+          " otras opciones de horario y buscaremos el mejor momento que se adapte a ti.",
         ],
       },
       {
@@ -306,8 +309,6 @@ export const es = {
   },
   contact: {
     heading: "Ubicación y contacto",
-    hours: "Jueves de 15:00 a 21:00",
-    hoursNote: "*Citas bajo reserva previa para garantizar tu atención personalizada.",
     addressLines: ["C. Esperanza Elena Caro, 2, 1°A4", "Casco Antiguo, 41002 Sevilla"],
     ctaLabel: "Reservar Ahora",
     openInMapsLabel: "Abrir en Maps",
@@ -374,6 +375,7 @@ export const es = {
       { href: "#bonos", label: "Bonos" },
       { href: "#preguntas-frecuentes", label: "Preguntas frecuentes" },
       { href: "#testimonios", label: "Testimonios" },
+      { href: "#tarjeta-regalo", label: "Regala" },
       { href: "#contacto", label: "Contacto" },
     ],
     copyright: (year: number) =>

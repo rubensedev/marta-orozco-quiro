@@ -53,6 +53,7 @@ export const en = {
       "I have always been interested in manual techniques, considering them a very powerful catalyst that roots us directly in primordial energies, activating a state of awareness that is very useful in our everyday lives.",
       "That is why, as a massage therapist, I have found a very organic way of weaving those energies together with different massage techniques, offering you personalised sessions according to your needs.",
       "For over five years I have been supporting clients with personalised massage sessions, from deep tissue work to relaxing treatments and wellness rituals, always accompanied by 100% natural oils carefully designed for each type of treatment.",
+      "I am a member of Protenat, the Professional Association of Natural Therapies, membership number 1351-SP-V.",
     ],
     techniquesHeading: "Techniques",
     techniques: [
@@ -113,7 +114,9 @@ export const en = {
       {
         question: "What are your opening hours?",
         answer: [
-          "I see clients on Thursdays from 3:00 pm to 9:00 pm at C. Esperanza Elena Caro, 2, 1°A4, Casco Antiguo, Sevilla (41002), by appointment only. I confirm the exact slot when you book.",
+          "My usual hours are Thursdays from 3:00 pm to 9:00 pm. Prefer another day? Don't miss your massage! You can ",
+          { label: "ask me", action: "whatsapp" as const },
+          " about other time options and we'll find the slot that works best for you.",
         ],
       },
       {
@@ -298,8 +301,6 @@ export const en = {
   },
   contact: {
     heading: "Location and contact",
-    hours: "Thursdays from 15:00 to 21:00",
-    hoursNote: "*Appointments by prior booking only to ensure your personalised care.",
     addressLines: ["C. Esperanza Elena Caro, 2, 1°A4", "Casco Antiguo, 41002 Sevilla"],
     ctaLabel: "Book now",
     openInMapsLabel: "Open in Maps",
@@ -366,6 +367,7 @@ export const en = {
       { href: "#packages", label: "Packs" },
       { href: "#faq", label: "FAQ" },
       { href: "#testimonials", label: "Testimonials" },
+      { href: "#gift-card", label: "Gift card" },
       { href: "#contact", label: "Contact" },
     ],
     copyright: (year: number) => `© ${year} Marta Orozco Quiromasaje. All rights reserved.`,
